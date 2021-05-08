@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9352371B-4244-443B-82B4-10B9D00C619C}</ProjectGuid>
+    <RootNamespace>Engine2D</RootNamespace>
+    <ProjectName>SkyEngine2D</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)binaries\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>binaries\$(Platform)\$(Configuration)</IntDir>
+    <IncludePath>$(ProjectDir)sources\core;$(SolutionDir)sources\game\sources\defines\resources;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\binaries\$(Platform)\$(Configuration);$(ConanLibraryDirectories);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ConanIncludeDirectories);$(ProjectDir)sources\core</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;WINDOWS_PLATFORM=1;GRAPHICS_OPENGL_ES_2_0=0;GRAPHICS_OPENGL_1_1=0;GRAPHICS_OPENGL_LATEST=1;DEBUG_SECTION=1;WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>tinyxml2d.lib;libpng16d.lib;zlib.lib;glfw3.lib;libglew32d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ConanLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\application\Application.h" />
+    <ClInclude Include="sources\core\actions\Actions.h" />
+    <ClInclude Include="sources\core\animation\AnimData.h" />
+    <ClInclude Include="sources\core\animation\AnimDataLoader.h" />
+    <ClInclude Include="sources\core\animation\AnimDataResources.h" />
+    <ClInclude Include="sources\core\animation\AnimStateLimit.h" />
+    <ClInclude Include="sources\core\animation\parser\FileAnim.h" />
+    <ClInclude Include="sources\core\animation\player\AnimPlayer.h" />
+    <ClInclude Include="sources\core\bindings\BindingCollection.h" />
+    <ClInclude Include="sources\core\bindings\BindingsManager.h" />
+    <ClInclude Include="sources\core\game_object\GameObject.h" />
+    <ClInclude Include="sources\core\game_object\GameObjectLabel.h" />
+    <ClInclude Include="sources\core\geometry\baching\DrawScheme.h" />
+    <ClInclude Include="sources\core\geometry\mesh\WireFrame.h" />
+    <ClInclude Include="sources\core\geometry\mesh\parser\FileMesh.h" />
+    <ClInclude Include="sources\core\geometry\mesh\MeshLoader.h" />
+    <ClInclude Include="sources\core\geometry\mesh\MeshResources.h" />
+    <ClInclude Include="sources\core\geometry\Polygon.h" />
+    <ClInclude Include="sources\core\global\GlobalData.h" />
+    <ClInclude Include="sources\core\global\GlobalPaths.h" />
+    <ClInclude Include="sources\core\input\Controllable.h" />
+    <ClInclude Include="sources\core\input\InputHandleProfiles.h" />
+    <ClInclude Include="sources\core\keys\ResourceKeyCollection.h" />
+    <ClInclude Include="sources\core\level\LevelData.h" />
+    <ClInclude Include="sources\core\level\LevelLoader.h" />
+    <ClInclude Include="sources\core\level\parser\FileLevel.h" />
+    <ClInclude Include="sources\core\level\Tile.h" />
+    <ClInclude Include="sources\core\loader\Loader.h" />
+    <ClInclude Include="sources\core\logging\Logging.h" />
+    <ClInclude Include="sources\core\math\Geometry.h" />
+    <ClInclude Include="sources\core\math\MathUtils.h" />
+    <ClInclude Include="sources\core\math\Matrix.h" />
+    <ClInclude Include="sources\core\math\Plane.h" />
+    <ClInclude Include="sources\core\math\Vector.h" />
+    <ClInclude Include="sources\core\platform\input\Device.h" />
+    <ClInclude Include="sources\core\platform\input\DeviceDefinitions.h" />
+    <ClInclude Include="sources\core\platform\input\InputEventBatch.h" />
+    <ClInclude Include="sources\core\platform\input\InputManager.h" />
+    <ClInclude Include="sources\core\platform\input\PlatformInput.h" />
+    <ClInclude Include="sources\core\platform\linux\LinuxPlatform.h" />
+    <ClInclude Include="sources\core\platform\Platform.h" />
+    <ClInclude Include="sources\core\platform\windows\InputDataType.h" />
+    <ClInclude Include="sources\core\platform\windows\WindowsPlatform.h" />
+    <ClInclude Include="sources\core\primitive\Line.h" />
+    <ClInclude Include="sources\core\primitive\Primitive.h" />
+    <ClInclude Include="sources\core\primitive\Rectangle.h" />
+    <ClInclude Include="sources\core\primitive\GameLine.h" />
+    <ClInclude Include="sources\core\primitive\GameRectangle.h" />
+    <ClInclude Include="sources\core\shaders\language\OpenGL2File.h" />
+    <ClInclude Include="sources\core\shaders\Shader.h" />
+    <ClInclude Include="sources\core\shaders\ShaderDefines.h" />
+    <ClInclude Include="sources\core\shaders\ShaderLoader.h" />
+    <ClInclude Include="sources\core\shaders\ShaderResources.h" />
+    <ClInclude Include="sources\core\stream\IClearFile.h" />
+    <ClInclude Include="sources\core\stream\Stream.h" />
+    <ClInclude Include="sources\core\stream\OClearFile.h" />
+    <ClInclude Include="sources\core\texture\formats\FilePNG.h" />
+    <ClInclude Include="sources\core\texture\formats\FileTGA.h" />
+    <ClInclude Include="sources\core\texture\Texture.h" />
+    <ClInclude Include="sources\core\texture\TextureLoader.h" />
+    <ClInclude Include="sources\core\texture\TextureResources.h" />
+    <ClInclude Include="sources\core\time\Time.h" />
+    <ClInclude Include="sources\core\utils\BinaryArray.h" />
+    <ClInclude Include="sources\core\utils\CircularQueue.h" />
+    <ClInclude Include="sources\core\utils\Physics2D.h" />
+    <ClInclude Include="sources\core\utils\FastAccessCollection.h" />
+    <ClInclude Include="sources\core\utils\MapCollection.h" />
+    <ClInclude Include="sources\core\utils\UniqueGenerator.h" />
+    <ClInclude Include="sources\core\utils\Utils.h" />
+    <ClInclude Include="sources\core\video\Driver.h" />
+    <ClInclude Include="sources\core\video\GraphicHeaders.h" />
+    <ClInclude Include="sources\core\video\opengl_latest\OpenGLLatestRenderer.h" />
+    <ClInclude Include="sources\core\video\Painter.h" />
+    <ClInclude Include="sources\core\video\Renderer.h" />
+    <ClInclude Include="sources\core\video\opengl_2.0_es\OpenGLESRenderer.h" />
+    <ClInclude Include="sources\system\System.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\application\Application.cpp" />
+    <ClCompile Include="sources\core\animation\AnimData.cpp" />
+    <ClCompile Include="sources\core\animation\AnimDataLoader.cpp" />
+    <ClCompile Include="sources\core\animation\AnimDataResources.cpp" />
+    <ClCompile Include="sources\core\animation\parser\FileAnim.cpp" />
+    <ClCompile Include="sources\core\animation\player\AnimPlayer.cpp" />
+    <ClCompile Include="sources\core\bindings\BindingCollection.cpp" />
+    <ClCompile Include="sources\core\bindings\BindingsManager.cpp" />
+    <ClCompile Include="sources\core\game_object\GameObject.cpp" />
+    <ClCompile Include="sources\core\game_object\GameObjectLabel.cpp" />
+    <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp" />
+    <ClCompile Include="sources\core\geometry\mesh\MeshLoader.cpp" />
+    <ClCompile Include="sources\core\geometry\mesh\MeshResources.cpp" />
+    <ClCompile Include="sources\core\geometry\mesh\parser\FileMesh.cpp" />
+    <ClCompile Include="sources\core\geometry\mesh\WireFrame.cpp" />
+    <ClCompile Include="sources\core\global\GlobalData.cpp" />
+    <ClCompile Include="sources\core\global\GlobalPaths.cpp" />
+    <ClCompile Include="sources\core\keys\ResourceKeyCollection.cpp" />
+    <ClCompile Include="sources\core\level\LevelLoader.cpp" />
+    <ClCompile Include="sources\core\level\parser\FileLevel.cpp" />
+    <ClCompile Include="sources\core\level\Tile.cpp" />
+    <ClCompile Include="sources\core\logging\Logging.cpp" />
+    <ClCompile Include="sources\core\math\Geometry.cpp" />
+    <ClCompile Include="sources\core\math\MathUtils.cpp" />
+    <ClCompile Include="sources\core\math\Matrix.cpp" />
+    <ClCompile Include="sources\core\math\Plane.cpp" />
+    <ClCompile Include="sources\core\math\Vector.cpp" />
+    <ClCompile Include="sources\core\platform\input\InputEventBatch.cpp" />
+    <ClCompile Include="sources\core\platform\input\InputManager.cpp" />
+    <ClCompile Include="sources\core\platform\input\PlatformInput.cpp" />
+    <ClCompile Include="sources\core\platform\linux\LinuxPlatform.cpp" />
+    <ClCompile Include="sources\core\platform\Platform.cpp" />
+    <ClCompile Include="sources\core\platform\windows\WindowsPlatform.cpp" />
+    <ClCompile Include="sources\core\primitive\Line.cpp" />
+    <ClCompile Include="sources\core\primitive\Primitive.cpp" />
+    <ClCompile Include="sources\core\primitive\Rectangle.cpp" />
+    <ClCompile Include="sources\core\primitive\GameLine.cpp" />
+    <ClCompile Include="sources\core\primitive\GameRectangle.cpp" />
+    <ClCompile Include="sources\core\shaders\language\OpenGL2File.cpp" />
+    <ClCompile Include="sources\core\shaders\ShaderLoader.cpp" />
+    <ClCompile Include="sources\core\shaders\ShaderResources.cpp" />
+    <ClCompile Include="sources\core\stream\IClearFile.cpp" />
+    <ClCompile Include="sources\core\stream\OClearFile.cpp" />
+    <ClCompile Include="sources\core\stream\Stream.cpp" />
+    <ClCompile Include="sources\core\texture\formats\FilePNG.cpp" />
+    <ClCompile Include="sources\core\texture\formats\FileTGA.cpp" />
+    <ClCompile Include="sources\core\texture\TextureLoader.cpp" />
+    <ClCompile Include="sources\core\texture\TextureResources.cpp" />
+    <ClCompile Include="sources\core\time\Time.cpp" />
+    <ClCompile Include="sources\core\utils\BinaryArray.cpp" />
+    <ClCompile Include="sources\core\utils\Physics2D.cpp" />
+    <ClCompile Include="sources\core\utils\UniqueGenerator.cpp" />
+    <ClCompile Include="sources\core\utils\Utils.cpp" />
+    <ClCompile Include="sources\core\video\Driver.cpp" />
+    <ClCompile Include="sources\core\video\opengl_latest\OpenGLLatestRenderer.cpp" />
+    <ClCompile Include="sources\core\video\Painter.cpp" />
+    <ClCompile Include="sources\core\video\Renderer.cpp" />
+    <ClCompile Include="sources\core\video\opengl_2.0_es\OpenGLESRenderer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="sources\system\System.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

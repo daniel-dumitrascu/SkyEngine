@@ -1,0 +1,33 @@
+#ifndef INPUT_MANAGER
+#define INPUT_MANAGER
+
+#include "Device.h"
+#include "PlatformInput.h"
+#include "../../utils/FastAccessCollection.h"
+
+class Controllable;
+
+class InputManager
+{
+	public:
+
+		static InputManager* GetInstance();
+				
+		int AddSubscriber(Controllable* subs);
+		void RemoveSubscriber(int id);
+		void Update();
+
+	private:
+
+		InputManager() {};
+		~InputManager();
+
+		InputManager(const InputManager& copy) = delete;
+		InputManager& operator = (const InputManager& copy) = delete;
+
+	private:
+
+		FastAccessCollection<Controllable*>	subscribers;
+};
+
+#endif

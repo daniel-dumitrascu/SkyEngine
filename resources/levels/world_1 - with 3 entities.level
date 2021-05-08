@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Level>
+	<Entity>
+		<type>bird</type>
+		<animation>bird_fly</animation>
+		<texture>bird_atlas.png</texture>
+		<shader>rend_tex</shader>
+		<position x="100" y="100" />
+		<rotation x="0" y="0" />
+		<scale size="150" />
+	</Entity>
+	<Entity>
+		<type>soldier</type>
+		<animation>soldier</animation>
+		<texture>soldier.png</texture>
+		<shader>rend_tex</shader>
+		<position x="100" y="100" />
+		<rotation x="0" y="0" />
+		<scale size="150" />
+	</Entity>
+	<Entity>
+		<type>player</type>
+		<tile>player</tile>
+		<texture>player.png</texture>
+		<shader>rend_tex</shader>
+		<position x="200" y="100" />
+		<rotation x="0" y="0" />
+		<scale size="150" />
+	</Entity>
+</Level>

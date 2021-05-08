@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B88B7E1A-B1B5-4075-A0F6-71455AC2B2A7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>My3D_App_Template</RootNamespace>
+    <ProjectName>Game</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)..\engine\sources\core;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)binaries\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>binaries\$(Platform)\$(Configuration)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>DEBUG_SECTION=1;WINDOWS_PLATFORM=1;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <UndefinePreprocessorDefinitions>STRESS_TEST</UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SkyEngine2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)sources\engine\binaries\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="sources\Game.cpp" />
+    <ClCompile Include="sources\GameDefines.cpp" />
+    <ClCompile Include="sources\game_objects\Background.cpp" />
+    <ClCompile Include="sources\game_objects\Bird.cpp" />
+    <ClCompile Include="sources\game_objects\GameObjectFactory.cpp" />
+    <ClCompile Include="sources\game_objects\MovingObject.cpp" />
+    <ClCompile Include="sources\game_objects\Player.cpp" />
+    <ClCompile Include="sources\game_objects\Soldier.cpp" />
+    <ClCompile Include="sources\game_objects\StaticObject.cpp" />
+    <ClCompile Include="sources\level\Level.cpp" />
+    <ClCompile Include="sources\level\StressLevel.cpp" />
+    <ClCompile Include="sources\menu\MainMenu.cpp" />
+    <ClCompile Include="sources\splash\SplashScreen.cpp" />
+    <ClCompile Include="sources\states\GameStateManager.cpp" />
+    <ClCompile Include="sources\states\GameStateGameplay.cpp" />
+    <ClCompile Include="sources\states\GameStateKickstart.cpp" />
+    <ClCompile Include="sources\states\GameStateMainMenu.cpp" />
+    <ClCompile Include="sources\WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\defines\ResourceDefines.h" />
+    <ClInclude Include="sources\Game.h" />
+    <ClInclude Include="sources\GameDefines.h" />
+    <ClInclude Include="sources\game_objects\Background.h" />
+    <ClInclude Include="sources\game_objects\Bird.h" />
+    <ClInclude Include="sources\game_objects\GameObjectDefines.h" />
+    <ClInclude Include="sources\game_objects\GameObjectFactory.h" />
+    <ClInclude Include="sources\game_objects\MovingObject.h" />
+    <ClInclude Include="sources\game_objects\Player.h" />
+    <ClInclude Include="sources\game_objects\Soldier.h" />
+    <ClInclude Include="sources\game_objects\StaticObject.h" />
+    <ClInclude Include="sources\level\Level.h" />
+    <ClInclude Include="sources\level\LevelDefines.h" />
+    <ClInclude Include="sources\level\StressLevel.h" />
+    <ClInclude Include="sources\menu\MainMenu.h" />
+    <ClInclude Include="sources\splash\SplashScreen.h" />
+    <ClInclude Include="sources\states\GameBaseState.h" />
+    <ClInclude Include="sources\states\GameStateManager.h" />
+    <ClInclude Include="sources\states\GameStateGameplay.h" />
+    <ClInclude Include="sources\states\GameStateKickstart.h" />
+    <ClInclude Include="sources\states\GameStateMainMenu.h" />
+    <ClInclude Include="sources\states\StateID.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

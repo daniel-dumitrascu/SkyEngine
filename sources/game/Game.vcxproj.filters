@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="sources\Game.cpp" />
+    <ClCompile Include="sources\WinMain.cpp" />
+    <ClCompile Include="sources\GameDefines.cpp" />
+    <ClCompile Include="sources\level\Level.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\level\StressLevel.cpp">
+      <Filter>level</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\menu\MainMenu.cpp">
+      <Filter>menu</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\splash\SplashScreen.cpp">
+      <Filter>splash</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\Background.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\Bird.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\Player.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\Soldier.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\GameObjectFactory.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\StaticObject.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\game_objects\MovingObject.cpp">
+      <Filter>game_objects</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\states\GameStateManager.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\states\GameStateGameplay.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\states\GameStateKickstart.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\states\GameStateMainMenu.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\Game.h" />
+    <ClInclude Include="sources\GameDefines.h" />
+    <ClInclude Include="sources\states\StateID.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\level\Level.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\level\StressLevel.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\menu\MainMenu.h">
+      <Filter>menu</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\splash\SplashScreen.h">
+      <Filter>splash</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\defines\ResourceDefines.h">
+      <Filter>defines</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\level\LevelDefines.h">
+      <Filter>level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\Background.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\Bird.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\Player.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\Soldier.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\GameObjectDefines.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\GameObjectFactory.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\StaticObject.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\game_objects\MovingObject.h">
+      <Filter>game_objects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\states\GameBaseState.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\states\GameStateManager.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\states\GameStateGameplay.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\states\GameStateKickstart.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\states\GameStateMainMenu.h">
+      <Filter>states</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="defines">
+      <UniqueIdentifier>{f648755b-9a07-470c-8d40-eea85fb933d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="states">
+      <UniqueIdentifier>{d68f1bcb-124f-4f3a-b31d-f90a87b0ec67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="level">
+      <UniqueIdentifier>{4f15f449-a835-4f95-9b51-ed690ae659dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="menu">
+      <UniqueIdentifier>{085ad014-daa3-4823-a074-75a707a189fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="splash">
+      <UniqueIdentifier>{c57802b5-a4e7-4290-bbd6-bd989bce5680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_objects">
+      <UniqueIdentifier>{cafc40e0-c4f8-4f53-b611-0ac7fd3fc468}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

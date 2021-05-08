@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Animation timer="30" >
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="0.7746" />
+			<Normal X="-0.6325" Y="0.7746" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0102" V="0.9008" />
+			<Texcoord U="0.0797" V="0.9008" />
+			<Texcoord U="0.0102" V="0.9859" />
+			<Texcoord U="0.0797" V="0.9859" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="0.7746" />
+			<Normal X="-0.6325" Y="0.7746" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1102" V="0.9008" />
+			<Texcoord U="0.1797" V="0.9008" />
+			<Texcoord U="0.1102" V="0.9859" />
+			<Texcoord U="0.1797" V="0.9859" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="0.7774" />
+			<Normal X="-0.6290" Y="0.7774" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2102" V="0.9008" />
+			<Texcoord U="0.2797" V="0.9008" />
+			<Texcoord U="0.2102" V="0.9867" />
+			<Texcoord U="0.2797" V="0.9867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="0.7774" />
+			<Normal X="-0.6290" Y="0.7774" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3102" V="0.9008" />
+			<Texcoord U="0.3797" V="0.9008" />
+			<Texcoord U="0.3102" V="0.9867" />
+			<Texcoord U="0.3797" V="0.9867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="0.7802" />
+			<Normal X="-0.6256" Y="0.7802" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4102" V="0.9008" />
+			<Texcoord U="0.4797" V="0.9008" />
+			<Texcoord U="0.4102" V="0.9875" />
+			<Texcoord U="0.4797" V="0.9875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="0.7802" />
+			<Normal X="-0.6256" Y="0.7802" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5102" V="0.9008" />
+			<Texcoord U="0.5797" V="0.9008" />
+			<Texcoord U="0.5102" V="0.9875" />
+			<Texcoord U="0.5797" V="0.9875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="0.7774" />
+			<Normal X="-0.6290" Y="0.7774" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6102" V="0.9008" />
+			<Texcoord U="0.6797" V="0.9008" />
+			<Texcoord U="0.6102" V="0.9867" />
+			<Texcoord U="0.6797" V="0.9867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="-0.7774" />
+			<Normal X="0.6290" Y="0.7774" />
+			<Normal X="-0.6290" Y="0.7774" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7102" V="0.9008" />
+			<Texcoord U="0.7797" V="0.9008" />
+			<Texcoord U="0.7102" V="0.9867" />
+			<Texcoord U="0.7797" V="0.9867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4995" Y="-0.8663" />
+			<Normal X="0.4995" Y="-0.8663" />
+			<Normal X="0.4995" Y="0.8663" />
+			<Normal X="-0.4995" Y="0.8663" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0289" V="0.8008" />
+			<Texcoord U="0.0789" V="0.8008" />
+			<Texcoord U="0.0289" V="0.8875" />
+			<Texcoord U="0.0789" V="0.8875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5530" Y="-0.8332" />
+			<Normal X="0.5530" Y="-0.8332" />
+			<Normal X="0.5530" Y="0.8332" />
+			<Normal X="-0.5530" Y="0.8332" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1297" V="0.8008" />
+			<Texcoord U="0.1867" V="0.8008" />
+			<Texcoord U="0.1297" V="0.8867" />
+			<Texcoord U="0.1867" V="0.8867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6374" Y="-0.7705" />
+			<Normal X="0.6374" Y="-0.7705" />
+			<Normal X="0.6374" Y="0.7705" />
+			<Normal X="-0.6374" Y="0.7705" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2242" V="0.8008" />
+			<Texcoord U="0.2953" V="0.8008" />
+			<Texcoord U="0.2242" V="0.8867" />
+			<Texcoord U="0.2953" V="0.8867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.7166" Y="-0.6975" />
+			<Normal X="0.7166" Y="-0.6975" />
+			<Normal X="0.7166" Y="0.6975" />
+			<Normal X="-0.7166" Y="0.6975" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3047" V="0.8008" />
+			<Texcoord U="0.3930" V="0.8008" />
+			<Texcoord U="0.3047" V="0.8867" />
+			<Texcoord U="0.3930" V="0.8867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6939" Y="-0.7201" />
+			<Normal X="0.6939" Y="-0.7201" />
+			<Normal X="0.6939" Y="0.7201" />
+			<Normal X="-0.6939" Y="0.7201" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4031" V="0.8008" />
+			<Texcoord U="0.4859" V="0.8008" />
+			<Texcoord U="0.4031" V="0.8867" />
+			<Texcoord U="0.4859" V="0.8867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.7166" Y="-0.6975" />
+			<Normal X="0.7166" Y="-0.6975" />
+			<Normal X="0.7166" Y="0.6975" />
+			<Normal X="-0.7166" Y="0.6975" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6047" V="0.8016" />
+			<Texcoord U="0.6930" V="0.8016" />
+			<Texcoord U="0.6047" V="0.8875" />
+			<Texcoord U="0.6930" V="0.8875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6374" Y="-0.7705" />
+			<Normal X="0.6374" Y="-0.7705" />
+			<Normal X="0.6374" Y="0.7705" />
+			<Normal X="-0.6374" Y="0.7705" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7242" V="0.8016" />
+			<Texcoord U="0.7953" V="0.8016" />
+			<Texcoord U="0.7242" V="0.8875" />
+			<Texcoord U="0.7953" V="0.8875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5530" Y="-0.8332" />
+			<Normal X="0.5530" Y="-0.8332" />
+			<Normal X="0.5530" Y="0.8332" />
+			<Normal X="-0.5530" Y="0.8332" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.8297" V="0.8016" />
+			<Texcoord U="0.8867" V="0.8016" />
+			<Texcoord U="0.8297" V="0.8875" />
+			<Texcoord U="0.8867" V="0.8875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4995" Y="-0.8663" />
+			<Normal X="0.4995" Y="-0.8663" />
+			<Normal X="0.4995" Y="0.8663" />
+			<Normal X="-0.4995" Y="0.8663" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.9289" V="0.8016" />
+			<Texcoord U="0.9789" V="0.8016" />
+			<Texcoord U="0.9289" V="0.8883" />
+			<Texcoord U="0.9789" V="0.8883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5090" Y="-0.8608" />
+			<Normal X="0.5090" Y="-0.8608" />
+			<Normal X="0.5090" Y="0.8608" />
+			<Normal X="-0.5090" Y="0.8608" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0305" V="0.7008" />
+			<Texcoord U="0.0836" V="0.7008" />
+			<Texcoord U="0.0305" V="0.7906" />
+			<Texcoord U="0.0836" V="0.7906" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6964" Y="-0.7177" />
+			<Normal X="0.6964" Y="-0.7177" />
+			<Normal X="0.6964" Y="0.7177" />
+			<Normal X="-0.6964" Y="0.7177" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1031" V="0.7008" />
+			<Texcoord U="0.1797" V="0.7008" />
+			<Texcoord U="0.1031" V="0.7797" />
+			<Texcoord U="0.1797" V="0.7797" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6960" Y="-0.7180" />
+			<Normal X="0.6960" Y="-0.7180" />
+			<Normal X="0.6960" Y="0.7180" />
+			<Normal X="-0.6960" Y="0.7180" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2055" V="0.7000" />
+			<Texcoord U="0.2797" V="0.7000" />
+			<Texcoord U="0.2055" V="0.7766" />
+			<Texcoord U="0.2797" V="0.7766" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6463" Y="-0.7631" />
+			<Normal X="0.6463" Y="-0.7631" />
+			<Normal X="0.6463" Y="0.7631" />
+			<Normal X="-0.6463" Y="0.7631" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3188" V="0.7000" />
+			<Texcoord U="0.3836" V="0.7000" />
+			<Texcoord U="0.3188" V="0.7766" />
+			<Texcoord U="0.3836" V="0.7766" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6502" Y="-0.7598" />
+			<Normal X="0.6502" Y="-0.7598" />
+			<Normal X="0.6502" Y="0.7598" />
+			<Normal X="-0.6502" Y="0.7598" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4063" V="0.7008" />
+			<Texcoord U="0.4758" V="0.7008" />
+			<Texcoord U="0.4063" V="0.7820" />
+			<Texcoord U="0.4758" V="0.7820" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4789" Y="-0.8779" />
+			<Normal X="0.4789" Y="-0.8779" />
+			<Normal X="0.4789" Y="0.8779" />
+			<Normal X="-0.4789" Y="0.8779" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0352" V="0.6102" />
+			<Texcoord U="0.0820" V="0.6102" />
+			<Texcoord U="0.0352" V="0.6961" />
+			<Texcoord U="0.0820" V="0.6961" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6566" Y="-0.7542" />
+			<Normal X="0.6566" Y="-0.7542" />
+			<Normal X="0.6566" Y="0.7542" />
+			<Normal X="-0.6566" Y="0.7542" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1211" V="0.6031" />
+			<Texcoord U="0.1789" V="0.6031" />
+			<Texcoord U="0.1211" V="0.6695" />
+			<Texcoord U="0.1789" V="0.6695" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6000" Y="-0.8000" />
+			<Normal X="0.6000" Y="-0.8000" />
+			<Normal X="0.6000" Y="0.8000" />
+			<Normal X="-0.6000" Y="0.8000" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2250" V="0.6031" />
+			<Texcoord U="0.2766" V="0.6031" />
+			<Texcoord U="0.2250" V="0.6719" />
+			<Texcoord U="0.2766" V="0.6719" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.9072" Y="-0.4206" />
+			<Normal X="0.9072" Y="-0.4206" />
+			<Normal X="0.9072" Y="0.4206" />
+			<Normal X="-0.9072" Y="0.4206" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3016" V="0.6000" />
+			<Texcoord U="0.3875" V="0.6000" />
+			<Texcoord U="0.3016" V="0.6398" />
+			<Texcoord U="0.3875" V="0.6398" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.8846" Y="-0.4664" />
+			<Normal X="0.8846" Y="-0.4664" />
+			<Normal X="0.8846" Y="0.4664" />
+			<Normal X="-0.8846" Y="0.4664" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4016" V="0.6008" />
+			<Texcoord U="0.4875" V="0.6008" />
+			<Texcoord U="0.4016" V="0.6461" />
+			<Texcoord U="0.4875" V="0.6461" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.8912" Y="-0.4537" />
+			<Normal X="0.8912" Y="-0.4537" />
+			<Normal X="0.8912" Y="0.4537" />
+			<Normal X="-0.8912" Y="0.4537" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5016" V="0.6008" />
+			<Texcoord U="0.5875" V="0.6008" />
+			<Texcoord U="0.5016" V="0.6445" />
+			<Texcoord U="0.5875" V="0.6445" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4789" Y="-0.8779" />
+			<Normal X="0.4789" Y="-0.8779" />
+			<Normal X="0.4789" Y="0.8779" />
+			<Normal X="-0.4789" Y="0.8779" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0352" V="0.5102" />
+			<Texcoord U="0.0820" V="0.5102" />
+			<Texcoord U="0.0352" V="0.5961" />
+			<Texcoord U="0.0820" V="0.5961" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5830" Y="-0.8124" />
+			<Normal X="0.5830" Y="-0.8124" />
+			<Normal X="0.5830" Y="0.8124" />
+			<Normal X="-0.5830" Y="0.8124" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1313" V="0.5031" />
+			<Texcoord U="0.1789" V="0.5031" />
+			<Texcoord U="0.1313" V="0.5695" />
+			<Texcoord U="0.1789" V="0.5695" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5821" Y="-0.8131" />
+			<Normal X="0.5821" Y="-0.8131" />
+			<Normal X="0.5821" Y="0.8131" />
+			<Normal X="-0.5821" Y="0.8131" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2273" V="0.5031" />
+			<Texcoord U="0.2766" V="0.5031" />
+			<Texcoord U="0.2273" V="0.5719" />
+			<Texcoord U="0.2766" V="0.5719" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.9087" Y="-0.4175" />
+			<Normal X="0.9087" Y="-0.4175" />
+			<Normal X="0.9087" Y="0.4175" />
+			<Normal X="-0.9087" Y="0.4175" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3016" V="0.5000" />
+			<Texcoord U="0.3883" V="0.5000" />
+			<Texcoord U="0.3016" V="0.5398" />
+			<Texcoord U="0.3883" V="0.5398" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.8863" Y="-0.4631" />
+			<Normal X="0.8863" Y="-0.4631" />
+			<Normal X="0.8863" Y="0.4631" />
+			<Normal X="-0.8863" Y="0.4631" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4016" V="0.5008" />
+			<Texcoord U="0.4883" V="0.5008" />
+			<Texcoord U="0.4016" V="0.5461" />
+			<Texcoord U="0.4883" V="0.5461" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.8928" Y="-0.4504" />
+			<Normal X="0.8928" Y="-0.4504" />
+			<Normal X="0.8928" Y="0.4504" />
+			<Normal X="-0.8928" Y="0.4504" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5016" V="0.5008" />
+			<Texcoord U="0.5883" V="0.5008" />
+			<Texcoord U="0.5016" V="0.5445" />
+			<Texcoord U="0.5883" V="0.5445" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4895" Y="-0.8720" />
+			<Normal X="0.4895" Y="-0.8720" />
+			<Normal X="0.4895" Y="0.8720" />
+			<Normal X="-0.4895" Y="0.8720" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0281" V="0.4039" />
+			<Texcoord U="0.0781" V="0.4039" />
+			<Texcoord U="0.0281" V="0.4930" />
+			<Texcoord U="0.0781" V="0.4930" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4690" Y="-0.8832" />
+			<Normal X="0.4690" Y="-0.8832" />
+			<Normal X="0.4690" Y="0.8832" />
+			<Normal X="-0.4690" Y="0.8832" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1289" V="0.4055" />
+			<Texcoord U="0.1758" V="0.4055" />
+			<Texcoord U="0.1289" V="0.4938" />
+			<Texcoord U="0.1758" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4229" Y="-0.9062" />
+			<Normal X="0.4229" Y="-0.9062" />
+			<Normal X="0.4229" Y="0.9062" />
+			<Normal X="-0.4229" Y="0.9062" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2305" V="0.4000" />
+			<Texcoord U="0.2742" V="0.4000" />
+			<Texcoord U="0.2305" V="0.4938" />
+			<Texcoord U="0.2742" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4104" Y="-0.9119" />
+			<Normal X="0.4104" Y="-0.9119" />
+			<Normal X="0.4104" Y="0.9119" />
+			<Normal X="-0.4104" Y="0.9119" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3328" V="0.4000" />
+			<Texcoord U="0.3750" V="0.4000" />
+			<Texcoord U="0.3328" V="0.4938" />
+			<Texcoord U="0.3750" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4281" Y="-0.9037" />
+			<Normal X="0.4281" Y="-0.9037" />
+			<Normal X="0.4281" Y="0.9037" />
+			<Normal X="-0.4281" Y="0.9037" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4313" V="0.4039" />
+			<Texcoord U="0.4734" V="0.4039" />
+			<Texcoord U="0.4313" V="0.4930" />
+			<Texcoord U="0.4734" V="0.4930" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4376" Y="-0.8992" />
+			<Normal X="0.4376" Y="-0.8992" />
+			<Normal X="0.4376" Y="0.8992" />
+			<Normal X="-0.4376" Y="0.8992" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5297" V="0.4055" />
+			<Texcoord U="0.5727" V="0.4055" />
+			<Texcoord U="0.5297" V="0.4938" />
+			<Texcoord U="0.5727" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4472" Y="-0.8944" />
+			<Normal X="0.4472" Y="-0.8944" />
+			<Normal X="0.4472" Y="0.8944" />
+			<Normal X="-0.4472" Y="0.8944" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6281" V="0.4000" />
+			<Texcoord U="0.6750" V="0.4000" />
+			<Texcoord U="0.6281" V="0.4938" />
+			<Texcoord U="0.6750" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4590" Y="-0.8884" />
+			<Normal X="0.4590" Y="-0.8884" />
+			<Normal X="0.4590" Y="0.8884" />
+			<Normal X="-0.4590" Y="0.8884" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7273" V="0.4000" />
+			<Texcoord U="0.7758" V="0.4000" />
+			<Texcoord U="0.7273" V="0.4938" />
+			<Texcoord U="0.7758" V="0.4938" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5400" Y="-0.8417" />
+			<Normal X="0.5400" Y="-0.8417" />
+			<Normal X="0.5400" Y="0.8417" />
+			<Normal X="-0.5400" Y="0.8417" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0289" V="0.3016" />
+			<Texcoord U="0.0820" V="0.3016" />
+			<Texcoord U="0.0289" V="0.3844" />
+			<Texcoord U="0.0820" V="0.3844" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5237" Y="-0.8519" />
+			<Normal X="0.5237" Y="-0.8519" />
+			<Normal X="0.5237" Y="0.8519" />
+			<Normal X="-0.5237" Y="0.8519" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1289" V="0.3023" />
+			<Texcoord U="0.1813" V="0.3023" />
+			<Texcoord U="0.1289" V="0.3875" />
+			<Texcoord U="0.1813" V="0.3875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4961" Y="-0.8682" />
+			<Normal X="0.4961" Y="-0.8682" />
+			<Normal X="0.4961" Y="0.8682" />
+			<Normal X="-0.4961" Y="0.8682" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2289" V="0.3016" />
+			<Texcoord U="0.2789" V="0.3016" />
+			<Texcoord U="0.2289" V="0.3891" />
+			<Texcoord U="0.2789" V="0.3891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5202" Y="-0.8540" />
+			<Normal X="0.5202" Y="-0.8540" />
+			<Normal X="0.5202" Y="0.8540" />
+			<Normal X="-0.5202" Y="0.8540" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3289" V="0.3016" />
+			<Texcoord U="0.3813" V="0.3016" />
+			<Texcoord U="0.3289" V="0.3875" />
+			<Texcoord U="0.3813" V="0.3875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5400" Y="-0.8417" />
+			<Normal X="0.5400" Y="-0.8417" />
+			<Normal X="0.5400" Y="0.8417" />
+			<Normal X="-0.5400" Y="0.8417" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4289" V="0.3016" />
+			<Texcoord U="0.4820" V="0.3016" />
+			<Texcoord U="0.4289" V="0.3844" />
+			<Texcoord U="0.4820" V="0.3844" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5237" Y="-0.8519" />
+			<Normal X="0.5237" Y="-0.8519" />
+			<Normal X="0.5237" Y="0.8519" />
+			<Normal X="-0.5237" Y="0.8519" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5289" V="0.3023" />
+			<Texcoord U="0.5813" V="0.3023" />
+			<Texcoord U="0.5289" V="0.3875" />
+			<Texcoord U="0.5813" V="0.3875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.4961" Y="-0.8682" />
+			<Normal X="0.4961" Y="-0.8682" />
+			<Normal X="0.4961" Y="0.8682" />
+			<Normal X="-0.4961" Y="0.8682" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6289" V="0.3016" />
+			<Texcoord U="0.6789" V="0.3016" />
+			<Texcoord U="0.6289" V="0.3891" />
+			<Texcoord U="0.6789" V="0.3891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5202" Y="-0.8540" />
+			<Normal X="0.5202" Y="-0.8540" />
+			<Normal X="0.5202" Y="0.8540" />
+			<Normal X="-0.5202" Y="0.8540" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7289" V="0.3016" />
+			<Texcoord U="0.7813" V="0.3016" />
+			<Texcoord U="0.7289" V="0.3875" />
+			<Texcoord U="0.7813" V="0.3875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="0.7746" />
+			<Normal X="-0.6325" Y="0.7746" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0102" V="0.2008" />
+			<Texcoord U="0.0797" V="0.2008" />
+			<Texcoord U="0.0102" V="0.2859" />
+			<Texcoord U="0.0797" V="0.2859" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6298" Y="-0.7768" />
+			<Normal X="0.6298" Y="-0.7768" />
+			<Normal X="0.6298" Y="0.7768" />
+			<Normal X="-0.6298" Y="0.7768" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1094" V="0.2000" />
+			<Texcoord U="0.1797" V="0.2000" />
+			<Texcoord U="0.1094" V="0.2867" />
+			<Texcoord U="0.1797" V="0.2867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6135" Y="-0.7897" />
+			<Normal X="0.6135" Y="-0.7897" />
+			<Normal X="0.6135" Y="0.7897" />
+			<Normal X="-0.6135" Y="0.7897" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2094" V="0.2000" />
+			<Texcoord U="0.2773" V="0.2000" />
+			<Texcoord U="0.2094" V="0.2875" />
+			<Texcoord U="0.2773" V="0.2875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6144" Y="-0.7890" />
+			<Normal X="0.6144" Y="-0.7890" />
+			<Normal X="0.6144" Y="0.7890" />
+			<Normal X="-0.6144" Y="0.7890" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3094" V="0.2000" />
+			<Texcoord U="0.3781" V="0.2000" />
+			<Texcoord U="0.3094" V="0.2883" />
+			<Texcoord U="0.3781" V="0.2883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="-0.7802" />
+			<Normal X="0.6256" Y="0.7802" />
+			<Normal X="-0.6256" Y="0.7802" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4094" V="0.2000" />
+			<Texcoord U="0.4789" V="0.2000" />
+			<Texcoord U="0.4094" V="0.2867" />
+			<Texcoord U="0.4789" V="0.2867" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6273" Y="-0.7788" />
+			<Normal X="0.6273" Y="-0.7788" />
+			<Normal X="0.6273" Y="0.7788" />
+			<Normal X="-0.6273" Y="0.7788" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5094" V="0.2000" />
+			<Texcoord U="0.5773" V="0.2000" />
+			<Texcoord U="0.5094" V="0.2844" />
+			<Texcoord U="0.5773" V="0.2844" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6178" Y="-0.7863" />
+			<Normal X="0.6178" Y="-0.7863" />
+			<Normal X="0.6178" Y="0.7863" />
+			<Normal X="-0.6178" Y="0.7863" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6094" V="0.2000" />
+			<Texcoord U="0.6781" V="0.2000" />
+			<Texcoord U="0.6094" V="0.2875" />
+			<Texcoord U="0.6781" V="0.2875" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6111" Y="-0.7916" />
+			<Normal X="0.6111" Y="-0.7916" />
+			<Normal X="0.6111" Y="0.7916" />
+			<Normal X="-0.6111" Y="0.7916" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7094" V="0.2000" />
+			<Texcoord U="0.7781" V="0.2000" />
+			<Texcoord U="0.7094" V="0.2891" />
+			<Texcoord U="0.7781" V="0.2891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="0.8459" />
+			<Normal X="-0.5334" Y="0.8459" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0211" V="0.1023" />
+			<Texcoord U="0.0758" V="0.1023" />
+			<Texcoord U="0.0211" V="0.1891" />
+			<Texcoord U="0.0758" V="0.1891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="0.8368" />
+			<Normal X="-0.5475" Y="0.8368" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1195" V="0.1063" />
+			<Texcoord U="0.1742" V="0.1063" />
+			<Texcoord U="0.1195" V="0.1898" />
+			<Texcoord U="0.1742" V="0.1898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="0.8368" />
+			<Normal X="-0.5475" Y="0.8368" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2195" V="0.1063" />
+			<Texcoord U="0.2742" V="0.1063" />
+			<Texcoord U="0.2195" V="0.1898" />
+			<Texcoord U="0.2742" V="0.1898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5404" Y="-0.8414" />
+			<Normal X="0.5404" Y="-0.8414" />
+			<Normal X="0.5404" Y="0.8414" />
+			<Normal X="-0.5404" Y="0.8414" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3203" V="0.1039" />
+			<Texcoord U="0.3750" V="0.1039" />
+			<Texcoord U="0.3203" V="0.1891" />
+			<Texcoord U="0.3750" V="0.1891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="0.8459" />
+			<Normal X="-0.5334" Y="0.8459" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4211" V="0.1016" />
+			<Texcoord U="0.4758" V="0.1016" />
+			<Texcoord U="0.4211" V="0.1883" />
+			<Texcoord U="0.4758" V="0.1883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="0.8459" />
+			<Normal X="-0.5334" Y="0.8459" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5227" V="0.1023" />
+			<Texcoord U="0.5773" V="0.1023" />
+			<Texcoord U="0.5227" V="0.1891" />
+			<Texcoord U="0.5773" V="0.1891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="0.8368" />
+			<Normal X="-0.5475" Y="0.8368" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6234" V="0.1063" />
+			<Texcoord U="0.6781" V="0.1063" />
+			<Texcoord U="0.6234" V="0.1898" />
+			<Texcoord U="0.6781" V="0.1898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="-0.8368" />
+			<Normal X="0.5475" Y="0.8368" />
+			<Normal X="-0.5475" Y="0.8368" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7234" V="0.1063" />
+			<Texcoord U="0.7781" V="0.1063" />
+			<Texcoord U="0.7234" V="0.1898" />
+			<Texcoord U="0.7781" V="0.1898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5404" Y="-0.8414" />
+			<Normal X="0.5404" Y="-0.8414" />
+			<Normal X="0.5404" Y="0.8414" />
+			<Normal X="-0.5404" Y="0.8414" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.8227" V="0.1039" />
+			<Texcoord U="0.8773" V="0.1039" />
+			<Texcoord U="0.8227" V="0.1891" />
+			<Texcoord U="0.8773" V="0.1891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="-0.8459" />
+			<Normal X="0.5334" Y="0.8459" />
+			<Normal X="-0.5334" Y="0.8459" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.9219" V="0.1016" />
+			<Texcoord U="0.9766" V="0.1016" />
+			<Texcoord U="0.9219" V="0.1883" />
+			<Texcoord U="0.9766" V="0.1883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5847" Y="-0.8113" />
+			<Normal X="0.5847" Y="-0.8113" />
+			<Normal X="0.5847" Y="0.8113" />
+			<Normal X="-0.5847" Y="0.8113" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.0125" V="0.0023" />
+			<Texcoord U="0.0750" V="0.0023" />
+			<Texcoord U="0.0125" V="0.0891" />
+			<Texcoord U="0.0750" V="0.0891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5419" Y="-0.8404" />
+			<Normal X="0.5419" Y="-0.8404" />
+			<Normal X="0.5419" Y="0.8404" />
+			<Normal X="-0.5419" Y="0.8404" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.1195" V="0.0063" />
+			<Texcoord U="0.1734" V="0.0063" />
+			<Texcoord U="0.1195" V="0.0898" />
+			<Texcoord U="0.1734" V="0.0898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.5891" Y="-0.8081" />
+			<Normal X="0.5891" Y="-0.8081" />
+			<Normal X="0.5891" Y="0.8081" />
+			<Normal X="-0.5891" Y="0.8081" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.2125" V="0.0063" />
+			<Texcoord U="0.2734" V="0.0063" />
+			<Texcoord U="0.2125" V="0.0898" />
+			<Texcoord U="0.2734" V="0.0898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6058" Y="-0.7956" />
+			<Normal X="0.6058" Y="-0.7956" />
+			<Normal X="0.6058" Y="0.7956" />
+			<Normal X="-0.6058" Y="0.7956" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.3094" V="0.0039" />
+			<Texcoord U="0.3742" V="0.0039" />
+			<Texcoord U="0.3094" V="0.0891" />
+			<Texcoord U="0.3742" V="0.0891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6169" Y="-0.7871" />
+			<Normal X="0.6169" Y="-0.7871" />
+			<Normal X="0.6169" Y="0.7871" />
+			<Normal X="-0.6169" Y="0.7871" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.4070" V="0.0016" />
+			<Texcoord U="0.4750" V="0.0016" />
+			<Texcoord U="0.4070" V="0.0883" />
+			<Texcoord U="0.4750" V="0.0883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6125" Y="-0.7905" />
+			<Normal X="0.6125" Y="-0.7905" />
+			<Normal X="0.6125" Y="0.7905" />
+			<Normal X="-0.6125" Y="0.7905" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.5094" V="0.0023" />
+			<Texcoord U="0.5766" V="0.0023" />
+			<Texcoord U="0.5094" V="0.0891" />
+			<Texcoord U="0.5766" V="0.0891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6352" Y="-0.7723" />
+			<Normal X="0.6352" Y="-0.7723" />
+			<Normal X="0.6352" Y="0.7723" />
+			<Normal X="-0.6352" Y="0.7723" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.6086" V="0.0063" />
+			<Texcoord U="0.6773" V="0.0063" />
+			<Texcoord U="0.6086" V="0.0898" />
+			<Texcoord U="0.6773" V="0.0898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6309" Y="-0.7759" />
+			<Normal X="0.6309" Y="-0.7759" />
+			<Normal X="0.6309" Y="0.7759" />
+			<Normal X="-0.6309" Y="0.7759" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.7094" V="0.0063" />
+			<Texcoord U="0.7773" V="0.0063" />
+			<Texcoord U="0.7094" V="0.0898" />
+			<Texcoord U="0.7773" V="0.0898" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="-0.7746" />
+			<Normal X="0.6325" Y="0.7746" />
+			<Normal X="-0.6325" Y="0.7746" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.8070" V="0.0039" />
+			<Texcoord U="0.8766" V="0.0039" />
+			<Texcoord U="0.8070" V="0.0891" />
+			<Texcoord U="0.8766" V="0.0891" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+	<Frame>
+		<Normals number="4">
+			<Normal X="-0.6080" Y="-0.7940" />
+			<Normal X="0.6080" Y="-0.7940" />
+			<Normal X="0.6080" Y="0.7940" />
+			<Normal X="-0.6080" Y="0.7940" />
+		</Normals>
+		<Textures number="4">
+			<Texcoord U="0.9094" V="0.0016" />
+			<Texcoord U="0.9758" V="0.0016" />
+			<Texcoord U="0.9094" V="0.0883" />
+			<Texcoord U="0.9758" V="0.0883" />
+		</Textures>
+		<Polygons number="2">
+			<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+			<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+		</Polygons>
+	</Frame>
+</Animation>
+<States>
+	<State start="0" end="7" />
+	<State start="8" end="12" />
+	<State start="13" end="16" />
+	<State start="17" end="21" />
+	<State start="22" end="27" />
+	<State start="28" end="33" />
+	<State start="34" end="41" />
+	<State start="42" end="49" />
+	<State start="50" end="57" />
+	<State start="58" end="67" />
+	<State start="68" end="77" />
+</States>

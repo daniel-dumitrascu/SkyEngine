@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="sources\application\Application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\system\System.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\animation\parser\FileAnim.cpp">
+      <Filter>core\animation\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\animation\player\AnimPlayer.cpp">
+      <Filter>core\animation\player</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\animation\AnimData.cpp">
+      <Filter>core\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\animation\AnimDataLoader.cpp">
+      <Filter>core\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\animation\AnimDataResources.cpp">
+      <Filter>core\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\bindings\BindingCollection.cpp">
+      <Filter>core\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\bindings\BindingsManager.cpp">
+      <Filter>core\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\game_object\GameObject.cpp">
+      <Filter>core\game_object</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\game_object\GameObjectLabel.cpp">
+      <Filter>core\game_object</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp">
+      <Filter>core\geometry\baching</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\geometry\mesh\parser\FileMesh.cpp">
+      <Filter>core\geometry\mesh\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\geometry\mesh\MeshLoader.cpp">
+      <Filter>core\geometry\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\geometry\mesh\MeshResources.cpp">
+      <Filter>core\geometry\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\geometry\mesh\WireFrame.cpp">
+      <Filter>core\geometry\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\global\GlobalData.cpp">
+      <Filter>core\global</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\global\GlobalPaths.cpp">
+      <Filter>core\global</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\keys\ResourceKeyCollection.cpp">
+      <Filter>core\keys</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\level\parser\FileLevel.cpp">
+      <Filter>core\level\parser</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\level\LevelLoader.cpp">
+      <Filter>core\level</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\level\Tile.cpp">
+      <Filter>core\level</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\logging\Logging.cpp">
+      <Filter>core\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\math\Geometry.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\math\MathUtils.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\math\Matrix.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\math\Vector.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\math\Plane.cpp">
+      <Filter>core\math</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\input\InputEventBatch.cpp">
+      <Filter>core\platform\input</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\input\InputManager.cpp">
+      <Filter>core\platform\input</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\input\PlatformInput.cpp">
+      <Filter>core\platform\input</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\linux\LinuxPlatform.cpp">
+      <Filter>core\platform\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\windows\WindowsPlatform.cpp">
+      <Filter>core\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\platform\Platform.cpp">
+      <Filter>core\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\primitive\GameLine.cpp">
+      <Filter>core\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\primitive\GameRectangle.cpp">
+      <Filter>core\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\primitive\Line.cpp">
+      <Filter>core\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\primitive\Rectangle.cpp">
+      <Filter>core\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\primitive\Primitive.cpp">
+      <Filter>core\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\shaders\language\OpenGL2File.cpp">
+      <Filter>core\shaders\language</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\shaders\ShaderLoader.cpp">
+      <Filter>core\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\shaders\ShaderResources.cpp">
+      <Filter>core\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\stream\IClearFile.cpp">
+      <Filter>core\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\stream\OClearFile.cpp">
+      <Filter>core\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\stream\Stream.cpp">
+      <Filter>core\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\texture\formats\FilePNG.cpp">
+      <Filter>core\texture\formats</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\texture\formats\FileTGA.cpp">
+      <Filter>core\texture\formats</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\texture\TextureLoader.cpp">
+      <Filter>core\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\texture\TextureResources.cpp">
+      <Filter>core\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\time\Time.cpp">
+      <Filter>core\time</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\utils\BinaryArray.cpp">
+      <Filter>core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\utils\Physics2D.cpp">
+      <Filter>core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\utils\UniqueGenerator.cpp">
+      <Filter>core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\utils\Utils.cpp">
+      <Filter>core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\video\opengl_2.0_es\OpenGLESRenderer.cpp">
+      <Filter>core\video\opengl_2.0_es</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\video\opengl_latest\OpenGLLatestRenderer.cpp">
+      <Filter>core\video\opengl_latest</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\video\Driver.cpp">
+      <Filter>core\video</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\video\Painter.cpp">
+      <Filter>core\video</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\video\Renderer.cpp">
+      <Filter>core\video</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\application\Application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\system\System.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\actions\Actions.h">
+      <Filter>core\actions</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\parser\FileAnim.h">
+      <Filter>core\animation\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\player\AnimPlayer.h">
+      <Filter>core\animation\player</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\AnimData.h">
+      <Filter>core\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\AnimDataLoader.h">
+      <Filter>core\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\AnimDataResources.h">
+      <Filter>core\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\animation\AnimStateLimit.h">
+      <Filter>core\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\bindings\BindingCollection.h">
+      <Filter>core\bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\bindings\BindingsManager.h">
+      <Filter>core\bindings</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\game_object\GameObject.h">
+      <Filter>core\game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\game_object\GameObjectLabel.h">
+      <Filter>core\game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\baching\DrawScheme.h">
+      <Filter>core\geometry\baching</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\mesh\parser\FileMesh.h">
+      <Filter>core\geometry\mesh\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\mesh\MeshLoader.h">
+      <Filter>core\geometry\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\mesh\MeshResources.h">
+      <Filter>core\geometry\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\mesh\WireFrame.h">
+      <Filter>core\geometry\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\geometry\Polygon.h">
+      <Filter>core\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\global\GlobalData.h">
+      <Filter>core\global</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\global\GlobalPaths.h">
+      <Filter>core\global</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\input\Controllable.h">
+      <Filter>core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\input\InputHandleProfiles.h">
+      <Filter>core\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\keys\ResourceKeyCollection.h">
+      <Filter>core\keys</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\parser\FileLevel.h">
+      <Filter>core\level\parser</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\LevelData.h">
+      <Filter>core\level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\LevelLoader.h">
+      <Filter>core\level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\Tile.h">
+      <Filter>core\level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\loader\Loader.h">
+      <Filter>core\loader</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\logging\Logging.h">
+      <Filter>core\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\math\Geometry.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\math\MathUtils.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\math\Matrix.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\math\Vector.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\math\Plane.h">
+      <Filter>core\math</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\Device.h">
+      <Filter>core\platform\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\DeviceDefinitions.h">
+      <Filter>core\platform\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\InputEventBatch.h">
+      <Filter>core\platform\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\InputManager.h">
+      <Filter>core\platform\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\PlatformInput.h">
+      <Filter>core\platform\input</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\linux\LinuxPlatform.h">
+      <Filter>core\platform\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\windows\InputDataType.h">
+      <Filter>core\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\windows\WindowsPlatform.h">
+      <Filter>core\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\Platform.h">
+      <Filter>core\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\primitive\GameLine.h">
+      <Filter>core\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\primitive\GameRectangle.h">
+      <Filter>core\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\primitive\Line.h">
+      <Filter>core\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\primitive\Rectangle.h">
+      <Filter>core\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\primitive\Primitive.h">
+      <Filter>core\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\shaders\language\OpenGL2File.h">
+      <Filter>core\shaders\language</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\shaders\Shader.h">
+      <Filter>core\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\shaders\ShaderDefines.h">
+      <Filter>core\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\shaders\ShaderLoader.h">
+      <Filter>core\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\shaders\ShaderResources.h">
+      <Filter>core\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\stream\IClearFile.h">
+      <Filter>core\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\stream\OClearFile.h">
+      <Filter>core\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\stream\Stream.h">
+      <Filter>core\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\texture\formats\FilePNG.h">
+      <Filter>core\texture\formats</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\texture\formats\FileTGA.h">
+      <Filter>core\texture\formats</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\texture\Texture.h">
+      <Filter>core\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\texture\TextureLoader.h">
+      <Filter>core\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\texture\TextureResources.h">
+      <Filter>core\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\time\Time.h">
+      <Filter>core\time</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\BinaryArray.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\CircularQueue.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\FastAccessCollection.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\MapCollection.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\Physics2D.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\UniqueGenerator.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\Utils.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\opengl_2.0_es\OpenGLESRenderer.h">
+      <Filter>core\video\opengl_2.0_es</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\opengl_latest\OpenGLLatestRenderer.h">
+      <Filter>core\video\opengl_latest</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\Driver.h">
+      <Filter>core\video</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\GraphicHeaders.h">
+      <Filter>core\video</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\Painter.h">
+      <Filter>core\video</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\video\Renderer.h">
+      <Filter>core\video</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="application">
+      <UniqueIdentifier>{1a50d29b-0f68-4de0-ad9e-6b54051396ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="system">
+      <UniqueIdentifier>{129c211c-95fe-45bf-893d-742a73405f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{a4bc3435-d112-43a7-b27b-6e479aaab799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\actions">
+      <UniqueIdentifier>{c5a9027f-1934-4719-8431-8e735b59c82a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\animation">
+      <UniqueIdentifier>{bda829c9-6f5f-4f22-9fbb-968c3c1cb9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\animation\parser">
+      <UniqueIdentifier>{f2b55111-4ff8-482e-8e0e-17ae693eba2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\animation\player">
+      <UniqueIdentifier>{2258b59f-b29b-46a1-846b-bcacd435a8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\bindings">
+      <UniqueIdentifier>{131f633e-c5d5-40af-8aab-5241724c0969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\game_object">
+      <UniqueIdentifier>{aa1f2b1d-2a53-4dff-8ac5-b26dae7cda96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\geometry">
+      <UniqueIdentifier>{e767735b-a3db-447f-8470-4f227ad24d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\geometry\baching">
+      <UniqueIdentifier>{f67abace-eedf-4b9a-96fa-828e1ec11cc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\geometry\mesh">
+      <UniqueIdentifier>{44295f1b-d643-4df4-9156-d5f8fb617e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\geometry\mesh\parser">
+      <UniqueIdentifier>{1f16106f-9d2b-44d4-b073-d810848e48d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\global">
+      <UniqueIdentifier>{d7480a17-3c9b-4316-a90b-4a89fcec0106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\input">
+      <UniqueIdentifier>{ed000295-8d4b-483b-901f-92a19b35d7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\keys">
+      <UniqueIdentifier>{73b48342-4904-4672-8294-669a32e62b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\level">
+      <UniqueIdentifier>{f4908901-3e70-4a05-be77-1fb0278c797c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\level\parser">
+      <UniqueIdentifier>{ba88d55a-bd91-404c-b373-7b8197c41d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\loader">
+      <UniqueIdentifier>{2d3a9604-9dcd-48a3-a374-bd3d72909249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\logging">
+      <UniqueIdentifier>{dfadbf5d-609c-40bb-a2d6-283a763768eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\math">
+      <UniqueIdentifier>{cdebae4f-2202-4a78-b530-d4c1279bf29d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\platform">
+      <UniqueIdentifier>{d416ba85-ce7a-41a0-9c86-44c414dd2503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\platform\input">
+      <UniqueIdentifier>{0e9274fa-2c34-4ca8-92ec-15968e1e7d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\platform\linux">
+      <UniqueIdentifier>{fa1fd5a2-fdfd-4aca-9d80-9edcb35e7e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\platform\windows">
+      <UniqueIdentifier>{042a685d-fd2f-4907-ad1e-f89ec58a95cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\primitive">
+      <UniqueIdentifier>{ab0c2b5b-3bbc-4cdd-a4b4-f04440359664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\shaders">
+      <UniqueIdentifier>{f09240c5-a9c0-4fc6-a976-099f2f4f3d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\shaders\language">
+      <UniqueIdentifier>{c7b9a4e2-d5e8-41df-b139-622bf3fb6cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\stream">
+      <UniqueIdentifier>{526d6b9b-d018-45f2-9285-c15f06e1c81f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\texture">
+      <UniqueIdentifier>{0b502583-9766-43dc-a960-de0a87719987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\texture\formats">
+      <UniqueIdentifier>{23e53977-4d19-4841-a4ab-367ca7bd5905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\time">
+      <UniqueIdentifier>{f786b204-ff7f-4ee9-a2bd-23d8a062ec58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\utils">
+      <UniqueIdentifier>{c242232a-3b7c-4c8e-931a-128fff0f3b7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\video">
+      <UniqueIdentifier>{5e2212f6-30f7-42de-b0e2-5bb2aef4e310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\video\opengl_2.0_es">
+      <UniqueIdentifier>{ff6c0f8a-bf95-4ed6-9b95-acfe4b8e2cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\video\opengl_latest">
+      <UniqueIdentifier>{19380ad9-092c-4cf3-9a79-e5bb9531f3b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
