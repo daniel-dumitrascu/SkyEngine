@@ -35,11 +35,11 @@ $(ProjectDir)binaries\$(Platform)\$(Configuration)\.conan
 * Install gcc
 * Install visual code
 * Add the Microsoft C/C++ extension for Visual Code (if preferred  you can also add Material Icon Theme but this is not mandatory)
-* We need to add some extra tools to the env by running this command: 
+* Go into the project root directory and execute the conan pachage manager 
 ```
-sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+conan install conanfile.txt
 ```
-* To build execute make
+* Open visual Code and build the project
 * Before running the game we need to make the shared library visible to the system
 ```
 LD_LIBRARY_PATH=<path to engine so>
