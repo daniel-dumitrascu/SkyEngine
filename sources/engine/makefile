@@ -1,26 +1,31 @@
+include ../../conanbuildinfo.mak
+
 CXX      := g++
 CXXFLAGS := -DLINUX_PLATFORM \
-			-DGLEW_STATIC \
-			-DGRAPHICS_OPENGL_LATEST \
-			-DDEBUG_SECTION \
-			-fPIC -Wall -g 
+		-DGLEW_STATIC \
+		-DGRAPHICS_OPENGL_LATEST \
+		-DDEBUG_SECTION \
+		-fPIC -Wall -g 
 LDFLAGS  := -shared
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
 TARGET   := libNemesisEngine.so
 INCLUDE  := -I./sources/core \
-			-I./../libs/glfw/include/ \
-			-I./../libs/glew/include/ \
-			-I./../libs/libpng16/ \
-			-I./../libs/libpng16/include/libpng16 
-LIBS_DIR := -L./../libs/glfw/lib/linux/ \
-			-L./../libs/glew/lib/linux/ \
-			-L./../libs/libpng16/
-LIBS  	 := -lglfw3 \
-			-lGLEW \
-			-lGL \
-			-lpng
+			-I$(CONAN_INCLUDE_DIRS_GLFW) \
+			-I$(CONAN_INCLUDE_DIRS_GLEW) \
+			-I$(CONAN_INCLUDE_DIRS_LIBPNG) \
+			-I$(CONAN_INCLUDE_DIRS_TINYXML2)
+LIBS_DIR := -L$(CONAN_LIB_DIRS_GLFW) \
+			-L$(CONAN_LIB_DIRS_GLEW) \
+			-L$(CONAN_LIB_DIRS_LIBPNG) \
+			-L$(CONAN_LIB_DIRS_TINYXML2)
+LIBS  	 := -l$(CONAN_LIBS_GLFW) \
+			-l$(CONAN_LIBS_GLEW) \
+			-l$(CONAN_LIBS_LIBPNG) \
+			-l$(CONAN_LIBS_TINYXML2) \
+			-lpthread \
+			-lGL
  
 SRC_PATH = ./sources
 SRC_TO_FILTER_OUT = ./sources/core/tinyxml2/contrib/html5-printer.cpp \
@@ -46,6 +51,8 @@ $(APP_DIR)/$(TARGET): $(OBJECTS)
 build:
 	@mkdir -p $(APP_DIR)
 	@mkdir -p $(OBJ_DIR)
+	@LD_LIBRARY_PATH=$(APP_DIR)
+	@export LD_LIBRARY_PATH
 
 debug: CXXFLAGS += -DDEBUG -g
 debug: all
