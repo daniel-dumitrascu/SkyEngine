@@ -17,6 +17,9 @@ Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX,
 	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT),
 	m_speed(500.0f)
 {
+	// Set a default direction
+	vector::vector_3x::SetVector(direction, 0.0f, 0.0f, 0.0f);
+
 	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED]  = nullptr;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMoveUp;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN]	 = &Player::OnMoveDown;
@@ -192,57 +195,51 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 					(this->*(handle_event))();
 			}
 		}
+
+		if (IsFlagON(OBJECT_HAS_MOVED_THIS_FRAME))
+		{
+			Move();
+			vector::vector_3x::SetVector(direction, 0.0f, 0.0f, 0.0f);
+		}
 	}
+}
+
+void Player::Move()
+{
+	vector::vector_3x::DotProduct(direction, direction, 10.0f);
+	vector::vector_3x::Addition(m_world_position, m_world_position, direction);
+
+	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
 }
 
 void Player::OnMoveUp()
 {
-	//We get the current position of the player and we update it
-	m_world_position.elem[1] += 10.0f;
-
-	//We set the new position in the world matrix
-	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-
-	//TODO m_world_matrix.elem[3][1] += m_speed * global_timer.GetElapsed(); // move on Y axis
-
+	vec_3x newActionDirection(0.0f, 1.0f, 0.0f);
+	vector::vector_3x::Addition(direction, direction, newActionDirection);
+	vector::vector_3x::Normalization(direction, direction);
 	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
 }
 
 void Player::OnMoveDown()
 {
-	//We get the current position of the player and we update it
-	m_world_position.elem[1] -= 10.0f;
-
-	//We set the new position in the world matrix
-	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-
-	//TODO m_world_matrix.elem[3][1] += -(m_speed * global_timer.GetElapsed()); // move on Y axis 
-
+	vec_3x newActionDirection(0.0f, -1.0f, 0.0f);
+	vector::vector_3x::Addition(direction, direction, newActionDirection);
+	vector::vector_3x::Normalization(direction, direction);
 	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
 }
 
 void Player::OnMoveLeft()
 {
-	//We get the current position of the player and we update it
-	m_world_position.elem[0] -= 10.0f;
-
-	//We set the new position in the world matrix
-	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-
-	//TODO m_world_matrix.elem[3][0] += -(m_speed * global_timer.GetElapsed()); // move on X axis 
-
+	vec_3x newActionDirection(-1.0f, 0.0f, 0.0f);
+	vector::vector_3x::Addition(direction, direction, newActionDirection);
+	vector::vector_3x::Normalization(direction, direction);
 	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
 }
 
 void Player::OnMoveRight()
 {
-	//We get the current position of the player and we update it
-	m_world_position.elem[0] += 10.0f;
-
-	//We set the new position in the world matrix
-	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-
-	//TODO m_world_matrix.elem[3][0] += m_speed * global_timer.GetElapsed(); // move on X axis 
-
+	vec_3x newActionDirection(1.0f, 0.0f, 0.0f);
+	vector::vector_3x::Addition(direction, direction, newActionDirection);
+	vector::vector_3x::Normalization(direction, direction);
 	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
 }

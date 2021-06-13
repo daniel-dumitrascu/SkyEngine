@@ -6,6 +6,7 @@
 #include "level/LevelData.h"
 #include "actions/Actions.h"
 #include "input/Controllable.h"
+#include "math/Vector.h"
 
 #if(DEBUG_SECTION)
 #include "primitive/GameLine.h"
@@ -36,11 +37,13 @@ class Player : public GameObject
 		Player& operator = (const Player& copy) = delete;
 
 		void Init();
+		void Move();
 
-		void OnMoveLeft();
-		void OnMoveRight();
 		void OnMoveUp();
 		void OnMoveDown();
+		void OnMoveLeft();
+		void OnMoveRight();
+
 		void OnRotateLeft() {};
 		void OnRotateRight() {};
 		void OnAttack() {};
@@ -48,6 +51,7 @@ class Player : public GameObject
 
 	private:
 
+		vec_3x direction;
 		float m_speed;
 		void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])();
 
