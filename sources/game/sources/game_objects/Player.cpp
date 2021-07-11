@@ -194,12 +194,12 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 	{
 		for(int i=0; i < batchSize; ++i)
 		{
+			int action = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i).button); //TODO don't like the way this is written
+			if (action == -1)
+				continue;
+
 			if (inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_PRESS)
 			{
-				int action = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i).button); //TODO don't like the way this is written
-				if (action == -1)
-					continue;
-
 				if (action == Actions::Game::GAME_EXIT)
 				{
 					GameStateManager::PushState(new GameStateMainMenu);
@@ -214,9 +214,13 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 						(this->*(handle_event))();
 				}
 			}
-			else if(inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE) //TODO nu-mi place unde acest speedGoal este resetat deoarece el poate fi resetat la orice button release si nu doar la keys de movement
+			else if(inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE)
 			{
-				speedGoal = 0.0f;
+				if (action == Actions::Gameplay::GAMEPLAY_MOVE_DOWN || action == Actions::Gameplay::GAMEPLAY_MOVE_UP ||
+					action == Actions::Gameplay::GAMEPLAY_MOVE_LEFT || action == Actions::Gameplay::GAMEPLAY_MOVE_RIGHT)
+				{
+					speedGoal = 0.0f;
+				}
 			}
 		}
 
