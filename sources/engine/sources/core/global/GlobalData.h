@@ -28,11 +28,11 @@ struct DisplayResolution
 extern mat_4x proj_matrix;
 
 
-/* Window aspect ratio */
+// Window aspect ratio
 extern const int WINDOWS_ASP_RATIO_X;
 extern const int WINDOWS_ASP_RATIO_Y;
 
-/* Game aspect ratio */
+// Game aspect ratio
 extern const int WORLD_ASP_RATIO_X;
 extern const int WORLD_ASP_RATIO_Y;
 
@@ -46,13 +46,16 @@ extern const int WORLD_WIDTH_RIGHT;
 extern const int WORLD_HEIGHT_UP;
 extern const int WORLD_HEIGHT_DOWN;
 
-/* Size of game world tile */
+// Size of game world tile
 extern const int WORLD_TILE_WIDTH;
 extern const int WORLD_TILE_HEIGHT;
 
-/* Total number of tiles on x and y axis */
+// Total number of tiles on x and y axis
 extern const int WORLD_GRID_COLUMN_COUNT;
 extern const int WORLD_GRID_ROW_COUNT;
 
+// Movement data
+extern const float PLAYER_SPEED_GOAL;
+extern const float DELTA_TIME_BOOST;
 
 #endif

@@ -15,7 +15,7 @@
 
 Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel) :
 	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
-	speedGoal(150.0f), currentSpeed(1.0f)  //TODO define this constants (150, 1, etc) into a defines file 
+	speedGoal(PLAYER_SPEED_GOAL), currentSpeed(1.0f)
 {
 	// Set a default direction
 	vector::vector_3x::SetVector(currDirection, 0.0f, 0.0f, 0.0f);
@@ -137,7 +137,7 @@ void Player::Draw()
 void Player::Update()
 {
 	vec_3x directionAndSpeed;
-	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * 40);
+	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * DELTA_TIME_BOOST);
 	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * 0.15f);
 	vector::vector_3x::Addition(m_world_position, m_world_position, directionAndSpeed);
 
@@ -237,7 +237,7 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 
 void Player::OnMoveUp()
 {
-	speedGoal = 150.0f;
+	speedGoal = PLAYER_SPEED_GOAL;
 	hasObjectMovedThisFrame = true;
 
 	ComputeDirection(0.0f, 1.0f, 0.0f);
@@ -246,7 +246,7 @@ void Player::OnMoveUp()
 
 void Player::OnMoveDown()
 {
-	speedGoal = 150.0f;
+	speedGoal = PLAYER_SPEED_GOAL;
 	hasObjectMovedThisFrame = true;
 
 	ComputeDirection(0.0f, -1.0f, 0.0f);
@@ -255,7 +255,7 @@ void Player::OnMoveDown()
 
 void Player::OnMoveLeft()
 {
-	speedGoal = 150.0f;
+	speedGoal = PLAYER_SPEED_GOAL;
 	hasObjectMovedThisFrame = true;
 
 	ComputeDirection(-1.0f, 0.0f, 0.0f);
@@ -264,7 +264,7 @@ void Player::OnMoveLeft()
 
 void Player::OnMoveRight()
 {
-	speedGoal = 150.0f;
+	speedGoal = PLAYER_SPEED_GOAL;
 	hasObjectMovedThisFrame = true;
 
 	ComputeDirection(1.0f, 0.0f, 0.0f);

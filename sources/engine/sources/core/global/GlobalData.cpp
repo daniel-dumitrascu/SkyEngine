@@ -37,3 +37,7 @@ const int WORLD_TILE_HEIGHT = 100;
 /* Total number of tiles on x and y axis */
 const int WORLD_GRID_COLUMN_COUNT = WORLD_WIDTH_RIGHT / WORLD_TILE_WIDTH;
 const int WORLD_GRID_ROW_COUNT = WORLD_HEIGHT_DOWN / WORLD_TILE_HEIGHT;
+
+// Movement data
+const float PLAYER_SPEED_GOAL = 150.0f;
+const float DELTA_TIME_BOOST = 40.0f;
