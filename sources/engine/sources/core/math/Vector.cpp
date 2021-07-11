@@ -4,6 +4,24 @@
 
 
 
+std::ostream& operator<<(std::ostream& os, const vec_2x& ref)
+{
+	os << "x=" << ref.elem[0] << " y=" << ref.elem[1];
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const vec_3x& ref)
+{
+	os << "x=" << ref.elem[0] << " y=" << ref.elem[1] << " z=" << ref.elem[2];
+	return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const vec_4x& ref)
+{
+	os << "x=" << ref.elem[0] << " y=" << ref.elem[1] << " z=" << ref.elem[2] << " t=" << ref.elem[3];
+	return os;
+}
+
 void vector::vector_2x::SetVector(vec_2x& R, const float vec_x, const float vec_y)
 {
 	R.elem[0] = vec_x;
