@@ -74,7 +74,7 @@ void MainMenu::InputActionNotify(const InputEventBatch& inputBatch)
 		for(int i=0; i < batchSize; ++i)
 		{
 			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDataAtIndex(i).button); //TODO don't like the way this is written
+					inputBatch.getDataAtIndex(i));
 
 			if(action == -1)
 				continue;
