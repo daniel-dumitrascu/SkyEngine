@@ -49,10 +49,16 @@ class Player : public GameObject
 		void OnAttack() {};
 		void OnDefense() {};
 
+		void ComputeDirection(float x, float y, float z);
+
 	private:
 
-		vec_3x direction;
-		float m_speed;
+		vec_3x currDirection;
+		vec_3x newDirection;
+		vec_3x lastFramePos;
+
+		float speedGoal;
+		float currentSpeed;
 		void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])();
 
 #if(DEBUG_SECTION)

@@ -95,26 +95,72 @@ void WindowsPlatform::checkKeyInput(InputEventBatch& frameInputBatch)
 
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_UP))
 	{
-		frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_UP);
+		frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_UP, KEYBOARD_BUTTON_PRESS);
+		keysStatus.SetFlagON(BUTTON_KEYBOARD_UP);
+	}	
+	else
+	{
+		// This is neaded so that we don't send an InputEvent with a release status each frame
+		if (keysStatus.IsFlagON(BUTTON_KEYBOARD_UP))
+		{
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_UP, KEYBOARD_BUTTON_RELEASE);
+			keysStatus.SetFlagOFF(BUTTON_KEYBOARD_UP);
+		}
 	}
+		
+
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_DOWN))
 	{
-		frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_DOWN);
+		frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_DOWN, KEYBOARD_BUTTON_PRESS);
+		keysStatus.SetFlagON(BUTTON_KEYBOARD_DOWN);
 	}
+	else
+	{
+		// This is neaded so that we don't send an InputEvent with a release status each frame
+		if (keysStatus.IsFlagON(BUTTON_KEYBOARD_DOWN))
+		{
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_DOWN, KEYBOARD_BUTTON_RELEASE);
+			keysStatus.SetFlagOFF(BUTTON_KEYBOARD_DOWN);
+		}
+	}
+		
+
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_LEFT))
 	{
-		frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_LEFT);
+		frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_LEFT, KEYBOARD_BUTTON_PRESS);
+		keysStatus.SetFlagON(BUTTON_KEYBOARD_LEFT);
+	}	
+	else
+	{
+		// This is neaded so that we don't send an InputEvent with a release status each frame
+		if (keysStatus.IsFlagON(BUTTON_KEYBOARD_LEFT))
+		{
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_LEFT, KEYBOARD_BUTTON_RELEASE);
+			keysStatus.SetFlagOFF(BUTTON_KEYBOARD_LEFT);
+		}
 	}
+		
+
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_RIGHT))
 	{
-		frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_RIGHT);
-	}
+		frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_RIGHT, KEYBOARD_BUTTON_PRESS);
+		keysStatus.SetFlagON(BUTTON_KEYBOARD_RIGHT);
+	}	
+	else
+	{
+		// This is neaded so that we don't send an InputEvent with a release status each frame
+		if (keysStatus.IsFlagON(BUTTON_KEYBOARD_RIGHT))
+		{
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_RIGHT, KEYBOARD_BUTTON_RELEASE);
+			keysStatus.SetFlagOFF(BUTTON_KEYBOARD_RIGHT);
+		}
+	}	
 
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_1))
 	{
 		if (!keysStatus.IsFlagON(BUTTON_KEYBOARD_1))
 		{
-			frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_1);
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_1, KEYBOARD_BUTTON_PRESS);
 			keysStatus.SetFlagON(BUTTON_KEYBOARD_1);
 		}
 	}
@@ -127,7 +173,7 @@ void WindowsPlatform::checkKeyInput(InputEventBatch& frameInputBatch)
 	{
 		if (!keysStatus.IsFlagON(BUTTON_KEYBOARD_2))
 		{
-			frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_2);
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_2, KEYBOARD_BUTTON_PRESS);
 			keysStatus.SetFlagON(BUTTON_KEYBOARD_2);
 		}
 	}
@@ -140,7 +186,7 @@ void WindowsPlatform::checkKeyInput(InputEventBatch& frameInputBatch)
 	{
 		if (!keysStatus.IsFlagON(BUTTON_KEYBOARD_3))
 		{
-			frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_3);
+			frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_3, KEYBOARD_BUTTON_PRESS);
 			keysStatus.SetFlagON(BUTTON_KEYBOARD_3);
 		}
 	}
@@ -151,7 +197,7 @@ void WindowsPlatform::checkKeyInput(InputEventBatch& frameInputBatch)
 
 	if (glfwGetKey((GLFWwindow*)m_window, GLFW_KEY_SPACE))
 	{
-		frameInputBatch.addDeviceData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_SPACE);
+		frameInputBatch.addData(DEVICE_KEYBOARD, BUTTON_KEYBOARD_SPACE, KEYBOARD_BUTTON_PRESS);
 	}
 }
 
@@ -159,11 +205,11 @@ void WindowsPlatform::checkMouseInput(InputEventBatch& frameInputBatch)
 {
 	if (glfwGetMouseButton((GLFWwindow*)m_window, GLFW_MOUSE_BUTTON_LEFT))
 	{
-		frameInputBatch.addDeviceData(DEVICE_MOUSE, BUTTON_MOUSE_LEFT);
+		frameInputBatch.addData(DEVICE_MOUSE, BUTTON_MOUSE_LEFT, KEYBOARD_BUTTON_PRESS);
 	}
 	if (glfwGetMouseButton((GLFWwindow*)m_window, GLFW_MOUSE_BUTTON_RIGHT))
 	{
-		frameInputBatch.addDeviceData(DEVICE_MOUSE, BUTTON_MOUSE_RIGHT);
+		frameInputBatch.addData(DEVICE_MOUSE, BUTTON_MOUSE_RIGHT, KEYBOARD_BUTTON_PRESS);
 	}
 }
 

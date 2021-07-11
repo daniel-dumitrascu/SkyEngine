@@ -2,36 +2,33 @@
 
 InputEventBatch::InputEventBatch()
 {
-	for(int i=0; i < batchDataOfSupportedDevices.size(); ++i)
-	{
-		// We allocate memory but the size remains the same
-		batchDataOfSupportedDevices[i].reserve(INPUT_EVENT_BATCH_MAX_SIZE);
-	}
+	// We allocate memory but the size remains the same
+	batchData.reserve(INPUT_EVENT_BATCH_MAX_SIZE);
 }
 
 bool InputEventBatch::isEmpty()
 {
-	for(int i=0; i < batchDataOfSupportedDevices.size(); ++i)
-	{
-		if(batchDataOfSupportedDevices[i].size())
-			return false;
-	}
-
-	return true;
+	return batchData.size() == 0 ? true : false;
 }
 
-int InputEventBatch::getDeviceBatchSize(int device) const
+int InputEventBatch::getDataBatchSize() const
 {
-	return batchDataOfSupportedDevices[device].size();
+	return batchData.size();
 }
 
-int InputEventBatch::getDeviceDataAtIndex(int device, int index) const 
+const InputEvent& InputEventBatch::getDataAtIndex(int index) const 
 {
-	return batchDataOfSupportedDevices[device][index];
+	return batchData[index];
 }
 
-void InputEventBatch::addDeviceData(int device, int data)
+void InputEventBatch::addData(const InputEvent& inEvent)
 {
-	if(batchDataOfSupportedDevices[device].size() < INPUT_EVENT_BATCH_MAX_SIZE)
-		batchDataOfSupportedDevices[device].push_back(data);
+	batchData.push_back(inEvent);
 }
+
+void InputEventBatch::addData(const int inDevice, const int inButton, const int inStatus)
+{
+	InputEvent ev(inDevice, inButton, inStatus);
+	addData(ev);
+}
+

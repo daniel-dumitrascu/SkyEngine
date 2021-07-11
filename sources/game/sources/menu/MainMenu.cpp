@@ -68,13 +68,13 @@ void MainMenu::Update()
 
 void MainMenu::InputActionNotify(const InputEventBatch& inputBatch)
 {
-	int const mouseBatchSize = inputBatch.getDeviceBatchSize(DEVICE_MOUSE);
-	if(mouseBatchSize > 0)
+	int const batchSize = inputBatch.getDataBatchSize();
+	if(batchSize > 0)
 	{
-		for(int i=0; i < mouseBatchSize; ++i)
+		for(int i=0; i < batchSize; ++i)
 		{
 			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDeviceDataAtIndex(DEVICE_MOUSE, i));
+					inputBatch.getDataAtIndex(i).button); //TODO don't like the way this is written
 
 			if(action == -1)
 				continue;

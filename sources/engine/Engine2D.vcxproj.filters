@@ -178,6 +178,9 @@
     <ClCompile Include="sources\core\video\Renderer.cpp">
       <Filter>core\video</Filter>
     </ClCompile>
+    <ClCompile Include="sources\core\utils\Motion.cpp">
+      <Filter>core\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\application\Application.h">
@@ -407,6 +410,12 @@
     </ClInclude>
     <ClInclude Include="sources\core\video\Renderer.h">
       <Filter>core\video</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\utils\Motion.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\platform\input\InputEvent.h">
+      <Filter>core\platform\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

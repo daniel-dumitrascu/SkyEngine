@@ -1,6 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <iostream>
+#include <sstream>
 
 struct vec_2x
 {
@@ -40,9 +42,18 @@ struct vec_3x
 			   (elem[2] == ref.elem[2]);
 	}
 
+	bool operator!=(const vec_3x& ref)
+	{
+		return (elem[0] != ref.elem[0]) ||
+			   (elem[1] != ref.elem[1]) ||
+			   (elem[2] != ref.elem[2]);
+	}
+
+	//TODO - define it in Vector.cpp, the same for operator==
+	//friend std::ostream& operator<<(std::ostream& os, const vec_3x& ref);
+
 	float elem[3];
 };
-
 
 struct vec_4x
 {
@@ -68,7 +79,11 @@ struct vec_4x
 	float elem[4];
 };
 
-
+/*std::ostream& operator<<(std::ostream& os, const vec_3x& ref)
+{
+	os << "x=" << ref.elem[0] << " y=" << ref.elem[1] << " z=" << ref.elem[2];
+	return os;
+}*/
 
 namespace vector
 {

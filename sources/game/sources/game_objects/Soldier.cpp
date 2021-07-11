@@ -151,13 +151,13 @@ void SoldierObject::Update()
 
 void SoldierObject::InputActionNotify(const InputEventBatch& inputBatch)
 {
-	int const keyboardBatchSize = inputBatch.getDeviceBatchSize(DEVICE_KEYBOARD);
-	if(keyboardBatchSize > 0)
+	int const batchSize = inputBatch.getDataBatchSize();
+	if(batchSize > 0)
 	{
-		for(int i=0; i < keyboardBatchSize; ++i)
+		for(int i=0; i < batchSize; ++i)
 		{
 			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDeviceDataAtIndex(DEVICE_KEYBOARD, i));
+					inputBatch.getDataAtIndex(i).button);
 			if(action == -1)
 				continue;
 

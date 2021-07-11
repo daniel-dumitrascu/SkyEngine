@@ -113,6 +113,7 @@
     <ClInclude Include="sources\core\math\Vector.h" />
     <ClInclude Include="sources\core\platform\input\Device.h" />
     <ClInclude Include="sources\core\platform\input\DeviceDefinitions.h" />
+    <ClInclude Include="sources\core\platform\input\InputEvent.h" />
     <ClInclude Include="sources\core\platform\input\InputEventBatch.h" />
     <ClInclude Include="sources\core\platform\input\InputManager.h" />
     <ClInclude Include="sources\core\platform\input\PlatformInput.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="sources\core\time\Time.h" />
     <ClInclude Include="sources\core\utils\BinaryArray.h" />
     <ClInclude Include="sources\core\utils\CircularQueue.h" />
+    <ClInclude Include="sources\core\utils\Motion.h" />
     <ClInclude Include="sources\core\utils\Physics2D.h" />
     <ClInclude Include="sources\core\utils\FastAccessCollection.h" />
     <ClInclude Include="sources\core\utils\MapCollection.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="sources\core\texture\TextureResources.cpp" />
     <ClCompile Include="sources\core\time\Time.cpp" />
     <ClCompile Include="sources\core\utils\BinaryArray.cpp" />
+    <ClCompile Include="sources\core\utils\Motion.cpp" />
     <ClCompile Include="sources\core\utils\Physics2D.cpp" />
     <ClCompile Include="sources\core\utils\UniqueGenerator.cpp" />
     <ClCompile Include="sources\core\utils\Utils.cpp" />

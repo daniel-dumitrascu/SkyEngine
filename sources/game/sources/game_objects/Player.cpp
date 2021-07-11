@@ -7,7 +7,7 @@
 #include "../states/GameStateManager.h"
 #include "../states/GameStateMainMenu.h"
 #include "platform/input/InputManager.h"
-#include "bindings/BindingsManager.h"
+#include "utils/Motion.h"
 
 #if(DEBUG_SECTION)
 #include "GameObjectFactory.h"
@@ -15,10 +15,13 @@
 
 Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel) :
 	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT),
-	m_speed(500.0f)
+	speedGoal(150.0f), currentSpeed(1.0f)  //TODO define this constants (150, 1, etc) into a defines file 
 {
 	// Set a default direction
-	vector::vector_3x::SetVector(direction, 0.0f, 0.0f, 0.0f);
+	vector::vector_3x::SetVector(currDirection, 0.0f, 0.0f, 0.0f);
+	vector::vector_3x::SetVector(newDirection, 0.0f, 0.0f, 0.0f);
+
+	vector::vector_3x::SetVector(lastFramePos, m_world_position);
 
 	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED]  = nullptr;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMoveUp;
@@ -133,10 +136,24 @@ void Player::Draw()
 
 void Player::Update()
 {
-	/* Reset m_wp matrix */
+	vec_3x directionAndSpeed;
+	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * 40);
+	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * 0.15f);
+	vector::vector_3x::Addition(m_world_position, m_world_position, directionAndSpeed);
+
+	// Set the new position of the object in game world
+	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
+
+	// Make the decision if the object is still moving or not
+	if (m_world_position != lastFramePos)
+		lastFramePos = m_world_position;
+	else
+		SetFlagOFF(OBJECT_IS_MOVING);
+
+	// Reset m_wp matrix 
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
+	// Construct a world-projection matrix 
 	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
 
 #if(DEBUG_SECTION)
@@ -171,75 +188,80 @@ void Player::Update()
 
 void Player::InputActionNotify(const InputEventBatch& inputBatch)
 {
-	int const keyboardBatchSize = inputBatch.getDeviceBatchSize(DEVICE_KEYBOARD);
-	if(keyboardBatchSize > 0)
+	bool hasObjectMovedThisFrame = false;
+	int const batchSize = inputBatch.getDataBatchSize();
+	if(batchSize > 0)
 	{
-		for(int i=0; i < keyboardBatchSize; ++i)
+		for(int i=0; i < batchSize; ++i)
 		{
-			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDeviceDataAtIndex(DEVICE_KEYBOARD, i));
-			if(action == -1)
-				continue;
+			if (inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_PRESS)
+			{
+				int action = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i).button); //TODO don't like the way this is written
+				if (action == -1)
+					continue;
 
-			if (action == Actions::Game::GAME_EXIT)
+				if (action == Actions::Game::GAME_EXIT)
+				{
+					GameStateManager::PushState(new GameStateMainMenu);
+					// Once we got the exit action we don't need to
+					// check for the other actions
+					break;
+				}
+				else if (action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[action])
+				{
+					//TODO - aceste 2 variabile nu sunt bine plasate aici. Gandeste-te daca ai o actiune de atac,
+					// la o astfel de actiune obiectul poate nu se misca :)
+					hasObjectMovedThisFrame = true;
+					speedGoal = 150.0f;
+
+					void (Player::*handle_event)() = m_action_handler[action];
+					if (handle_event)
+						(this->*(handle_event))();
+				}
+			}
+			else if(inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE) //TODO nu-mi place unde acest speedGoal este resetat deoarece el poate fi resetat la orice button release si nu doar la keys de movement
 			{
-				GameStateManager::PushState(new GameStateMainMenu);
-				// Once we got the exit action we don't need to
-				// check for the other actions
-				break;
-			} 
-			else if (action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[action])
-			{
-				void (Player::*handle_event)() = m_action_handler[action];
-				if (handle_event)
-					(this->*(handle_event))();
+				speedGoal = 0.0f;
 			}
 		}
 
-		if (IsFlagON(OBJECT_HAS_MOVED_THIS_FRAME))
-		{
-			Move();
-			vector::vector_3x::SetVector(direction, 0.0f, 0.0f, 0.0f);
+		if (hasObjectMovedThisFrame)
+		{	
+			// At this point I know that the object has moved so I need to make 
+			// the necessary adjustments like using the new computed direction vector
+			vector::vector_3x::Normalization(newDirection, newDirection);
+			currDirection = newDirection;
+			vector::vector_3x::SetVector(newDirection, 0.0f, 0.0f, 0.0f);
 		}
 	}
 }
 
-void Player::Move()
-{
-	vector::vector_3x::DotProduct(direction, direction, 10.0f);
-	vector::vector_3x::Addition(m_world_position, m_world_position, direction);
-
-	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-}
-
 void Player::OnMoveUp()
 {
-	vec_3x newActionDirection(0.0f, 1.0f, 0.0f);
-	vector::vector_3x::Addition(direction, direction, newActionDirection);
-	vector::vector_3x::Normalization(direction, direction);
-	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
+	ComputeDirection(0.0f, 1.0f, 0.0f);
+	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveDown()
 {
-	vec_3x newActionDirection(0.0f, -1.0f, 0.0f);
-	vector::vector_3x::Addition(direction, direction, newActionDirection);
-	vector::vector_3x::Normalization(direction, direction);
-	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
+	ComputeDirection(0.0f, -1.0f, 0.0f);
+	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveLeft()
 {
-	vec_3x newActionDirection(-1.0f, 0.0f, 0.0f);
-	vector::vector_3x::Addition(direction, direction, newActionDirection);
-	vector::vector_3x::Normalization(direction, direction);
-	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
+	ComputeDirection(-1.0f, 0.0f, 0.0f);
+	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveRight()
 {
-	vec_3x newActionDirection(1.0f, 0.0f, 0.0f);
-	vector::vector_3x::Addition(direction, direction, newActionDirection);
-	vector::vector_3x::Normalization(direction, direction);
-	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
+	ComputeDirection(1.0f, 0.0f, 0.0f);
+	SetFlagON(OBJECT_IS_MOVING);
+}
+
+void Player::ComputeDirection(float x, float y, float z)
+{
+	vec_3x dir(x, y, z);
+	vector::vector_3x::Addition(newDirection, newDirection, dir);
 }

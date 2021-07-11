@@ -62,7 +62,7 @@ void MovingObject::Update()
 		m_world_position.elem[0] += 1.0f;
 	
 	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
-	SetFlagON(OBJECT_HAS_MOVED_THIS_FRAME);
+	SetFlagON(OBJECT_IS_MOVING);
 
 
 	/* Reset m_wp matrix */

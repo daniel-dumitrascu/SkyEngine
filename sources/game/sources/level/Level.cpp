@@ -292,9 +292,12 @@ void Level::Update()
 			currObject = m_sceneObjects.Retrive(index);
 			currObject->Update();
 
-			if (currObject->IsFlagON(OBJECT_HAS_MOVED_THIS_FRAME))
+			if (currObject->IsFlagON(OBJECT_IS_MOVING))
 			{
-				currObject->SetFlagOFF(OBJECT_HAS_MOVED_THIS_FRAME);
+				//currObject->SetFlagOFF(OBJECT_IS_MOVING); 
+				//TODO - Am inlaturat acest SetFlagOFF(OBJECT_IS_MOVING) deoarece acum pe player iau decizia daca obiectul se misca sau nu in update.
+				//Iar aici doar verific daca obiectul se misca sau nu. Vezi cum poti face si cu celelalte obiecte.
+																
 
 #if(DEBUG_SECTION)
 				if (!isAlreadyReset)
@@ -460,13 +463,13 @@ void Level::Draw()
 
 void Level::InputActionNotify(const InputEventBatch& inputBatch)
 {
-	int const keyboardBatchSize = inputBatch.getDeviceBatchSize(DEVICE_KEYBOARD);
-	if(keyboardBatchSize > 0)
+	int const batchSize = inputBatch.getDataBatchSize();
+	if(batchSize > 0)
 	{
-		for(int i=0; i < keyboardBatchSize; ++i)
+		for(int i=0; i < batchSize; ++i)
 		{
 			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDeviceDataAtIndex(DEVICE_KEYBOARD, i));
+					inputBatch.getDataAtIndex(i).button);
 			if(action == -1)
 				continue;
 
