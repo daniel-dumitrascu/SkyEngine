@@ -14,7 +14,7 @@
 #endif
 
 Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel) :
-	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT),
+	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
 	speedGoal(150.0f), currentSpeed(1.0f)  //TODO define this constants (150, 1, etc) into a defines file 
 {
 	// Set a default direction
@@ -188,7 +188,7 @@ void Player::Update()
 
 void Player::InputActionNotify(const InputEventBatch& inputBatch)
 {
-	bool hasObjectMovedThisFrame = false;
+	hasObjectMovedThisFrame = false;
 	int const batchSize = inputBatch.getDataBatchSize();
 	if(batchSize > 0)
 	{
@@ -209,11 +209,6 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 				}
 				else if (action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[action])
 				{
-					//TODO - aceste 2 variabile nu sunt bine plasate aici. Gandeste-te daca ai o actiune de atac,
-					// la o astfel de actiune obiectul poate nu se misca :)
-					hasObjectMovedThisFrame = true;
-					speedGoal = 150.0f;
-
 					void (Player::*handle_event)() = m_action_handler[action];
 					if (handle_event)
 						(this->*(handle_event))();
@@ -238,24 +233,36 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 
 void Player::OnMoveUp()
 {
+	speedGoal = 150.0f;
+	hasObjectMovedThisFrame = true;
+
 	ComputeDirection(0.0f, 1.0f, 0.0f);
 	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveDown()
 {
+	speedGoal = 150.0f;
+	hasObjectMovedThisFrame = true;
+
 	ComputeDirection(0.0f, -1.0f, 0.0f);
 	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveLeft()
 {
+	speedGoal = 150.0f;
+	hasObjectMovedThisFrame = true;
+
 	ComputeDirection(-1.0f, 0.0f, 0.0f);
 	SetFlagON(OBJECT_IS_MOVING);
 }
 
 void Player::OnMoveRight()
 {
+	speedGoal = 150.0f;
+	hasObjectMovedThisFrame = true;
+
 	ComputeDirection(1.0f, 0.0f, 0.0f);
 	SetFlagON(OBJECT_IS_MOVING);
 }

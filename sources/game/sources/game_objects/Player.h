@@ -59,6 +59,9 @@ class Player : public GameObject
 
 		float speedGoal;
 		float currentSpeed;
+
+		bool hasObjectMovedThisFrame;
+
 		void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])();
 
 #if(DEBUG_SECTION)
