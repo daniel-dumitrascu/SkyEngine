@@ -136,10 +136,7 @@ void Player::Draw()
 
 void Player::Update()
 {
-	vec_3x directionAndSpeed;
-	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * DELTA_TIME_BOOST);
-	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * 0.15f);
-	vector::vector_3x::Addition(m_world_position, m_world_position, directionAndSpeed);
+	UpdateMovement();
 
 	// Set the new position of the object in game world
 	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
@@ -275,4 +272,12 @@ void Player::ComputeDirection(float x, float y, float z)
 {
 	vec_3x dir(x, y, z);
 	vector::vector_3x::Addition(newDirection, newDirection, dir);
+}
+
+void Player::UpdateMovement()
+{
+	vec_3x directionAndSpeed;
+	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * DELTA_TIME_BOOST);
+	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * 0.15f);
+	vector::vector_3x::Addition(m_world_position, m_world_position, directionAndSpeed);
 }

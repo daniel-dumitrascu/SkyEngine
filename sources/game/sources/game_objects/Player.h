@@ -50,6 +50,7 @@ class Player : public GameObject
 		void OnDefense() {};
 
 		void ComputeDirection(float x, float y, float z);
+		void UpdateMovement();
 
 	private:
 
