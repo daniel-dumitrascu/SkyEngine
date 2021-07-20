@@ -156,21 +156,20 @@ void SoldierObject::InputActionNotify(const InputEventBatch& inputBatch)
 	{
 		for(int i=0; i < batchSize; ++i)
 		{
-			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDataAtIndex(i).button);
-			if(action == -1)
+			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
+			if(wrapper == nullptr)
 				continue;
 
-			if (action == Actions::Game::GAME_EXIT)
+			if (wrapper->action == Actions::Game::GAME_EXIT)
 			{
 				GameStateManager::PushState(new GameStateMainMenu);
 				// Once we got the exit action we don't need to
 				// check for the other actions
 				break;
 			}
-			else if (action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[action])
+			else if (wrapper->action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[wrapper->action])
 			{
-				void (SoldierObject::*handle_event)() = m_action_handler[action];
+				void (SoldierObject::*handle_event)() = m_action_handler[wrapper->action];
 				if (handle_event)
 					(this->*(handle_event))();
 			}

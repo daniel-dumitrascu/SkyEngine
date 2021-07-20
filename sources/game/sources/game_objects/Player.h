@@ -39,17 +39,14 @@ class Player : public GameObject
 		void Init();
 		void Move();
 
-		void OnMoveUp();
-		void OnMoveDown();
-		void OnMoveLeft();
-		void OnMoveRight();
+		void OnMovement(void* extraData);
 
 		void OnRotateLeft() {};
 		void OnRotateRight() {};
 		void OnAttack() {};
 		void OnDefense() {};
 
-		void ComputeDirection(float x, float y, float z);
+		void ComputeDirection(const vec_3x* newOrientation);
 		void UpdateMovement();
 
 	private:
@@ -63,7 +60,7 @@ class Player : public GameObject
 
 		bool hasObjectMovedThisFrame;
 
-		void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])();
+		void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])(void* extraData);
 
 #if(DEBUG_SECTION)
 		GameLine* leftOutline = nullptr;

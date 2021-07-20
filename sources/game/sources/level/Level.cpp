@@ -468,18 +468,17 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 	{
 		for(int i=0; i < batchSize; ++i)
 		{
-			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDataAtIndex(i).button);
-			if(action == -1)
+			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
+			if(wrapper == nullptr)
 				continue;
 
-			if (action == Actions::Game::GAME_EXIT)
+			if (wrapper->action == Actions::Game::GAME_EXIT)
 			{
 				exit(0); //TODO here should be a new state for closing
 				break;
 			} 
 #if(DEBUG_SECTION)
-			else if (action == Actions::Debug::DEBUG_GRID_DRAW)
+			else if (wrapper->action == Actions::Debug::DEBUG_GRID_DRAW)
 			{
 				isGridDrawingEnabled = !isGridDrawingEnabled;
 				if (isGridDrawingEnabled)
@@ -487,11 +486,11 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 				else
 					RemoveVisibleGridLines();
 			}
-			else if (action == Actions::Debug::DEBUG_OBJECT_TILE_MAPPING)
+			else if (wrapper->action == Actions::Debug::DEBUG_OBJECT_TILE_MAPPING)
 			{
 				isColorTileRenderEnabled = !isColorTileRenderEnabled;
 			}
-			else if (action == Actions::Debug::DEBUG_OBJECT_RECTANGLE)
+			else if (wrapper->action == Actions::Debug::DEBUG_OBJECT_RECTANGLE)
 			{
 				isOutlineEnabled = !isOutlineEnabled;
 

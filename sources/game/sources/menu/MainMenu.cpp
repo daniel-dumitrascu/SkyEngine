@@ -73,15 +73,14 @@ void MainMenu::InputActionNotify(const InputEventBatch& inputBatch)
 	{
 		for(int i=0; i < batchSize; ++i)
 		{
-			int action = inputToActionBindings->GetBinding(
-					inputBatch.getDataAtIndex(i));
+			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
 
-			if(action == -1)
+			if(wrapper == nullptr)
 				continue;
 
-			if (action == Actions::Menu::MENU_CLICK)
+			if (wrapper->action == Actions::Menu::MENU_CLICK)
 				GameStateManager::PushState(new GameStateGameplay);
-			else if (action == Actions::Game::GAME_EXIT)
+			else if (wrapper->action == Actions::Game::GAME_EXIT)
 				exit(0); //TODO here should be a new state for closing
 		}
 	}

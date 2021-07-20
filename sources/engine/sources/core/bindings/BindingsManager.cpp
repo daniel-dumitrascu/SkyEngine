@@ -2,6 +2,8 @@
 #include "../platform/input/DeviceDefinitions.h"
 #include "../actions/Actions.h"
 #include "../input/InputHandleProfiles.h"
+#include "../math/Vector.h"
+#include <memory>
 
 BindingsManager& BindingsManager::GetInstance()
 {
@@ -50,10 +52,10 @@ void BindingsManager::ConstructBindings()
 
 	// Game object profile
 	layer = new BindingCollection();
-	layer->AddBinding(BUTTON_KEYBOARD_UP, Actions::Gameplay::GAMEPLAY_MOVE_UP);
-	layer->AddBinding(BUTTON_KEYBOARD_DOWN, Actions::Gameplay::GAMEPLAY_MOVE_DOWN);
-	layer->AddBinding(BUTTON_KEYBOARD_LEFT, Actions::Gameplay::GAMEPLAY_MOVE_LEFT);
-	layer->AddBinding(BUTTON_KEYBOARD_RIGHT, Actions::Gameplay::GAMEPLAY_MOVE_RIGHT);
+	layer->AddBinding(BUTTON_KEYBOARD_UP, Actions::Gameplay::GAMEPLAY_MOVE_UP, std::make_shared<vec_3x>(vec_3x(0.0f, 1.0f, 0.0f)));
+	layer->AddBinding(BUTTON_KEYBOARD_DOWN, Actions::Gameplay::GAMEPLAY_MOVE_DOWN, std::make_shared<vec_3x>(vec_3x(0.0f, -1.0f, 0.0f)));
+	layer->AddBinding(BUTTON_KEYBOARD_LEFT, Actions::Gameplay::GAMEPLAY_MOVE_LEFT, std::make_shared<vec_3x>(vec_3x(-1.0f, 0.0f, 0.0f)));
+	layer->AddBinding(BUTTON_KEYBOARD_RIGHT, Actions::Gameplay::GAMEPLAY_MOVE_RIGHT, std::make_shared<vec_3x>(vec_3x(1.0f, 0.0f, 0.0f)));
 	layer->AddBinding(BUTTON_KEYBOARD_ESC, Actions::Game::GAME_EXIT);
 	layer->AddBinding(BUTTON_KEYBOARD_SPACE, Actions::Gameplay::GAMEPLAY_ATTACK);
 

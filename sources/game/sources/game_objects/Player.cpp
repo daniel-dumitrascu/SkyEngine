@@ -24,10 +24,10 @@ Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX,
 	vector::vector_3x::SetVector(lastFramePos, m_world_position);
 
 	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED]  = nullptr;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMoveUp;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN]	 = &Player::OnMoveDown;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT]	 = &Player::OnMoveLeft;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = &Player::OnMoveRight;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = &Player::OnMovement;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK]	 = nullptr;
 
 	Init();
@@ -191,30 +191,30 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 	{
 		for(int i=0; i < batchSize; ++i)
 		{
-			int action = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
-			if (action == -1)
+			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
+			if (wrapper == nullptr)
 				continue;
 
 			if (inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_PRESS)
 			{
-				if (action == Actions::Game::GAME_EXIT)
+				if (wrapper->action == Actions::Game::GAME_EXIT)
 				{
 					GameStateManager::PushState(new GameStateMainMenu);
 					// Once we got the exit action we don't need to
 					// check for the other actions
 					break;
 				}
-				else if (action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[action])
+				else if (wrapper->action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[wrapper->action])
 				{
-					void (Player::*handle_event)() = m_action_handler[action];
+					void (Player::*handle_event)(void* extraData) = m_action_handler[wrapper->action];
 					if (handle_event)
-						(this->*(handle_event))();
+						(this->*(handle_event))(wrapper->extraData.get());
 				}
 			}
 			else if(inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE)
 			{
-				if (action == Actions::Gameplay::GAMEPLAY_MOVE_DOWN || action == Actions::Gameplay::GAMEPLAY_MOVE_UP ||
-					action == Actions::Gameplay::GAMEPLAY_MOVE_LEFT || action == Actions::Gameplay::GAMEPLAY_MOVE_RIGHT)
+				if (wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_DOWN || wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_UP ||
+					wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_LEFT || wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_RIGHT)
 				{
 					speedGoal = 0.0f;
 				}
@@ -232,46 +232,19 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 	}
 }
 
-void Player::OnMoveUp()
+void Player::OnMovement(void* extraData)
 {
 	speedGoal = PLAYER_SPEED_GOAL;
 	hasObjectMovedThisFrame = true;
 
-	ComputeDirection(0.0f, 1.0f, 0.0f);
+	// We know that at this point we have extraData
+	ComputeDirection((vec_3x*)extraData);
 	SetFlagON(OBJECT_IS_MOVING);
 }
 
-void Player::OnMoveDown()
+void Player::ComputeDirection(const vec_3x* newOrientation)
 {
-	speedGoal = PLAYER_SPEED_GOAL;
-	hasObjectMovedThisFrame = true;
-
-	ComputeDirection(0.0f, -1.0f, 0.0f);
-	SetFlagON(OBJECT_IS_MOVING);
-}
-
-void Player::OnMoveLeft()
-{
-	speedGoal = PLAYER_SPEED_GOAL;
-	hasObjectMovedThisFrame = true;
-
-	ComputeDirection(-1.0f, 0.0f, 0.0f);
-	SetFlagON(OBJECT_IS_MOVING);
-}
-
-void Player::OnMoveRight()
-{
-	speedGoal = PLAYER_SPEED_GOAL;
-	hasObjectMovedThisFrame = true;
-
-	ComputeDirection(1.0f, 0.0f, 0.0f);
-	SetFlagON(OBJECT_IS_MOVING);
-}
-
-void Player::ComputeDirection(float x, float y, float z)
-{
-	vec_3x dir(x, y, z);
-	vector::vector_3x::Addition(newDirection, newDirection, dir);
+	vector::vector_3x::Addition(newDirection, newDirection, *newOrientation);
 }
 
 void Player::UpdateMovement()
