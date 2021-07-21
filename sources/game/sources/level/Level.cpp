@@ -294,11 +294,6 @@ void Level::Update()
 
 			if (currObject->IsFlagON(OBJECT_IS_MOVING))
 			{
-				//currObject->SetFlagOFF(OBJECT_IS_MOVING); 
-				//TODO - Am inlaturat acest SetFlagOFF(OBJECT_IS_MOVING) deoarece acum pe player iau decizia daca obiectul se misca sau nu in update.
-				//Iar aici doar verific daca obiectul se misca sau nu. Vezi cum poti face si cu celelalte obiecte.
-																
-
 #if(DEBUG_SECTION)
 				if (!isAlreadyReset)
 				{

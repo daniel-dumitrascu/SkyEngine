@@ -30,11 +30,13 @@ SoldierObject::SoldierObject(Texture* tex,
 					gameLabel,
 					INPUT_HANDLE_PROFILE_GAMEOBJECT)
 {
-	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED] = NULL;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP] = &SoldierObject::OnMoveUp;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN] = &SoldierObject::OnMoveDown;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT] = &SoldierObject::OnMoveLeft;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = &SoldierObject::OnMoveRight;
+	SetFlagOFF(OBJECT_IS_CONTROLLABLE);
+
+	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = nullptr;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK] = &SoldierObject::OnAttack;
 
 	/* Reset m_wp matrix */
@@ -147,62 +149,6 @@ void SoldierObject::Update()
 
 	/* Construct a world-projection matrix */
 	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
-}
-
-void SoldierObject::InputActionNotify(const InputEventBatch& inputBatch)
-{
-	int const batchSize = inputBatch.getDataBatchSize();
-	if(batchSize > 0)
-	{
-		for(int i=0; i < batchSize; ++i)
-		{
-			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
-			if(wrapper == nullptr)
-				continue;
-
-			if (wrapper->action == Actions::Game::GAME_EXIT)
-			{
-				GameStateManager::PushState(new GameStateMainMenu);
-				// Once we got the exit action we don't need to
-				// check for the other actions
-				break;
-			}
-			else if (wrapper->action < Actions::Gameplay::GAMEPLAY_COUNT && m_action_handler[wrapper->action])
-			{
-				void (SoldierObject::*handle_event)() = m_action_handler[wrapper->action];
-				if (handle_event)
-					(this->*(handle_event))();
-			}
-		}
-	}
-}
-
-void SoldierObject::OnMoveLeft()
-{
-	m_world_matrix.elem[3][0] -= 10.0f;
-	//delete m_anim_state;
-
-	//TODO This is not a very good design, AS_Bird_Fly should not receive this type of
-	//parameters. This will be refactored when the drawing technique will be implemented
-	//m_anim_state = new AS_Soldier_Run_Sword_On(m_mesh_location, m_texture_location);
-	
-	/* Starting the animation */
-	//m_anim_state->ResumeState();
-}
-
-void SoldierObject::OnMoveRight()
-{
-	m_world_matrix.elem[3][0] += 10.0f;
-}
-
-void SoldierObject::OnMoveUp()
-{
-	m_world_matrix.elem[3][1] += 10.0f;
-}
-
-void SoldierObject::OnMoveDown()
-{
-	m_world_matrix.elem[3][1] -= 10.0f;
 }
 
 void SoldierObject::OnAttack()

@@ -62,6 +62,9 @@ void MovingObject::Update()
 		m_world_position.elem[0] += 1.0f;
 	
 	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
+
+	//Warning - setting the flag ON and OFF for OBJECT_IS_MOVING must be made in the object. 
+	//In the Level class I only check if the current object is still moving but I don't take any decisions on setting this flag OFF.
 	SetFlagON(OBJECT_IS_MOVING);
 
 

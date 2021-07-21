@@ -20,11 +20,11 @@ bool CoreTime::Timer::IsExceeded()
 	static unsigned long curr_time;	
 
 	curr_time = CoreTime::GetTime();
-	m_elapsed = curr_time - m_start_time;
+	m_elapsed = curr_time - m_previous_time;
 
 	if (m_elapsed >= m_update_interval)
 	{
-		m_start_time = curr_time;
+		m_previous_time = curr_time;
 		return true;
 	}
 

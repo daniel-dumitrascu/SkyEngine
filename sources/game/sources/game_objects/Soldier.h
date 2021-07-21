@@ -42,16 +42,10 @@ class SoldierObject : public GameObject
 		void PreDraw();
 		void Update();
 
-		void InputActionNotify(const InputEventBatch& inputBatch);
-
 	private:
 		
 		void Init();
 
-		void OnMoveLeft();
-		void OnMoveRight();
-		void OnMoveUp();
-		void OnMoveDown();
 		void OnRotateLeft() {};
 		void OnRotateRight() {};
 		void OnAttack();

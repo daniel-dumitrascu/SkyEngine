@@ -15,7 +15,7 @@
 
 Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel) :
 	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
-	speedGoal(PLAYER_SPEED_GOAL), currentSpeed(1.0f)
+	speedGoal(0.0f), currentSpeed(0.0f)
 {
 	// Set a default direction
 	vector::vector_3x::SetVector(currDirection, 0.0f, 0.0f, 0.0f);
@@ -136,7 +136,13 @@ void Player::Draw()
 
 void Player::Update()
 {
-	UpdateMovement();
+	float framesElapsedTime = global_timer.GetElapsed();
+
+	// Keep this value from growing too large
+	if (framesElapsedTime > 0.15f)
+		framesElapsedTime = 0.15f;
+
+	UpdateMovement(framesElapsedTime);
 
 	// Set the new position of the object in game world
 	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
@@ -247,10 +253,10 @@ void Player::ComputeDirection(const vec_3x* newOrientation)
 	vector::vector_3x::Addition(newDirection, newDirection, *newOrientation);
 }
 
-void Player::UpdateMovement()
+void Player::UpdateMovement(float framesElapsedTime)
 {
 	vec_3x directionAndSpeed;
-	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, 0.15f * DELTA_TIME_BOOST);
-	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * 0.15f);
+	currentSpeed = Motion::MotionInterpolation(speedGoal, currentSpeed, framesElapsedTime * DELTA_TIME_BOOST);
+	vector::vector_3x::DotProduct(directionAndSpeed, currDirection, currentSpeed * framesElapsedTime);
 	vector::vector_3x::Addition(m_world_position, m_world_position, directionAndSpeed);
 }

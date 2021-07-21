@@ -47,7 +47,7 @@ class Player : public GameObject
 		void OnDefense() {};
 
 		void ComputeDirection(const vec_3x* newOrientation);
-		void UpdateMovement();
+		void UpdateMovement(float framesElapsedTime);
 
 	private:
 
