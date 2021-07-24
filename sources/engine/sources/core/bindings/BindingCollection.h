@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <memory>
 #include "platform/input/InputEvent.h"
 
 struct DataBindingWrapper
