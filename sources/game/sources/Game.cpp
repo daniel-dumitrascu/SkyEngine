@@ -32,9 +32,9 @@ void Game::Init()
 	matrix::matrix_4x::SetIdentity(proj_matrix);
 
 	/* Build a 2D projection matrix */
-	matrix::game_matrix::ProjectionMatrix(proj_matrix, 0.0f, (float)WORLD_WIDTH_RIGHT,
+	matrix::game_matrix::ProjectionMatrix(proj_matrix, 0.0f, (float)WORLD_WIDTH,
 															 0.0f,
-															 (float)WORLD_HEIGHT_DOWN, 1.0f, -1.0f);
+															 (float)WORLD_HEIGHT, 1.0f, -1.0f);
 
 	GameStateManager::PushState(new GameStateKickstart);
 	is_running = true;

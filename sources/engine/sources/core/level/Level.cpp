@@ -128,26 +128,28 @@ void Level::ConstructGameGrid()
 #endif
 
 	// Resize the row count of the grid
-	m_gameWorldGrid.resize(WORLD_GRID_ROW_COUNT);
+	m_gameWorldGrid.resize(WORLD_GRID_HEIGHT_COUNT);
 #if(DEBUG_SECTION)
-	m_gridRect.resize(WORLD_GRID_ROW_COUNT);
+	m_gridRect.resize(WORLD_GRID_HEIGHT_COUNT);
 #endif
 
 	// Create a generic rectangle in [-1, 1] coordonate space
+	//TODO - marimea rect-ului e fixa aici. Normal ea trebuie sa fie adaptata
+	//marimii WORLD_TILE_WIDTH si a WORLD_TILE_HEIGHT
 	vec_2x leftTop(-50.0f, 50.0f);
 	vec_2x rightBottom(50.0f, -50.0f);
 	Rectangle genericRect(leftTop, rightBottom);
 
-	for (unsigned int i = 0; i < WORLD_GRID_ROW_COUNT; ++i)
+	for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
 	{
 		// Resize each row by the number of column
-		m_gameWorldGrid[i].resize(WORLD_GRID_COLUMN_COUNT);
+		m_gameWorldGrid[i].resize(WORLD_GRID_WIDTH_COUNT);
 #if(DEBUG_SECTION)
-		m_gridRect[i].resize(WORLD_GRID_COLUMN_COUNT);
+		m_gridRect[i].resize(WORLD_GRID_WIDTH_COUNT);
 #endif
 
 		// Iterate in the new allocated row and create new tiles
-		for (unsigned int j = 0; j < WORLD_GRID_COLUMN_COUNT; ++j)
+		for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 		{
 			m_gameWorldGrid[i][j] = new Tile(i, j, genericRect);
 
@@ -183,7 +185,7 @@ void Level::AddVisibleGridLines()
 		vector::vector_2x::SetVector(startPoint, firstRect.GetLeft(), firstRect.GetTop());
 		vector::vector_2x::SetVector(endPoint, lastRect.GetRight(), lastRect.GetTop());
 
-		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 		m_gridLinesIds.push_back(m_sceneObjects.Occupy(gameLine));
 	}
 
@@ -196,7 +198,7 @@ void Level::AddVisibleGridLines()
 		vector::vector_2x::SetVector(startPoint, firstRect.GetLeft(), firstRect.GetBottom());
 		vector::vector_2x::SetVector(endPoint, lastRect.GetLeft(), lastRect.GetTop());
 
-		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 		m_gridLinesIds.push_back(m_sceneObjects.Occupy(gameLine));
 	}
 }
@@ -282,8 +284,8 @@ void Level::Update()
 					isAlreadyReset = true;
 					vec_4x green;
 					vector::vector_4x::SetVector(green, 0.0f, 1.0f, 0.0f, 1.0f);
-					for (unsigned int i = 0; i < WORLD_GRID_ROW_COUNT; ++i)
-						for (unsigned int j = 0; j < WORLD_GRID_COLUMN_COUNT; ++j)
+					for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
+						for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 						{
 							((GameRectangle*)(m_gridRect[i][j].first))->SetColor(green);
 						}
@@ -493,13 +495,15 @@ Tile* Level::GetTileAtIndex(unsigned int x, unsigned int y)
 
 void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex)
 {
-	static float virtualWorldMultiplierFloat = (float)VIRTUAL_WORLD_MULTIPLIER;
+	//static float virtualWorldMultiplierFloat = (float)VIRTUAL_WORLD_MULTIPLIER;
+	static float worldTileWidthFloat = (float)WORLD_TILE_WIDTH;
+	static float worldTileHeightFloat = (float)WORLD_TILE_HEIGHT;
 
 	// Part 1: For every top, bottom, left and right we calculate the index
-	float tempObjectTopGridIndex = objectRect.GetTop() / virtualWorldMultiplierFloat;
-	float tempObjectBottomGridIndex = objectRect.GetBottom() / virtualWorldMultiplierFloat;
-	float tempObjectLeftGridIndex = objectRect.GetLeft() / virtualWorldMultiplierFloat;
-	float tempObjectRightGridIndex = objectRect.GetRight() / virtualWorldMultiplierFloat;
+	float tempObjectTopGridIndex = objectRect.GetTop() / worldTileHeightFloat;
+	float tempObjectBottomGridIndex = objectRect.GetBottom() / worldTileHeightFloat;
+	float tempObjectLeftGridIndex = objectRect.GetLeft() / worldTileWidthFloat;
+	float tempObjectRightGridIndex = objectRect.GetRight() / worldTileWidthFloat;
 
 	// Part 2: We add +1 for top and left
 	outTopIndex = (int)tempObjectTopGridIndex;
@@ -508,10 +512,10 @@ void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopI
 	outRightIndex = (int)tempObjectRightGridIndex;
 
 	// Part 3: We add +1 for top and right only if modulo of multiplier if non-zero
-	if (std::fmod(objectRect.GetTop(), virtualWorldMultiplierFloat) == 0.0f)
+	if (std::fmod(objectRect.GetTop(), worldTileHeightFloat) == 0.0f)
 		--outTopIndex;
 
-	if (std::fmod(objectRect.GetRight(), virtualWorldMultiplierFloat) == 0.0f)
+	if (std::fmod(objectRect.GetRight(), worldTileWidthFloat) == 0.0f)
 		--outRightIndex;
 }
 

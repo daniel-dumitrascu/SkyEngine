@@ -59,19 +59,19 @@ void StaticObject::Init()
 
 	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
 	vector::vector_2x::SetVector(endPoint, rect.GetLeft(), rect.GetBottom());
-	leftOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+	leftOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 
 	vector::vector_2x::SetVector(startPoint, rect.GetRight(), rect.GetTop());
 	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
-	rightOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+	rightOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 
 	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
 	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetTop());
-	topOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+	topOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 
 	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetBottom());
 	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
-	bottomOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
+	bottomOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 #endif
 }
 

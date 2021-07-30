@@ -40,13 +40,16 @@ void OpenGLLatestRenderer::InitRenderer(void* screen_handle,
 	}
 
 	/* Calculating the aspect ratio */
-	int viewport_width = resolution.width;
-	int viewport_height = (resolution.width / aspect_ratio.x) * aspect_ratio.y;
+	int viewport_width = 1600; //WORLD_WIDTH;
+	int viewport_height = 900; //WORLD_HEIGHT;
 
 	int viewport_start_x = 0;
-	int viewport_start_y = (resolution.height / 2) - (viewport_height / 2);
+	int viewport_start_y = 0;
 
 	glViewport(viewport_start_x, viewport_start_y, viewport_width, viewport_height);
+
+	//glLoadIdentity();
+	//glFrustum (0.0, 1.0, 0.0, 1.0, 0.1, 1000.0);
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
