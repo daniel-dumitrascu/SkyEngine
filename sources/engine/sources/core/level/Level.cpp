@@ -495,7 +495,6 @@ Tile* Level::GetTileAtIndex(unsigned int x, unsigned int y)
 
 void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex)
 {
-	//static float virtualWorldMultiplierFloat = (float)VIRTUAL_WORLD_MULTIPLIER;
 	static float worldTileWidthFloat = (float)WORLD_TILE_WIDTH;
 	static float worldTileHeightFloat = (float)WORLD_TILE_HEIGHT;
 
