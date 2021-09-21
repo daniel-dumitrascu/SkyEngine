@@ -320,7 +320,7 @@ void Level::Update()
 					for (int xAxisIndex = oldGridMapping[1]; xAxisIndex <= oldGridMapping[3]; xAxisIndex++)
 					{
 						Tile* oldTile = GetGridTile(xAxisIndex, yAxisIndex);
-						std::string label = currObject->GetLabel().GetStrLabel();
+						std::string label = currObject->GetID();
 						oldTile->RemoveCollidingObject(label); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
 #if(DEBUG_SECTION)
 						if (!oldTile->HasCollidingObjects())

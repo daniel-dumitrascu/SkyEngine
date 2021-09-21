@@ -9,8 +9,8 @@
 #include "GameObjectFactory.h"
 #endif
 
-StaticObject::StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, GameObjectLabel& gameLabel) :
-	GameObject(mesh, texture, shader, posX, posY, scale, gameLabel, INPUT_HANDLE_PROFILE_NONE)
+StaticObject::StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id) :
+	GameObject(mesh, texture, shader, posX, posY, scale, id, INPUT_HANDLE_PROFILE_NONE)
 {
 	Init();
 }
@@ -31,14 +31,13 @@ StaticObject::~StaticObject()
 
 std::unique_ptr<GameObject> StaticObject::Clone()
 {
-	GameObjectLabel newlabel(GAME_OBJECT_ID_STATIC_BLOCK, UniqueGenerator::Instance().GenerateUniqueID());
 	return std::make_unique<StaticObject>(m_wireframe,
 											m_texture,
 											m_shader,
 											GetPosition().elem[0],
 											GetPosition().elem[1],
 											m_scaling,
-											newlabel);
+											UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void StaticObject::Init()

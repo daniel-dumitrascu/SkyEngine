@@ -19,7 +19,7 @@ void Tile::AddCollidingObject(GameObject* obj)
 {
 	if (obj != nullptr)
 	{
-		std::string label = obj->GetLabel().GetStrLabel();
+		std::string label = obj->GetID();
 		m_tileCollidingObjects.insert(std::pair<std::string, GameObject*>(label, obj));	
 	}
 }

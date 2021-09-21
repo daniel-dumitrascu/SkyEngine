@@ -1,6 +1,7 @@
 #pragma once
 #include <set>
 #include <stack>
+#include <string>
 
 class UniqueGenerator
 {
@@ -15,12 +16,13 @@ class UniqueGenerator
 
 		static UniqueGenerator& Instance();
 
-		unsigned int GenerateUniqueID();
-		void RemoveID(const unsigned int id);
+		std::string GenerateUniqueID();
+		void RemoveID(const std::string id);
+		void AddIDToMemory(const std::string id);
 
 	private:
 
 		unsigned int nextID = 0;
-		std::set<int> generatedIds;
-		std::stack<int> recycledIds;
+		std::set<std::string> generatedIds;
+		std::stack<std::string> recycledIds;
 };

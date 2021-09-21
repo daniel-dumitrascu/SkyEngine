@@ -1,6 +1,5 @@
 #pragma once
 
-#include "game_object/GameObjectLabel.h"
 #include "game_object/GameObject.h"
 #include "level/LevelData.h"
 #include "geometry/mesh/WireFrame.h"
@@ -15,7 +14,7 @@ class StaticObject : public GameObject
 {
 	public:
 
-		StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, GameObjectLabel& gameLabel);
+		StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id);
 		~StaticObject();
 		
 		StaticObject(const StaticObject& copy) = delete;

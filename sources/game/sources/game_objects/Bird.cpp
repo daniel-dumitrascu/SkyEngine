@@ -15,14 +15,14 @@ BirdObject::BirdObject(Texture* tex,
 					   const float posX, 
 					   const float posY, 
 					   int scale,
-					   GameObjectLabel& gameLabel) : GameObject(NULL,
-																tex, 
-																shader, 
-																posX,
-																posY,
-																scale,
-																gameLabel,
-																INPUT_HANDLE_PROFILE_GAMEOBJECT)
+					   const std::string id) : GameObject(NULL,
+												tex, 
+												shader, 
+												posX,
+												posY,
+												scale,
+												id,
+												INPUT_HANDLE_PROFILE_GAMEOBJECT)
 {	
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
@@ -53,13 +53,12 @@ BirdObject::~BirdObject()
 
 std::unique_ptr<GameObject> BirdObject::Clone()
 {
-	GameObjectLabel newlabel(GAME_OBJECT_ID_BIRD, UniqueGenerator::Instance().GenerateUniqueID());
 	return std::make_unique<BirdObject>(m_texture,
 										m_shader,
 										GetPosition().elem[0],
 										GetPosition().elem[1],
 										m_scaling,
-										newlabel);
+										UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void BirdObject::Init()

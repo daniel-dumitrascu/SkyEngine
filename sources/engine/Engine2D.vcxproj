@@ -88,7 +88,6 @@
     <ClInclude Include="sources\core\bindings\BindingCollection.h" />
     <ClInclude Include="sources\core\bindings\BindingsManager.h" />
     <ClInclude Include="sources\core\game_object\GameObject.h" />
-    <ClInclude Include="sources\core\game_object\GameObjectLabel.h" />
     <ClInclude Include="sources\core\geometry\baching\DrawScheme.h" />
     <ClInclude Include="sources\core\geometry\mesh\WireFrame.h" />
     <ClInclude Include="sources\core\geometry\mesh\parser\FileMesh.h" />
@@ -166,7 +165,6 @@
     <ClCompile Include="sources\core\bindings\BindingCollection.cpp" />
     <ClCompile Include="sources\core\bindings\BindingsManager.cpp" />
     <ClCompile Include="sources\core\game_object\GameObject.cpp" />
-    <ClCompile Include="sources\core\game_object\GameObjectLabel.cpp" />
     <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp" />
     <ClCompile Include="sources\core\geometry\mesh\MeshLoader.cpp" />
     <ClCompile Include="sources\core\geometry\mesh\MeshResources.cpp" />

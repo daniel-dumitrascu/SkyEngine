@@ -6,8 +6,8 @@
 class GameLine : public GameObject
 {
 	public:
-		GameLine(Line& line, GameObjectLabel& label);
-		GameLine(Line& line, const vec_4x& color, GameObjectLabel& label);
+		GameLine(Line& line, const std::string& id);
+		GameLine(Line& line, const vec_4x& color, const std::string& id);
 		~GameLine();
 
 		std::unique_ptr<GameObject> Clone() override;

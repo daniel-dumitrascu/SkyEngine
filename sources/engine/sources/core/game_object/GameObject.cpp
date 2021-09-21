@@ -14,14 +14,14 @@ GameObject::GameObject( WireFrame* wireframe,
 						const float posX, 
 						const float posY, 
 						int scale,
-						GameObjectLabel& gameLabel,
+						const std::string& id,
 						InputHandleProfile layer) : Controllable(layer),
 												  m_wireframe(wireframe),
 												  m_texture(texture),
 												  m_shader(shader),
 												  m_scaling(1),
 												  m_destroy(true),
-												  m_gameLabel(gameLabel),
+												  m_id(id),
 												  m_rectHeight(0.0f),
 												  m_rectLenght(0.0f),
 												  m_gameObjectSettings(OBJECT_FLAG_COUNT)
@@ -167,15 +167,15 @@ Rectangle GameObject::GetObjectWorldRect()
 
 void GameObject::AddCollidingNeighbour(GameObject* neighbour)
 {
-	if (m_collidingNeighbours.find(neighbour->GetLabel().GetStrLabel()) == m_collidingNeighbours.end())
+	if (m_collidingNeighbours.find(neighbour->GetID()) == m_collidingNeighbours.end())
 	{
-		m_collidingNeighbours.insert(std::pair<const std::string, GameObject*>(neighbour->GetLabel().GetStrLabel(), neighbour));
+		m_collidingNeighbours.insert(std::pair<const std::string, GameObject*>(neighbour->GetID(), neighbour));
 	}
 }
 
 void GameObject::RemoveCollidingNeighbour(GameObject* neighbour)
 {
-	m_collidingNeighbours.erase(neighbour->GetLabel().GetStrLabel());
+	m_collidingNeighbours.erase(neighbour->GetID());
 }
 
 void GameObject::ClearCollidingNeighbours()

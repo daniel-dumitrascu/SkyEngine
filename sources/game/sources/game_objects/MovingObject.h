@@ -9,7 +9,7 @@ class MovingObject : public GameObject
 {
 public:
 
-	MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel);
+	MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id);
 	~MovingObject();
 
 	void Draw();

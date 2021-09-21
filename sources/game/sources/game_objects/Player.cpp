@@ -13,8 +13,8 @@
 #include "GameObjectFactory.h"
 #endif
 
-Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel) :
-	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
+Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id) :
+	GameObject(mesh, texture, shader, postX, postY, scale, id, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
 	speedGoal(0.0f), currentSpeed(0.0f)
 {
 	// Set a default direction

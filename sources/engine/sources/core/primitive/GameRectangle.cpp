@@ -10,8 +10,8 @@
 #include "utils/UniqueGenerator.h"
 
 
-GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, GameObjectLabel& gameLabel) :
-	GameObject(nullptr, nullptr, -1, posX, posX, 1, gameLabel, INPUT_HANDLE_PROFILE_NONE)
+GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const std::string& id) :
+	GameObject(nullptr, nullptr, -1, posX, posX, 1, id, INPUT_HANDLE_PROFILE_NONE)
 {
 	m_rectangle = new Rectangle(rect);		 
 	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
@@ -24,8 +24,8 @@ GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, GameObject
 	Init();
 }
 
-GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const vec_4x& color, GameObjectLabel& gameLabel) :
-	GameObject(nullptr, nullptr, -1, posX, posY, 1, gameLabel, INPUT_HANDLE_PROFILE_NONE)
+GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const vec_4x& color, const std::string& id) :
+	GameObject(nullptr, nullptr, -1, posX, posY, 1, id, INPUT_HANDLE_PROFILE_NONE)
 {
 	m_rectangle = new Rectangle(rect);
 	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
@@ -47,8 +47,7 @@ GameRectangle::~GameRectangle()
 
 std::unique_ptr<GameObject> GameRectangle::Clone()
 {
-	GameObjectLabel newlabel(m_gameLabel.GetType(), UniqueGenerator::Instance().GenerateUniqueID());
-	return std::make_unique<GameRectangle>(*m_rectangle, GetPosition().elem[0], GetPosition().elem[1], newlabel);
+	return std::make_unique<GameRectangle>(*m_rectangle, GetPosition().elem[0], GetPosition().elem[1], UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void GameRectangle::Init()

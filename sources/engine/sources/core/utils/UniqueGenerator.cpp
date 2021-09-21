@@ -1,4 +1,5 @@
 #include "UniqueGenerator.h"
+#include <iostream>
 
 #if(WINDOWS_PLATFORM)
 	#include <limits.h>
@@ -12,9 +13,9 @@ UniqueGenerator& UniqueGenerator::Instance()
 	return instance;
 }
 
-unsigned int UniqueGenerator::GenerateUniqueID()
+std::string UniqueGenerator::GenerateUniqueID()
 {
-	unsigned int id = 0;
+	std::string id = "";
 
 	if (!recycledIds.empty())
 	{
@@ -24,8 +25,8 @@ unsigned int UniqueGenerator::GenerateUniqueID()
 	}
 	else if (nextID < UINT32_MAX)
 	{
-		id = ++nextID;
-		generatedIds.insert(id);	
+		id = std::to_string(++nextID);
+		generatedIds.insert(id);
 	}
 
 	/*
@@ -36,7 +37,7 @@ unsigned int UniqueGenerator::GenerateUniqueID()
 	return id;
 }
 
-void UniqueGenerator::RemoveID(const unsigned int id)
+void UniqueGenerator::RemoveID(const std::string id)
 {
 	const auto searchIdResult = generatedIds.find(id);
 
@@ -44,5 +45,14 @@ void UniqueGenerator::RemoveID(const unsigned int id)
 	{
 		recycledIds.push(*searchIdResult);
 		generatedIds.erase(searchIdResult);
+	}
+}
+
+void UniqueGenerator::AddIDToMemory(const std::string id)
+{
+	auto ite = generatedIds.insert(id);
+	if (ite.second = false)
+	{
+		std::cout << "ID <" << id << "> is already generated";
 	}
 }
