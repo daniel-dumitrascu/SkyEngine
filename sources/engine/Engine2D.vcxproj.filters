@@ -31,9 +31,6 @@
     <ClCompile Include="sources\core\game_object\GameObject.cpp">
       <Filter>core\game_object</Filter>
     </ClCompile>
-    <ClCompile Include="sources\core\game_object\GameObjectLabel.cpp">
-      <Filter>core\game_object</Filter>
-    </ClCompile>
     <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp">
       <Filter>core\geometry\baching</Filter>
     </ClCompile>
@@ -217,9 +214,6 @@
       <Filter>core\bindings</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\game_object\GameObject.h">
-      <Filter>core\game_object</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\core\game_object\GameObjectLabel.h">
       <Filter>core\game_object</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\geometry\baching\DrawScheme.h">

@@ -10,7 +10,8 @@ struct GameObjectPackage
 	GameObjectPackage() :	m_renderable(false),
 							m_collidable(false),
 							m_controllable(false),
-							m_modelID(0),
+							m_id(""),
+							m_type(0),
 							m_meshID(0),
 							m_animationID(0),
 							m_textureID(0),
@@ -30,7 +31,8 @@ struct GameObjectPackage
 	bool m_renderable;
 	bool m_collidable;
 	bool m_controllable;
-	int m_modelID;
+	std::string m_id;
+	int m_type;
 	int m_meshID;
 	int m_animationID;
 	int m_textureID;

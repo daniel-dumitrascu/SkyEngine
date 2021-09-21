@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Level>
-	<GameObject>
-		<Composition ModelID="1" ResourceMeshID="2" ResourceTextureID="1" ResourceShaderID="1" />
+	<GameObject id="1">
+		<Composition Type="1" ResourceMeshID="2" ResourceTextureID="1" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>
 		<Position x="200" y="100" />
 		<Rotation x="0" y="0" />
 		<Scale size="150" />
 	</GameObject>
-	<GameObject>
-		<Composition ModelID="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+	<GameObject id="2">
+		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="100" y="100" />
 		<Rotation x="0" y="0" />
 		<Scale size="100" />
 	</GameObject>
-	<GameObject>
-		<Composition ModelID="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+	<GameObject id="3">
+		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="1000" y="350" />
 		<Rotation x="0" y="0" />
 		<Scale size="100" />
 	</GameObject>
-	<GameObject>
-		<Composition ModelID="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+	<GameObject id="4">
+		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="600" y="600" />
 		<Rotation x="0" y="0" />

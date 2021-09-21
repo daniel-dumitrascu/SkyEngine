@@ -1,13 +1,12 @@
 #include "MovingObject.h"
 #include "geometry/mesh/WireFrame.h"
 #include "texture/Texture.h"
-#include "game_object/GameObjectLabel.h"
 #include "video/Painter.h"
 #include "global/GlobalData.h"
 
 
-MovingObject::MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel):
-	GameObject(mesh, texture, shader, postX, postY, scale, gameLabel, INPUT_HANDLE_PROFILE_NONE),
+MovingObject::MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id):
+	GameObject(mesh, texture, shader, postX, postY, scale, id, INPUT_HANDLE_PROFILE_NONE),
 	m_speed(20.0f)
 {
 	Init();

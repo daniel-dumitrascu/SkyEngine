@@ -47,12 +47,21 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 
 			if (object_elem)
 			{
-				/* Parse the composition */
+				const char* id;
+				result += object_elem->QueryStringAttribute("id", &id);
+
+				// Check the result before using the id
+				if (result != tinyxml2::XML_SUCCESS)
+					return NULL;
+
+				game_object_pack.m_id = std::string(id);
+
+				// Parse the composition 
 				tinyxml2::XMLElement* Property_elem = object_elem->FirstChildElement("Composition");
 
 				if (Property_elem)
 				{
-					result += Property_elem->QueryIntAttribute("ModelID", &(game_object_pack.m_modelID));
+					result += Property_elem->QueryIntAttribute("Type", &(game_object_pack.m_type));
 					result += Property_elem->QueryIntAttribute("ResourceMeshID", &(game_object_pack.m_meshID));
 					result += Property_elem->QueryIntAttribute("ResourceTextureID", &(game_object_pack.m_textureID));
 					result += Property_elem->QueryIntAttribute("ResourceShaderID", &(game_object_pack.m_shaderID));
@@ -60,7 +69,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 					//TODO to add animation here as well
 				}
 
-				/* Parse the properties */
+				// Parse the properties 
 				Property_elem = Property_elem->NextSiblingElement("Properties");
 
 				if (Property_elem)
@@ -74,7 +83,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 					Property_elem->QueryBoolAttribute("Controllable", &(game_object_pack.m_controllable));
 				}
 
-				/* Parse the position */
+				// Parse the position 
 				Property_elem = Property_elem->NextSiblingElement("Position");
 
 				if (Property_elem)
@@ -83,7 +92,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 					result += Property_elem->QueryFloatAttribute("y", &(game_object_pack.m_position.elem[1]));
 				}
 
-				/* Parse the rotation */
+				// Parse the rotation 
 				Property_elem = Property_elem->NextSiblingElement("Rotation");
 
 				if (Property_elem)
@@ -92,7 +101,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 					result += Property_elem->QueryFloatAttribute("y", &(game_object_pack.m_rotation.elem[1]));
 				}
 
-				/* Parse the scale */
+				// Parse the scale 
 				Property_elem = Property_elem->NextSiblingElement("Scale");
 
 				if (Property_elem)
@@ -101,7 +110,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 				if (result != tinyxml2::XML_SUCCESS)
 					return NULL;
 
-				/* Add entity data to the level data */
+				// Add entity data to the level data 
 				level->m_level_data.push_back(game_object_pack);
 			}
 			else

@@ -1,7 +1,6 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include "game_object/GameObjectLabel.h"
 #include "game_object/GameObject.h"
 #include "level/LevelData.h"
 #include "geometry/mesh/WireFrame.h"
@@ -12,7 +11,7 @@ class Background : public GameObject
 {
 public:
 
-	Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, GameObjectLabel& gameLabel);
+	Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id);
 	~Background();
 
 	Background(const Background& copy) = delete;

@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "game_object/GameObjectLabel.h"
 #include "game_object/GameObject.h"
 #include "level/LevelData.h"
 #include "actions/Actions.h"
@@ -22,7 +21,7 @@ class Player : public GameObject
 
 	public:
 
-		Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, GameObjectLabel& gameLabel);
+		Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id);
 		~Player();
 
 		void Draw();

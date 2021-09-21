@@ -5,8 +5,8 @@
 #include "utils/UniqueGenerator.h"
 
 
-Background::Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, GameObjectLabel& gameLabel) :
-	GameObject(mesh, texture, shader, posX, posY, scale, gameLabel, INPUT_HANDLE_PROFILE_NONE)
+Background::Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id) :
+	GameObject(mesh, texture, shader, posX, posY, scale, id, INPUT_HANDLE_PROFILE_NONE)
 {
 	Init();
 }
@@ -20,14 +20,13 @@ Background::~Background()
 
 std::unique_ptr<GameObject> Background::Clone()
 {
-	GameObjectLabel newlabel(GAME_OBJECT_ID_BACKGROUND, UniqueGenerator::Instance().GenerateUniqueID());
 	return std::make_unique<Background>(m_wireframe,
 										m_texture,
 										m_shader,
 										GetPosition().elem[0],
 										GetPosition().elem[1],
 										m_scaling,
-										newlabel);
+										UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void Background::Init()

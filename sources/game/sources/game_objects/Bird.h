@@ -1,7 +1,6 @@
 #ifndef BIRD_H
 #define BIRD_H
 
-#include "game_object/GameObjectLabel.h"
 #include "game_object/GameObject.h"
 #include "level/LevelData.h"
 #include "texture/Texture.h"
@@ -17,7 +16,7 @@ class BirdObject : public GameObject
 				   const float posX,
 				   const float posY,
 				   int scale,
-				   GameObjectLabel& gameLabel);
+				   const std::string id);
 		~BirdObject();
 
 		BirdObject(const BirdObject& copy) = delete;

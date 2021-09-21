@@ -20,14 +20,14 @@ SoldierObject::SoldierObject(Texture* tex,
 							const float posX, 
 							const float posY, 
 							int scale, 
-							GameObjectLabel& gameLabel) :
+							const std::string& id) :
 		GameObject(NULL, 
 					tex, 
 					shader, 
 					posX, 
 					posY, 
 					scale, 
-					gameLabel,
+					id,
 					INPUT_HANDLE_PROFILE_GAMEOBJECT)
 {
 	SetFlagOFF(OBJECT_IS_CONTROLLABLE);
@@ -68,13 +68,12 @@ SoldierObject::~SoldierObject()
 
 std::unique_ptr<GameObject> SoldierObject::Clone()
 {
-	GameObjectLabel newlabel(GAME_OBJECT_ID_SOLDIER, UniqueGenerator::Instance().GenerateUniqueID());
 	return std::make_unique<SoldierObject>(m_texture,
 											m_shader,
 											GetPosition().elem[0],
 											GetPosition().elem[1],
 											m_scaling,
-											newlabel);
+											UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void SoldierObject::Init()

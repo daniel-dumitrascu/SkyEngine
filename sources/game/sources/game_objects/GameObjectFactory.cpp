@@ -1,5 +1,4 @@
 #include "GameObjectFactory.h"
-#include "game_object/GameObjectLabel.h"
 #include "keys/ResourceKeyCollection.h"
 #include "../defines/ResourceDefines.h"
 #include "global/GlobalPaths.h"
@@ -24,7 +23,7 @@ GameObjectFactory* GameObjectFactory::GetInstance()
 GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 {
 	GameObject* obj = nullptr;
-	switch (objPack.m_modelID)
+	switch (objPack.m_type)
 	{
 		case GAME_OBJECT_ID_LINE:
 		{
@@ -47,8 +46,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 			if (anim && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new BirdObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new BirdObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}
 			
 			break;
@@ -61,8 +60,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 			
 			if (tile && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}	
 				
 			break;
@@ -75,8 +74,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 			if (anim && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new SoldierObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new SoldierObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}
 		
 			break;
@@ -90,8 +89,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 			if (tile && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}	
 
 			break;
@@ -104,8 +103,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 			if (tile && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new MovingObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new MovingObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}
 
 			break;
@@ -118,8 +117,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 			if (tile && tex && program != 0)
 			{
-				GameObjectLabel label(objPack.m_modelID, UniqueGenerator::Instance().GenerateUniqueID());
-				obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, label);
+				obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 			}				
 
 			break;
@@ -149,9 +148,8 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 GameObject* GameObjectFactory::CreateGameLine(vec_2x& startPoint, vec_2x& endPoint, int thickness, vec_4x& color)
 {
-	GameObjectLabel label(GAME_OBJECT_ID_LINE, UniqueGenerator::Instance().GenerateUniqueID());
 	Line line(startPoint, endPoint, thickness);
-	return new GameLine(line, color, label);
+	return new GameLine(line, color, UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& pointTopLeft, vec_2x& pointBottomRight, float posX, float posY, vec_4x& color)
@@ -162,8 +160,7 @@ GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& pointTopLeft, vec_2x&
 
 GameObject* GameObjectFactory::CreateGameRectangle(Rectangle& rect, float posX, float posY, vec_4x& color)
 {
-	GameObjectLabel label(GAME_OBJECT_ID_RECT, UniqueGenerator::Instance().GenerateUniqueID());
-	return new GameRectangle(rect, posX, posY, color, label);
+	return new GameRectangle(rect, posX, posY, color, UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 WireFrame* GameObjectFactory::GetTile(GameObjectPackage& pack)

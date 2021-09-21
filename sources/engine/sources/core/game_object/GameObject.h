@@ -1,7 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "GameObjectLabel.h"
 #include "math/Matrix.h"
 #include "shaders/ShaderResources.h"
 #include "level/LevelData.h"
@@ -40,7 +39,7 @@ class GameObject : public Controllable
 					const float posX,
 					const float posY,
 					const int scale,
-					GameObjectLabel& gameLabel,
+					const std::string& id,
 					InputHandleProfile layer );
 
 		virtual ~GameObject();
@@ -73,7 +72,7 @@ class GameObject : public Controllable
 		Rectangle GetObjectWorldRect();
 		const std::array<int, 4>& GetOccupiedGriDArea() const { return m_occupiedGridArea; }
 		void SetOccupiedGridArea(int topIndex, int leftIndex, int bottomIndex, int rightIndex);
-		const GameObjectLabel& GetLabel() const { return m_gameLabel; }
+		const std::string GetID() const { return m_id; }
 
 		void AddCollidingNeighbour(GameObject* neighbour);
 		void RemoveCollidingNeighbour(GameObject* neighbour);
@@ -87,14 +86,14 @@ class GameObject : public Controllable
 	protected:
 
 		float m_rectHeight;
-		float m_rectLenght;
+		float m_rectLenght;	
 		int m_shader;							// The shader used by this entity     //TODO we don't need a m_shader in each entity. This should be at the game level or entity collection management
 		BinaryArray m_gameObjectSettings;
 		WireFrame* m_wireframe;					// The mesh model of the entity
 		Rectangle* m_rectangle = nullptr;		// The rect constr from the wireframe used in collision calc
 		Texture* m_texture;						// The texture applied on the mesh
-		GameObjectLabel	m_gameLabel;			// The unique identifier in the game of this object
 		std::array<int, 4> m_occupiedGridArea;	// The last known occupied grid area of the object
+		std::string	m_id;						// The unique identifier in the game of this object
 
 		vec_3x m_world_position;
 		vec_3x m_world_rotation;
