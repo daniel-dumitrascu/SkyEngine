@@ -1,9 +1,7 @@
 #include "Background.h"
 #include "video/Painter.h"
-#include "global/GlobalData.h"
-#include "GameObjectDefines.h"
+#include "texture/Texture.h"
 #include "utils/UniqueGenerator.h"
-
 
 Background::Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id) :
 	GameObject(mesh, texture, shader, posX, posY, scale, id, INPUT_HANDLE_PROFILE_NONE)
@@ -21,12 +19,12 @@ Background::~Background()
 std::unique_ptr<GameObject> Background::Clone()
 {
 	return std::make_unique<Background>(m_wireframe,
-										m_texture,
-										m_shader,
-										GetPosition().elem[0],
-										GetPosition().elem[1],
-										m_scaling,
-										UniqueGenerator::Instance().GenerateUniqueID());
+		m_texture,
+		m_shader,
+		GetPosition().elem[0],
+		GetPosition().elem[1],
+		m_scaling,
+		UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void Background::Init()

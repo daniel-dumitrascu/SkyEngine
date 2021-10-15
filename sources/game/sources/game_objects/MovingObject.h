@@ -1,5 +1,5 @@
 #pragma once
-#include "game_object/GameObject.h"
+#include "entities/GameObject.h"
 
 class WireFrame;
 class Texture;

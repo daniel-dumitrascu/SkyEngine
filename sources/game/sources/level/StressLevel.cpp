@@ -1,4 +1,7 @@
 #include "StressLevel.h"
+
+#if 0
+
 #include "geometry/mesh/MeshLoader.h"
 #include "geometry/mesh/MeshResources.h"
 #include "texture/TextureLoader.h"
@@ -107,3 +110,5 @@ void StressLevel::Draw()
 		bird[i]->Draw();
 	}
 }
+
+#endif

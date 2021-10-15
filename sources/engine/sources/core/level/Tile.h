@@ -2,7 +2,7 @@
 #include <string>
 #include <map>
 #include "primitive/Rectangle.h"
-#include "game_object/GameObject.h"
+#include "entities/GameObject.h"
 
 
 class Tile

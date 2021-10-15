@@ -28,9 +28,6 @@
     <ClCompile Include="sources\core\bindings\BindingsManager.cpp">
       <Filter>core\bindings</Filter>
     </ClCompile>
-    <ClCompile Include="sources\core\game_object\GameObject.cpp">
-      <Filter>core\game_object</Filter>
-    </ClCompile>
     <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp">
       <Filter>core\geometry\baching</Filter>
     </ClCompile>
@@ -178,6 +175,42 @@
     <ClCompile Include="sources\core\utils\Motion.cpp">
       <Filter>core\utils</Filter>
     </ClCompile>
+    <ClCompile Include="sources\core\level\Level.cpp">
+      <Filter>core\level</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\entities\GameObject.cpp">
+      <Filter>core\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\entities\GameObjectFactory.cpp">
+      <Filter>core\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\entities\Background.cpp">
+      <Filter>core\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\entities\StaticObject.cpp">
+      <Filter>core\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\entities\Player.cpp">
+      <Filter>core\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\states\GameStateGameplay.cpp">
+      <Filter>core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\states\GameStateKickstart.cpp">
+      <Filter>core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\states\GameStateMainMenu.cpp">
+      <Filter>core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\states\GameStateManager.cpp">
+      <Filter>core\states</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\splash\SplashScreen.cpp">
+      <Filter>core\splash</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\core\menu\MainMenu.cpp">
+      <Filter>core\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\application\Application.h">
@@ -212,9 +245,6 @@
     </ClInclude>
     <ClInclude Include="sources\core\bindings\BindingsManager.h">
       <Filter>core\bindings</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\core\game_object\GameObject.h">
-      <Filter>core\game_object</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\geometry\baching\DrawScheme.h">
       <Filter>core\geometry\baching</Filter>
@@ -411,6 +441,57 @@
     <ClInclude Include="sources\core\platform\input\InputEvent.h">
       <Filter>core\platform\input</Filter>
     </ClInclude>
+    <ClInclude Include="sources\core\level\Level.h">
+      <Filter>core\level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\LevelDefines.h">
+      <Filter>core\level</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\GameObject.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\GameObjectFactory.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\GameObjectDefines.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\defines\ResourceDefines.h">
+      <Filter>core\defines</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\Background.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\StaticObject.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\entities\Player.h">
+      <Filter>core\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\GameBaseState.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\GameStateGameplay.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\GameStateKickstart.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\GameStateMainMenu.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\GameStateManager.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\states\StateID.h">
+      <Filter>core\states</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\splash\SplashScreen.h">
+      <Filter>core\splash</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\menu\MainMenu.h">
+      <Filter>core\menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="application">
@@ -436,9 +517,6 @@
     </Filter>
     <Filter Include="core\bindings">
       <UniqueIdentifier>{131f633e-c5d5-40af-8aab-5241724c0969}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\game_object">
-      <UniqueIdentifier>{aa1f2b1d-2a53-4dff-8ac5-b26dae7cda96}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\geometry">
       <UniqueIdentifier>{e767735b-a3db-447f-8470-4f227ad24d66}</UniqueIdentifier>
@@ -520,6 +598,21 @@
     </Filter>
     <Filter Include="core\video\opengl_latest">
       <UniqueIdentifier>{19380ad9-092c-4cf3-9a79-e5bb9531f3b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\entities">
+      <UniqueIdentifier>{6b1158bb-5298-42ab-a3a0-d812509bd88f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\defines">
+      <UniqueIdentifier>{88d7df67-b930-48f3-a5d4-6cfaa132751c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\states">
+      <UniqueIdentifier>{377e8db1-f293-44fd-ab9a-905259d82384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\splash">
+      <UniqueIdentifier>{772fafba-9a78-47c0-8e85-71211ce06248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\menu">
+      <UniqueIdentifier>{d78725a0-4e22-4dcd-be21-2614a820e79c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

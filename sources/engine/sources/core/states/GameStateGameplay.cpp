@@ -2,9 +2,10 @@
 #include "platform/input/InputManager.h"
 
 #if (STRESS_TEST)
-	#include "../level/StressLevel.h"
+	//TODO - move the stress level to the engine as well
+	#include "level/StressLevel.h"
 #else
-	#include "../level/Level.h"
+	#include "level/Level.h"
 #endif
 
 

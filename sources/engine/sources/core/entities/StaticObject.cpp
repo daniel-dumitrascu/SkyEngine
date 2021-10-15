@@ -1,10 +1,10 @@
 #include "StaticObject.h"
 #include "video/Painter.h"
-#include "global/GlobalData.h"
-#include "GameObjectDefines.h"
 #include "utils/UniqueGenerator.h"
-#include "actions/Actions.h"
+#include "global/GlobalData.h"
+#include "texture/Texture.h"
 
+//TODO - circular inclusion - think of a better solution here
 #if(DEBUG_SECTION)
 #include "GameObjectFactory.h"
 #endif
@@ -32,12 +32,12 @@ StaticObject::~StaticObject()
 std::unique_ptr<GameObject> StaticObject::Clone()
 {
 	return std::make_unique<StaticObject>(m_wireframe,
-											m_texture,
-											m_shader,
-											GetPosition().elem[0],
-											GetPosition().elem[1],
-											m_scaling,
-											UniqueGenerator::Instance().GenerateUniqueID());
+		m_texture,
+		m_shader,
+		GetPosition().elem[0],
+		GetPosition().elem[1],
+		m_scaling,
+		UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void StaticObject::Init()

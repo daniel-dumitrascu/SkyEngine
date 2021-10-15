@@ -1,10 +1,6 @@
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
+#pragma once
 
-#include "game_object/GameObject.h"
-#include "level/LevelData.h"
-#include "geometry/mesh/WireFrame.h"
-#include "texture/Texture.h"
+#include "entities/GameObject.h"
 #include <memory>
 
 class Background : public GameObject
@@ -30,5 +26,3 @@ private:
 
 	unsigned int m_shader_pair_id;
 };
-
-#endif
