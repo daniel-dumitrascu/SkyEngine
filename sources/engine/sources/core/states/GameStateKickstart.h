@@ -3,7 +3,7 @@
 
 #include "GameBaseState.h"
 #include "time/Time.h"
-#include "../splash/SplashScreen.h"
+#include "splash/SplashScreen.h"
 
 class GameStateKickstart : public GameBaseState
 {

@@ -2,7 +2,7 @@
 #define GAME_STATE_MAIN_MENU_H
 
 #include "GameBaseState.h"
-#include "../menu/MainMenu.h"
+#include "menu/MainMenu.h"
 
 class GameStateMainMenu : public GameBaseState
 {

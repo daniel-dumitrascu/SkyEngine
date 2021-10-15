@@ -1,18 +1,23 @@
 #include "GameObjectFactory.h"
-#include "keys/ResourceKeyCollection.h"
-#include "../defines/ResourceDefines.h"
-#include "global/GlobalPaths.h"
 #include "GameObjectDefines.h"
+#include "utils/UniqueGenerator.h"
+#include "primitive/Line.h"
 #include "primitive/GameLine.h"
 #include "primitive/GameRectangle.h"
+#include "defines/ResourceDefines.h"
+#include "geometry/mesh/MeshResources.h"
+#include "geometry/mesh/MeshLoader.h"
+#include "texture/TextureResources.h"
+#include "texture/TextureLoader.h"
+#include "animation/AnimDataResources.h"
+#include "animation/AnimDataLoader.h"
+#include "shaders/ShaderLoader.h"
 #include "shaders/ShaderDefines.h"
-#include "Player.h"
-#include "StaticObject.h"
-#include "Bird.h"
-#include "Soldier.h"
-#include "Background.h"
-#include "MovingObject.h"
-
+#include "keys/ResourceKeyCollection.h"
+#include "global/GlobalPaths.h"
+#include "entities/Background.h"
+#include "entities/StaticObject.h"
+#include "entities/Player.h"
 
 GameObjectFactory* GameObjectFactory::GetInstance()
 {
@@ -22,128 +27,113 @@ GameObjectFactory* GameObjectFactory::GetInstance()
 
 GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 {
-	GameObject* obj = nullptr;
-	switch (objPack.m_type)
+	if (objPack.m_type == GAME_OBJECT_ID_LINE)
 	{
-		case GAME_OBJECT_ID_LINE:
+		return CreateGameLine(objPack.m_startPoint, objPack.m_endPoint, objPack.m_thickness, objPack.m_color);
+	}
+
+	if (objPack.m_type == GAME_OBJECT_ID_RECT)
+	{
+		return CreateGameRectangle(objPack.m_pointTopLeft, objPack.m_pointBottomRight,
+				objPack.m_position.elem[0], objPack.m_position.elem[1],
+				objPack.m_color);
+	}
+
+	WireFrame* tile = GetTile(objPack);
+	Texture* tex = GetTexture(objPack);
+	int program = GetProgram(objPack);
+
+	GameObject* obj = nullptr;
+
+	if (tile && tex && program != 0)
+	{
+		if (objPack.m_type == GAME_OBJECT_ID_PLAYER)
 		{
-			obj = CreateGameLine(objPack.m_startPoint, objPack.m_endPoint, objPack.m_thickness, objPack.m_color);
-			break;
+			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 		}
-		case GAME_OBJECT_ID_RECT:
+		else if (objPack.m_type == GAME_OBJECT_ID_STATIC_BLOCK)
 		{
-			obj = CreateGameRectangle(objPack.m_pointTopLeft, objPack.m_pointBottomRight, 
-									  objPack.m_position.elem[0], objPack.m_position.elem[1], 
-									  objPack.m_color);
-			break;
+			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 		}
-		case GAME_OBJECT_ID_BIRD:
+		else if (objPack.m_type == GAME_OBJECT_ID_BACKGROUND)
 		{
-			//TODO - for animations, I will send this param exactly the same as I send the WireFrame
-			AnimData* anim = GetAnimation(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-
-			if (anim && tex && program != 0)
-			{
-				obj = new BirdObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}
-			
-			break;
-		}
-		case GAME_OBJECT_ID_PLAYER:
-		{
-			WireFrame* tile = GetTile(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-			
-			if (tile && tex && program != 0)
-			{
-				obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}	
-				
-			break;
-		}
-		case GAME_OBJECT_ID_SOLDIER:
-		{
-			AnimData* anim = GetAnimation(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-
-			if (anim && tex && program != 0)
-			{
-				obj = new SoldierObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}
-		
-			break;
-		}
-		case GAME_OBJECT_ID_STATIC_BLOCK:
-		case GAME_OBJECT_ID_GRASS:
-		{
-			WireFrame* tile = GetTile(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-
-			if (tile && tex && program != 0)
-			{
-				obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}	
-
-			break;
-		}
-		case GAME_OBJECT_ID_MOVING_OBJECT:
-		{
-			WireFrame* tile = GetTile(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-
-			if (tile && tex && program != 0)
-			{
-				obj = new MovingObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}
-
-			break;
-		}
-		case GAME_OBJECT_ID_BACKGROUND:
-		{
-			WireFrame* tile = GetTile(objPack);
-			Texture* tex = GetTexture(objPack);
-			int program = GetProgram(objPack);
-
-			if (tile && tex && program != 0)
-			{
-				obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-				UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
-			}				
-
-			break;
+			obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 		}
 	}
 
 	// Set rendable flag
-	if(objPack.m_renderable)
+	if (objPack.m_renderable)
 		obj->SetFlagON(GameObjectFlags::OBJECT_IS_RENDERABLE);
 	else
 		obj->SetFlagOFF(GameObjectFlags::OBJECT_IS_RENDERABLE);
-	
+
 	// Set collidable flag
-	if(objPack.m_collidable)
+	if (objPack.m_collidable)
 		obj->SetFlagON(GameObjectFlags::OBJECT_IS_COLLIDABLE);
-	else 
+	else
 		obj->SetFlagOFF(GameObjectFlags::OBJECT_IS_COLLIDABLE);
 
 	// Set contralable flag
-	if(objPack.m_controllable)
+	if (objPack.m_controllable)
 		obj->SetFlagON(OBJECT_IS_CONTROLLABLE);
 	else
 		obj->SetFlagOFF(OBJECT_IS_CONTROLLABLE);
 
+
 	return obj;
+
+
+	//TODO - See what functionality these classes have and try to integrate it into GameObject
+	//After that we can delete them
+	
+	/*case GAME_OBJECT_ID_BIRD:
+	{
+		//TODO - for animations, I will send this param exactly the same as I send the WireFrame
+		AnimData* anim = GetAnimation(objPack);
+		Texture* tex = GetTexture(objPack);
+		int program = GetProgram(objPack);
+
+		if (anim && tex && program != 0)
+		{
+			obj = new BirdObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+		}
+
+		break;
+	}*/
+	
+	/*case GAME_OBJECT_ID_SOLDIER:
+	{
+		AnimData* anim = GetAnimation(objPack);
+		Texture* tex = GetTexture(objPack);
+		int program = GetProgram(objPack);
+
+		if (anim && tex && program != 0)
+		{
+			obj = new SoldierObject(tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+		}
+
+		break;
+	}*/
+	
+	/*case GAME_OBJECT_ID_MOVING_OBJECT:
+	{
+		WireFrame* tile = GetTile(objPack);
+		Texture* tex = GetTexture(objPack);
+		int program = GetProgram(objPack);
+
+		if (tile && tex && program != 0)
+		{
+			obj = new MovingObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+		}
+
+		break;
+	}*/
 }
 
 GameObject* GameObjectFactory::CreateGameLine(vec_2x& startPoint, vec_2x& endPoint, int thickness, vec_4x& color)
@@ -234,7 +224,7 @@ int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 		{
 			ResourceKeyCollection* resKeyColl = ResourceKeyCollection::GetInstance();
 			ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(shaders_path + resKeyColl->GetNameByKey(KEY_SHADER, pack.m_shaderID)),
-													 pack.m_shaderID);
+				pack.m_shaderID);
 
 			program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderID);
 		}

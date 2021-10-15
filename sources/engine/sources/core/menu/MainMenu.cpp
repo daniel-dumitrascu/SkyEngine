@@ -5,8 +5,8 @@
 #include "platform/input/DeviceDefinitions.h"
 #include "actions/Actions.h"
 #include "bindings/BindingsManager.h"
-#include "../states/GameStateManager.h"
-#include "../states/GameStateGameplay.h"
+#include "states/GameStateManager.h"
+#include "states/GameStateGameplay.h"
 
 
 MainMenu::MainMenu(WireFrame* mesh, Texture* texture, int shader) : Controllable(INPUT_HANDLE_PROFILE_MENU),

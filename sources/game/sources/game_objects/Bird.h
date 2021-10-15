@@ -1,7 +1,7 @@
 #ifndef BIRD_H
 #define BIRD_H
 
-#include "game_object/GameObject.h"
+#include "entities/GameObject.h"
 #include "level/LevelData.h"
 #include "texture/Texture.h"
 #include "animation/player/AnimPlayer.h"

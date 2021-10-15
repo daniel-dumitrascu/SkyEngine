@@ -1,17 +1,16 @@
 #include "Player.h"
 #include "video/Painter.h"
 #include "global/GlobalData.h"
-#include "geometry/mesh/WireFrame.h"
 #include "texture/Texture.h"
-#include "GameObjectDefines.h"
-#include "../states/GameStateManager.h"
-#include "../states/GameStateMainMenu.h"
-#include "platform/input/InputManager.h"
 #include "utils/Motion.h"
+#include "states/GameStateManager.h"
+#include "states/GameStateMainMenu.h"
 
+//TODO - circular inclusion - think of a better solution here
 #if(DEBUG_SECTION)
 #include "GameObjectFactory.h"
 #endif
+
 
 Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id) :
 	GameObject(mesh, texture, shader, postX, postY, scale, id, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
@@ -23,12 +22,12 @@ Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX,
 
 	vector::vector_3x::SetVector(lastFramePos, m_world_position);
 
-	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED]  = nullptr;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN]	 = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP] = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN] = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT] = &Player::OnMovement;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK]	 = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK] = nullptr;
 
 	Init();
 }
@@ -193,9 +192,9 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 {
 	hasObjectMovedThisFrame = false;
 	int const batchSize = inputBatch.getDataBatchSize();
-	if(batchSize > 0)
+	if (batchSize > 0)
 	{
-		for(int i=0; i < batchSize; ++i)
+		for (int i = 0; i < batchSize; ++i)
 		{
 			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
 			if (wrapper == nullptr)
@@ -217,7 +216,7 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 						(this->*(handle_event))(wrapper->extraData.get());
 				}
 			}
-			else if(inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE)
+			else if (inputBatch.getDataAtIndex(i).status == KEYBOARD_BUTTON_RELEASE)
 			{
 				if (wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_DOWN || wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_UP ||
 					wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_LEFT || wrapper->action == Actions::Gameplay::GAMEPLAY_MOVE_RIGHT)
@@ -228,7 +227,7 @@ void Player::InputActionNotify(const InputEventBatch& inputBatch)
 		}
 
 		if (hasObjectMovedThisFrame)
-		{	
+		{
 			// At this point I know that the object has moved so I need to make 
 			// the necessary adjustments like using the new computed direction vector
 			vector::vector_3x::Normalization(newDirection, newDirection);

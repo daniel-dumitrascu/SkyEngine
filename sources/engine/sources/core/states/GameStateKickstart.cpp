@@ -6,7 +6,7 @@
 #include "shaders/ShaderLoader.h"
 #include "shaders/ShaderResources.h"
 #include "keys/ResourceKeyCollection.h"
-#include "../defines/ResourceDefines.h"
+#include "defines/ResourceDefines.h"
 #include "global/GlobalPaths.h"
 #include "global/GlobalData.h"
 #include "GameStateMainMenu.h"

@@ -91,46 +91,19 @@
   <ItemGroup>
     <ClCompile Include="sources\Game.cpp" />
     <ClCompile Include="sources\GameDefines.cpp" />
-    <ClCompile Include="sources\game_objects\Background.cpp" />
     <ClCompile Include="sources\game_objects\Bird.cpp" />
-    <ClCompile Include="sources\game_objects\GameObjectFactory.cpp" />
     <ClCompile Include="sources\game_objects\MovingObject.cpp" />
-    <ClCompile Include="sources\game_objects\Player.cpp" />
     <ClCompile Include="sources\game_objects\Soldier.cpp" />
-    <ClCompile Include="sources\game_objects\StaticObject.cpp" />
-    <ClCompile Include="sources\level\Level.cpp" />
     <ClCompile Include="sources\level\StressLevel.cpp" />
-    <ClCompile Include="sources\menu\MainMenu.cpp" />
-    <ClCompile Include="sources\splash\SplashScreen.cpp" />
-    <ClCompile Include="sources\states\GameStateManager.cpp" />
-    <ClCompile Include="sources\states\GameStateGameplay.cpp" />
-    <ClCompile Include="sources\states\GameStateKickstart.cpp" />
-    <ClCompile Include="sources\states\GameStateMainMenu.cpp" />
     <ClCompile Include="sources\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sources\defines\ResourceDefines.h" />
     <ClInclude Include="sources\Game.h" />
     <ClInclude Include="sources\GameDefines.h" />
-    <ClInclude Include="sources\game_objects\Background.h" />
     <ClInclude Include="sources\game_objects\Bird.h" />
-    <ClInclude Include="sources\game_objects\GameObjectDefines.h" />
-    <ClInclude Include="sources\game_objects\GameObjectFactory.h" />
     <ClInclude Include="sources\game_objects\MovingObject.h" />
-    <ClInclude Include="sources\game_objects\Player.h" />
     <ClInclude Include="sources\game_objects\Soldier.h" />
-    <ClInclude Include="sources\game_objects\StaticObject.h" />
-    <ClInclude Include="sources\level\Level.h" />
-    <ClInclude Include="sources\level\LevelDefines.h" />
     <ClInclude Include="sources\level\StressLevel.h" />
-    <ClInclude Include="sources\menu\MainMenu.h" />
-    <ClInclude Include="sources\splash\SplashScreen.h" />
-    <ClInclude Include="sources\states\GameBaseState.h" />
-    <ClInclude Include="sources\states\GameStateManager.h" />
-    <ClInclude Include="sources\states\GameStateGameplay.h" />
-    <ClInclude Include="sources\states\GameStateKickstart.h" />
-    <ClInclude Include="sources\states\GameStateMainMenu.h" />
-    <ClInclude Include="sources\states\StateID.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

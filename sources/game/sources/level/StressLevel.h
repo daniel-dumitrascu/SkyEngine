@@ -1,6 +1,7 @@
 #ifndef STRESS_LEVEL_GAME
 #define STRESS_LEVEL_GAME
 
+#if 0
 #include "geometry/baching/DrawScheme.h"
 
 #include "../game_objects/Player.h"
@@ -25,5 +26,6 @@ class StressLevel : public DrawScheme
 		int maxim = 10;
 		BirdObject**  bird;
 };
+#endif
 
 #endif

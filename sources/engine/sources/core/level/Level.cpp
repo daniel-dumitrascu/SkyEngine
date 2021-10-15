@@ -1,36 +1,17 @@
 #include "Level.h"
-#include "geometry/mesh/MeshLoader.h"
-#include "geometry/mesh/MeshResources.h"
-#include "texture/TextureLoader.h"
-#include "texture/TextureResources.h"
-#include "shaders/ShaderLoader.h"
-#include "shaders/ShaderResources.h"
-#include "animation/AnimDataResources.h"
-#include "animation/AnimDataLoader.h"
-#include "level/LevelLoader.h"
-#include "level/LevelData.h"
+#include "platform/input/InputManager.h"
+#include "global/GlobalData.h"
+#include "LevelLoader.h"
 #include "LevelDefines.h"
 #include "global/GlobalPaths.h"
-#include "video/Painter.h"
-#include "global/GlobalData.h"
-#include "../game_objects/GameObjectFactory.h"
 #include "utils/Physics2D.h"
-#include "../defines/ResourceDefines.h"
-#include "platform/input/InputManager.h"
-#include "input/InputHandleProfiles.h"
-#include "bindings/BindingsManager.h"
-
-#include <math.h>
-#include <array>
-
+#include "video/Painter.h"
+#include "actions/Actions.h"
+#include "entities/GameObjectFactory.h"
 
 #if(DEBUG_SECTION)
-#include "primitive/Line.h"
-#include "primitive/Rectangle.h"
 #include "primitive/GameRectangle.h"
-#include "primitive/GameLine.h"
 #endif
-
 
 Level* Level::GetInstance()
 {
@@ -59,10 +40,10 @@ void Level::CleanLevel()
 	// Remove all the entities from the level 
 	for (int index = 0; index < m_sceneObjects.Count(); ++index)
 	{
-		if(!m_sceneObjects.IsSlotFree(index))
+		if (!m_sceneObjects.IsSlotFree(index))
 			RemoveObject(index);
 	}
-		
+
 	// Deallocate the game rectangles
 #if(DEBUG_SECTION)
 	for (int i = 0; i < m_gridRect.size(); ++i)
@@ -89,7 +70,7 @@ void Level::ConstructLevel(LevelPackage* levelData)
 	int outRightIndex = 0;
 
 	InputManager* input_manager = InputManager::GetInstance();
-	
+
 	for (std::list<GameObjectPackage>::iterator ite = levelData->m_level_data.begin(); ite != levelData->m_level_data.end(); ++ite)
 	{
 		obj = GameObjectFactory::GetInstance()->CreateGameObject((*ite));
@@ -120,10 +101,10 @@ void Level::ConstructLevel(LevelPackage* levelData)
 			//TODO Test all the cases because there might be problems with the returned index. This is not always returned as it should
 			/*TODO ??? index = */m_sceneObjects.Occupy(obj);
 
-			if(obj->IsFlagON(OBJECT_IS_CONTROLLABLE))
-			{			
+			if (obj->IsFlagON(OBJECT_IS_CONTROLLABLE))
+			{
 				int subId = input_manager->AddSubscriber((Controllable*)obj);
-				if(subId == -1)
+				if (subId == -1)
 				{
 					std::cout << "[ERROR] Problem when addind an object as subscriber" << std::endl;
 					continue;
@@ -222,7 +203,7 @@ void Level::AddVisibleGridLines()
 
 void Level::RemoveVisibleGridLines()
 {
-	for (int i=0; i < m_gridLinesIds.size(); ++i)
+	for (int i = 0; i < m_gridLinesIds.size(); ++i)
 	{
 		delete m_sceneObjects.Free(m_gridLinesIds[i]);
 	}
@@ -256,7 +237,7 @@ void Level::Init()
 	ConstructGameGrid();
 
 #if(DEBUG_SECTION)
-	if(isGridDrawingEnabled)
+	if (isGridDrawingEnabled)
 		AddVisibleGridLines();
 #endif
 
@@ -281,9 +262,9 @@ void Level::Update()
 
 	for (int index = 0; index < m_sceneObjects.Count(); ++index)
 	{
-		if(!m_sceneObjects.IsSlotFree(index))
+		if (!m_sceneObjects.IsSlotFree(index))
 		{
-			if(!m_sceneObjects.Retrive(index)->IsAlive())
+			if (!m_sceneObjects.Retrive(index)->IsAlive())
 			{
 				RemoveObject(index);
 				continue;
@@ -306,7 +287,7 @@ void Level::Update()
 						{
 							((GameRectangle*)(m_gridRect[i][j].first))->SetColor(green);
 						}
-				}		
+				}
 #endif
 
 				// Get the rectangle of the game object and calculate the occupied area in the grid
@@ -441,7 +422,7 @@ void Level::Draw()
 	Painter::ClearScreen();
 
 #if(DEBUG_SECTION)
-	if(isColorTileRenderEnabled)
+	if (isColorTileRenderEnabled)
 		RenderTileDebugColor();
 #endif
 
@@ -459,19 +440,19 @@ void Level::Draw()
 void Level::InputActionNotify(const InputEventBatch& inputBatch)
 {
 	int const batchSize = inputBatch.getDataBatchSize();
-	if(batchSize > 0)
+	if (batchSize > 0)
 	{
-		for(int i=0; i < batchSize; ++i)
+		for (int i = 0; i < batchSize; ++i)
 		{
 			const DataBindingWrapper* wrapper = inputToActionBindings->GetBinding(inputBatch.getDataAtIndex(i));
-			if(wrapper == nullptr)
+			if (wrapper == nullptr)
 				continue;
 
 			if (wrapper->action == Actions::Game::GAME_EXIT)
 			{
 				exit(0); //TODO here should be a new state for closing
 				break;
-			} 
+			}
 #if(DEBUG_SECTION)
 			else if (wrapper->action == Actions::Debug::DEBUG_GRID_DRAW)
 			{
@@ -495,7 +476,7 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 					if (!m_sceneObjects.IsSlotFree(index))
 					{
 						GameObject* obj = m_sceneObjects.Retrive(index);
-						if(obj->IsAlive() && obj->IsFlagON(OBJECT_IS_RENDERABLE))
+						if (obj->IsAlive() && obj->IsFlagON(OBJECT_IS_RENDERABLE))
 							obj->SetOutline(isOutlineEnabled);
 					}
 				}

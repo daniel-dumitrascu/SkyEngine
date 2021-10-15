@@ -87,7 +87,13 @@
     <ClInclude Include="sources\core\animation\player\AnimPlayer.h" />
     <ClInclude Include="sources\core\bindings\BindingCollection.h" />
     <ClInclude Include="sources\core\bindings\BindingsManager.h" />
-    <ClInclude Include="sources\core\game_object\GameObject.h" />
+    <ClInclude Include="sources\core\defines\ResourceDefines.h" />
+    <ClInclude Include="sources\core\entities\Background.h" />
+    <ClInclude Include="sources\core\entities\GameObject.h" />
+    <ClInclude Include="sources\core\entities\GameObjectDefines.h" />
+    <ClInclude Include="sources\core\entities\GameObjectFactory.h" />
+    <ClInclude Include="sources\core\entities\Player.h" />
+    <ClInclude Include="sources\core\entities\StaticObject.h" />
     <ClInclude Include="sources\core\geometry\baching\DrawScheme.h" />
     <ClInclude Include="sources\core\geometry\mesh\WireFrame.h" />
     <ClInclude Include="sources\core\geometry\mesh\parser\FileMesh.h" />
@@ -99,7 +105,9 @@
     <ClInclude Include="sources\core\input\Controllable.h" />
     <ClInclude Include="sources\core\input\InputHandleProfiles.h" />
     <ClInclude Include="sources\core\keys\ResourceKeyCollection.h" />
+    <ClInclude Include="sources\core\level\Level.h" />
     <ClInclude Include="sources\core\level\LevelData.h" />
+    <ClInclude Include="sources\core\level\LevelDefines.h" />
     <ClInclude Include="sources\core\level\LevelLoader.h" />
     <ClInclude Include="sources\core\level\parser\FileLevel.h" />
     <ClInclude Include="sources\core\level\Tile.h" />
@@ -110,6 +118,7 @@
     <ClInclude Include="sources\core\math\Matrix.h" />
     <ClInclude Include="sources\core\math\Plane.h" />
     <ClInclude Include="sources\core\math\Vector.h" />
+    <ClInclude Include="sources\core\menu\MainMenu.h" />
     <ClInclude Include="sources\core\platform\input\Device.h" />
     <ClInclude Include="sources\core\platform\input\DeviceDefinitions.h" />
     <ClInclude Include="sources\core\platform\input\InputEvent.h" />
@@ -130,6 +139,13 @@
     <ClInclude Include="sources\core\shaders\ShaderDefines.h" />
     <ClInclude Include="sources\core\shaders\ShaderLoader.h" />
     <ClInclude Include="sources\core\shaders\ShaderResources.h" />
+    <ClInclude Include="sources\core\splash\SplashScreen.h" />
+    <ClInclude Include="sources\core\states\GameBaseState.h" />
+    <ClInclude Include="sources\core\states\GameStateGameplay.h" />
+    <ClInclude Include="sources\core\states\GameStateKickstart.h" />
+    <ClInclude Include="sources\core\states\GameStateMainMenu.h" />
+    <ClInclude Include="sources\core\states\GameStateManager.h" />
+    <ClInclude Include="sources\core\states\StateID.h" />
     <ClInclude Include="sources\core\stream\IClearFile.h" />
     <ClInclude Include="sources\core\stream\Stream.h" />
     <ClInclude Include="sources\core\stream\OClearFile.h" />
@@ -164,7 +180,11 @@
     <ClCompile Include="sources\core\animation\player\AnimPlayer.cpp" />
     <ClCompile Include="sources\core\bindings\BindingCollection.cpp" />
     <ClCompile Include="sources\core\bindings\BindingsManager.cpp" />
-    <ClCompile Include="sources\core\game_object\GameObject.cpp" />
+    <ClCompile Include="sources\core\entities\Background.cpp" />
+    <ClCompile Include="sources\core\entities\GameObject.cpp" />
+    <ClCompile Include="sources\core\entities\GameObjectFactory.cpp" />
+    <ClCompile Include="sources\core\entities\Player.cpp" />
+    <ClCompile Include="sources\core\entities\StaticObject.cpp" />
     <ClCompile Include="sources\core\geometry\baching\DrawScheme.cpp" />
     <ClCompile Include="sources\core\geometry\mesh\MeshLoader.cpp" />
     <ClCompile Include="sources\core\geometry\mesh\MeshResources.cpp" />
@@ -173,6 +193,7 @@
     <ClCompile Include="sources\core\global\GlobalData.cpp" />
     <ClCompile Include="sources\core\global\GlobalPaths.cpp" />
     <ClCompile Include="sources\core\keys\ResourceKeyCollection.cpp" />
+    <ClCompile Include="sources\core\level\Level.cpp" />
     <ClCompile Include="sources\core\level\LevelLoader.cpp" />
     <ClCompile Include="sources\core\level\parser\FileLevel.cpp" />
     <ClCompile Include="sources\core\level\Tile.cpp" />
@@ -182,6 +203,7 @@
     <ClCompile Include="sources\core\math\Matrix.cpp" />
     <ClCompile Include="sources\core\math\Plane.cpp" />
     <ClCompile Include="sources\core\math\Vector.cpp" />
+    <ClCompile Include="sources\core\menu\MainMenu.cpp" />
     <ClCompile Include="sources\core\platform\input\InputEventBatch.cpp" />
     <ClCompile Include="sources\core\platform\input\InputManager.cpp" />
     <ClCompile Include="sources\core\platform\input\PlatformInput.cpp" />
@@ -196,6 +218,11 @@
     <ClCompile Include="sources\core\shaders\language\OpenGL2File.cpp" />
     <ClCompile Include="sources\core\shaders\ShaderLoader.cpp" />
     <ClCompile Include="sources\core\shaders\ShaderResources.cpp" />
+    <ClCompile Include="sources\core\splash\SplashScreen.cpp" />
+    <ClCompile Include="sources\core\states\GameStateGameplay.cpp" />
+    <ClCompile Include="sources\core\states\GameStateKickstart.cpp" />
+    <ClCompile Include="sources\core\states\GameStateMainMenu.cpp" />
+    <ClCompile Include="sources\core\states\GameStateManager.cpp" />
     <ClCompile Include="sources\core\stream\IClearFile.cpp" />
     <ClCompile Include="sources\core\stream\OClearFile.cpp" />
     <ClCompile Include="sources\core\stream\Stream.cpp" />
