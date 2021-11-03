@@ -8,6 +8,7 @@
 #include "../global/GlobalData.h"
 #include "math/Geometry.h"
 #include "utils/UniqueGenerator.h"
+#include "level/Level.h"
 
 
 GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const std::string& id) :
@@ -52,8 +53,9 @@ std::unique_ptr<GameObject> GameRectangle::Clone()
 
 void GameRectangle::Init()
 {
-	// Construct a world-projection matrix 
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	// Construct a world-view-projection matrix 
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 	// Select the key for the right shader
 	ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
@@ -101,8 +103,9 @@ void GameRectangle::Update()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 }
 
 void GameRectangle::SetColor(const vec_4x& color)

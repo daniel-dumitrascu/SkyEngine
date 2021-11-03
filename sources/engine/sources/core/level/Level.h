@@ -4,6 +4,9 @@
 #include "level/LevelData.h"
 #include "level/Tile.h"
 #include "utils/FastAccessCollection.h"
+#include "camera/Camera.h"
+#include <unordered_map>
+#include <map>
 
 class Level: public Controllable
 {
@@ -16,6 +19,8 @@ public:
 	void Draw();
 
 	void InputActionNotify(const InputEventBatch& inputBatch);
+	
+	Camera* GetActiveCamera() { return activeLevelCamera; }
 
 private:
 
@@ -28,8 +33,7 @@ private:
 	void ConstructGameGrid();
 	Tile* GetTileAtIndex(unsigned int x, unsigned int y);
 	void ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex);
-	Tile* GetGridTile(int x, int y);
-	void RemoveObject(int index);
+	bool IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex, const float outBottomIndex, const float outRightIndex);
 #if(DEBUG_SECTION)
 	GameObject* GetGridRectObject(int x, int y);
 
@@ -47,8 +51,10 @@ private:
 
 	// Level has ownership over the objects so the objects
 	// will be deleted by the the Level
-	FastAccessCollection <GameObject*> m_sceneObjects;
+	std::map<std::string, GameObject*> sceneObjects;
 	std::vector<std::vector<Tile*>> m_gameWorldGrid;
+	Camera* activeLevelCamera; //TODO foloseste unique_ptr
+	std::unordered_map<std::string, Camera*> availableCameras;
 
 #if(DEBUG_SECTION)	
 	// This creates a grid of GameRectangles.
@@ -56,7 +62,7 @@ private:
 	std::vector<std::vector<std::pair<GameObject*, bool>>> m_gridRect;
 
 	// This vector stored the ids of the lines used to draw the game grid
-	std::vector<int> m_gridLinesIds;
+	std::vector<std::string> m_gridLinesIds;
 	bool isGridDrawingEnabled = true;
 	bool isColorTileRenderEnabled = true;
 	bool isOutlineEnabled = true;

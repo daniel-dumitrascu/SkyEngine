@@ -3,6 +3,7 @@
 #include "utils/UniqueGenerator.h"
 #include "global/GlobalData.h"
 #include "texture/Texture.h"
+#include "level/Level.h"
 
 //TODO - circular inclusion - think of a better solution here
 #if(DEBUG_SECTION)
@@ -32,12 +33,12 @@ StaticObject::~StaticObject()
 std::unique_ptr<GameObject> StaticObject::Clone()
 {
 	return std::make_unique<StaticObject>(m_wireframe,
-		m_texture,
-		m_shader,
-		GetPosition().elem[0],
-		GetPosition().elem[1],
-		m_scaling,
-		UniqueGenerator::Instance().GenerateUniqueID());
+											m_texture,
+											m_shader,
+											GetPosition().elem[0],
+											GetPosition().elem[1],
+											m_scaling,
+											UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void StaticObject::Init()
@@ -47,8 +48,9 @@ void StaticObject::Init()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 #if(DEBUG_SECTION)
 	vec_4x lineColor;
@@ -132,8 +134,9 @@ void StaticObject::Update()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 #if(DEBUG_SECTION)
 	if (isOutlineEnabled)

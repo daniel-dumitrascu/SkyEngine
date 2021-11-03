@@ -37,12 +37,26 @@ Level::~Level()
 
 void Level::CleanLevel()
 {
-	// Remove all the entities from the level 
-	for (int index = 0; index < m_sceneObjects.Count(); ++index)
+	// Remove all the cameras from the level
+	std::unordered_map<std::string, Camera*>::iterator ite = availableCameras.begin();
+	while (ite != availableCameras.end())
 	{
-		if (!m_sceneObjects.IsSlotFree(index))
-			RemoveObject(index);
+		// We have ownership on the cameras so we can safetly delete them here
+		delete ite->second;
+		ite++;
 	}
+
+	availableCameras.clear();
+	activeLevelCamera = nullptr;
+
+	// Remove all the entities from the level 
+	for (auto& mapEntry : sceneObjects)
+	{
+		delete mapEntry.second;
+		mapEntry.second = nullptr;
+	}
+
+	sceneObjects.clear();
 
 	// Deallocate the game rectangles
 #if(DEBUG_SECTION)
@@ -57,8 +71,8 @@ void Level::CleanLevel()
 			delete m_gameWorldGrid[i][j];
 
 
-	/* Reset score and other settings */
-	//TODO to do
+	// Reset score and other settings
+	//TODO to implement
 }
 
 void Level::ConstructLevel(LevelPackage* levelData)
@@ -70,36 +84,35 @@ void Level::ConstructLevel(LevelPackage* levelData)
 	int outRightIndex = 0;
 
 	InputManager* input_manager = InputManager::GetInstance();
-
-	for (std::list<GameObjectPackage>::iterator ite = levelData->m_level_data.begin(); ite != levelData->m_level_data.end(); ++ite)
+	
+	// Create the scene cameras
+	for (std::list<CameraPackage>::iterator cameraIte = levelData->m_level_cameras.begin(); cameraIte != levelData->m_level_cameras.end(); ++cameraIte)
 	{
-		obj = GameObjectFactory::GetInstance()->CreateGameObject((*ite));
+		Camera* camera = GameObjectFactory::GetInstance()->CreateCamera((*cameraIte));
+		availableCameras.insert(std::make_pair(cameraIte->camera_id, camera));
+	}
+
+	std::unordered_map<std::string, Camera*>::iterator ite = availableCameras.find(levelData->m_active_camera_id);
+	if (ite != availableCameras.end())
+		activeLevelCamera = ite->second;
+	else
+	{
+		log.message("Selected camera is not available, application will terminate", Logging::MSG_ERROR);
+		exit(0);	//TODO think of another way of handling a missing "selected camera" block from the scene file 
+	}
+	
+	// Create scene objects
+	for (std::list<GameObjectPackage>::iterator objectIte = levelData->m_level_data.begin(); objectIte != levelData->m_level_data.end(); ++objectIte)
+	{
+		obj = GameObjectFactory::GetInstance()->CreateGameObject((*objectIte));
 		if (obj)
 		{
-			// Calculation  of the object in tile map
-			Rectangle objRect = obj->GetObjectWorldRect();
-			ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
-			obj->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+			if (obj->GetID().compare(levelData->m_active_camera_attached_object) == 0)
+			{
+				activeLevelCamera->AttachCameraToObject(obj);
+			}
 
-			// Add the object in every tile with which it intersects
-			for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
-				for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
-				{
-					Tile* newTile = GetGridTile(xAxisIndex, yAxisIndex);
-					newTile->AddCollidingObject(obj);
-#if(DEBUG_SECTION)
-					// Activate the visibility on the new area
-					SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
-					GetGridRectObject(xAxisIndex, yAxisIndex)->Update();
-#endif
-				}
-
-			//TODO for a quick access of the game object in the main storage collection, I need to store in it (in the object)
-			//the index returned from "Add" method. 
-			//Otherwise, it will be very difficult to delete it. So, the index will also be stored in the object.
-			//It's the best way, ensuring us a speed in accessing and deleting.
-			//TODO Test all the cases because there might be problems with the returned index. This is not always returned as it should
-			/*TODO ??? index = */m_sceneObjects.Occupy(obj);
+			sceneObjects.insert(std::pair<std::string, GameObject*>(obj->GetID(), obj));
 
 			if (obj->IsFlagON(OBJECT_IS_CONTROLLABLE))
 			{
@@ -117,6 +130,34 @@ void Level::ConstructLevel(LevelPackage* levelData)
 		{
 			log.message("Can't construct level, not enough resources.", Logging::MSG_ERROR);
 		}
+	}
+
+	ConstructGameGrid();
+
+#if(DEBUG_SECTION)
+	if (isGridDrawingEnabled)
+		AddVisibleGridLines();
+#endif
+
+	for (auto& mapEntry : sceneObjects)
+	{
+		// Calculation  of the object in tile map
+		Rectangle objRect = mapEntry.second->GetObjectWorldRect();
+		ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+		mapEntry.second->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+
+		// Add the object in every tile with which it intersects
+		for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
+			for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
+			{
+				Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
+				newTile->AddCollidingObject(mapEntry.second);
+#if(DEBUG_SECTION)
+				// Activate the visibility on the new area
+				SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
+				GetGridRectObject(xAxisIndex, yAxisIndex)->Update();
+#endif
+			}
 	}
 }
 
@@ -151,7 +192,7 @@ void Level::ConstructGameGrid()
 		// Iterate in the new allocated row and create new tiles
 		for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 		{
-			m_gameWorldGrid[i][j] = new Tile(i, j, genericRect);
+			m_gameWorldGrid[i][j] = new Tile(i, j, genericRect);   //TODO - does a Tile need a Rect?
 
 			// After we have constructed the game grid we must create GameRect objects 
 			// for each time so that we can use them in the debug mode of the app
@@ -177,29 +218,25 @@ void Level::AddVisibleGridLines()
 	GameObject* gameLine = nullptr;
 
 	// Horizontal lines
-	for (int gridHeightIndex = 0; gridHeightIndex < m_gridRect.size(); ++gridHeightIndex)
+	for (int gridHeightIndex = 0; gridHeightIndex < WORLD_GRID_HEIGHT_COUNT; ++gridHeightIndex)
 	{
-		const Rectangle firstRect = m_gridRect[gridHeightIndex][0].first->GetObjectWorldRect();
-		const Rectangle lastRect = m_gridRect[gridHeightIndex][m_gridRect[gridHeightIndex].size() - 1].first->GetObjectWorldRect();
-
-		vector::vector_2x::SetVector(startPoint, firstRect.GetLeft(), firstRect.GetTop());
-		vector::vector_2x::SetVector(endPoint, lastRect.GetRight(), lastRect.GetTop());
+		vector::vector_2x::SetVector(startPoint, 0.0f, WORLD_TILE_HEIGHT * gridHeightIndex);
+		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * WORLD_GRID_WIDTH_COUNT, WORLD_TILE_HEIGHT * gridHeightIndex);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
-		m_gridLinesIds.push_back(m_sceneObjects.Occupy(gameLine));
+		sceneObjects.insert(std::pair<std::string, GameObject*>(gameLine->GetID(), gameLine));
+		m_gridLinesIds.push_back(gameLine->GetID());
 	}
 
 	// Vertical lines
-	for (int gridWidthIndex = 0; gridWidthIndex < m_gridRect[0].size(); ++gridWidthIndex)
+	for (int gridWidthIndex = 0; gridWidthIndex < WORLD_GRID_WIDTH_COUNT; ++gridWidthIndex)
 	{
-		const Rectangle firstRect = m_gridRect[0][gridWidthIndex].first->GetObjectWorldRect();
-		const Rectangle lastRect = m_gridRect[m_gridRect.size() - 1][gridWidthIndex].first->GetObjectWorldRect();
-
-		vector::vector_2x::SetVector(startPoint, firstRect.GetLeft(), firstRect.GetBottom());
-		vector::vector_2x::SetVector(endPoint, lastRect.GetLeft(), lastRect.GetTop());
+		vector::vector_2x::SetVector(startPoint, WORLD_TILE_WIDTH * gridWidthIndex, 0.0f);
+		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * gridWidthIndex, WORLD_TILE_HEIGHT * WORLD_GRID_HEIGHT_COUNT);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
-		m_gridLinesIds.push_back(m_sceneObjects.Occupy(gameLine));
+		sceneObjects.insert(std::pair<std::string, GameObject*>(gameLine->GetID(), gameLine));
+		m_gridLinesIds.push_back(gameLine->GetID());
 	}
 }
 
@@ -207,7 +244,12 @@ void Level::RemoveVisibleGridLines()
 {
 	for (int i = 0; i < m_gridLinesIds.size(); ++i)
 	{
-		delete m_sceneObjects.Free(m_gridLinesIds[i]);
+		auto ite = sceneObjects.find(m_gridLinesIds[i]);
+		if (ite != sceneObjects.end())
+		{
+			delete ite->second;
+			sceneObjects.erase(ite);
+		}
 	}
 
 	m_gridLinesIds.clear();
@@ -236,13 +278,6 @@ void Level::Init()
 	// the level with the new data 
 	CleanLevel();
 
-	ConstructGameGrid();
-
-#if(DEBUG_SECTION)
-	if (isGridDrawingEnabled)
-		AddVisibleGridLines();
-#endif
-
 	// Load the level data
 	LevelPackage* levelData = (LevelPackage*)LevelLoader::GetInstance()->Load(levels_path + LEVEL_1);
 
@@ -259,51 +294,52 @@ void Level::Update()
 	int outBottomIndex = 0;
 	int outRightIndex = 0;
 	bool isAlreadyReset = false;
+	bool isMovementInCurrUpdate = false;
 
-	GameObject* currObject = nullptr;
-
-	for (int index = 0; index < m_sceneObjects.Count(); ++index)
-	{
-		if (!m_sceneObjects.IsSlotFree(index))
-		{
-			if (!m_sceneObjects.Retrive(index)->IsAlive())
-			{
-				RemoveObject(index);
-				continue;
-			}
-
-			currObject = m_sceneObjects.Retrive(index);
-			currObject->Update();
-
-			if (currObject->IsFlagON(OBJECT_IS_MOVING))
-			{
 #if(DEBUG_SECTION)
-				if (!isAlreadyReset)
-				{
-					// Reset the color on all tile objects to green
-					isAlreadyReset = true;
-					vec_4x green;
-					vector::vector_4x::SetVector(green, 0.0f, 1.0f, 0.0f, 1.0f);
-					for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
-						for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
-						{
-							((GameRectangle*)(m_gridRect[i][j].first))->SetColor(green);
-						}
-				}
+	vec_4x green;
+	vector::vector_4x::SetVector(green, 0.0f, 1.0f, 0.0f, 1.0f);
 #endif
 
-				// Get the rectangle of the game object and calculate the occupied area in the grid
-				Rectangle objRect = currObject->GetObjectWorldRect();
-				ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+	for (std::map<std::string, GameObject*>::iterator sceneIte = sceneObjects.begin(); 
+		sceneIte != sceneObjects.end();
+		++sceneIte)
+	{
+		if (!sceneIte->second->IsAlive())
+		{
+			sceneIte = sceneObjects.erase(sceneIte);
+			continue;
+		}
 
-				// Get the old area values and remove the object pointer from each tile
-				std::array<int, 4> oldGridMapping = currObject->GetOccupiedGriDArea();
+		sceneIte->second->Update();
+		if (sceneIte->second->IsFlagON(OBJECT_IS_MOVING))
+		{
+			isMovementInCurrUpdate = true;
+#if(DEBUG_SECTION)
+			//TODO - oare acest cod poate fi executat in afara for-ului?
+			if (!isAlreadyReset)
+			{
+				// Reset the color on all tile objects to green
+				isAlreadyReset = true;
+				for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
+					for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
+					{
+						((GameRectangle*)(m_gridRect[i][j].first))->SetColor(green);
+					}
+			}
+#endif
+			// Get the old area values and remove the object pointer from each tile
+			std::array<int, 4> oldGridMapping = sceneIte->second->GetOccupiedGriDArea();
 
+			// Check if the old occupied grid area is not out of bounce
+			if (!IsAreaOutOfBounce(oldGridMapping[0], oldGridMapping[1], oldGridMapping[2], oldGridMapping[3]))
+			{
 				for (int yAxisIndex = oldGridMapping[0]; yAxisIndex >= oldGridMapping[2]; yAxisIndex--)
 					for (int xAxisIndex = oldGridMapping[1]; xAxisIndex <= oldGridMapping[3]; xAxisIndex++)
 					{
-						Tile* oldTile = GetGridTile(xAxisIndex, yAxisIndex);
-						std::string label = currObject->GetID();
+						Tile* oldTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
+
+						std::string label = sceneIte->second->GetID();
 						oldTile->RemoveCollidingObject(label); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
 #if(DEBUG_SECTION)
 						if (!oldTile->HasCollidingObjects())
@@ -313,108 +349,124 @@ void Level::Update()
 						}
 #endif
 					}
+			} 
 
-				// Remove the old colliding neighbours
-				currObject->ClearCollidingNeighbours();
+			// Remove the old colliding neighbours
+			sceneIte->second->ClearCollidingNeighbours();
 
+			// Get the rectangle of the game object and calculate the occupied area in the grid
+			Rectangle objRect = sceneIte->second->GetObjectWorldRect();
+			ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+
+			// Check if the new occupied grid area is not out of bounce
+			if (!IsAreaOutOfBounce(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex))
+			{
 				// Add the game object pointer to the new tiles and construct new colliding neighbours
-				currObject->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+				sceneIte->second->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
 
 				for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
 					for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 					{
-						Tile* newTile = GetGridTile(xAxisIndex, yAxisIndex);
-
+						Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
 						const std::map<std::string, GameObject*> collidingObj = newTile->GetCollidingObjects();
 						std::map<std::string, GameObject*>::const_iterator ite = collidingObj.begin();
 						for (; ite != collidingObj.end(); ite++)
 						{
-							currObject->AddCollidingNeighbour(ite->second);
-							ite->second->AddCollidingNeighbour(currObject);
+							sceneIte->second->AddCollidingNeighbour(ite->second);
+							ite->second->AddCollidingNeighbour(sceneIte->second);
 						}
 
-						newTile->AddCollidingObject(currObject);
+						newTile->AddCollidingObject(sceneIte->second);
 #if(DEBUG_SECTION)
 						// Activate the visibility on the new area
 						SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
-						GetGridRectObject(xAxisIndex, yAxisIndex)->Update();
 #endif
 					}
-
-				// Check if object is colliding with other objects from scene
-				const std::map<const std::string, GameObject*> collidingNeighbours = currObject->GetCollidingNeighbours();
-				std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
-				for (; ite != collidingNeighbours.end(); ite++)
-				{
-					//TODO we should use a general collision detection here that implements something like CollisionDetectionAABB
-					//TODO dependency injection
-					bool isColliding = Physics2D::CollisionDetectionAABB(objRect, ite->second->GetObjectWorldRect());
-					if (isColliding)
-					{
-#if(DEBUG_SECTION)
-						// Color in red the tiles occupied by the objects that are colliding 
-						vec_4x color;
-						vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
-
-						std::array<int, 4> objectAGridMapping = currObject->GetOccupiedGriDArea();
-						std::array<int, 4> objectBGridMapping = ite->second->GetOccupiedGriDArea();
-
-						for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
-							for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
-							{
-								((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
-							}
-
-						for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
-							for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
-							{
-								((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
-							}
-
-						//std::cout << "Coliziune intre <" << currObject->GetLabel().GetStrLabel() << "> si <" << ite->second->GetLabel().GetStrLabel() << ">" << std::endl;
-#endif
-					}
-				}
 			}
-			// This is necessary so that we don't "forget" about the objects that are in collision
-			// but they haven't moved this frame. This is just for the debug red coloring that is being lost
-			// when collision objects aren't moved in future frames.
-			// Here, we just recolor them in red
-#if(DEBUG_SECTION)
-			else
+
+			// Check if object is colliding with other objects from scene
+			const std::map<const std::string, GameObject*> collidingNeighbours = sceneIte->second->GetCollidingNeighbours();
+			std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
+			for (; ite != collidingNeighbours.end(); ite++)
 			{
-				// Check if object is colliding with other objects from scene
-				const std::map<const std::string, GameObject*> collidingNeighbours = currObject->GetCollidingNeighbours();
-				std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
-				for (; ite != collidingNeighbours.end(); ite++)
+				//TODO we should use a general collision detection here that implements something like CollisionDetectionAABB
+				//TODO dependency injection
+				bool isColliding = Physics2D::CollisionDetectionAABB(objRect, ite->second->GetObjectWorldRect());
+				if (isColliding)
 				{
-					Rectangle objRect = currObject->GetObjectWorldRect();
-					bool isColliding = Physics2D::CollisionDetectionAABB(objRect, ite->second->GetObjectWorldRect());
-					if (isColliding)
-					{
-						// Color in red the tiles occupied by the objects that are colliding 
-						vec_4x color;
-						vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
+#if(DEBUG_SECTION)
+					// Color in red the tiles occupied by the objects that are colliding 
+					vec_4x color;
+					vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
 
-						std::array<int, 4> objectAGridMapping = currObject->GetOccupiedGriDArea();
-						std::array<int, 4> objectBGridMapping = ite->second->GetOccupiedGriDArea();
+ 					std::array<int, 4> objectAGridMapping = sceneIte->second->GetOccupiedGriDArea();
+					std::array<int, 4> objectBGridMapping = ite->second->GetOccupiedGriDArea();
 
-						for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
-							for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
-							{
-								((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
-							}
+					for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
+						for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
+						{
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+						}
 
-						for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
-							for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
-							{
-								((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
-							}
-					}
+					for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
+						for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
+						{
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+						}
+
+						std::cout << "Collision between <" << sceneIte->second->GetID() << "> and <" << ite->second->GetID() << ">" << std::endl;
+#endif
 				}
 			}
-#endif
 		}
+		// This is necessary so that we don't "forget" about the objects that are in collision
+		// but they haven't moved this frame. This is just for the debug red coloring that is being lost
+		// when collision objects aren't moved in future frames.
+		// Here, we just recolor them in red
+#if(DEBUG_SECTION)
+		else
+		{
+			// Check if object is colliding with other objects from scene
+			const std::map<const std::string, GameObject*> collidingNeighbours = sceneIte->second->GetCollidingNeighbours();
+			std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
+			for (; ite != collidingNeighbours.end(); ite++)
+			{
+				Rectangle objRect = sceneIte->second->GetObjectWorldRect();
+				bool isColliding = Physics2D::CollisionDetectionAABB(objRect, ite->second->GetObjectWorldRect());
+				if (isColliding)
+				{
+					// Color in red the tiles occupied by the objects that are colliding
+					vec_4x color;
+					vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
+
+					std::array<int, 4> objectAGridMapping = sceneIte->second->GetOccupiedGriDArea();
+					std::array<int, 4> objectBGridMapping = ite->second->GetOccupiedGriDArea();
+
+					for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
+						for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
+						{
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+						}
+
+					for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
+						for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
+						{
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+						}
+				}
+			}
+		}
+#endif
+	}
+
+	if (isMovementInCurrUpdate)
+	{
+		// Update the debug grid when movement has been detected in the current update frame
+		for (int i = 0; i < m_gridRect.size(); ++i)
+			for (int j = 0; j < m_gridRect[i].size(); ++j)
+			{
+				m_gridRect[i][j].first->Update();
+			}
 	}
 }
 
@@ -424,18 +476,15 @@ void Level::Draw()
 	Painter::ClearScreen();
 
 #if(DEBUG_SECTION)
-	if (isColorTileRenderEnabled)
+	if(isColorTileRenderEnabled)
 		RenderTileDebugColor();
 #endif
 
 	// Draw all the level entities
-	for (int index = 0; index < m_sceneObjects.Count(); ++index)
+	for (const auto& sceneEntry : sceneObjects)
 	{
-		if (!m_sceneObjects.IsSlotFree(index))
-		{
-			m_sceneObjects.Retrive(index)->PreDraw();
-			m_sceneObjects.Retrive(index)->Draw();
-		}
+		sceneEntry.second->PreDraw();
+		sceneEntry.second->Draw();
 	}
 }
 
@@ -473,14 +522,10 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 				isOutlineEnabled = !isOutlineEnabled;
 
 				// All the renderable objects in the scene must get the new value
-				for (int index = 0; index < m_sceneObjects.Count(); ++index)
+				for (auto sceneObj : sceneObjects)
 				{
-					if (!m_sceneObjects.IsSlotFree(index))
-					{
-						GameObject* obj = m_sceneObjects.Retrive(index);
-						if (obj->IsAlive() && obj->IsFlagON(OBJECT_IS_RENDERABLE))
-							obj->SetOutline(isOutlineEnabled);
-					}
+					if (sceneObj.second->IsAlive() && sceneObj.second->IsFlagON(OBJECT_IS_RENDERABLE))
+						sceneObj.second->SetOutline(isOutlineEnabled);
 				}
 			}
 #endif
@@ -518,25 +563,12 @@ void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopI
 		--outRightIndex;
 }
 
-Tile* Level::GetGridTile(int x, int y)
+bool Level::IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex, const float outBottomIndex, const float outRightIndex)
 {
-	// y - row
-	// x - column
-
-	if (y >= m_gameWorldGrid.size())
-		return nullptr;
-
-	if (x >= m_gameWorldGrid[y].size())
-		return nullptr;
-
-	return m_gameWorldGrid[y][x];
-}
-
-void Level::RemoveObject(int index)
-{
-	GameObject* todelGameObject = m_sceneObjects.Retrive(index);
-	delete todelGameObject;
-	m_sceneObjects.Free(index);
+	return (outTopIndex < 0 || outTopIndex >= WORLD_GRID_HEIGHT_COUNT) ||
+		   (outBottomIndex < 0 || outBottomIndex >= WORLD_GRID_HEIGHT_COUNT) ||
+		   (outLeftIndex < 0 || outLeftIndex >= WORLD_GRID_WIDTH_COUNT) ||
+		   (outRightIndex < 0 || outRightIndex >= WORLD_GRID_WIDTH_COUNT);
 }
 
 #if(DEBUG_SECTION)

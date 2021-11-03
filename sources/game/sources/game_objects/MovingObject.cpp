@@ -71,7 +71,7 @@ void MovingObject::Update()
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
 	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	matrix::game_matrix::BuildWorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
 }
 
 void MovingObject::Init()
@@ -82,5 +82,5 @@ void MovingObject::Init()
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
 	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	matrix::game_matrix::BuildWorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
 }

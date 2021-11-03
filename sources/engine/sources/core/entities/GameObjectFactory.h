@@ -2,6 +2,7 @@
 
 #include "entities/GameObject.h"
 #include "animation/AnimData.h"
+#include "camera/Camera.h"
 
 class GameObjectFactory
 {
@@ -13,6 +14,7 @@ public:
 	 * This is going to be used when parsing a level data file
 	 */
 	GameObject* CreateGameObject(GameObjectPackage& packer);
+	Camera* CreateCamera(const CameraPackage& cameraPack);
 
 	/*
 	 * These methods are used when creating individual game objects

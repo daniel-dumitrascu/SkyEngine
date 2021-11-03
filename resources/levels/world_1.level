@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Level>
+	<Cameras>
+		<Camera id="1">
+			<Position x="500" y="500" />
+			<Rotation x="0" y="0" />
+		</Camera>
+	</Cameras>
+	<SelectedActiveCamera CameraID="1" AttachedObject="1"/>
 	<GameObject id="1">
 		<Composition Type="1" ResourceMeshID="2" ResourceTextureID="1" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>

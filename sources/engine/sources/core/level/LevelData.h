@@ -48,9 +48,29 @@ struct GameObjectPackage
 	vec_4x m_color;
 };
 
+struct CameraPackage {
+
+	CameraPackage() : camera_id("")
+	{
+		vector::vector_3x::SetVector(position, 0.0f, 0.0f, 0.0f);
+		vector::vector_3x::SetVector(rotation, 0.0f, 0.0f, 0.0f);
+	}
+	
+	std::string camera_id;
+	vec_3x position;
+	vec_3x rotation;
+};
+
 struct LevelPackage
 {
+	LevelPackage() : m_active_camera_id(""),
+					 m_active_camera_attached_object("")
+	{}
+
+	std::string m_active_camera_id;
+	std::string m_active_camera_attached_object;
 	std::list<GameObjectPackage> m_level_data;
+	std::list<CameraPackage> m_level_cameras;
 };
 
 #endif

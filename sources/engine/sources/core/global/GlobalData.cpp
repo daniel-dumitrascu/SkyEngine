@@ -19,7 +19,7 @@ const int WINDOWS_SCREEN_MULTIPLIER = 100;
 
 // Game world details
 const int WORLD_GRID_WIDTH_COUNT = 16;
-const int WORLD_GRID_HEIGHT_COUNT = 9;
+const int WORLD_GRID_HEIGHT_COUNT = 16;
 
 const int WORLD_TILE_WIDTH = 100;
 const int WORLD_TILE_HEIGHT = 100;

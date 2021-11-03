@@ -5,6 +5,7 @@
 #include "utils/Motion.h"
 #include "states/GameStateManager.h"
 #include "states/GameStateMainMenu.h"
+#include "level/Level.h"
 
 //TODO - circular inclusion - think of a better solution here
 #if(DEBUG_SECTION)
@@ -22,12 +23,12 @@ Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX,
 
 	vector::vector_3x::SetVector(lastFramePos, m_world_position);
 
-	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED] = nullptr;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP] = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN] = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT] = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_UNDEFINED]  = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_UP]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_DOWN]	 = &Player::OnMovement;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_LEFT]	 = &Player::OnMovement;
 	m_action_handler[Actions::Gameplay::GAMEPLAY_MOVE_RIGHT] = &Player::OnMovement;
-	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK] = nullptr;
+	m_action_handler[Actions::Gameplay::GAMEPLAY_ATTACK]	 = nullptr;
 
 	Init();
 }
@@ -53,8 +54,9 @@ void Player::Init()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 #if(DEBUG_SECTION)
 	vec_4x lineColor;
@@ -155,8 +157,9 @@ void Player::Update()
 	// Reset m_wp matrix 
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	// Construct a world-projection matrix 
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	// Construct a world-view-projection matrix
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 #if(DEBUG_SECTION)
 	if (isOutlineEnabled)

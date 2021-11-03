@@ -136,6 +136,11 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 	}*/
 }
 
+Camera* GameObjectFactory::CreateCamera(const CameraPackage& cameraPack)
+{
+	return new Camera(cameraPack.position, cameraPack.rotation);
+}
+
 GameObject* GameObjectFactory::CreateGameLine(vec_2x& startPoint, vec_2x& endPoint, int thickness, vec_4x& color)
 {
 	Line line(startPoint, endPoint, thickness);
