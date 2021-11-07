@@ -33,9 +33,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 
 	if (objPack.m_type == GAME_OBJECT_ID_RECT)
 	{
-		return CreateGameRectangle(objPack.m_pointTopLeft, objPack.m_pointBottomRight,
-				objPack.m_position.elem[0], objPack.m_position.elem[1],
-				objPack.m_color);
+		return CreateGameRectangle(objPack.m_pointTopLeft, objPack.m_pointBottomRight, objPack.m_color);
 	}
 
 	WireFrame* tile = GetTile(objPack);
@@ -164,15 +162,9 @@ GameObject* GameObjectFactory::CreateGameLine(vec_2x& startPoint, vec_2x& endPoi
 	return new GameLine(line, color, UniqueGenerator::Instance().GenerateUniqueID());
 }
 
-GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& pointTopLeft, vec_2x& pointBottomRight, float posX, float posY, vec_4x& color)
+GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, vec_4x& color)
 {
-	Rectangle rect(pointTopLeft, pointBottomRight);
-	return CreateGameRectangle(rect, posX, posY, color);
-}
-
-GameObject* GameObjectFactory::CreateGameRectangle(Rectangle& rect, float posX, float posY, vec_4x& color)
-{
-	return new GameRectangle(rect, posX, posY, color, UniqueGenerator::Instance().GenerateUniqueID());
+	return new GameRectangle(recLeftTop, recRightBottom, color, UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 WireFrame* GameObjectFactory::GetTile(GameObjectPackage& pack)

@@ -186,10 +186,10 @@ void Level::ConstructGameGrid()
 			// After we have constructed the game grid we must create GameRect objects 
 			// for each time so that we can use them in the debug mode of the app
 #if(DEBUG_SECTION)
-			int xPos = (WORLD_TILE_WIDTH * j) + WORLD_TILE_WIDTH / 2;
-			int yPos = (WORLD_TILE_HEIGHT * i) + WORLD_TILE_HEIGHT / 2;
+			vec_2x recLeftTop(WORLD_TILE_WIDTH * j, (WORLD_TILE_HEIGHT * i) + WORLD_TILE_HEIGHT);
+			vec_2x recRightBottom((WORLD_TILE_WIDTH * j) + WORLD_TILE_WIDTH, WORLD_TILE_HEIGHT * i);
 
-			m_gridRect[i][j] = std::make_pair(GameObjectFactory::GetInstance()->CreateGameRectangle(genericRect, xPos, yPos, color), false);
+			m_gridRect[i][j] = std::make_pair(GameObjectFactory::GetInstance()->CreateGameRectangle(recLeftTop, recRightBottom, color), false);
 #endif
 		}
 	}

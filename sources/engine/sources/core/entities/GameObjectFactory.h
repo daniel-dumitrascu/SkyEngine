@@ -21,8 +21,7 @@ public:
 	 * These methods are used when creating individual game objects
 	 */
 	GameObject* CreateGameLine(vec_2x& startPoint, vec_2x& endPoint, int thickness, vec_4x& color);
-	GameObject* CreateGameRectangle(vec_2x& pointTopLeft, vec_2x& pointBottomRight, float posX, float posY, vec_4x& color);
-	GameObject* CreateGameRectangle(Rectangle& rect, float posX, float posY, vec_4x& color);
+	GameObject* CreateGameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, vec_4x& color);
 
 private:
 
