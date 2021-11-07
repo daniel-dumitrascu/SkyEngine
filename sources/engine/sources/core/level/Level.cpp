@@ -166,10 +166,6 @@ void Level::ConstructGameGrid()
 	m_gridRect.resize(WORLD_GRID_HEIGHT_COUNT);
 #endif
 
-	vec_2x leftTop(-(WORLD_TILE_WIDTH / 2.0f), WORLD_TILE_HEIGHT / 2.0f);
-	vec_2x rightBottom(WORLD_TILE_WIDTH / 2.0f, -(WORLD_TILE_HEIGHT / 2.0f));
-	Rectangle genericRect(leftTop, rightBottom);
-
 	for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
 	{
 		// Resize each row by the number of column
@@ -181,7 +177,7 @@ void Level::ConstructGameGrid()
 		// Iterate in the new allocated row and create new tiles
 		for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 		{
-			m_gameWorldGrid[i][j] = new Tile(i, j, genericRect);   //TODO - does a Tile need a Rect?
+			m_gameWorldGrid[i][j] = new Tile(i, j);
 
 			// After we have constructed the game grid we must create GameRect objects 
 			// for each time so that we can use them in the debug mode of the app

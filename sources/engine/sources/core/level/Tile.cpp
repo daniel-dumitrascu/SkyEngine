@@ -1,7 +1,7 @@
 #include "Tile.h"
 
-Tile::Tile(unsigned int rowIndex, unsigned int columnIndex, const Rectangle& rect)
-	: m_gridRowIndex(rowIndex), m_gridColumnIndex(columnIndex), m_tileRectangle(rect)
+Tile::Tile(unsigned int rowIndex, unsigned int columnIndex)
+	: m_gridRowIndex(rowIndex), m_gridColumnIndex(columnIndex)
 {
 	// What's very important here to remember is that the rectangle of this tile has
 	// a generic position in the [-1, 1] coordonate system. The actual position in game world
