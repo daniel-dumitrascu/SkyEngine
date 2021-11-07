@@ -174,11 +174,8 @@ void Level::ConstructGameGrid()
 	m_gridRect.resize(WORLD_GRID_HEIGHT_COUNT);
 #endif
 
-	// Create a generic rectangle in [-1, 1] coordonate space
-	//TODO - marimea rect-ului e fixa aici. Normal ea trebuie sa fie adaptata
-	//marimii WORLD_TILE_WIDTH si a WORLD_TILE_HEIGHT
-	vec_2x leftTop(-50.0f, 50.0f);
-	vec_2x rightBottom(50.0f, -50.0f);
+	vec_2x leftTop(-(WORLD_TILE_WIDTH / 2.0f), WORLD_TILE_HEIGHT / 2.0f);
+	vec_2x rightBottom(WORLD_TILE_WIDTH / 2.0f, -(WORLD_TILE_HEIGHT / 2.0f));
 	Rectangle genericRect(leftTop, rightBottom);
 
 	for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
@@ -214,7 +211,7 @@ void Level::AddVisibleGridLines()
 	vec_2x startPoint;
 	vec_2x endPoint;
 
-	vector::vector_4x::SetVector(lineColor, 0.0f, 1.0f, 0.0f, 1.0f);
+	vector::vector_4x::SetVector(lineColor, 0.0f, 0.5f, 0.5f, 1.0f);
 	GameObject* gameLine = nullptr;
 
 	// Horizontal lines
