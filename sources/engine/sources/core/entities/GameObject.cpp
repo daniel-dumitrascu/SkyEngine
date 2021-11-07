@@ -193,3 +193,13 @@ const std::map<const std::string, GameObject*>& GameObject::GetCollidingNeighbou
 {
 	return m_collidingNeighbours;
 }
+
+#if(DEBUG_SECTION)
+void GameObject::SetDebugOutlines(GameObject *leftOutline, GameObject *rightOutline, GameObject *topOutline, GameObject *bottomOutline)
+{
+	this->leftOutline = leftOutline;
+	this->rightOutline = rightOutline;
+	this->topOutline = topOutline;
+	this->bottomOutline = bottomOutline;
+}
+#endif

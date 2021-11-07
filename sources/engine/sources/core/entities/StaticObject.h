@@ -25,11 +25,4 @@ public:
 private:
 
 	void Init();
-
-#if(DEBUG_SECTION)
-	GameLine* leftOutline = nullptr;
-	GameLine* rightOutline = nullptr;
-	GameLine* topOutline = nullptr;
-	GameLine* bottomOutline = nullptr;
-#endif
 };

@@ -2,7 +2,6 @@
 #include "GameObjectDefines.h"
 #include "utils/UniqueGenerator.h"
 #include "primitive/Line.h"
-#include "primitive/GameLine.h"
 #include "primitive/GameRectangle.h"
 #include "defines/ResourceDefines.h"
 #include "geometry/mesh/MeshResources.h"
@@ -51,11 +50,29 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		{
 			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
 			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+
+#if(DEBUG_SECTION)
+			GameLine *leftOutline = nullptr;
+			GameLine *rightOutline = nullptr;
+			GameLine *topOutline = nullptr;
+			GameLine *bottomOutline = nullptr;
+			ConstructDebugOutlines(obj, &leftOutline, &rightOutline, &topOutline, &bottomOutline);
+			obj->SetDebugOutlines(leftOutline, rightOutline, topOutline, bottomOutline);
+#endif
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_STATIC_BLOCK)
 		{
 			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
 			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+
+#if(DEBUG_SECTION)
+			GameLine *leftOutline = nullptr;
+			GameLine *rightOutline = nullptr;
+			GameLine *topOutline = nullptr;
+			GameLine *bottomOutline = nullptr;
+			ConstructDebugOutlines(obj, &leftOutline, &rightOutline, &topOutline, &bottomOutline);
+			obj->SetDebugOutlines(leftOutline, rightOutline, topOutline, bottomOutline);
+#endif
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_BACKGROUND)
 		{
@@ -239,3 +256,30 @@ int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 	else
 		return NULL;
 }
+
+#if(DEBUG_SECTION)
+void GameObjectFactory::ConstructDebugOutlines(GameObject* obj, GameLine **leftOutline, GameLine **rightOutline, GameLine **topOutline, GameLine **bottomOutline)
+{
+	vec_4x lineColor;
+	vec_2x startPoint;
+	vec_2x endPoint;
+	vector::vector_4x::SetVector(lineColor, 0.0f, 0.0f, 1.0f, 1.0f);
+	Rectangle rect = obj->GetObjectWorldRect();
+
+	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
+	vector::vector_2x::SetVector(endPoint, rect.GetLeft(), rect.GetBottom());
+	*leftOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
+
+	vector::vector_2x::SetVector(startPoint, rect.GetRight(), rect.GetTop());
+	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
+	*rightOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
+
+	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
+	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetTop());
+	*topOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
+
+	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetBottom());
+	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
+	*bottomOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
+}
+#endif

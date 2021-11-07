@@ -3,6 +3,7 @@
 #include "entities/GameObject.h"
 #include "animation/AnimData.h"
 #include "camera/Camera.h"
+#include "primitive/GameLine.h"
 
 class GameObjectFactory
 {
@@ -33,4 +34,8 @@ private:
 	Texture* GetTexture(GameObjectPackage& pack);
 	AnimData* GetAnimation(GameObjectPackage& pack);
 	int GetProgram(GameObjectPackage& pack);
+
+#if(DEBUG_SECTION)
+	void ConstructDebugOutlines(GameObject* obj, GameLine **leftOutline, GameLine **rightOutline, GameLine **topOutline, GameLine **bottomOutline);
+#endif
 };

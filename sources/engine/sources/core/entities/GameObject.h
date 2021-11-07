@@ -81,6 +81,7 @@ class GameObject : public Controllable
 
 #if(DEBUG_SECTION)
 		void SetOutline(bool value) { isOutlineEnabled = value; }
+		void SetDebugOutlines(GameObject *leftOutline, GameObject *rightOutline, GameObject *topOutline, GameObject *bottomOutline);
 #endif
 
 	protected:
@@ -107,6 +108,12 @@ class GameObject : public Controllable
 
 #if(DEBUG_SECTION)
 		bool isOutlineEnabled = true;	// Debug option that will draw a rectangle around the object
+
+		// Lines used for object debug outlining
+		GameObject* leftOutline = nullptr;
+		GameObject* rightOutline = nullptr;
+		GameObject* topOutline = nullptr;
+		GameObject* bottomOutline = nullptr;
 #endif
 };
 
