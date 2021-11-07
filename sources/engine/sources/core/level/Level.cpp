@@ -38,14 +38,6 @@ Level::~Level()
 void Level::CleanLevel()
 {
 	// Remove all the cameras from the level
-	std::unordered_map<std::string, Camera*>::iterator ite = availableCameras.begin();
-	while (ite != availableCameras.end())
-	{
-		// We have ownership on the cameras so we can safetly delete them here
-		delete ite->second;
-		ite++;
-	}
-
 	availableCameras.clear();
 	activeLevelCamera = nullptr;
 
@@ -92,13 +84,13 @@ void Level::ConstructLevel(LevelPackage* levelData)
 		availableCameras.insert(std::make_pair(cameraIte->camera_id, camera));
 	}
 
-	std::unordered_map<std::string, Camera*>::iterator ite = availableCameras.find(levelData->m_active_camera_id);
+	auto ite = availableCameras.find(levelData->m_active_camera_id);
 	if (ite != availableCameras.end())
-		activeLevelCamera = ite->second;
+		activeLevelCamera = ite->second.get();
 	else
 	{
 		log.message("Selected camera is not available, application will terminate", Logging::MSG_ERROR);
-		exit(0);	//TODO think of another way of handling a missing "selected camera" block from the scene file 
+		exit(0);	//TODO at the moment this is fine but the failing of loading a scene should not terminate the whole app
 	}
 	
 	// Create scene objects

@@ -53,8 +53,8 @@ private:
 	// will be deleted by the the Level
 	std::map<std::string, GameObject*> sceneObjects;
 	std::vector<std::vector<Tile*>> m_gameWorldGrid;
-	Camera* activeLevelCamera; //TODO foloseste unique_ptr
-	std::unordered_map<std::string, Camera*> availableCameras;
+	Camera* activeLevelCamera;
+	std::unordered_map<std::string, std::unique_ptr<Camera>> availableCameras;
 
 #if(DEBUG_SECTION)	
 	// This creates a grid of GameRectangles.
