@@ -12,7 +12,7 @@
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>
 		<Position x="200" y="100" />
 		<Rotation x="0" y="0" />
-		<Scale size="150" />
+		<Scale size="120" />
 	</GameObject>
 	<GameObject id="2">
 		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
