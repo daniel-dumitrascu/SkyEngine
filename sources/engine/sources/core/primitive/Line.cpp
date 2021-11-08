@@ -25,3 +25,9 @@ WireFrame* Line::GetConstructedWireFrame()
 	vec_4x rectangleCoord = MathUtils::LineToRectangleCoord(m_startLine, m_endLine, m_thickness);
 	return MathUtils::CreateRectangleWireframe(rectangleCoord.elem[0], rectangleCoord.elem[1], rectangleCoord.elem[2], rectangleCoord.elem[3]);
 }
+
+void Line::SetPosition(vec_2x& startPoint, vec_2x& endPoint)
+{
+	m_startLine = startPoint;
+	m_endLine = endPoint;
+}

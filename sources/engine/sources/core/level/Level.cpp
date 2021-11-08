@@ -42,12 +42,6 @@ void Level::CleanLevel()
 	activeLevelCamera = nullptr;
 
 	// Remove all the entities from the level 
-	for (auto& mapEntry : sceneObjects)
-	{
-		delete mapEntry.second;
-		mapEntry.second = nullptr;
-	}
-
 	sceneObjects.clear();
 
 	// Deallocate the game rectangles
@@ -143,7 +137,7 @@ void Level::ConstructLevel(LevelPackage* levelData)
 			for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 			{
 				Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-				newTile->AddCollidingObject(mapEntry.second);
+				newTile->AddCollidingObject(mapEntry.second.get());
 #if(DEBUG_SECTION)
 				// Activate the visibility on the new area
 				SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
@@ -199,7 +193,7 @@ void Level::AddVisibleGridLines()
 	vec_2x startPoint;
 	vec_2x endPoint;
 
-	vector::vector_4x::SetVector(lineColor, 0.0f, 0.5f, 0.5f, 1.0f);
+	vector::vector_4x::SetVector(lineColor, 0.0f, 0.5f, 0.5f, 0.3f);
 	GameObject* gameLine = nullptr;
 
 	// Horizontal lines
@@ -209,8 +203,7 @@ void Level::AddVisibleGridLines()
 		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * WORLD_GRID_WIDTH_COUNT, WORLD_TILE_HEIGHT * gridHeightIndex);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
-		sceneObjects.insert(std::pair<std::string, GameObject*>(gameLine->GetID(), gameLine));
-		m_gridLinesIds.push_back(gameLine->GetID());
+		sceneGridLines.push_back(std::unique_ptr<GameObject>(gameLine));
 	}
 
 	// Vertical lines
@@ -220,24 +213,13 @@ void Level::AddVisibleGridLines()
 		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * gridWidthIndex, WORLD_TILE_HEIGHT * WORLD_GRID_HEIGHT_COUNT);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
-		sceneObjects.insert(std::pair<std::string, GameObject*>(gameLine->GetID(), gameLine));
-		m_gridLinesIds.push_back(gameLine->GetID());
+		sceneGridLines.push_back(std::unique_ptr<GameObject>(gameLine));
 	}
 }
 
 void Level::RemoveVisibleGridLines()
 {
-	for (int i = 0; i < m_gridLinesIds.size(); ++i)
-	{
-		auto ite = sceneObjects.find(m_gridLinesIds[i]);
-		if (ite != sceneObjects.end())
-		{
-			delete ite->second;
-			sceneObjects.erase(ite);
-		}
-	}
-
-	m_gridLinesIds.clear();
+	sceneGridLines.clear();
 }
 
 void Level::RenderTileDebugColor()
@@ -286,7 +268,7 @@ void Level::Update()
 	vector::vector_4x::SetVector(green, 0.0f, 1.0f, 0.0f, 1.0f);
 #endif
 
-	for (std::map<std::string, GameObject*>::iterator sceneIte = sceneObjects.begin(); 
+	for (std::map<std::string, std::unique_ptr<GameObject>>::iterator sceneIte = sceneObjects.begin(); 
 		sceneIte != sceneObjects.end();
 		++sceneIte)
 	{
@@ -358,10 +340,10 @@ void Level::Update()
 						for (; ite != collidingObj.end(); ite++)
 						{
 							sceneIte->second->AddCollidingNeighbour(ite->second);
-							ite->second->AddCollidingNeighbour(sceneIte->second);
+							ite->second->AddCollidingNeighbour(sceneIte->second.get());
 						}
 
-						newTile->AddCollidingObject(sceneIte->second);
+						newTile->AddCollidingObject(sceneIte->second.get());
 #if(DEBUG_SECTION)
 						// Activate the visibility on the new area
 						SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
@@ -453,6 +435,14 @@ void Level::Update()
 				m_gridRect[i][j].first->Update();
 			}
 	}
+
+	// Update the grid lines
+#if(DEBUG_SECTION)
+	for (auto& ite : sceneGridLines)
+	{
+		ite->Update();
+	}
+#endif
 }
 
 void Level::Draw()
@@ -471,6 +461,14 @@ void Level::Draw()
 		sceneEntry.second->PreDraw();
 		sceneEntry.second->Draw();
 	}
+
+#if(DEBUG_SECTION)
+	for (const auto& line : sceneGridLines)
+	{
+		line->PreDraw();
+		line->Draw();
+	}
+#endif
 }
 
 void Level::InputActionNotify(const InputEventBatch& inputBatch)
@@ -507,7 +505,7 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 				isOutlineEnabled = !isOutlineEnabled;
 
 				// All the renderable objects in the scene must get the new value
-				for (auto sceneObj : sceneObjects)
+				for (auto& sceneObj : sceneObjects)
 				{
 					if (sceneObj.second->IsAlive() && sceneObj.second->IsFlagON(OBJECT_IS_RENDERABLE))
 						sceneObj.second->SetOutline(isOutlineEnabled);

@@ -15,8 +15,7 @@ class GameLine : public GameObject
 		void SetColor(const vec_4x& color);
 		const vec_4x& GetColor() { return m_color; }
 
-		void UpdateStartAndEnd(vec_2x& startPoint, vec_2x& endPoint);
-		void UpdateStartAndEnd(Line& line);
+		void SetPosition(vec_2x& startPoint, vec_2x& endPoint);
 
 		void Draw();
 		void PreDraw();

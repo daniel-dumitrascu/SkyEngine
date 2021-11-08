@@ -120,25 +120,25 @@ void StaticObject::Update()
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetLeft(), rect.GetBottom());
 		GameLine* left = static_cast<GameLine*>(leftOutline);
-		left->UpdateStartAndEnd(newStartPoint, newEndPoint);
+		left->SetPosition(newStartPoint, newEndPoint);
 		left->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetRight(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetBottom());
 		GameLine* right = static_cast<GameLine*>(rightOutline);
-		right->UpdateStartAndEnd(newStartPoint, newEndPoint);
+		right->SetPosition(newStartPoint, newEndPoint);
 		right->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetTop());
 		GameLine* top = static_cast<GameLine*>(topOutline);
-		top->UpdateStartAndEnd(newStartPoint, newEndPoint);
+		top->SetPosition(newStartPoint, newEndPoint);
 		top->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetBottom());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetBottom());
 		GameLine* bottom = static_cast<GameLine*>(bottomOutline);
-		bottom->UpdateStartAndEnd(newStartPoint, newEndPoint);
+		bottom->SetPosition(newStartPoint, newEndPoint);
 		bottom->Update();
 	}
 #endif

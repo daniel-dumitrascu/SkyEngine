@@ -108,14 +108,9 @@ void GameLine::SetColor(const vec_4x& color)
 	vector::vector_4x::SetVector(m_color, color.elem[0], color.elem[1], color.elem[2], color.elem[3]);
 }
 
-void GameLine::UpdateStartAndEnd(vec_2x& startPoint, vec_2x& endPoint)
+void GameLine::SetPosition(vec_2x& startPoint, vec_2x& endPoint)
 {
 	Line line(startPoint, endPoint, m_line.GetThickness());
-	UpdateStartAndEnd(line);
-}
-
-void GameLine::UpdateStartAndEnd(Line& line)
-{
 	m_line = line;
 
 	Painter::RemoveGeometryFromGPU(m_wireframe);

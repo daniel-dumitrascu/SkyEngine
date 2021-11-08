@@ -51,7 +51,7 @@ private:
 
 	// Level has ownership over the objects so the objects
 	// will be deleted by the the Level
-	std::map<std::string, GameObject*> sceneObjects;
+	std::map<std::string, std::unique_ptr<GameObject>> sceneObjects;
 	std::vector<std::vector<Tile*>> m_gameWorldGrid;
 	Camera* activeLevelCamera;
 	std::unordered_map<std::string, std::unique_ptr<Camera>> availableCameras;
@@ -61,8 +61,9 @@ private:
 	// The boolean tells us if a certain object needs to be updated and rendered
 	std::vector<std::vector<std::pair<GameObject*, bool>>> m_gridRect;
 
-	// This vector stored the ids of the lines used to draw the game grid
-	std::vector<std::string> m_gridLinesIds;
+	// Contains the grid lines
+	std::vector<std::unique_ptr<GameObject>> sceneGridLines;
+
 	bool isGridDrawingEnabled = true;
 	bool isColorTileRenderEnabled = true;
 	bool isOutlineEnabled = true;
