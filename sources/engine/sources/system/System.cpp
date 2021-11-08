@@ -68,7 +68,7 @@ void System::Run()
 		if ((CoreTime::GetTime() - timer) > SECOND_IN_MILISEC)
 		{
 			timer += SECOND_IN_MILISEC;
-			log.message(std::string("Rendered frames per second: ") + std::to_string(updates) + std::string("    Total frames per second: ") + std::to_string(frames), Logging::MSG_DEBUG);
+			//log.message(std::string("Rendered frames per second: ") + std::to_string(updates) + std::string("    Total frames per second: ") + std::to_string(frames), Logging::MSG_DEBUG);
 			updates = 0;
 			frames = 0;
 		}

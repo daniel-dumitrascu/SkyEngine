@@ -8,26 +8,13 @@
 #include "../global/GlobalData.h"
 #include "math/Geometry.h"
 #include "utils/UniqueGenerator.h"
+#include "level/Level.h"
 
 
-GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const std::string& id) :
-	GameObject(nullptr, nullptr, -1, posX, posX, 1, id, INPUT_HANDLE_PROFILE_NONE)
+GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color, const std::string& id) :
+	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, id, INPUT_HANDLE_PROFILE_NONE)
 {
-	m_rectangle = new Rectangle(rect);		 
-	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
-
-	// Once we have a rect we can now calculate the size of that rect (height and lenght)
-	vec_2x rectDimensions = Geometry::CalculateRectDimensions(*m_rectangle);
-	m_rectHeight = rectDimensions.elem[0];
-	m_rectLenght = rectDimensions.elem[1];
-
-	Init();
-}
-
-GameRectangle::GameRectangle(Rectangle& rect, float posX, float posY, const vec_4x& color, const std::string& id) :
-	GameObject(nullptr, nullptr, -1, posX, posY, 1, id, INPUT_HANDLE_PROFILE_NONE)
-{
-	m_rectangle = new Rectangle(rect);
+	m_rectangle = new Rectangle(recLeftTop, recRightBottom);
 	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
 
 	// Once we have a rect we can now calculate the size of that rect (height and lenght)
@@ -47,13 +34,17 @@ GameRectangle::~GameRectangle()
 
 std::unique_ptr<GameObject> GameRectangle::Clone()
 {
-	return std::make_unique<GameRectangle>(*m_rectangle, GetPosition().elem[0], GetPosition().elem[1], UniqueGenerator::Instance().GenerateUniqueID());
+	return std::make_unique<GameRectangle>(vec_2x(m_rectangle->GetLeft(), m_rectangle->GetTop()), 
+										   vec_2x(m_rectangle->GetRight(), m_rectangle->GetBottom()),
+										   m_color, 
+										   UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void GameRectangle::Init()
 {
-	// Construct a world-projection matrix 
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	// Construct a world-view-projection matrix 
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 	// Select the key for the right shader
 	ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
@@ -101,8 +92,9 @@ void GameRectangle::Update()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 }
 
 void GameRectangle::SetColor(const vec_4x& color)

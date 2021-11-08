@@ -3,11 +3,8 @@
 #include "utils/UniqueGenerator.h"
 #include "global/GlobalData.h"
 #include "texture/Texture.h"
+#include "level/Level.h"
 
-//TODO - circular inclusion - think of a better solution here
-#if(DEBUG_SECTION)
-#include "GameObjectFactory.h"
-#endif
 
 StaticObject::StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id) :
 	GameObject(mesh, texture, shader, posX, posY, scale, id, INPUT_HANDLE_PROFILE_NONE)
@@ -32,12 +29,12 @@ StaticObject::~StaticObject()
 std::unique_ptr<GameObject> StaticObject::Clone()
 {
 	return std::make_unique<StaticObject>(m_wireframe,
-		m_texture,
-		m_shader,
-		GetPosition().elem[0],
-		GetPosition().elem[1],
-		m_scaling,
-		UniqueGenerator::Instance().GenerateUniqueID());
+											m_texture,
+											m_shader,
+											GetPosition().elem[0],
+											GetPosition().elem[1],
+											m_scaling,
+											UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void StaticObject::Init()
@@ -47,32 +44,9 @@ void StaticObject::Init()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
-
-#if(DEBUG_SECTION)
-	vec_4x lineColor;
-	vec_2x startPoint;
-	vec_2x endPoint;
-	vector::vector_4x::SetVector(lineColor, 0.0f, 0.0f, 1.0f, 1.0f);
-	Rectangle rect = GetObjectWorldRect();
-
-	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
-	vector::vector_2x::SetVector(endPoint, rect.GetLeft(), rect.GetBottom());
-	leftOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
-
-	vector::vector_2x::SetVector(startPoint, rect.GetRight(), rect.GetTop());
-	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
-	rightOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
-
-	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetTop());
-	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetTop());
-	topOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
-
-	vector::vector_2x::SetVector(startPoint, rect.GetLeft(), rect.GetBottom());
-	vector::vector_2x::SetVector(endPoint, rect.GetRight(), rect.GetBottom());
-	bottomOutline = (GameLine*)GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 3, lineColor);
-#endif
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 }
 
 void StaticObject::PreDraw()
@@ -132,8 +106,9 @@ void StaticObject::Update()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 #if(DEBUG_SECTION)
 	if (isOutlineEnabled)
@@ -144,23 +119,27 @@ void StaticObject::Update()
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetLeft(), rect.GetBottom());
-		leftOutline->UpdateStartAndEnd(newStartPoint, newEndPoint);
-		leftOutline->Update();
+		GameLine* left = static_cast<GameLine*>(leftOutline);
+		left->SetPosition(newStartPoint, newEndPoint);
+		left->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetRight(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetBottom());
-		rightOutline->UpdateStartAndEnd(newStartPoint, newEndPoint);
-		rightOutline->Update();
+		GameLine* right = static_cast<GameLine*>(rightOutline);
+		right->SetPosition(newStartPoint, newEndPoint);
+		right->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetTop());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetTop());
-		topOutline->UpdateStartAndEnd(newStartPoint, newEndPoint);
-		topOutline->Update();
+		GameLine* top = static_cast<GameLine*>(topOutline);
+		top->SetPosition(newStartPoint, newEndPoint);
+		top->Update();
 
 		vector::vector_2x::SetVector(newStartPoint, rect.GetLeft(), rect.GetBottom());
 		vector::vector_2x::SetVector(newEndPoint, rect.GetRight(), rect.GetBottom());
-		bottomOutline->UpdateStartAndEnd(newStartPoint, newEndPoint);
-		bottomOutline->Update();
+		GameLine* bottom = static_cast<GameLine*>(bottomOutline);
+		bottom->SetPosition(newStartPoint, newEndPoint);
+		bottom->Update();
 	}
 #endif
 }

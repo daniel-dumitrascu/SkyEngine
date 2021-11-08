@@ -542,6 +542,22 @@ void matrix::game_matrix::SetWorldRotation(mat_4x& R, const vec_3x& rot)
 	R.elem[3][3] = 1.0f;
 }
 
+void BuildWorldMatrix(mat_4x& R, const vec_3x rotation, const vec_3x position, const float scale)
+{
+	matrix::game_matrix::BuildWorldMatrix(R, rotation.elem[0], rotation.elem[1], rotation.elem[2],
+											 position.elem[0], position.elem[1], position.elem[2],
+											 scale);
+}
+
+void matrix::game_matrix::BuildWorldMatrix(mat_4x& R, const float rotX, const float rotY, const float rotZ,
+													  const float pozX, const float pozY, const float pozZ,
+													  const float scale)
+{
+	matrix::game_matrix::SetWorldScale(R, scale);
+	matrix::game_matrix::SetWorldPosition(R, pozX, pozY, pozZ);
+	matrix::game_matrix::SetWorldRotation(R, rotX, rotY, rotZ);
+}
+
 void matrix::game_matrix::SetWorldPosAndRot(mat_4x& R, const vec_3x& pos, const vec_3x& rot)
 {
 	matrix::game_matrix::SetWorldRotation(R, rot.elem[0], rot.elem[1], rot.elem[2]);
@@ -555,48 +571,74 @@ void matrix::game_matrix::SetWorldPosAndRot(mat_4x& R, const float rotX, const f
 	matrix::game_matrix::SetWorldPosition(R, pozX, pozY, pozZ);
 }
 
-/** Sets the matrix to an orthographic projection like glOrtho (http://www.opengl.org/sdk/docs/man/xhtml/glOrtho.xml) following
-* the OpenGL equivalent
-*
-* @param left The left clipping plane
-* @param right The right clipping plane
-* @param bottom The bottom clipping plane
-* @param top The top clipping plane
-* @param near The near clipping plane
-* @param far The far clipping plane
-* @return This matrix for the purpose of chaining methods together. */
-void matrix::game_matrix::ProjectionMatrix(mat_4x& R, const float left, const float right, const float bottom,
+void matrix::game_matrix::BuildProjectionMatrix(mat_4x& R, const float left, const float right, const float bottom,
 													  const float top, const float near, const float far)
 {
-	/* This is an optimized (specilized) version of the general code */
-	// left is 0.0f
-	// bottom is 0.0f
-
-	float result_a = right;
-	float result_b = top;
-	float result_c = far - near;
-
-	matrix::matrix_4x::SetMatrix(R, (2.0f / result_a), 0.0f, 0.0f, 0.0f,
-									0.0f, (2.0f / result_b), 0.0f, 0.0f,
-									0.0f, 0.0f, (-2.0f / result_c), 0.0f,
-									-1, -1, (-(far + near) / result_c), 1.0f);
-
-
-#if 0
-	/* This is the general code */
 	float result_a = right - left;
 	float result_b = top - bottom;
 	float result_c = far - near;
 
 	matrix::matrix_4x::SetMatrix(R, (2.0f / result_a), 0.0f, 0.0f, 0.0f,
-		                            0.0f, (2.0f / result_b), 0.0f, 0.0f,
+									0.0f, (2.0f / result_b), 0.0f, 0.0f,
 									0.0f, 0.0f, (-2.0f / result_c), 0.0f,
-									(-(right + left) / result_a), (-(top + bottom) / result_b), (-(far + near) / result_c), 1.0f);
-#endif
+									(-right / result_a), (-top / result_b), (-(far + near) / result_c), 1.0f);
 }
 
-void matrix::game_matrix::WorldProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& proj)
+void matrix::game_matrix::BuildWorldProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& proj)
 {
 	matrix::matrix_4x::Multiply(R, R, world);
 	matrix::matrix_4x::Multiply(R, R, proj);
+}
+
+void matrix::game_matrix::BuildWorldViewProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& view, const mat_4x& proj)
+{
+	matrix::matrix_4x::Multiply(R, R, world);
+	matrix::matrix_4x::Multiply(R, R, view);
+	matrix::matrix_4x::Multiply(R, R, proj);
+}
+
+void matrix::game_matrix::BuildViewMatrix(mat_4x& R, const mat_4x& camera)
+{
+	vec_3x    CPos, CRight, CUp, CLook;
+	float     valX, valY, valZ;
+
+	CRight.elem[0] = camera.elem[0][0];
+	CRight.elem[1] = camera.elem[0][1];
+	CRight.elem[2] = camera.elem[0][2];
+
+	CUp.elem[0] = camera.elem[1][0];
+	CUp.elem[1] = camera.elem[1][1];
+	CUp.elem[2] = camera.elem[1][2];
+
+	CLook.elem[0] = camera.elem[2][0];
+	CLook.elem[1] = camera.elem[2][1];
+	CLook.elem[2] = camera.elem[2][2];
+
+	CPos.elem[0] = camera.elem[3][0];
+	CPos.elem[1] = camera.elem[3][1];
+	CPos.elem[2] = camera.elem[3][2];
+
+	valX = vector::vector_3x::DotProduct(CPos, CRight);
+	valY = vector::vector_3x::DotProduct(CPos, CUp);
+	valZ = vector::vector_3x::DotProduct(CPos, CLook);
+
+	R.elem[0][0] = camera.elem[0][0];
+	R.elem[0][1] = camera.elem[1][0];
+	R.elem[0][2] = camera.elem[2][0];
+	R.elem[0][3] = 0.0f;
+
+	R.elem[1][0] = camera.elem[0][1];
+	R.elem[1][1] = camera.elem[1][1];
+	R.elem[1][2] = camera.elem[2][1];
+	R.elem[1][3] = 0.0f;
+
+	R.elem[2][0] = camera.elem[0][2];
+	R.elem[2][1] = camera.elem[1][2];
+	R.elem[2][2] = camera.elem[2][2];
+	R.elem[2][3] = 0.0f;
+
+	R.elem[3][0] = -valX;
+	R.elem[3][1] = -valY;
+	R.elem[3][2] = -valZ;
+	R.elem[3][3] = 1.0f;
 }

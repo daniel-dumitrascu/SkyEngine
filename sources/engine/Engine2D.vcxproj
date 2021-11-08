@@ -87,6 +87,7 @@
     <ClInclude Include="sources\core\animation\player\AnimPlayer.h" />
     <ClInclude Include="sources\core\bindings\BindingCollection.h" />
     <ClInclude Include="sources\core\bindings\BindingsManager.h" />
+    <ClInclude Include="sources\core\camera\Camera.h" />
     <ClInclude Include="sources\core\defines\ResourceDefines.h" />
     <ClInclude Include="sources\core\entities\Background.h" />
     <ClInclude Include="sources\core\entities\GameObject.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="sources\core\animation\player\AnimPlayer.cpp" />
     <ClCompile Include="sources\core\bindings\BindingCollection.cpp" />
     <ClCompile Include="sources\core\bindings\BindingsManager.cpp" />
+    <ClCompile Include="sources\core\camera\Camera.cpp" />
     <ClCompile Include="sources\core\entities\Background.cpp" />
     <ClCompile Include="sources\core\entities\GameObject.cpp" />
     <ClCompile Include="sources\core\entities\GameObjectFactory.cpp" />

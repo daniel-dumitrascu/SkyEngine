@@ -139,12 +139,26 @@ namespace matrix
 		/* Set rotation in world game matrix */
 		void SetWorldRotation(mat_4x& R, const vec_3x& rot);
 
+		/* World matrix */
+		void BuildWorldMatrix(mat_4x& R, const vec_3x rotation, const vec_3x position, const float scale);
+
+		/* World matrix */
+		void BuildWorldMatrix(mat_4x& R, const float rotX, const float rotY, const float rotZ,
+										 const float pozX, const float pozY, const float pozZ,
+										 const float scale);
+
 		/* Projection matrix */
-		void ProjectionMatrix(mat_4x& R, const float left, const float right, const float bottom, 										 
+		void BuildProjectionMatrix(mat_4x& R, const float left, const float right, const float bottom, 										 
 										 const float top, const float near, const float far);
 
 		/* World-Projection matrix */
-		void WorldProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& proj);
+		void BuildWorldProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& proj);
+
+		/* World-View-Projection matrix */
+		void BuildWorldViewProjMatrix(mat_4x& R, const mat_4x& world, const mat_4x& view, const mat_4x& proj);
+
+		/* View matrix */
+		void BuildViewMatrix(mat_4x& R, const mat_4x& camera);
 	}
 }
 

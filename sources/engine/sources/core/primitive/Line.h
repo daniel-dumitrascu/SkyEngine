@@ -13,7 +13,8 @@ class Line : public Primitive
 		virtual ~Line() {};
 
 		WireFrame* GetConstructedWireFrame();
-		float GetThickness() { return m_thickness;  }
+		float GetThickness() { return m_thickness; }
+		void SetPosition(vec_2x& startPoint, vec_2x& endPoint);
 
 	private:
 

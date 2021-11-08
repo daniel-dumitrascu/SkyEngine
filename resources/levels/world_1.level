@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Level>
+	<Cameras>
+		<Camera id="1">
+			<Position x="500" y="500" />
+			<Rotation x="0" y="0" />
+		</Camera>
+	</Cameras>
+	<SelectedActiveCamera CameraID="1" AttachedObject="1"/>
 	<GameObject id="1">
 		<Composition Type="1" ResourceMeshID="2" ResourceTextureID="1" ResourceShaderID="1" />
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>
 		<Position x="200" y="100" />
 		<Rotation x="0" y="0" />
-		<Scale size="150" />
+		<Scale size="120" />
 	</GameObject>
 	<GameObject id="2">
 		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />

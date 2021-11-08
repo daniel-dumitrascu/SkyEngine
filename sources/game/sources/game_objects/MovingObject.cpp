@@ -57,8 +57,8 @@ void MovingObject::Update()
 {
 	// TODO - For the purpose of having a moving object I will place the moving logic here.
 	// But, this is not correct, the object should not know about this logic, this should be external, in an AI
-	if(m_world_position.elem[0] < ((WORLD_ASP_RATIO_X * VIRTUAL_WORLD_MULTIPLIER) - 100))
-		m_world_position.elem[0] += 1.0f;
+	//if(m_world_position.elem[0] < ((WORLD_ASP_RATIO_X * VIRTUAL_WORLD_MULTIPLIER) - 100))
+	//	m_world_position.elem[0] += 1.0f;
 	
 	matrix::game_matrix::SetWorldPosition(m_world_matrix, m_world_position);
 
@@ -71,7 +71,7 @@ void MovingObject::Update()
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
 	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	matrix::game_matrix::BuildWorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
 }
 
 void MovingObject::Init()
@@ -82,5 +82,5 @@ void MovingObject::Init()
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
 	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	matrix::game_matrix::BuildWorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
 }

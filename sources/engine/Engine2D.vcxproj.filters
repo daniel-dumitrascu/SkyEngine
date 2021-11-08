@@ -211,6 +211,9 @@
     <ClCompile Include="sources\core\menu\MainMenu.cpp">
       <Filter>core\menu</Filter>
     </ClCompile>
+    <ClCompile Include="sources\core\camera\Camera.cpp">
+      <Filter>core\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\application\Application.h">
@@ -492,6 +495,9 @@
     <ClInclude Include="sources\core\menu\MainMenu.h">
       <Filter>core\menu</Filter>
     </ClInclude>
+    <ClInclude Include="sources\core\camera\Camera.h">
+      <Filter>core\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="application">
@@ -613,6 +619,9 @@
     </Filter>
     <Filter Include="core\menu">
       <UniqueIdentifier>{d78725a0-4e22-4dcd-be21-2614a820e79c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\camera">
+      <UniqueIdentifier>{b8b36b7e-d137-4f7e-bddd-bbcc08b0d357}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

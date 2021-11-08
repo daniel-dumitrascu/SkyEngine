@@ -9,11 +9,10 @@ class Tile
 {
 	public:
 
-		Tile(unsigned int rowIndex, unsigned int columnIndex, const Rectangle& rect);
+		Tile(unsigned int rowIndex, unsigned int columnIndex);
 
 		int GetRowIndex() { return m_gridRowIndex; }
 		int GetColumnIndex() { return m_gridColumnIndex; }
-		const Rectangle& GetRectangle() { return m_tileRectangle; }
 		void RemoveCollidingObject(std::string& id);
 		void AddCollidingObject(GameObject* obj);
 		bool HasCollidingObjects();
@@ -31,9 +30,4 @@ class Tile
 		 * A list of game objects that collide with this tile
 		 */
 		std::map<std::string, GameObject*> m_tileCollidingObjects;
-
-		/*
-		 * The tile borders are represented by a rectangle
-		 */
-		Rectangle m_tileRectangle;
 };

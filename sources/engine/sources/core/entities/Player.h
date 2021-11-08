@@ -50,11 +50,4 @@ private:
 	bool hasObjectMovedThisFrame;
 
 	void (Player::*m_action_handler[Actions::Gameplay::GAMEPLAY_COUNT])(void* extraData);
-
-#if(DEBUG_SECTION)
-	GameLine* leftOutline = nullptr;
-	GameLine* rightOutline = nullptr;
-	GameLine* topOutline = nullptr;
-	GameLine* bottomOutline = nullptr;
-#endif
 };

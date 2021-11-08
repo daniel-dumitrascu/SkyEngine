@@ -19,12 +19,12 @@ Background::~Background()
 std::unique_ptr<GameObject> Background::Clone()
 {
 	return std::make_unique<Background>(m_wireframe,
-		m_texture,
-		m_shader,
-		GetPosition().elem[0],
-		GetPosition().elem[1],
-		m_scaling,
-		UniqueGenerator::Instance().GenerateUniqueID());
+										m_texture,
+										m_shader,
+										GetPosition().elem[0],
+										GetPosition().elem[1],
+										m_scaling,
+										UniqueGenerator::Instance().GenerateUniqueID());
 }
 
 void Background::Init()

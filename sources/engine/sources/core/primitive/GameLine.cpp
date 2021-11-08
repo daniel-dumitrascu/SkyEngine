@@ -7,6 +7,8 @@
 #include "global/GlobalPaths.h"
 #include "../global/GlobalData.h"
 #include "utils/UniqueGenerator.h"
+#include "camera/Camera.h"
+#include "level/Level.h"
 
 
 GameLine::GameLine(Line& line, const std::string& id):
@@ -45,8 +47,9 @@ std::unique_ptr<GameObject> GameLine::Clone()
 
 void GameLine::Init()
 {
-	// Construct a world-projection matrix 
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	// Construct a world-view-projection matrix 
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
 	// Select the key for the right shader
 	ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
@@ -94,8 +97,10 @@ void GameLine::Update()
 	/* Reset m_wp matrix */
 	matrix::matrix_4x::SetIdentity(m_wp_matrix);
 
-	/* Construct a world-projection matrix */
-	matrix::game_matrix::WorldProjMatrix(m_wp_matrix, m_world_matrix, proj_matrix);
+	/* Construct a world-view-projection matrix */
+	//TODO as an optimization I should be able to calculate BuildWorldViewProjMatrix just when the object changed his pos, rotation or scaling
+	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
+	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 }
 
 void GameLine::SetColor(const vec_4x& color)
@@ -103,14 +108,9 @@ void GameLine::SetColor(const vec_4x& color)
 	vector::vector_4x::SetVector(m_color, color.elem[0], color.elem[1], color.elem[2], color.elem[3]);
 }
 
-void GameLine::UpdateStartAndEnd(vec_2x& startPoint, vec_2x& endPoint)
+void GameLine::SetPosition(vec_2x& startPoint, vec_2x& endPoint)
 {
 	Line line(startPoint, endPoint, m_line.GetThickness());
-	UpdateStartAndEnd(line);
-}
-
-void GameLine::UpdateStartAndEnd(Line& line)
-{
 	m_line = line;
 
 	Painter::RemoveGeometryFromGPU(m_wireframe);
