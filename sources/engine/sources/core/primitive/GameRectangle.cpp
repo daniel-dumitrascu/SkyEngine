@@ -11,8 +11,8 @@
 #include "level/Level.h"
 
 
-GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color, const std::string& id) :
-	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, id, INPUT_HANDLE_PROFILE_NONE)
+GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color) :
+	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, INPUT_HANDLE_PROFILE_NONE)
 {
 	m_rectangle = new Rectangle(recLeftTop, recRightBottom);
 	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
@@ -36,8 +36,7 @@ std::unique_ptr<GameObject> GameRectangle::Clone()
 {
 	return std::make_unique<GameRectangle>(vec_2x(m_rectangle->GetLeft(), m_rectangle->GetTop()), 
 										   vec_2x(m_rectangle->GetRight(), m_rectangle->GetBottom()),
-										   m_color, 
-										   UniqueGenerator::Instance().GenerateUniqueID());
+										   m_color);
 }
 
 void GameRectangle::Init()

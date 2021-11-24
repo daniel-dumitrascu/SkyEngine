@@ -7,7 +7,7 @@ class Background : public GameObject
 {
 public:
 
-	Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id);
+	Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale);
 	~Background();
 
 	Background(const Background& copy) = delete;

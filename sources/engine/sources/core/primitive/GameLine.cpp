@@ -11,8 +11,8 @@
 #include "level/Level.h"
 
 
-GameLine::GameLine(Line& line, const std::string& id):
-	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, id, INPUT_HANDLE_PROFILE_NONE),
+GameLine::GameLine(Line& line):
+	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, INPUT_HANDLE_PROFILE_NONE),
 	m_line(line)
 {
 	m_wireframe = m_line.GetConstructedWireFrame();
@@ -22,8 +22,8 @@ GameLine::GameLine(Line& line, const std::string& id):
 	Init();
 }
 
-GameLine::GameLine(Line& line, const vec_4x& color, const std::string& id) :
-	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, id, INPUT_HANDLE_PROFILE_NONE),
+GameLine::GameLine(Line& line, const vec_4x& color) :
+	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, INPUT_HANDLE_PROFILE_NONE),
 	m_line(line)
 {
 	m_wireframe = m_line.GetConstructedWireFrame();
@@ -42,7 +42,7 @@ GameLine::~GameLine()
 
 std::unique_ptr<GameObject> GameLine::Clone()
 {
-	return std::make_unique<GameLine>(m_line, UniqueGenerator::Instance().GenerateUniqueID());
+	return std::make_unique<GameLine>(m_line);
 }
 
 void GameLine::Init()

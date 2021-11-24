@@ -29,7 +29,7 @@ class SoldierObject : public GameObject
 
 	public:
 
-		SoldierObject(Texture* tex, int shader, const float posX, const float posY, int scale, const std::string& id);
+		SoldierObject(Texture* tex, int shader, const float posX, const float posY, int scale);
 		~SoldierObject();
 
 		SoldierObject(const SoldierObject& copy) = delete;

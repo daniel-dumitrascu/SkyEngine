@@ -177,5 +177,4 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 	}
 
 	return level;
-
 }

@@ -3,8 +3,8 @@
 #include "texture/Texture.h"
 #include "utils/UniqueGenerator.h"
 
-Background::Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id) :
-	GameObject(mesh, texture, shader, posX, posY, scale, id, INPUT_HANDLE_PROFILE_NONE)
+Background::Background(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale) :
+	GameObject(mesh, texture, shader, posX, posY, scale, INPUT_HANDLE_PROFILE_NONE)
 {
 	Init();
 }
@@ -23,8 +23,7 @@ std::unique_ptr<GameObject> Background::Clone()
 										m_shader,
 										GetPosition().elem[0],
 										GetPosition().elem[1],
-										m_scaling,
-										UniqueGenerator::Instance().GenerateUniqueID());
+										m_scaling);
 }
 
 void Background::Init()

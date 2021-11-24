@@ -15,8 +15,7 @@ class BirdObject : public GameObject
 				   int shader, 
 				   const float posX,
 				   const float posY,
-				   int scale,
-				   const std::string id);
+				   int scale);
 		~BirdObject();
 
 		BirdObject(const BirdObject& copy) = delete;

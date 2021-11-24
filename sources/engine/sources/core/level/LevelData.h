@@ -10,7 +10,8 @@ struct GameObjectPackage
 	GameObjectPackage() :	m_renderable(false),
 							m_collidable(false),
 							m_controllable(false),
-							m_id(""),
+							m_id(""),		// The ID from the level data
+							m_sceneID(""),  // The ID given at runtime when the object is stored in the scene collection
 							m_type(0),
 							m_meshID(0),
 							m_animationID(0),
@@ -32,6 +33,7 @@ struct GameObjectPackage
 	bool m_collidable;
 	bool m_controllable;
 	std::string m_id;
+	std::string m_sceneID;
 	int m_type;
 	int m_meshID;
 	int m_animationID;

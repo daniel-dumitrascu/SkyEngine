@@ -6,7 +6,7 @@
 class GameRectangle : public GameObject
 {
 	public:
-		GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color, const std::string& id);
+		GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color);
 		~GameRectangle();
 
 		std::unique_ptr<GameObject> Clone() override;
