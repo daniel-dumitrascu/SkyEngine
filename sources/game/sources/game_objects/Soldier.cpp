@@ -19,15 +19,13 @@ SoldierObject::SoldierObject(Texture* tex,
 							int shader, 
 							const float posX, 
 							const float posY, 
-							int scale, 
-							const std::string& id) :
+							int scale) :
 		GameObject(NULL, 
 					tex, 
 					shader, 
 					posX, 
 					posY, 
 					scale, 
-					id,
 					INPUT_HANDLE_PROFILE_GAMEOBJECT)
 {
 	SetFlagOFF(OBJECT_IS_CONTROLLABLE);
@@ -72,8 +70,7 @@ std::unique_ptr<GameObject> SoldierObject::Clone()
 											m_shader,
 											GetPosition().elem[0],
 											GetPosition().elem[1],
-											m_scaling,
-											UniqueGenerator::Instance().GenerateUniqueID());
+											m_scaling);
 }
 
 void SoldierObject::Init()

@@ -5,8 +5,8 @@
 #include "global/GlobalData.h"
 
 
-MovingObject::MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id):
-	GameObject(mesh, texture, shader, postX, postY, scale, id, INPUT_HANDLE_PROFILE_NONE),
+MovingObject::MovingObject(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale):
+	GameObject(mesh, texture, shader, postX, postY, scale, INPUT_HANDLE_PROFILE_NONE),
 	m_speed(20.0f)
 {
 	Init();

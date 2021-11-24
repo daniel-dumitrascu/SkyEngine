@@ -10,7 +10,7 @@ class StaticObject : public GameObject
 {
 public:
 
-	StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, const std::string& id);
+	StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale);
 	~StaticObject();
 
 	StaticObject(const StaticObject& copy) = delete;

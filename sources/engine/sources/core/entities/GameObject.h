@@ -39,7 +39,6 @@ class GameObject : public Controllable
 					const float posX,
 					const float posY,
 					const int scale,
-					const std::string& id,
 					InputHandleProfile layer );
 
 		virtual ~GameObject();
@@ -73,6 +72,7 @@ class GameObject : public Controllable
 		const std::array<int, 4>& GetOccupiedGriDArea() const { return m_occupiedGridArea; }
 		void SetOccupiedGridArea(int topIndex, int leftIndex, int bottomIndex, int rightIndex);
 		const std::string GetID() const { return m_id; }
+		void SetID(std::string& id) { m_id = id; };
 
 		void AddCollidingNeighbour(GameObject* neighbour);
 		void RemoveCollidingNeighbour(GameObject* neighbour);

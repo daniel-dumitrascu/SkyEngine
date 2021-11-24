@@ -46,8 +46,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 	{
 		if (objPack.m_type == GAME_OBJECT_ID_PLAYER)
 		{
-			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;
@@ -60,8 +59,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_STATIC_BLOCK)
 		{
-			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;
@@ -74,8 +72,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_BACKGROUND)
 		{
-			obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
-			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
+			obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
 		}
 	}
 
@@ -159,12 +156,12 @@ Camera* GameObjectFactory::CreateCamera(const CameraPackage& cameraPack)
 GameObject* GameObjectFactory::CreateGameLine(vec_2x& startPoint, vec_2x& endPoint, int thickness, vec_4x& color)
 {
 	Line line(startPoint, endPoint, thickness);
-	return new GameLine(line, color, UniqueGenerator::Instance().GenerateUniqueID());
+	return new GameLine(line, color);
 }
 
 GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, vec_4x& color)
 {
-	return new GameRectangle(recLeftTop, recRightBottom, color, UniqueGenerator::Instance().GenerateUniqueID());
+	return new GameRectangle(recLeftTop, recRightBottom, color);
 }
 
 WireFrame* GameObjectFactory::GetTile(GameObjectPackage& pack)

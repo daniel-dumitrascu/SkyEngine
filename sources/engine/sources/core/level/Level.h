@@ -34,6 +34,7 @@ private:
 	Tile* GetTileAtIndex(unsigned int x, unsigned int y);
 	void ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex);
 	bool IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex, const float outBottomIndex, const float outRightIndex);
+	void RemoveObject(int index);
 #if(DEBUG_SECTION)
 	GameObject* GetGridRectObject(int x, int y);
 
@@ -51,7 +52,9 @@ private:
 
 	// Level has ownership over the objects so the objects
 	// will be deleted by the the Level
-	std::map<std::string, std::unique_ptr<GameObject>> sceneObjects;
+	FastAccessCollection<GameObject*> sceneObjects;
+	//std::map<std::string, std::unique_ptr<GameObject>> sceneObjects;
+
 	std::vector<std::vector<Tile*>> m_gameWorldGrid;
 	Camera* activeLevelCamera;
 	std::unordered_map<std::string, std::unique_ptr<Camera>> availableCameras;

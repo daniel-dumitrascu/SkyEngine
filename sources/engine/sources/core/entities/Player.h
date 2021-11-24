@@ -11,7 +11,7 @@ class Player : public GameObject
 
 public:
 
-	Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, const std::string& id);
+	Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale);
 	~Player();
 
 	void Draw();
