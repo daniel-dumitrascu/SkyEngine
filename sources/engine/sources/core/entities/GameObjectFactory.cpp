@@ -46,7 +46,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 	{
 		if (objPack.m_type == GAME_OBJECT_ID_PLAYER)
 		{
-			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
+			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;
@@ -59,7 +59,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_STATIC_BLOCK)
 		{
-			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
+			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;

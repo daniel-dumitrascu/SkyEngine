@@ -71,13 +71,14 @@ class GameObject : public Controllable
 		Rectangle GetObjectWorldRect();
 		const std::array<int, 4>& GetOccupiedGriDArea() const { return m_occupiedGridArea; }
 		void SetOccupiedGridArea(int topIndex, int leftIndex, int bottomIndex, int rightIndex);
-		const std::string GetID() const { return m_id; }
-		void SetID(std::string& id) { m_id = id; };
+		const int GetID() const { return m_id; }
+		void SetID(int id) { m_id = id; };
+		float GetZBuffer() { return m_zbuffer; }
 
 		void AddCollidingNeighbour(GameObject* neighbour);
 		void RemoveCollidingNeighbour(GameObject* neighbour);
 		void ClearCollidingNeighbours();
-		const std::map<const std::string, GameObject*>& GetCollidingNeighbours() const;
+		const std::map<const int, GameObject*>& GetCollidingNeighbours() const;
 
 #if(DEBUG_SECTION)
 		void SetOutline(bool value) { isOutlineEnabled = value; }
@@ -87,21 +88,22 @@ class GameObject : public Controllable
 	protected:
 
 		float m_rectHeight;
-		float m_rectLenght;	
+		float m_rectLenght;
+		float m_zbuffer;
 		int m_shader;							// The shader used by this entity     //TODO we don't need a m_shader in each entity. This should be at the game level or entity collection management
 		BinaryArray m_gameObjectSettings;
 		WireFrame* m_wireframe;					// The mesh model of the entity
 		Rectangle* m_rectangle = nullptr;		// The rect constr from the wireframe used in collision calc
 		Texture* m_texture;						// The texture applied on the mesh
 		std::array<int, 4> m_occupiedGridArea;	// The last known occupied grid area of the object
-		std::string	m_id;						// The unique identifier in the game of this object
+		int	m_id;								// The unique identifier in the game of this object
 
 		vec_3x m_world_position;
 		vec_3x m_world_rotation;
 		mat_4x m_world_matrix;
 		mat_4x m_wp_matrix;
 
-		std::map<const std::string, GameObject*> m_collidingNeighbours;
+		std::map<const int, GameObject*> m_collidingNeighbours;
 
 		int  m_scaling;
 		bool m_destroy;

@@ -8,10 +8,12 @@
 #include "level/Level.h"
 
 
-Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale) :
+Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, float zBuffer) :
 	GameObject(mesh, texture, shader, postX, postY, scale, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
 	speedGoal(0.0f), currentSpeed(0.0f)
 {
+	m_zbuffer = zBuffer;
+
 	// Set a default direction
 	vector::vector_3x::SetVector(currDirection, 0.0f, 0.0f, 0.0f);
 	vector::vector_3x::SetVector(newDirection, 0.0f, 0.0f, 0.0f);

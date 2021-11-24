@@ -22,6 +22,7 @@ GameObject::GameObject( WireFrame* wireframe,
 												  m_destroy(true),
 												  m_rectHeight(0.0f),
 												  m_rectLenght(0.0f),
+												  m_zbuffer(0.0f),
 												  m_gameObjectSettings(OBJECT_FLAG_COUNT)
 {
 	SetFlagOFF(GameObjectFlags::OBJECT_IS_ANIMATED);
@@ -167,7 +168,7 @@ void GameObject::AddCollidingNeighbour(GameObject* neighbour)
 {
 	if (m_collidingNeighbours.find(neighbour->GetID()) == m_collidingNeighbours.end())
 	{
-		m_collidingNeighbours.insert(std::pair<const std::string, GameObject*>(neighbour->GetID(), neighbour));
+		m_collidingNeighbours.insert(std::pair<int, GameObject*>(neighbour->GetID(), neighbour));
 	}
 }
 
@@ -178,7 +179,7 @@ void GameObject::RemoveCollidingNeighbour(GameObject* neighbour)
 
 void GameObject::ClearCollidingNeighbours()
 {
-	std::map<const std::string, GameObject*>::iterator ite = m_collidingNeighbours.begin();
+	std::map<const int, GameObject*>::iterator ite = m_collidingNeighbours.begin();
 	for (; ite != m_collidingNeighbours.end(); ite++)
 	{
 		ite->second->RemoveCollidingNeighbour(this);
@@ -187,7 +188,7 @@ void GameObject::ClearCollidingNeighbours()
 	m_collidingNeighbours.clear();
 }
 
-const std::map<const std::string, GameObject*>& GameObject::GetCollidingNeighbours() const
+const std::map<const int, GameObject*>& GameObject::GetCollidingNeighbours() const
 {
 	return m_collidingNeighbours;
 }

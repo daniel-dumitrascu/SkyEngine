@@ -8,9 +8,9 @@ Tile::Tile(unsigned int rowIndex, unsigned int columnIndex)
 	// will be optain by getting the GameRectangle's position
 }
 
-void Tile::RemoveCollidingObject(std::string& id)
+void Tile::RemoveCollidingObject(int id)
 {
-	std::map<std::string, GameObject*>::iterator foundIt = m_tileCollidingObjects.find(id);
+	std::map<int, GameObject*>::iterator foundIt = m_tileCollidingObjects.find(id);
 	if(foundIt != m_tileCollidingObjects.end())
 		m_tileCollidingObjects.erase(foundIt);
 }
@@ -18,10 +18,7 @@ void Tile::RemoveCollidingObject(std::string& id)
 void Tile::AddCollidingObject(GameObject* obj)
 {
 	if (obj != nullptr)
-	{
-		std::string label = obj->GetID();
-		m_tileCollidingObjects.insert(std::pair<std::string, GameObject*>(label, obj));	
-	}
+		m_tileCollidingObjects.insert(std::pair<int, GameObject*>(obj->GetID(), obj));
 }
 
 bool Tile::HasCollidingObjects()
@@ -29,7 +26,7 @@ bool Tile::HasCollidingObjects()
 	return !m_tileCollidingObjects.empty();
 }
 
-const std::map<std::string, GameObject*>& Tile::GetCollidingObjects()
+const std::map<int, GameObject*>& Tile::GetCollidingObjects()
 {
 	return m_tileCollidingObjects;
 }

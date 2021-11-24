@@ -11,14 +11,15 @@ struct GameObjectPackage
 							m_collidable(false),
 							m_controllable(false),
 							m_id(""),		// The ID from the level data
-							m_sceneID(""),  // The ID given at runtime when the object is stored in the scene collection
+							m_sceneID(0),   // The ID given at runtime when the object is stored in the scene collection
 							m_type(0),
 							m_meshID(0),
 							m_animationID(0),
 							m_textureID(0),
 							m_shaderID(0),
 							m_scale(0),
-							m_thickness(0)
+							m_thickness(0),
+							m_zBuffer(0.0f)
 	{
 		vector::vector_2x::SetVector(m_startPoint, 0.0f, 0.0f);
 		vector::vector_2x::SetVector(m_endPoint, 0.0f, 0.0f);
@@ -33,7 +34,7 @@ struct GameObjectPackage
 	bool m_collidable;
 	bool m_controllable;
 	std::string m_id;
-	std::string m_sceneID;
+	int m_sceneID;
 	int m_type;
 	int m_meshID;
 	int m_animationID;
@@ -48,6 +49,7 @@ struct GameObjectPackage
 	vec_3x m_position;
 	vec_3x m_rotation;
 	vec_4x m_color;
+	float m_zBuffer;
 };
 
 struct CameraPackage {
