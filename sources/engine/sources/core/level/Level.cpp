@@ -576,9 +576,10 @@ bool Level::IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex,
 
 void Level::RemoveObject(int index)
 {
-	//TODO - remove the object from the sceneRenderingObjects as well
-
 	GameObject* todelGameObject = sceneObjectsCollection.Retrive(index);
+
+	sceneRenderingObjects.erase(todelGameObject->GetZBuffer());
+
 	delete todelGameObject;
 	sceneObjectsCollection.Free(index);
 }
