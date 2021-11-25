@@ -113,7 +113,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 			Property_elem = Property_elem->NextSiblingElement("ZBuffer");
 
 			if (Property_elem)
-				result += Property_elem->QueryFloatAttribute("value", &(game_object_pack.m_zBuffer));
+				result += Property_elem->QueryIntAttribute("value", &(game_object_pack.m_zBuffer));
 
 			if (result != tinyxml2::XML_SUCCESS)
 				return NULL;

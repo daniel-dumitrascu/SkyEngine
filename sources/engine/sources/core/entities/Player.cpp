@@ -8,7 +8,7 @@
 #include "level/Level.h"
 
 
-Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, float zBuffer) :
+Player::Player(WireFrame* mesh, Texture* texture, int shader, const float postX, const float postY, int scale, int zBuffer) :
 	GameObject(mesh, texture, shader, postX, postY, scale, INPUT_HANDLE_PROFILE_GAMEOBJECT), hasObjectMovedThisFrame(false),
 	speedGoal(0.0f), currentSpeed(0.0f)
 {

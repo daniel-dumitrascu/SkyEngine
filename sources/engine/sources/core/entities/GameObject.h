@@ -73,7 +73,7 @@ class GameObject : public Controllable
 		void SetOccupiedGridArea(int topIndex, int leftIndex, int bottomIndex, int rightIndex);
 		const int GetID() const { return m_id; }
 		void SetID(int id) { m_id = id; };
-		float GetZBuffer() { return m_zbuffer; }
+		int GetZBuffer() { return m_zbuffer; }
 
 		void AddCollidingNeighbour(GameObject* neighbour);
 		void RemoveCollidingNeighbour(GameObject* neighbour);
@@ -89,7 +89,7 @@ class GameObject : public Controllable
 
 		float m_rectHeight;
 		float m_rectLenght;
-		float m_zbuffer;
+		int m_zbuffer;							// A value between 0 and 100 - we don't want to use float or double in the map because of the precission issue
 		int m_shader;							// The shader used by this entity     //TODO we don't need a m_shader in each entity. This should be at the game level or entity collection management
 		BinaryArray m_gameObjectSettings;
 		WireFrame* m_wireframe;					// The mesh model of the entity
