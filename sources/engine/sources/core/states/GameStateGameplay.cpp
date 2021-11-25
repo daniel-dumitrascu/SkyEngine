@@ -36,5 +36,6 @@ void GameStateGameplay::UpdateState()
 
 void GameStateGameplay::RenderState()
 {
+	Level::GetInstance()->PreDraw();
 	Level::GetInstance()->Draw();
 }

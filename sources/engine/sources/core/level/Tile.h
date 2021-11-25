@@ -13,10 +13,10 @@ class Tile
 
 		int GetRowIndex() { return m_gridRowIndex; }
 		int GetColumnIndex() { return m_gridColumnIndex; }
-		void RemoveCollidingObject(std::string& id);
+		void RemoveCollidingObject(int id);
 		void AddCollidingObject(GameObject* obj);
 		bool HasCollidingObjects();
-		const std::map<std::string, GameObject*>& GetCollidingObjects();
+		const std::map<int, GameObject*>& GetCollidingObjects();
 
 	private:
 
@@ -29,5 +29,5 @@ class Tile
 		/*
 		 * A list of game objects that collide with this tile
 		 */
-		std::map<std::string, GameObject*> m_tileCollidingObjects;
+		std::map<int, GameObject*> m_tileCollidingObjects;
 };

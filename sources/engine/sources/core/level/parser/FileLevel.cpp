@@ -109,6 +109,12 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 			if (Property_elem)
 				result += Property_elem->QueryIntAttribute("size", &(game_object_pack.m_scale));
 
+			// Parse the Z-Buffer
+			Property_elem = Property_elem->NextSiblingElement("ZBuffer");
+
+			if (Property_elem)
+				result += Property_elem->QueryIntAttribute("value", &(game_object_pack.m_zBuffer));
+
 			if (result != tinyxml2::XML_SUCCESS)
 				return NULL;
 

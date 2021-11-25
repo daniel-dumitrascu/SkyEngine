@@ -16,6 +16,7 @@ public:
 
 	void Init();
 	void Update();
+	void PreDraw();
 	void Draw();
 
 	void InputActionNotify(const InputEventBatch& inputBatch);
@@ -52,8 +53,9 @@ private:
 
 	// Level has ownership over the objects so the objects
 	// will be deleted by the the Level
-	FastAccessCollection<GameObject*> sceneObjects;
-	//std::map<std::string, std::unique_ptr<GameObject>> sceneObjects;
+	FastAccessCollection<GameObject*> sceneObjectsCollection;
+
+	std::multimap<float, int> sceneRenderingObjects;
 
 	std::vector<std::vector<Tile*>> m_gameWorldGrid;
 	Camera* activeLevelCamera;

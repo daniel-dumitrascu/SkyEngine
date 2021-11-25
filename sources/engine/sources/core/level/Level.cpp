@@ -42,9 +42,9 @@ void Level::CleanLevel()
 	activeLevelCamera = nullptr;
 
 	// Remove all the entities from the level 
-	for (int index = 0; index < sceneObjects.Count(); ++index)
+	for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
 	{
-		if (!sceneObjects.IsSlotFree(index))
+		if (!sceneObjectsCollection.IsSlotFree(index))
 			RemoveObject(index);
 	}
 
@@ -97,9 +97,9 @@ void Level::ConstructLevel(LevelPackage* levelData)
 		obj = GameObjectFactory::GetInstance()->CreateGameObject((*objectIte));
 		if (obj)
 		{
-			int objUniqueID = sceneObjects.Occupy(obj);
-			obj->SetID(std::to_string(objUniqueID));
-			objectIte->m_sceneID = std::to_string(objUniqueID);
+			int objUniqueID = sceneObjectsCollection.Occupy(obj);
+			obj->SetID(objUniqueID);
+			objectIte->m_sceneID = objUniqueID;
 
 			if (objectIte->m_id.compare(levelData->m_active_camera_attached_object) == 0)
 			{
@@ -131,19 +131,19 @@ void Level::ConstructLevel(LevelPackage* levelData)
 		AddVisibleGridLines();
 #endif
 
-	for (int index = 0; index < sceneObjects.Count(); ++index)
+	for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
 	{
 		// Calculation  of the object in tile map
-		Rectangle objRect = sceneObjects.Retrive(index)->GetObjectWorldRect();
+		Rectangle objRect = sceneObjectsCollection.Retrive(index)->GetObjectWorldRect();
 		ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
-		sceneObjects.Retrive(index)->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
+		sceneObjectsCollection.Retrive(index)->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
 
 		// Add the object in every tile with which it intersects
 		for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
 			for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 			{
 				Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-				newTile->AddCollidingObject(sceneObjects.Retrive(index));
+				newTile->AddCollidingObject(sceneObjectsCollection.Retrive(index));
 #if(DEBUG_SECTION)
 				// Activate the visibility on the new area
 				SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
@@ -272,18 +272,18 @@ void Level::Update()
 	vector::vector_4x::SetVector(green, 0.0f, 1.0f, 0.0f, 1.0f);
 #endif
 
-	for (int index = 0; index < sceneObjects.Count(); ++index)
+	for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
 	{
 		//TODO - implement on the FastAccessCollection a rearange feature so that most of the occupied slots are grouped in front of the array
-		if (sceneObjects.IsSlotFree(index))
+		if (sceneObjectsCollection.IsSlotFree(index))
 			continue;
 
-		if (!sceneObjects.Retrive(index)->IsAlive())
+		if (!sceneObjectsCollection.Retrive(index)->IsAlive())
 		{
 			RemoveObject(index);
 			continue;
 		}
-		GameObject* currSceneObj = sceneObjects.Retrive(index);
+		GameObject* currSceneObj = sceneObjectsCollection.Retrive(index);
 
 		currSceneObj->Update();
 		if (currSceneObj->IsFlagON(OBJECT_IS_MOVING))
@@ -312,9 +312,7 @@ void Level::Update()
 					for (int xAxisIndex = oldGridMapping[1]; xAxisIndex <= oldGridMapping[3]; xAxisIndex++)
 					{
 						Tile* oldTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-
-						std::string label = currSceneObj->GetID();
-						oldTile->RemoveCollidingObject(label); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
+						oldTile->RemoveCollidingObject(currSceneObj->GetID()); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
 #if(DEBUG_SECTION)
 						if (!oldTile->HasCollidingObjects())
 						{
@@ -342,8 +340,8 @@ void Level::Update()
 					for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 					{
 						Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-						const std::map<std::string, GameObject*> collidingObj = newTile->GetCollidingObjects();
-						std::map<std::string, GameObject*>::const_iterator ite = collidingObj.begin();
+						const std::map<int, GameObject*> collidingObj = newTile->GetCollidingObjects();
+						std::map<int, GameObject*>::const_iterator ite = collidingObj.begin();
 						for (; ite != collidingObj.end(); ite++)
 						{
 							currSceneObj->AddCollidingNeighbour(ite->second);
@@ -359,8 +357,8 @@ void Level::Update()
 			}
 
 			// Check if object is colliding with other objects from scene
-			const std::map<const std::string, GameObject*> collidingNeighbours = currSceneObj->GetCollidingNeighbours();
-			std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
+			const std::map<const int, GameObject*> collidingNeighbours = currSceneObj->GetCollidingNeighbours();
+			std::map<const int, GameObject*>::const_iterator ite = collidingNeighbours.begin();
 			for (; ite != collidingNeighbours.end(); ite++)
 			{
 				//TODO we should use a general collision detection here that implements something like CollisionDetectionAABB
@@ -388,7 +386,7 @@ void Level::Update()
 							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
 						}
 
-						std::cout << "Collision between <" << currSceneObj->GetID() << "> and <" << ite->second->GetID() << ">" << std::endl;
+						//std::cout << "Collision between <" << currSceneObj->GetID() << "> and <" << ite->second->GetID() << ">" << std::endl;
 #endif
 				}
 			}
@@ -401,8 +399,8 @@ void Level::Update()
 		else
 		{
 			// Check if object is colliding with other objects from scene
-			const std::map<const std::string, GameObject*> collidingNeighbours = currSceneObj->GetCollidingNeighbours();
-			std::map<const std::string, GameObject*>::const_iterator ite = collidingNeighbours.begin();
+			const std::map<const int, GameObject*> collidingNeighbours = currSceneObj->GetCollidingNeighbours();
+			std::map<const int, GameObject*>::const_iterator ite = collidingNeighbours.begin();
 			for (; ite != collidingNeighbours.end(); ite++)
 			{
 				Rectangle objRect = currSceneObj->GetObjectWorldRect();
@@ -452,6 +450,17 @@ void Level::Update()
 #endif
 }
 
+void Level::PreDraw()
+{
+	sceneRenderingObjects.clear();
+
+	for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
+	{
+		if (!sceneObjectsCollection.IsSlotFree(index))
+			sceneRenderingObjects.insert(std::pair<float, int>(sceneObjectsCollection.Retrive(index)->GetZBuffer(), index));
+	}
+}
+
 void Level::Draw()
 {
 	// Clear the color buffer
@@ -463,13 +472,10 @@ void Level::Draw()
 #endif
 
 	// Draw all the level entities
-	for (int index = 0; index < sceneObjects.Count(); ++index)
+	for (auto ite = sceneRenderingObjects.begin(); ite != sceneRenderingObjects.end(); ++ite)
 	{
-		if (!sceneObjects.IsSlotFree(index))
-		{
-			sceneObjects.Retrive(index)->PreDraw();
-			sceneObjects.Retrive(index)->Draw();
-		}
+		sceneObjectsCollection.Retrive(ite->second)->PreDraw();
+		sceneObjectsCollection.Retrive(ite->second)->Draw();
 	}
 
 #if(DEBUG_SECTION)
@@ -515,13 +521,13 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 				isOutlineEnabled = !isOutlineEnabled;
 
 				// All the renderable objects in the scene must get the new value
-				for (int index = 0; index < sceneObjects.Count(); ++index)
+				for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
 				{
-					if (!sceneObjects.IsSlotFree(index) &&
-						sceneObjects.Retrive(index)->IsAlive() &&
-						sceneObjects.Retrive(index)->IsFlagON(OBJECT_IS_RENDERABLE))
+					if (!sceneObjectsCollection.IsSlotFree(index) &&
+						sceneObjectsCollection.Retrive(index)->IsAlive() &&
+						sceneObjectsCollection.Retrive(index)->IsFlagON(OBJECT_IS_RENDERABLE))
 					{
-						sceneObjects.Retrive(index)->SetOutline(isOutlineEnabled);
+						sceneObjectsCollection.Retrive(index)->SetOutline(isOutlineEnabled);
 					}
 				}
 			}
@@ -570,9 +576,12 @@ bool Level::IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex,
 
 void Level::RemoveObject(int index)
 {
-	GameObject* todelGameObject = sceneObjects.Retrive(index);
+	GameObject* todelGameObject = sceneObjectsCollection.Retrive(index);
+
+	sceneRenderingObjects.erase(todelGameObject->GetZBuffer());
+
 	delete todelGameObject;
-	sceneObjects.Free(index);
+	sceneObjectsCollection.Free(index);
 }
 
 #if(DEBUG_SECTION)

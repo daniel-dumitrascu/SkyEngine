@@ -6,9 +6,10 @@
 #include "level/Level.h"
 
 
-StaticObject::StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale) :
+StaticObject::StaticObject(WireFrame* mesh, Texture* texture, int shader, const float posX, const float posY, int scale, int zBuffer) :
 	GameObject(mesh, texture, shader, posX, posY, scale, INPUT_HANDLE_PROFILE_NONE)
 {
+	m_zbuffer = zBuffer;
 	Init();
 }
 
@@ -33,7 +34,8 @@ std::unique_ptr<GameObject> StaticObject::Clone()
 											m_shader,
 											GetPosition().elem[0],
 											GetPosition().elem[1],
-											m_scaling);
+											m_scaling,
+											m_zbuffer);
 }
 
 void StaticObject::Init()
