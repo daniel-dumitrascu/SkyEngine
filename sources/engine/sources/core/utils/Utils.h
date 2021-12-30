@@ -9,6 +9,10 @@ namespace utils
 	namespace path
 	{
 		void GetWorkingDir(std::string& _path);
+
+		bool IsFileCreated(const std::string& _path, const std::string& _fileName);
+
+		std::ofstream CreateFileAtLocation(const std::string& _path, const std::string& _fileName);
 	}
 
 	namespace str

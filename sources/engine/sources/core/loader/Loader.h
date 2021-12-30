@@ -15,10 +15,6 @@ class Loader
 
 		 virtual void* Load(const std::string& file_path) = 0;
 
-	protected:
-
-		 bool  m_is_loaded;
-
 	private:
 
 		 Loader(const Loader& copy) {};
