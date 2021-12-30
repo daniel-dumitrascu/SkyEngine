@@ -27,10 +27,7 @@ void* ShaderLoader::Load(const std::string& file_path)
 #endif
 
 	if (m_buffer)
-	{
-		m_is_loaded = true;
 		return m_buffer;
-	}
 
 	log.message("Shader file could not be loaded!", Logging::MSG_ERROR);
 	exit(1);

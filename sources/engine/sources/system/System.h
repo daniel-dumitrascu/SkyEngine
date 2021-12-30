@@ -29,6 +29,8 @@ class System
 
 		bool CleanUp();
 		void ConstrSystemGlobals();
+		void CreateSettingsFileIfNonExisting(const std::string& working_dir_path);
+		void CreateDefaultSettingsFile(const std::string& _path, const std::string& _fileName);
 
 		std::string    m_title;
 		Driver*        m_driver;

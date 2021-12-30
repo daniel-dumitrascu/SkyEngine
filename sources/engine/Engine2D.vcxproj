@@ -135,6 +135,9 @@
     <ClInclude Include="sources\core\primitive\Rectangle.h" />
     <ClInclude Include="sources\core\primitive\GameLine.h" />
     <ClInclude Include="sources\core\primitive\GameRectangle.h" />
+    <ClInclude Include="sources\core\settings\parser\FileSettings.h" />
+    <ClInclude Include="sources\core\settings\SettingsLoader.h" />
+    <ClInclude Include="sources\core\settings\SettingsPackage.h" />
     <ClInclude Include="sources\core\shaders\language\OpenGL2File.h" />
     <ClInclude Include="sources\core\shaders\Shader.h" />
     <ClInclude Include="sources\core\shaders\ShaderDefines.h" />
@@ -217,6 +220,8 @@
     <ClCompile Include="sources\core\primitive\Rectangle.cpp" />
     <ClCompile Include="sources\core\primitive\GameLine.cpp" />
     <ClCompile Include="sources\core\primitive\GameRectangle.cpp" />
+    <ClCompile Include="sources\core\settings\parser\FileSettings.cpp" />
+    <ClCompile Include="sources\core\settings\SettingsLoader.cpp" />
     <ClCompile Include="sources\core\shaders\language\OpenGL2File.cpp" />
     <ClCompile Include="sources\core\shaders\ShaderLoader.cpp" />
     <ClCompile Include="sources\core\shaders\ShaderResources.cpp" />

@@ -36,6 +36,5 @@ void* MeshLoader::Load(const std::string& file_path)
 		exit(1);
 	}
 
-	m_is_loaded = true;
 	return m_buffer;
 }

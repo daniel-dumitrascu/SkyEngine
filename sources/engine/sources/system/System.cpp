@@ -2,7 +2,11 @@
 #include "global/GlobalPaths.h"
 #include "utils/Utils.h"
 #include "global/GlobalData.h"
+#include "nlohmann/json.hpp"
 
+#include <fstream>
+
+using json = nlohmann::json;
 
 Application*  System::m_app = NULL;
 
@@ -25,9 +29,12 @@ void System::SetApplication(Application* const app, const std::string title)
 	m_title = utils::str::Strfmt("%s - built on %s %s, version 0.001", title.c_str(), __TIME__, __DATE__);
 }
 
+#include "settings/SettingsLoader.h"
 System::System() : m_title(""), m_driver(NULL), log("System")
 {
 	ConstrSystemGlobals();
+	CreateSettingsFileIfNonExisting(working_dir_path);
+	SettingsLoader::GetInstance()->Load(working_dir_path + "/settings.json");
 }
 
 void System::Init() 
@@ -99,4 +106,25 @@ void System::ConstrSystemGlobals()
 	textures_path	= working_dir_path + "/resources/textures/PNG_files/";
 	animation_path	= working_dir_path + "/resources/animations/";
 	shaders_path	= working_dir_path + "/resources/shaders/";
+}
+
+void System::CreateSettingsFileIfNonExisting(const std::string& working_dir_path)
+{
+	if (!utils::path::IsFileCreated(working_dir_path, "settings.json"))
+		CreateDefaultSettingsFile(working_dir_path, "settings.json");	
+}
+
+void System::CreateDefaultSettingsFile(const std::string& _path, const std::string& _fileName)
+{
+	std::ofstream settingFile = utils::path::CreateFileAtLocation(_path, _fileName);
+
+	json settingsJson;
+	settingsJson["defaultResources"]["splashScreen"]["path"] = working_dir_path + "\\" + "assets" + "\\" + "splashscreen";
+	settingsJson["defaultResources"]["splashScreen"]["name"] = "splashscreen.png";
+	settingsJson["defaultResources"]["splashScreen"]["mesh"] = "splashscreen.mesh";
+	std::string strJson = settingsJson.dump(4);
+
+	settingFile.write(strJson.c_str(), strJson.length());
+	settingFile.flush();
+	settingFile.close();
 }
