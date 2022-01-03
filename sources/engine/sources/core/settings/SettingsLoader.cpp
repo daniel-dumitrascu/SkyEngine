@@ -28,7 +28,7 @@ void* SettingsLoader::Load(const std::string& file_path)
 		settingsPackage.reset();
 
 	settingsPackage = std::unique_ptr<SettingsPackage>(parser->ParseFile(file_path));
-	return reinterpret_cast<void*>(settingsPackage.get());
+	return static_cast<void*>(settingsPackage.get());
 }
 
 std::string SettingsLoader::GetValue(std::string key)

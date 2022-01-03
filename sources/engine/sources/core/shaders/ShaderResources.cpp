@@ -16,21 +16,20 @@ ShaderRes::ShaderRes() : log("ShaderRes")
 
 ShaderRes::~ShaderRes()
 {
-	std::map<unsigned int, unsigned int>::iterator  ite = m_collection.begin();
-	int to_del;
+	std::map<const std::string, unsigned int>::iterator  ite = m_collection.begin();
 
 	for (; ite != m_collection.end();)
 	{
 #if(GRAPHICS_OPENGL_ES_2_0 || GRAPHICS_OPENGL_LATEST)
 		glDeleteProgram(ite->second);
 #endif
-		to_del = ite->first;
+		const std::string& to_del = ite->first;
 		++ite;
 		Remove(to_del);
 	}
 }
 
-bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, int key)
+bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, const std::string& key)
 {
 	if (shaderPair)
 	{
@@ -46,7 +45,7 @@ bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, int key)
 	return false;
 }
 
-void ShaderRes::RemoveShaderPair(const int key)
+void ShaderRes::RemoveShaderPair(const std::string& key)
 {
 	//TODO if this function is called many times, an optimization would be to use an iterator as in ShaderRes :: ~ ShaderRes ()
 	unsigned int program_id = RetriveProgramID(key);
@@ -68,12 +67,12 @@ unsigned int ShaderRes::CountShaderPair()
 	return MapCollection::Count();
 }
 
-bool ShaderRes::ExistShaderPair(const int key)
+bool ShaderRes::ExistShaderPair(const std::string& key)
 {
 	return MapCollection::Find(key);
 }
 
-unsigned int ShaderRes::RetriveProgramID(const unsigned int key)
+unsigned int ShaderRes::RetriveProgramID(const std::string& key)
 {
 	return MapCollection::Retrive(key);
 }

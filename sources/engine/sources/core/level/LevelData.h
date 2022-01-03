@@ -13,10 +13,10 @@ struct GameObjectPackage
 							m_id(""),		// The ID from the level data
 							m_sceneID(0),   // The ID given at runtime when the object is stored in the scene collection
 							m_type(0),
-							m_meshID(0),
-							m_animationID(0),
-							m_textureID(0),
-							m_shaderID(0),
+							m_meshPath(""),
+							m_texturePath(""),
+							m_shaderPath(""),
+							m_animationPath(""),
 							m_scale(0),
 							m_zBuffer(0),
 							m_thickness(0)				
@@ -34,12 +34,12 @@ struct GameObjectPackage
 	bool m_collidable;
 	bool m_controllable;
 	std::string m_id;
+	std::string m_meshPath;
+	std::string m_texturePath;
+	std::string m_shaderPath;
+	std::string m_animationPath;
 	int m_sceneID;
 	int m_type;
-	int m_meshID;
-	int m_animationID;
-	int m_textureID;
-	int m_shaderID;
 	int m_scale;
 	int m_zBuffer;
 	int m_thickness;		// valid only for line objects

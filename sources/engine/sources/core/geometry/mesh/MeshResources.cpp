@@ -27,14 +27,14 @@ MeshRes& MeshRes::operator=(const MeshRes& copy)
 	return *this;
 }
 
-void MeshRes::Add(WireFrame* mesh, int key)
+void MeshRes::Add(WireFrame* mesh, const std::string& key)
 {
 	MapCollection::Add(mesh, key);
 }
 
-void MeshRes::Remove(const int index)
+void MeshRes::Remove(const std::string& key)
 {
-	MapCollection::Remove(index);
+	MapCollection::Remove(key);
 }
 
 unsigned int MeshRes::Count()
@@ -42,12 +42,12 @@ unsigned int MeshRes::Count()
 	return MapCollection::Count();
 }
 
-bool MeshRes::Find(const int index)
+bool MeshRes::Find(const std::string& key)
 {
-	return MapCollection::Find(index);
+	return MapCollection::Find(key);
 }
 
-WireFrame* MeshRes::Retrive(const int index)
+WireFrame* MeshRes::Retrive(const std::string& key)
 {
-	return MapCollection::Retrive(index);
+	return MapCollection::Retrive(key);
 }

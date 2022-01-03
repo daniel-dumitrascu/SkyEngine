@@ -11,11 +11,11 @@ class TexRes : public MapCollection<Texture*>
 
 		static TexRes* GetInstance();
 
-		void Add(Texture* texture, int key);
-		void Remove(const int index);
+		void Add(Texture* texture, const std::string& key);
+		void Remove(const std::string& key);
 		unsigned int Count() { return MapCollection::Count(); };
-		bool Find(const int index);
-		Texture* Retrive(const int index);
+		bool Find(const std::string& key);
+		Texture* Retrive(const std::string& key);
 
 	private:
 

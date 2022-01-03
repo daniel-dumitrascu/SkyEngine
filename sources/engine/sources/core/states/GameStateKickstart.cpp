@@ -5,14 +5,13 @@
 #include "texture/TextureResources.h"
 #include "shaders/ShaderLoader.h"
 #include "shaders/ShaderResources.h"
-#include "keys/ResourceKeyCollection.h"
 #include "defines/ResourceDefines.h"
 #include "global/GlobalPaths.h"
 #include "global/GlobalData.h"
 #include "GameStateMainMenu.h"
 #include "video/Painter.h"
-#include "shaders/ShaderDefines.h"
 #include "GameStateManager.h"
+#include "settings/SettingsLoader.h"
 
 
 GameStateKickstart::GameStateKickstart() : is_done_loading(false), 
@@ -29,40 +28,17 @@ GameStateKickstart::~GameStateKickstart()
 
 void GameStateKickstart::ResumeState()
 {
-	/* Set the game keys */
-	ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
+	// Load the default resources
+	std::string splashScreenMesh = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.mesh");
+	std::string splashScreenTexture = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.texture");
+	std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
 
-	/* Adding the mesh keys */
-	resourceKeyCollection->AddKey(KEY_TILE, RESOURCE_MESH_ID_CRATE, "crate.mesh");
-	resourceKeyCollection->AddKey(KEY_TILE, RESOURCE_MESH_ID_PLAYER, "player.mesh");
-	resourceKeyCollection->AddKey(KEY_TILE, RESOURCE_MESH_ID_WALL, "wall.mesh");
-	resourceKeyCollection->AddKey(KEY_TILE, RESOURCE_MESH_ID_FULLSCREEN, "fullscreen.mesh");
-	resourceKeyCollection->AddKey(KEY_TILE, RESOURCE_MESH_ID_GRASS, "grass.mesh");
-
-	/* Adding the animation keys */
-	resourceKeyCollection->AddKey(KEY_ANIMATION, RESOURCE_ANIMATION_ID_BIRD, "bird_fly");
-	resourceKeyCollection->AddKey(KEY_ANIMATION, RESOURCE_ANIMATION_ID_SOLDIER, "soldier");
-
-	/* Adding the texture keys */
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_BIRD, "bird_atlas.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_PLAYER, "player.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_GAME, "game.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_ZOMBIE, "zombie.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_MOUNTAIN, "mountain.tga");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_CRATE, "crate.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_WALL, "wall.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_SPLASHSCREEN, "splash.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_MAINMENU, "main_menu.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_SOLDIER, "soldier.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_BACKGROUND, "background.png");
-	resourceKeyCollection->AddKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_GRASS, "grass.png");
-
-	MeshRes::GetInstance()->Add((WireFrame*)MeshLoader::GetInstance()->Load(meshes_path + resourceKeyCollection->GetNameByKey(KEY_TILE, RESOURCE_MESH_ID_FULLSCREEN)), RESOURCE_MESH_ID_FULLSCREEN);
-	TexRes::GetInstance()->Add((Texture*)TexLoader::GetInstance()->Load(textures_path + resourceKeyCollection->GetNameByKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_SPLASHSCREEN)), RESOURCE_TEXTURE_ID_SPLASHSCREEN);
-	ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(shaders_path + resourceKeyCollection->GetNameByKey(KEY_SHADER, SHADER_ID_BASIC)), SHADER_ID_BASIC);
+	MeshRes::GetInstance()->Add((WireFrame*)MeshLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenMesh), splashScreenMesh);
+	TexRes::GetInstance()->Add((Texture*)TexLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenTexture), splashScreenTexture);
+	ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenShader), splashScreenShader);
 
 	/***********************************************************************************************************************/
-	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(SHADER_ID_BASIC);
+	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(splashScreenShader);
 
 	// move them in DrawScheme
 	// for every shader pair :)
@@ -93,24 +69,24 @@ void GameStateKickstart::UpdateState()
 		    m_splash_screen->Update();
 		else
 		{
+			MeshLoader* mesh_loader = MeshLoader::GetInstance();
 			MeshRes* mesh_res = MeshRes::GetInstance();
 			TexLoader* tex_loader = TexLoader::GetInstance();
 			TexRes* tex_res = TexRes::GetInstance();
 			ShaderRes* shader_res = ShaderRes::GetInstance();
 
-			ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
-
-			/* load the splash screen and menu resources */	
-			tex_res->Add((Texture*)tex_loader->Load(textures_path + resourceKeyCollection->GetNameByKey(KEY_TEXTURE, RESOURCE_TEXTURE_ID_MAINMENU)), RESOURCE_TEXTURE_ID_MAINMENU);
-			
-			unsigned int program_id = shader_res->RetriveProgramID(SHADER_ID_BASIC);
-
-			WireFrame* mesh;
-			Texture* texture;
+			/* Load the splash screen and menu resources */	
+			std::string menuTexture = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture");
+			Texture* texture = (Texture*)tex_loader->Load(working_dir_path + "\\" + menuTexture);
+			tex_res->Add(texture, menuTexture);
+					
+			std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
+			unsigned int program_id = shader_res->RetriveProgramID(SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader"));
 
 			/* Get resources for the splashscreen */
-			mesh = mesh_res->Retrive(RESOURCE_MESH_ID_FULLSCREEN);
-			texture = tex_res->Retrive(RESOURCE_TEXTURE_ID_SPLASHSCREEN);
+			std::string menuMeshPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.mesh");
+			WireFrame* mesh = (WireFrame*)mesh_loader->Load(working_dir_path + "\\" + menuMeshPath);
+			mesh_res->Add(mesh, menuMeshPath);
 
 			m_splash_screen = new SplashScreen(mesh, texture, program_id);
 			m_splash_screen->Init();

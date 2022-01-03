@@ -5,8 +5,8 @@
 #include "texture/TextureResources.h"
 #include "shaders/ShaderLoader.h"
 #include "shaders/ShaderResources.h"
-#include "shaders/ShaderDefines.h"
 #include "defines/ResourceDefines.h"
+#include "settings/SettingsLoader.h"
 #include "menu/MainMenu.h"
 #include "platform/input/InputManager.h"
 #include "global/GlobalPaths.h"
@@ -28,7 +28,8 @@ GameStateMainMenu::~GameStateMainMenu()
 
 void GameStateMainMenu::ResumeState()
 {
-	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(SHADER_ID_BASIC);
+	const std::string& shaderPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.shader");
+	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(shaderPath);
 
 	// TODO 
 	// Move these calls in DrawScheme
@@ -59,7 +60,8 @@ void GameStateMainMenu::UpdateState()
 	}
 	else
 	{
-		unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(SHADER_ID_BASIC);
+		const std::string& shaderPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.shader");
+		unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(shaderPath);
 
 		MeshRes* mesh_res = MeshRes::GetInstance();
 		TexRes* tex_res = TexRes::GetInstance();
@@ -67,8 +69,8 @@ void GameStateMainMenu::UpdateState()
 		Texture* texture;
 
 		/* Get resources for the splashscreen */
-		mesh = mesh_res->Retrive(RESOURCE_MESH_ID_FULLSCREEN);
-		texture = tex_res->Retrive(RESOURCE_TEXTURE_ID_MAINMENU);
+		mesh = mesh_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.menu.mesh"));
+		texture = tex_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture"));
 
 		m_main_menu = new MainMenu(mesh, texture, program_id);
 		m_main_menu->Init();

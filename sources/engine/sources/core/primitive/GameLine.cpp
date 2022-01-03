@@ -1,7 +1,5 @@
 #include "GameLine.h"
 #include "video/Painter.h"
-#include "shaders/ShaderDefines.h"
-#include "keys/ResourceKeyCollection.h"
 #include "shaders/ShaderResources.h"
 #include "shaders/ShaderLoader.h"
 #include "global/GlobalPaths.h"
@@ -51,18 +49,15 @@ void GameLine::Init()
 	const mat_4x viewMatrix = Level::GetInstance()->GetActiveCamera()->GetViewMatrix();
 	matrix::game_matrix::BuildWorldViewProjMatrix(m_wp_matrix, m_world_matrix, viewMatrix, proj_matrix);
 
-	// Select the key for the right shader
-	ResourceKeyCollection* resourceKeyCollection = ResourceKeyCollection::GetInstance();
-
 	// Do we have this resource loaded?
 	// If not, we need to load it
-	m_shader = ShaderRes::GetInstance()->RetriveProgramID(SHADER_ID_PRIMITIVE);
+	std::string primitivePath = "assets\\shaders\\primitive";
+	std::string fullpath = working_dir_path + "\\" + primitivePath;
+	m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	if (!m_shader)
 	{
-		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(shaders_path + resourceKeyCollection->GetNameByKey(KEY_SHADER, SHADER_ID_PRIMITIVE)),
-			SHADER_ID_PRIMITIVE);
-
-		m_shader = ShaderRes::GetInstance()->RetriveProgramID(SHADER_ID_PRIMITIVE);
+		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath), primitivePath);
+		m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	}
 
 	Painter::SendGeometryToGPU(m_wireframe);

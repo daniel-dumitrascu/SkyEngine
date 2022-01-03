@@ -2,6 +2,7 @@
 #include "global/GlobalPaths.h"
 #include "utils/Utils.h"
 #include "global/GlobalData.h"
+#include "settings/SettingsLoader.h"
 #include "nlohmann/json.hpp"
 
 #include <fstream>
@@ -29,7 +30,6 @@ void System::SetApplication(Application* const app, const std::string title)
 	m_title = utils::str::Strfmt("%s - built on %s %s, version 0.001", title.c_str(), __TIME__, __DATE__);
 }
 
-#include "settings/SettingsLoader.h"
 System::System() : m_title(""), m_driver(NULL), log("System")
 {
 	ConstrSystemGlobals();
@@ -99,13 +99,6 @@ bool System::CleanUp()
 void System::ConstrSystemGlobals()
 {
 	utils::path::GetWorkingDir(working_dir_path);
-
-	levels_path		= working_dir_path + "/resources/levels/";
-	models_path		= working_dir_path + "/resources/models/";
-	meshes_path		= working_dir_path + "/resources/meshes/";
-	textures_path	= working_dir_path + "/resources/textures/PNG_files/";
-	animation_path	= working_dir_path + "/resources/animations/";
-	shaders_path	= working_dir_path + "/resources/shaders/";
 }
 
 void System::CreateSettingsFileIfNonExisting(const std::string& working_dir_path)
@@ -119,9 +112,14 @@ void System::CreateDefaultSettingsFile(const std::string& _path, const std::stri
 	std::ofstream settingFile = utils::path::CreateFileAtLocation(_path, _fileName);
 
 	json settingsJson;
-	settingsJson["defaultResources"]["splashScreen"]["path"] = working_dir_path + "\\" + "assets" + "\\" + "splashscreen";
-	settingsJson["defaultResources"]["splashScreen"]["name"] = "splashscreen.png";
-	settingsJson["defaultResources"]["splashScreen"]["mesh"] = "splashscreen.mesh";
+	settingsJson["defaultResources"]["splashScreen"]["texture"] = "assets\\textures\\default\\splashscreen\\splashscreen.png";
+	settingsJson["defaultResources"]["splashScreen"]["mesh"] = "assets\\meshes\\default\\splashscreen\\splashscreen.mesh";
+	settingsJson["defaultResources"]["splashScreen"]["shader"] = "assets\\shaders\\default\\basic";
+
+	settingsJson["defaultResources"]["menu"]["mesh"] = "assets\\meshes\\default\\menu\\main_menu.mesh";
+	settingsJson["defaultResources"]["menu"]["texture"] = "assets\\textures\\default\\menu\\main_menu.png";	
+	settingsJson["defaultResources"]["menu"]["shader"] = "assets\\shaders\\default\\basic";
+
 	std::string strJson = settingsJson.dump(4);
 
 	settingFile.write(strJson.c_str(), strJson.length());

@@ -27,10 +27,17 @@ SettingsPackage* FileSettings::ParseFile(const std::string& file_path)
 	
 	settings->data.insert(std::pair<std::string, std::string>("defaultResources.splashScreen.mesh", 
 		settingsJson["defaultResources"]["splashScreen"]["mesh"]));
-	settings->data.insert(std::pair<std::string, std::string>("defaultResources.splashScreen.name",
-		settingsJson["defaultResources"]["splashScreen"]["name"]));
-	settings->data.insert(std::pair<std::string, std::string>("defaultResources.splashScreen.path",
-		settingsJson["defaultResources"]["splashScreen"]["path"]));
+	settings->data.insert(std::pair<std::string, std::string>("defaultResources.splashScreen.texture",
+		settingsJson["defaultResources"]["splashScreen"]["texture"]));
+	settings->data.insert(std::pair<std::string, std::string>("defaultResources.splashScreen.shader",
+		settingsJson["defaultResources"]["splashScreen"]["shader"]));
+
+	settings->data.insert(std::pair<std::string, std::string>("defaultResources.menu.mesh",
+		settingsJson["defaultResources"]["menu"]["mesh"]));
+	settings->data.insert(std::pair<std::string, std::string>("defaultResources.menu.texture",
+		settingsJson["defaultResources"]["menu"]["texture"]));
+	settings->data.insert(std::pair<std::string, std::string>("defaultResources.menu.shader",
+		settingsJson["defaultResources"]["menu"]["shader"]));
 	
 	return settings;
 }

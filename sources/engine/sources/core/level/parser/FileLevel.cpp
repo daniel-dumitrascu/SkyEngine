@@ -63,12 +63,22 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 
 			if (Property_elem)
 			{
+				const char* stringRawValue;
 				result += Property_elem->QueryIntAttribute("Type", &(game_object_pack.m_type));
-				result += Property_elem->QueryIntAttribute("ResourceMeshID", &(game_object_pack.m_meshID));
-				result += Property_elem->QueryIntAttribute("ResourceTextureID", &(game_object_pack.m_textureID));
-				result += Property_elem->QueryIntAttribute("ResourceShaderID", &(game_object_pack.m_shaderID));
+				result += Property_elem->QueryStringAttribute("ResourceMeshPath", &stringRawValue);
+				game_object_pack.m_meshPath = stringRawValue;
+				result += Property_elem->QueryStringAttribute("ResourceTexturePath", &stringRawValue);
+				game_object_pack.m_texturePath = stringRawValue;
+				result += Property_elem->QueryStringAttribute("ResourceShaderPath", &stringRawValue);
+				game_object_pack.m_shaderPath = stringRawValue;
+				result += Property_elem->QueryStringAttribute("ResourceAnimationPath", &stringRawValue);
 
-				//TODO to add animation here as well
+				// An animation resource is not mandatory, so, we can reset
+				// the error variable if the attribute is not found
+				if (result == tinyxml2::XML_NO_ATTRIBUTE)
+					result = 0;
+
+				game_object_pack.m_animationPath = stringRawValue;
 			}
 
 			// Parse the properties 

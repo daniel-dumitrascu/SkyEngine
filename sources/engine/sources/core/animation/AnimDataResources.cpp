@@ -12,14 +12,14 @@ AnimDataRes& AnimDataRes::operator=(const AnimDataRes& copy)
 	return *this;
 }
 
-void AnimDataRes::Add(AnimData* anim, int key)
+void AnimDataRes::Add(AnimData* anim, const std::string& key)
 {
 	MapCollection::Add(anim, key);
 }
 
-void AnimDataRes::Remove(const int index)
+void AnimDataRes::Remove(const std::string& key)
 {
-	MapCollection::Remove(index);
+	MapCollection::Remove(key);
 }
 
 unsigned int AnimDataRes::Count()
@@ -27,12 +27,12 @@ unsigned int AnimDataRes::Count()
 	return MapCollection::Count();
 }
 
-bool AnimDataRes::Find(const int index)
+bool AnimDataRes::Find(const std::string& key)
 {
-	return MapCollection::Find(index);
+	return MapCollection::Find(key);
 }
 
-AnimData* AnimDataRes::Retrive(const int index)
+AnimData* AnimDataRes::Retrive(const std::string& key)
 {
-	return MapCollection::Retrive(index);
+	return MapCollection::Retrive(key);
 }

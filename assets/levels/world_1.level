@@ -8,7 +8,9 @@
 	</Cameras>
 	<SelectedActiveCamera CameraID="1" AttachedObject="1"/>
 	<GameObject id="1">
-		<Composition Type="1" ResourceMeshID="2" ResourceTextureID="1" ResourceShaderID="1" />
+		<Composition Type="1" ResourceMeshPath="assets/meshes/player.mesh" 
+							  ResourceTexturePath="assets/textures/PNG_files/player.png" 
+							  ResourceShaderPath="assets/shaders/rend_tex" />
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>
 		<Position x="200" y="100" />
 		<Rotation x="0" y="0" />
@@ -16,7 +18,9 @@
 		<ZBuffer value="2" />
 	</GameObject>
 	<GameObject id="2">
-		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+		<Composition Type="2" ResourceMeshPath="assets/meshes/crate.mesh" 
+							  ResourceTexturePath="assets/textures/PNG_files/crate.png" 
+							  ResourceShaderPath="assets/shaders/rend_tex" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="100" y="100" />
 		<Rotation x="0" y="0" />
@@ -24,7 +28,9 @@
 		<ZBuffer value="1" />
 	</GameObject>
 	<GameObject id="3">
-		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+		<Composition Type="2" ResourceMeshPath="assets/meshes/crate.mesh" 
+							  ResourceTexturePath="assets/textures/PNG_files/crate.png" 
+							  ResourceShaderPath="assets/shaders/rend_tex" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="1000" y="350" />
 		<Rotation x="0" y="0" />
@@ -32,7 +38,9 @@
 		<ZBuffer value="1" />
 	</GameObject>
 	<GameObject id="4">
-		<Composition Type="2" ResourceMeshID="1" ResourceTextureID="5" ResourceShaderID="1" />
+		<Composition Type="2" ResourceMeshPath="assets/meshes/crate.mesh" 
+							  ResourceTexturePath="assets/textures/PNG_files/crate.png" 
+							  ResourceShaderPath="assets/shaders/rend_tex" />
 		<Properties Renderable="true" Collidable="true" />
 		<Position x="600" y="600" />
 		<Rotation x="0" y="0" />

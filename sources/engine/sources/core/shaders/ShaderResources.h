@@ -12,11 +12,11 @@ class ShaderRes : private MapCollection<unsigned int>
 
 		static ShaderRes* GetInstance();
 		
-		bool AddShaderPair(ShaderPair* shaderPair, int key);
-		void RemoveShaderPair(const int key);
+		bool AddShaderPair(ShaderPair* shaderPair, const std::string& key);
+		void RemoveShaderPair(const std::string& key);
 		unsigned int CountShaderPair();
-		bool ExistShaderPair(const int key);
-		unsigned int RetriveProgramID(const unsigned int key);
+		bool ExistShaderPair(const std::string& key);
+		unsigned int RetriveProgramID(const std::string& key);
 
 	private:
 

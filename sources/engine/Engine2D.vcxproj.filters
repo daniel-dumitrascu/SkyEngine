@@ -49,9 +49,6 @@
     <ClCompile Include="sources\core\global\GlobalPaths.cpp">
       <Filter>core\global</Filter>
     </ClCompile>
-    <ClCompile Include="sources\core\keys\ResourceKeyCollection.cpp">
-      <Filter>core\keys</Filter>
-    </ClCompile>
     <ClCompile Include="sources\core\level\parser\FileLevel.cpp">
       <Filter>core\level\parser</Filter>
     </ClCompile>
@@ -285,9 +282,6 @@
     <ClInclude Include="sources\core\input\InputHandleProfiles.h">
       <Filter>core\input</Filter>
     </ClInclude>
-    <ClInclude Include="sources\core\keys\ResourceKeyCollection.h">
-      <Filter>core\keys</Filter>
-    </ClInclude>
     <ClInclude Include="sources\core\level\parser\FileLevel.h">
       <Filter>core\level\parser</Filter>
     </ClInclude>
@@ -367,9 +361,6 @@
       <Filter>core\shaders\language</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\shaders\Shader.h">
-      <Filter>core\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\core\shaders\ShaderDefines.h">
       <Filter>core\shaders</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\shaders\ShaderLoader.h">
@@ -556,9 +547,6 @@
     </Filter>
     <Filter Include="core\input">
       <UniqueIdentifier>{ed000295-8d4b-483b-901f-92a19b35d7b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\keys">
-      <UniqueIdentifier>{73b48342-4904-4672-8294-669a32e62b34}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\level">
       <UniqueIdentifier>{f4908901-3e70-4a05-be77-1fb0278c797c}</UniqueIdentifier>

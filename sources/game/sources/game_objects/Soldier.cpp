@@ -75,7 +75,8 @@ std::unique_ptr<GameObject> SoldierObject::Clone()
 
 void SoldierObject::Init()
 {
-	AnimData* anim_data = AnimDataRes::GetInstance()->Retrive(RESOURCE_ANIMATION_ID_SOLDIER);
+	//TODO - rework the animation
+	AnimData* anim_data = AnimDataRes::GetInstance()->Retrive("");
 	m_anim_player = new AnimPlayer(anim_data);
 
 	/* Starting the animation */

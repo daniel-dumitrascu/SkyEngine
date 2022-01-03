@@ -11,8 +11,6 @@
 #include "animation/AnimDataResources.h"
 #include "animation/AnimDataLoader.h"
 #include "shaders/ShaderLoader.h"
-#include "shaders/ShaderDefines.h"
-#include "keys/ResourceKeyCollection.h"
 #include "global/GlobalPaths.h"
 #include "entities/Background.h"
 #include "entities/StaticObject.h"
@@ -166,84 +164,62 @@ GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& recLeftTop, vec_2x& r
 
 WireFrame* GameObjectFactory::GetTile(GameObjectPackage& pack)
 {
-	if (pack.m_meshID > RESOURCE_MESH_ID_UNDEFINED && pack.m_meshID < RESOURCE_MESH_COUNT)
+	/* Do we have this resource loaded? */
+	/* If not, we need to load it */
+	std::string fullpath = working_dir_path + "\\" + pack.m_meshPath;
+	WireFrame* mesh = MeshRes::GetInstance()->Retrive(pack.m_meshPath);
+	if (mesh == NULL)
 	{
-		/* Do we have this resource loaded? */
-		/* If not, we need to load it */
-		WireFrame* mesh = MeshRes::GetInstance()->Retrive(pack.m_meshID);
-		if (mesh == NULL)
-		{
-			ResourceKeyCollection* resKeyColl = ResourceKeyCollection::GetInstance();
-			mesh = (WireFrame*)MeshLoader::GetInstance()->Load(meshes_path + resKeyColl->GetNameByKey(KEY_TILE, pack.m_meshID));
-			MeshRes::GetInstance()->Add(mesh, pack.m_meshID);
-		}
-
-		return mesh;
+		mesh = (WireFrame*)MeshLoader::GetInstance()->Load(fullpath);
+		MeshRes::GetInstance()->Add(mesh, pack.m_meshPath);
 	}
-	else
-		return NULL;
+
+	return mesh;
 }
 
 Texture* GameObjectFactory::GetTexture(GameObjectPackage& pack)
 {
-	if (pack.m_textureID > RESOURCE_TEXTURE_ID_UNDEFINED && pack.m_textureID < RESOURCE_TEXTURE_COUNT)
+	/* Do we have this resource loaded? */
+	/* If not, we need to load it */
+	std::string fullpath = working_dir_path + "\\" + pack.m_texturePath;
+	Texture* tex = TexRes::GetInstance()->Retrive(pack.m_texturePath);
+	if (tex == NULL)
 	{
-		/* Do we have this resource loaded? */
-		/* If not, we need to load it */
-		Texture* tex = TexRes::GetInstance()->Retrive(pack.m_textureID);
-		if (tex == NULL)
-		{
-			ResourceKeyCollection* resKeyColl = ResourceKeyCollection::GetInstance();
-			tex = (Texture*)TexLoader::GetInstance()->Load(textures_path + resKeyColl->GetNameByKey(KEY_TEXTURE, pack.m_textureID));
-			TexRes::GetInstance()->Add(tex, pack.m_textureID);
-		}
-
-		return tex;
+		tex = (Texture*)TexLoader::GetInstance()->Load(fullpath);
+		TexRes::GetInstance()->Add(tex, pack.m_texturePath);
 	}
-	else
-		return NULL;
+
+	return tex;
 }
 
 AnimData* GameObjectFactory::GetAnimation(GameObjectPackage& pack)
 {
-	if (pack.m_animationID > RESOURCE_ANIMATION_ID_UNDEFINED && pack.m_animationID < RESOURCE_ANIMATION_COUNT)
+	/* Do we have this resource loaded? */
+	/* If not, we need to load it */
+	std::string fullpath = working_dir_path + "\\" + pack.m_animationPath;
+	AnimData* anim = AnimDataRes::GetInstance()->Retrive(pack.m_animationPath);
+	if (anim == NULL)
 	{
-		/* Do we have this resource loaded? */
-		/* If not, we need to load it */
-		AnimData* anim = AnimDataRes::GetInstance()->Retrive(pack.m_animationID);
-		if (anim == NULL)
-		{
-			ResourceKeyCollection* resKeyColl = ResourceKeyCollection::GetInstance();
-			anim = (AnimData*)AnimDataLoader::GetInstance()->Load(animation_path + resKeyColl->GetNameByKey(KEY_ANIMATION, pack.m_animationID) + ".anim");
-			AnimDataRes::GetInstance()->Add(anim, pack.m_animationID);
-		}
-
-		return anim;
+		anim = (AnimData*)AnimDataLoader::GetInstance()->Load(fullpath);
+		AnimDataRes::GetInstance()->Add(anim, pack.m_animationPath);
 	}
-	else
-		return NULL;
+
+	return anim;
 }
 
 int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 {
-	if (pack.m_shaderID > SHADER_ID_UNDEFINED && pack.m_shaderID < SHADER_COUNT)
+	/* Do we have this resource loaded? */
+	/* If not, we need to load it */
+	std::string fullpath = working_dir_path + "\\" + pack.m_shaderPath;
+	int program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
+	if (!program)
 	{
-		/* Do we have this resource loaded? */
-		/* If not, we need to load it */
-		int program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderID);
-		if (!program)
-		{
-			ResourceKeyCollection* resKeyColl = ResourceKeyCollection::GetInstance();
-			ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(shaders_path + resKeyColl->GetNameByKey(KEY_SHADER, pack.m_shaderID)),
-				pack.m_shaderID);
-
-			program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderID);
-		}
-
-		return program;
+		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath), pack.m_shaderPath);
+		program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
 	}
-	else
-		return NULL;
+
+	return program;
 }
 
 #if(DEBUG_SECTION)
