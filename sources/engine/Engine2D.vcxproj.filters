@@ -456,9 +456,6 @@
     <ClInclude Include="sources\core\entities\GameObjectDefines.h">
       <Filter>core\entities</Filter>
     </ClInclude>
-    <ClInclude Include="sources\core\defines\ResourceDefines.h">
-      <Filter>core\defines</Filter>
-    </ClInclude>
     <ClInclude Include="sources\core\entities\Background.h">
       <Filter>core\entities</Filter>
     </ClInclude>
@@ -610,9 +607,6 @@
     </Filter>
     <Filter Include="core\entities">
       <UniqueIdentifier>{6b1158bb-5298-42ab-a3a0-d812509bd88f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="core\defines">
-      <UniqueIdentifier>{88d7df67-b930-48f3-a5d4-6cfaa132751c}</UniqueIdentifier>
     </Filter>
     <Filter Include="core\states">
       <UniqueIdentifier>{377e8db1-f293-44fd-ab9a-905259d82384}</UniqueIdentifier>

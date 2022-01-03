@@ -7,7 +7,6 @@
 #include "states/GameStateMainMenu.h"
 #include "animation/AnimDataResources.h"
 #include "entities/GameObjectDefines.h"
-#include "defines/ResourceDefines.h"
 #include "utils/UniqueGenerator.h"
 #include "bindings/BindingsManager.h"
 

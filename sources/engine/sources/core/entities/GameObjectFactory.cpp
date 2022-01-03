@@ -3,7 +3,6 @@
 #include "utils/UniqueGenerator.h"
 #include "primitive/Line.h"
 #include "primitive/GameRectangle.h"
-#include "defines/ResourceDefines.h"
 #include "geometry/mesh/MeshResources.h"
 #include "geometry/mesh/MeshLoader.h"
 #include "texture/TextureResources.h"

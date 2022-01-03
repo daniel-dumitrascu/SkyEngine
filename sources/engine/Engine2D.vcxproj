@@ -88,7 +88,6 @@
     <ClInclude Include="sources\core\bindings\BindingCollection.h" />
     <ClInclude Include="sources\core\bindings\BindingsManager.h" />
     <ClInclude Include="sources\core\camera\Camera.h" />
-    <ClInclude Include="sources\core\defines\ResourceDefines.h" />
     <ClInclude Include="sources\core\entities\Background.h" />
     <ClInclude Include="sources\core\entities\GameObject.h" />
     <ClInclude Include="sources\core\entities\GameObjectDefines.h" />

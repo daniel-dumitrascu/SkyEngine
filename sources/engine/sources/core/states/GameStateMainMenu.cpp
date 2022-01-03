@@ -5,7 +5,6 @@
 #include "texture/TextureResources.h"
 #include "shaders/ShaderLoader.h"
 #include "shaders/ShaderResources.h"
-#include "defines/ResourceDefines.h"
 #include "settings/SettingsLoader.h"
 #include "menu/MainMenu.h"
 #include "platform/input/InputManager.h"
