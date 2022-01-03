@@ -4,7 +4,6 @@
 #include "time/Time.h"
 #include "animation/AnimDataResources.h"
 #include "entities/GameObjectDefines.h"
-#include "defines/ResourceDefines.h"
 #include "utils/UniqueGenerator.h"
 
 static int anim_index = 0;

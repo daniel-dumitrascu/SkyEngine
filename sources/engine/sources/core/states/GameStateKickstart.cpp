@@ -5,7 +5,6 @@
 #include "texture/TextureResources.h"
 #include "shaders/ShaderLoader.h"
 #include "shaders/ShaderResources.h"
-#include "defines/ResourceDefines.h"
 #include "global/GlobalPaths.h"
 #include "global/GlobalData.h"
 #include "GameStateMainMenu.h"
