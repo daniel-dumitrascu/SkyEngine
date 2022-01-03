@@ -105,7 +105,6 @@
     <ClInclude Include="sources\core\global\GlobalPaths.h" />
     <ClInclude Include="sources\core\input\Controllable.h" />
     <ClInclude Include="sources\core\input\InputHandleProfiles.h" />
-    <ClInclude Include="sources\core\keys\ResourceKeyCollection.h" />
     <ClInclude Include="sources\core\level\Level.h" />
     <ClInclude Include="sources\core\level\LevelData.h" />
     <ClInclude Include="sources\core\level\LevelDefines.h" />
@@ -140,7 +139,6 @@
     <ClInclude Include="sources\core\settings\SettingsPackage.h" />
     <ClInclude Include="sources\core\shaders\language\OpenGL2File.h" />
     <ClInclude Include="sources\core\shaders\Shader.h" />
-    <ClInclude Include="sources\core\shaders\ShaderDefines.h" />
     <ClInclude Include="sources\core\shaders\ShaderLoader.h" />
     <ClInclude Include="sources\core\shaders\ShaderResources.h" />
     <ClInclude Include="sources\core\splash\SplashScreen.h" />
@@ -197,7 +195,6 @@
     <ClCompile Include="sources\core\geometry\mesh\WireFrame.cpp" />
     <ClCompile Include="sources\core\global\GlobalData.cpp" />
     <ClCompile Include="sources\core\global\GlobalPaths.cpp" />
-    <ClCompile Include="sources\core\keys\ResourceKeyCollection.cpp" />
     <ClCompile Include="sources\core\level\Level.cpp" />
     <ClCompile Include="sources\core\level\LevelLoader.cpp" />
     <ClCompile Include="sources\core\level\parser\FileLevel.cpp" />

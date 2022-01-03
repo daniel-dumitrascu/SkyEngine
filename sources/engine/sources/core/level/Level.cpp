@@ -252,7 +252,7 @@ void Level::Init()
 	CleanLevel();
 
 	// Load the level data
-	std::unique_ptr<LevelPackage> levelData((LevelPackage*)LevelLoader::GetInstance()->Load(levels_path + LEVEL_1));
+	std::unique_ptr<LevelPackage> levelData((LevelPackage*)LevelLoader::GetInstance()->Load(working_dir_path + "/assets/levels/" + LEVEL_1));
 
 	// Create the entities for this level
 	ConstructLevel(levelData.get());

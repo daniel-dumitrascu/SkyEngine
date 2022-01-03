@@ -60,15 +60,16 @@ std::unique_ptr<GameObject> BirdObject::Clone()
 
 void BirdObject::Init()
 {
-	AnimData* anim_data = AnimDataRes::GetInstance()->Retrive(RESOURCE_ANIMATION_ID_BIRD);
+	//TODO - rework the animation
+	AnimData* anim_data = AnimDataRes::GetInstance()->Retrive("");
 	m_anim_player = new AnimPlayer(anim_data);
 
-	/* Starting the animation */
+	// Starting the animation 
 	m_anim_player->SetState(0);
 	m_anim_player->ResumeAnim();
 
 	//TODO refactor
-	/* Send animation data to GPU */
+	// Send animation data to GPU 
 	int index = 0;
 	int start, end;
 

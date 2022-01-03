@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ModelMapping>
+	<MeshCoords number="4">
+		<MeshCoord X="-1" Y="-1" Z="0.0" />
+		<MeshCoord X="1" Y="-1" Z="0.0" />
+		<MeshCoord X="1" Y="1" Z="0.0" />
+		<MeshCoord X="-1" Y="1" Z="0.0" />
+	</MeshCoords>
+	<Textures number="4">
+		<Texcoord U="0.0" V="0.0" />
+		<Texcoord U="1.0" V="0.0" />
+		<Texcoord U="0.0" V="1.0" />
+		<Texcoord U="1.0" V="1.0" />
+	</Textures>
+	<Polygons number="2">
+		<Polygon TexA="1" NormA="1" TexB="2" NormB="2" TexC="4" NormC="3" />
+		<Polygon TexA="1" NormA="1" TexB="4" NormB="3" TexC="3" NormC="4" />
+	</Polygons>
+</ModelMapping>

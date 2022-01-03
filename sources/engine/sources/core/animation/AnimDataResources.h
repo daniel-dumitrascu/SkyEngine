@@ -10,11 +10,11 @@ class AnimDataRes : private MapCollection<AnimData*>
 
 		static AnimDataRes* GetInstance();
 
-		void Add(AnimData* mesh, int key);
-		void Remove(const int index);
+		void Add(AnimData* mesh, const std::string& key);
+		void Remove(const std::string& key);
 		unsigned int Count();
-		bool Find(const int index);
-		AnimData* Retrive(const int index);
+		bool Find(const std::string& key);
+		AnimData* Retrive(const std::string& key);
 
 	private:
 

@@ -12,23 +12,23 @@ TexRes& TexRes::operator=(const TexRes& copy)
 	return *this;
 }
 
-void TexRes::Add(Texture* texture, int key)
+void TexRes::Add(Texture* texture, const std::string& key)
 {
 	MapCollection::Add(texture, key);
 }
 
-void TexRes::Remove(const int index)
+void TexRes::Remove(const std::string& key)
 {
-	MapCollection::Remove(index);
+	MapCollection::Remove(key);
 }
 
-bool TexRes::Find(const int index)
+bool TexRes::Find(const std::string& key)
 {
-	return MapCollection::Find(index);
+	return MapCollection::Find(key);
 }
 
-Texture* TexRes::Retrive(const int index)
+Texture* TexRes::Retrive(const std::string& key)
 {
-	return MapCollection::Retrive(index);
+	return MapCollection::Retrive(key);
 }
 		
