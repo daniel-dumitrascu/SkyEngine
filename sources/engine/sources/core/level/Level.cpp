@@ -133,17 +133,17 @@ void Level::ConstructLevel(LevelPackage* levelData)
 
 	for (int index = 0; index < sceneObjectsCollection.Count(); ++index)
 	{
-		// Calculation  of the object in tile map
+		// Calculation of the object in grid sector
 		Rectangle objRect = sceneObjectsCollection.Retrive(index)->GetObjectWorldRect();
 		ComputeObjectToGridMapping(objRect, outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
 		sceneObjectsCollection.Retrive(index)->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
 
-		// Add the object in every tile with which it intersects
+		// Add the object in every sector with which it intersects
 		for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
 			for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 			{
-				Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-				newTile->AddCollidingObject(sceneObjectsCollection.Retrive(index));
+				Sector* newSector = GetSectorAtIndex(xAxisIndex, yAxisIndex);
+				newSector->AddCollidingObject(sceneObjectsCollection.Retrive(index));
 #if(DEBUG_SECTION)
 				// Activate the visibility on the new area
 				SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
@@ -174,16 +174,16 @@ void Level::ConstructGameGrid()
 		m_gridRect[i].resize(WORLD_GRID_WIDTH_COUNT);
 #endif
 
-		// Iterate in the new allocated row and create new tiles
+		// Iterate in the new allocated row and create new sectors
 		for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 		{
-			m_gameWorldGrid[i][j] = new Tile(i, j);
+			m_gameWorldGrid[i][j] = new Sector(i, j);
 
 			// After we have constructed the game grid we must create GameRect objects 
 			// for each time so that we can use them in the debug mode of the app
 #if(DEBUG_SECTION)
-			vec_2x recLeftTop(WORLD_TILE_WIDTH * j, (WORLD_TILE_HEIGHT * i) + WORLD_TILE_HEIGHT);
-			vec_2x recRightBottom((WORLD_TILE_WIDTH * j) + WORLD_TILE_WIDTH, WORLD_TILE_HEIGHT * i);
+			vec_2x recLeftTop(GRID_SECTOR_WIDTH * j, (GRID_SECTOR_HEIGHT * i) + GRID_SECTOR_HEIGHT);
+			vec_2x recRightBottom((GRID_SECTOR_WIDTH * j) + GRID_SECTOR_WIDTH, GRID_SECTOR_HEIGHT * i);
 
 			m_gridRect[i][j] = std::make_pair(GameObjectFactory::GetInstance()->CreateGameRectangle(recLeftTop, recRightBottom, color), false);
 #endif
@@ -205,8 +205,8 @@ void Level::AddVisibleGridLines()
 	// Horizontal lines
 	for (int gridHeightIndex = 0; gridHeightIndex < WORLD_GRID_HEIGHT_COUNT; ++gridHeightIndex)
 	{
-		vector::vector_2x::SetVector(startPoint, 0.0f, WORLD_TILE_HEIGHT * gridHeightIndex);
-		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * WORLD_GRID_WIDTH_COUNT, WORLD_TILE_HEIGHT * gridHeightIndex);
+		vector::vector_2x::SetVector(startPoint, 0.0f, GRID_SECTOR_HEIGHT * gridHeightIndex);
+		vector::vector_2x::SetVector(endPoint, GRID_SECTOR_WIDTH * WORLD_GRID_WIDTH_COUNT, GRID_SECTOR_HEIGHT * gridHeightIndex);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 		sceneGridLines.push_back(std::unique_ptr<GameObject>(gameLine));
@@ -215,8 +215,8 @@ void Level::AddVisibleGridLines()
 	// Vertical lines
 	for (int gridWidthIndex = 0; gridWidthIndex < WORLD_GRID_WIDTH_COUNT; ++gridWidthIndex)
 	{
-		vector::vector_2x::SetVector(startPoint, WORLD_TILE_WIDTH * gridWidthIndex, 0.0f);
-		vector::vector_2x::SetVector(endPoint, WORLD_TILE_WIDTH * gridWidthIndex, WORLD_TILE_HEIGHT * WORLD_GRID_HEIGHT_COUNT);
+		vector::vector_2x::SetVector(startPoint, GRID_SECTOR_WIDTH * gridWidthIndex, 0.0f);
+		vector::vector_2x::SetVector(endPoint, GRID_SECTOR_WIDTH * gridWidthIndex, GRID_SECTOR_HEIGHT * WORLD_GRID_HEIGHT_COUNT);
 
 		gameLine = GameObjectFactory::GetInstance()->CreateGameLine(startPoint, endPoint, 5, lineColor);
 		sceneGridLines.push_back(std::unique_ptr<GameObject>(gameLine));
@@ -228,7 +228,7 @@ void Level::RemoveVisibleGridLines()
 	sceneGridLines.clear();
 }
 
-void Level::RenderTileDebugColor()
+void Level::RenderSectorDebugColor()
 {
 	for (int i = 0; i < m_gridRect.size(); ++i)
 	{
@@ -290,10 +290,10 @@ void Level::Update()
 		{
 			isMovementInCurrUpdate = true;
 #if(DEBUG_SECTION)
-			//TODO - oare acest cod poate fi executat in afara for-ului?
+			//TODO - could this code be executed outside the for?
 			if (!isAlreadyReset)
 			{
-				// Reset the color on all tile objects to green
+				// Reset the color on all sector objects to green
 				isAlreadyReset = true;
 				for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
 					for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
@@ -302,7 +302,7 @@ void Level::Update()
 					}
 			}
 #endif
-			// Get the old area values and remove the object pointer from each tile
+			// Get the old area values and remove the object pointer from each sector
 			std::array<int, 4> oldGridMapping = currSceneObj->GetOccupiedGriDArea();
 
 			// Check if the old occupied grid area is not out of bounce
@@ -311,10 +311,10 @@ void Level::Update()
 				for (int yAxisIndex = oldGridMapping[0]; yAxisIndex >= oldGridMapping[2]; yAxisIndex--)
 					for (int xAxisIndex = oldGridMapping[1]; xAxisIndex <= oldGridMapping[3]; xAxisIndex++)
 					{
-						Tile* oldTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-						oldTile->RemoveCollidingObject(currSceneObj->GetID()); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
+						Sector* oldSector = GetSectorAtIndex(xAxisIndex, yAxisIndex);
+						oldSector->RemoveCollidingObject(currSceneObj->GetID()); //TODO pt consistenta, aceasta metoda trebuie sa ia tot un Object
 #if(DEBUG_SECTION)
-						if (!oldTile->HasCollidingObjects())
+						if (!oldSector->HasCollidingObjects())
 						{
 							// Deactivate the visibility on the old area
 							SetGridRectVisibility(xAxisIndex, yAxisIndex, false);
@@ -333,14 +333,14 @@ void Level::Update()
 			// Check if the new occupied grid area is not out of bounce
 			if (!IsAreaOutOfBounce(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex))
 			{
-				// Add the game object pointer to the new tiles and construct new colliding neighbours
+				// Add the game object pointer to the new sectors and construct new colliding neighbours
 				currSceneObj->SetOccupiedGridArea(outTopIndex, outLeftIndex, outBottomIndex, outRightIndex);
 
 				for (int yAxisIndex = outTopIndex; yAxisIndex >= outBottomIndex; yAxisIndex--)
 					for (int xAxisIndex = outLeftIndex; xAxisIndex <= outRightIndex; xAxisIndex++)
 					{
-						Tile* newTile = GetTileAtIndex(xAxisIndex, yAxisIndex);
-						const std::map<int, GameObject*> collidingObj = newTile->GetCollidingObjects();
+						Sector* newSector = GetSectorAtIndex(xAxisIndex, yAxisIndex);
+						const std::map<int, GameObject*> collidingObj = newSector->GetCollidingObjects();
 						std::map<int, GameObject*>::const_iterator ite = collidingObj.begin();
 						for (; ite != collidingObj.end(); ite++)
 						{
@@ -348,7 +348,7 @@ void Level::Update()
 							ite->second->AddCollidingNeighbour(currSceneObj);
 						}
 
-						newTile->AddCollidingObject(currSceneObj);
+						newSector->AddCollidingObject(currSceneObj);
 #if(DEBUG_SECTION)
 						// Activate the visibility on the new area
 						SetGridRectVisibility(xAxisIndex, yAxisIndex, true);
@@ -367,7 +367,7 @@ void Level::Update()
 				if (isColliding)
 				{
 #if(DEBUG_SECTION)
-					// Color in red the tiles occupied by the objects that are colliding 
+					// Color in red the sectors occupied by the objects that are colliding 
 					vec_4x color;
 					vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
 
@@ -407,7 +407,7 @@ void Level::Update()
 				bool isColliding = Physics2D::CollisionDetectionAABB(objRect, ite->second->GetObjectWorldRect());
 				if (isColliding)
 				{
-					// Color in red the tiles occupied by the objects that are colliding
+					// Color in red the sectors occupied by the objects that are colliding
 					vec_4x color;
 					vector::vector_4x::SetVector(color, 1.0f, 0.0f, 0.0f, 1.0f);
 
@@ -467,8 +467,8 @@ void Level::Draw()
 	Painter::ClearScreen();
 
 #if(DEBUG_SECTION)
-	if(isColorTileRenderEnabled)
-		RenderTileDebugColor();
+	if(isSectorColorRenderEnabled)
+		RenderSectorDebugColor();
 #endif
 
 	// Draw all the level entities
@@ -512,9 +512,9 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 				else
 					RemoveVisibleGridLines();
 			}
-			else if (wrapper->action == Actions::Debug::DEBUG_OBJECT_TILE_MAPPING)
+			else if (wrapper->action == Actions::Debug::DEBUG_OBJECT_SECTOR_MAPPING)
 			{
-				isColorTileRenderEnabled = !isColorTileRenderEnabled;
+				isSectorColorRenderEnabled = !isSectorColorRenderEnabled;
 			}
 			else if (wrapper->action == Actions::Debug::DEBUG_OBJECT_RECTANGLE)
 			{
@@ -536,21 +536,21 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 	}
 }
 
-Tile* Level::GetTileAtIndex(unsigned int x, unsigned int y)
+Sector* Level::GetSectorAtIndex(unsigned int x, unsigned int y)
 {
 	return (x < m_gameWorldGrid.size() && y < m_gameWorldGrid[x].size()) ? m_gameWorldGrid[x][y] : nullptr;
 }
 
 void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex)
 {
-	static float worldTileWidthFloat = (float)WORLD_TILE_WIDTH;
-	static float worldTileHeightFloat = (float)WORLD_TILE_HEIGHT;
+	static float gridSectorWidthFloat = (float)GRID_SECTOR_WIDTH;
+	static float gridSectorHeightFloat = (float)GRID_SECTOR_HEIGHT;
 
 	// Part 1: For every top, bottom, left and right we calculate the index
-	float tempObjectTopGridIndex = objectRect.GetTop() / worldTileHeightFloat;
-	float tempObjectBottomGridIndex = objectRect.GetBottom() / worldTileHeightFloat;
-	float tempObjectLeftGridIndex = objectRect.GetLeft() / worldTileWidthFloat;
-	float tempObjectRightGridIndex = objectRect.GetRight() / worldTileWidthFloat;
+	float tempObjectTopGridIndex = objectRect.GetTop() / gridSectorHeightFloat;
+	float tempObjectBottomGridIndex = objectRect.GetBottom() / gridSectorHeightFloat;
+	float tempObjectLeftGridIndex = objectRect.GetLeft() / gridSectorWidthFloat;
+	float tempObjectRightGridIndex = objectRect.GetRight() / gridSectorWidthFloat;
 
 	// Part 2: We add +1 for top and left
 	outTopIndex = (int)tempObjectTopGridIndex;
@@ -559,10 +559,10 @@ void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopI
 	outRightIndex = (int)tempObjectRightGridIndex;
 
 	// Part 3: We add +1 for top and right only if modulo of multiplier if non-zero
-	if (std::fmod(objectRect.GetTop(), worldTileHeightFloat) == 0.0f)
+	if (std::fmod(objectRect.GetTop(), gridSectorHeightFloat) == 0.0f)
 		--outTopIndex;
 
-	if (std::fmod(objectRect.GetRight(), worldTileWidthFloat) == 0.0f)
+	if (std::fmod(objectRect.GetRight(), gridSectorWidthFloat) == 0.0f)
 		--outRightIndex;
 }
 

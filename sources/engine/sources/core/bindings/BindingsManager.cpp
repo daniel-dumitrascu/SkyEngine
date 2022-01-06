@@ -45,7 +45,7 @@ void BindingsManager::ConstructBindings()
 	// Level profile
 	layer = new BindingCollection();
 	layer->AddBinding(BUTTON_KEYBOARD_1, Actions::Debug::DEBUG_GRID_DRAW);
-	layer->AddBinding(BUTTON_KEYBOARD_2, Actions::Debug::DEBUG_OBJECT_TILE_MAPPING);
+	layer->AddBinding(BUTTON_KEYBOARD_2, Actions::Debug::DEBUG_OBJECT_SECTOR_MAPPING);
 	layer->AddBinding(BUTTON_KEYBOARD_3, Actions::Debug::DEBUG_OBJECT_RECTANGLE);
 
 	bindingsForDifferentLayers.insert(std::unordered_map<int, BindingCollection*>::value_type(INPUT_HANDLE_PROFILE_LEVEL, layer));

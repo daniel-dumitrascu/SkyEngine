@@ -33,17 +33,17 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		return CreateGameRectangle(objPack.m_pointTopLeft, objPack.m_pointBottomRight, objPack.m_color);
 	}
 
-	WireFrame* tile = GetTile(objPack);
+	WireFrame* mesh = GetMesh(objPack);
 	Texture* tex = GetTexture(objPack);
 	int program = GetProgram(objPack);
 
 	GameObject* obj = nullptr;
 
-	if (tile && tex && program != 0)
+	if (mesh && tex && program != 0)
 	{
 		if (objPack.m_type == GAME_OBJECT_ID_PLAYER)
 		{
-			obj = new Player(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
+			obj = new Player(mesh, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;
@@ -56,7 +56,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_STATIC_BLOCK)
 		{
-			obj = new StaticObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
+			obj = new StaticObject(mesh, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_zBuffer);
 
 #if(DEBUG_SECTION)
 			GameLine *leftOutline = nullptr;
@@ -69,7 +69,7 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 		}
 		else if (objPack.m_type == GAME_OBJECT_ID_BACKGROUND)
 		{
-			obj = new Background(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
+			obj = new Background(mesh, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale);
 		}
 	}
 
@@ -131,13 +131,13 @@ GameObject* GameObjectFactory::CreateGameObject(GameObjectPackage& objPack)
 	
 	/*case GAME_OBJECT_ID_MOVING_OBJECT:
 	{
-		WireFrame* tile = GetTile(objPack);
+		WireFrame* mesh = GetMesh(objPack);
 		Texture* tex = GetTexture(objPack);
 		int program = GetProgram(objPack);
 
-		if (tile && tex && program != 0)
+		if (mesh && tex && program != 0)
 		{
-			obj = new MovingObject(tile, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
+			obj = new MovingObject(mesh, tex, program, objPack.m_position.elem[0], objPack.m_position.elem[1], objPack.m_scale, objPack.m_id);
 			UniqueGenerator::Instance().AddIDToMemory(objPack.m_id);
 		}
 
@@ -161,7 +161,7 @@ GameObject* GameObjectFactory::CreateGameRectangle(vec_2x& recLeftTop, vec_2x& r
 	return new GameRectangle(recLeftTop, recRightBottom, color);
 }
 
-WireFrame* GameObjectFactory::GetTile(GameObjectPackage& pack)
+WireFrame* GameObjectFactory::GetMesh(GameObjectPackage& pack)
 {
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */

@@ -26,7 +26,7 @@ enum GameObjectFlags
 class WireFrame;
 struct Texture;
 class Rectangle;
-class Tile;
+class Sector;
 
 class GameObject : public Controllable
 {

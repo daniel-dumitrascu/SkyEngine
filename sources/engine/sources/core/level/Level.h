@@ -2,7 +2,7 @@
 
 #include "input/Controllable.h"
 #include "level/LevelData.h"
-#include "level/Tile.h"
+#include "level/GridSector.h"
 #include "utils/FastAccessCollection.h"
 #include "camera/Camera.h"
 #include <unordered_map>
@@ -32,7 +32,7 @@ private:
 	void CleanLevel();
 	void ConstructLevel(LevelPackage* levelData);
 	void ConstructGameGrid();
-	Tile* GetTileAtIndex(unsigned int x, unsigned int y);
+	Sector* GetSectorAtIndex(unsigned int x, unsigned int y);
 	void ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex);
 	bool IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex, const float outBottomIndex, const float outRightIndex);
 	void RemoveObject(int index);
@@ -44,7 +44,7 @@ private:
 
 	void AddVisibleGridLines();
 	void RemoveVisibleGridLines();
-	void RenderTileDebugColor();
+	void RenderSectorDebugColor();
 #endif
 
 private:
@@ -57,7 +57,7 @@ private:
 
 	std::multimap<float, int> sceneRenderingObjects;
 
-	std::vector<std::vector<Tile*>> m_gameWorldGrid;
+	std::vector<std::vector<Sector*>> m_gameWorldGrid;
 	Camera* activeLevelCamera;
 	std::unordered_map<std::string, std::unique_ptr<Camera>> availableCameras;
 
@@ -70,7 +70,7 @@ private:
 	std::vector<std::unique_ptr<GameObject>> sceneGridLines;
 
 	bool isGridDrawingEnabled = true;
-	bool isColorTileRenderEnabled = true;
+	bool isSectorColorRenderEnabled = true;
 	bool isOutlineEnabled = true;
 #endif
 };

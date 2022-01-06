@@ -29,7 +29,7 @@ private:
 	GameObjectFactory(const GameObjectFactory& copy) {};
 	~GameObjectFactory() {};
 
-	WireFrame* GetTile(GameObjectPackage& pack);
+	WireFrame* GetMesh(GameObjectPackage& pack);
 	Texture* GetTexture(GameObjectPackage& pack);
 	AnimData* GetAnimation(GameObjectPackage& pack);
 	int GetProgram(GameObjectPackage& pack);

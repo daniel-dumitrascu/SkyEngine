@@ -38,8 +38,8 @@ extern const int WINDOWS_SCREEN_MULTIPLIER;
 extern const int WORLD_GRID_WIDTH_COUNT;
 extern const int WORLD_GRID_HEIGHT_COUNT;
 
-extern const int WORLD_TILE_WIDTH;
-extern const int WORLD_TILE_HEIGHT;
+extern const int GRID_SECTOR_WIDTH;
+extern const int GRID_SECTOR_HEIGHT;
 
 extern const int WORLD_WIDTH;
 extern const int WORLD_HEIGHT;

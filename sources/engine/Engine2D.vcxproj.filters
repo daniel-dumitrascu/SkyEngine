@@ -55,9 +55,6 @@
     <ClCompile Include="sources\core\level\LevelLoader.cpp">
       <Filter>core\level</Filter>
     </ClCompile>
-    <ClCompile Include="sources\core\level\Tile.cpp">
-      <Filter>core\level</Filter>
-    </ClCompile>
     <ClCompile Include="sources\core\logging\Logging.cpp">
       <Filter>core\logging</Filter>
     </ClCompile>
@@ -217,6 +214,9 @@
     <ClCompile Include="sources\core\settings\SettingsLoader.cpp">
       <Filter>core\settings</Filter>
     </ClCompile>
+    <ClCompile Include="sources\core\level\GridSector.cpp">
+      <Filter>core\level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\application\Application.h">
@@ -289,9 +289,6 @@
       <Filter>core\level</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\level\LevelLoader.h">
-      <Filter>core\level</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\core\level\Tile.h">
       <Filter>core\level</Filter>
     </ClInclude>
     <ClInclude Include="sources\core\loader\Loader.h">
@@ -500,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="sources\core\settings\SettingsLoader.h">
       <Filter>core\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\core\level\GridSector.h">
+      <Filter>core\level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

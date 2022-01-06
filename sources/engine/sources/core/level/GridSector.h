@@ -5,11 +5,11 @@
 #include "entities/GameObject.h"
 
 
-class Tile
+class Sector
 {
 	public:
 
-		Tile(unsigned int rowIndex, unsigned int columnIndex);
+		Sector(unsigned int rowIndex, unsigned int columnIndex);
 
 		int GetRowIndex() { return m_gridRowIndex; }
 		int GetColumnIndex() { return m_gridColumnIndex; }
@@ -27,7 +27,7 @@ class Tile
 		unsigned int m_gridColumnIndex;
 
 		/*
-		 * A list of game objects that collide with this tile
+		 * A list of game objects that collide with this sector
 		 */
-		std::map<int, GameObject*> m_tileCollidingObjects;
+		std::map<int, GameObject*> gridSectorCollidingObjects;
 };

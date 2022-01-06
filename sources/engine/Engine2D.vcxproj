@@ -109,7 +109,7 @@
     <ClInclude Include="sources\core\level\LevelDefines.h" />
     <ClInclude Include="sources\core\level\LevelLoader.h" />
     <ClInclude Include="sources\core\level\parser\FileLevel.h" />
-    <ClInclude Include="sources\core\level\Tile.h" />
+    <ClInclude Include="sources\core\level\GridSector.h" />
     <ClInclude Include="sources\core\loader\Loader.h" />
     <ClInclude Include="sources\core\logging\Logging.h" />
     <ClInclude Include="sources\core\math\Geometry.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="sources\core\level\Level.cpp" />
     <ClCompile Include="sources\core\level\LevelLoader.cpp" />
     <ClCompile Include="sources\core\level\parser\FileLevel.cpp" />
-    <ClCompile Include="sources\core\level\Tile.cpp" />
+    <ClCompile Include="sources\core\level\GridSector.cpp" />
     <ClCompile Include="sources\core\logging\Logging.cpp" />
     <ClCompile Include="sources\core\math\Geometry.cpp" />
     <ClCompile Include="sources\core\math\MathUtils.cpp" />
