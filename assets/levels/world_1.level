@@ -7,6 +7,7 @@
 		</Camera>
 	</Cameras>
 	<SelectedActiveCamera CameraID="1" AttachedObject="1"/>
+	<!-- Player -->
 	<GameObject id="1">
 		<Composition Type="1" ResourceMeshPath="assets/meshes/player.mesh" 
 							  ResourceTexturePath="assets/textures/PNG_files/player.png" 
@@ -14,9 +15,10 @@
 		<Properties Renderable="true" Collidable="true" Controllable="true"/>
 		<Position x="200" y="100" />
 		<Rotation x="0" y="0" />
-		<Scale size="120" />
-		<ZBuffer value="2" />
+		<Scale size="90" />
+		<ZBuffer value="3" />
 	</GameObject>
+	<!-- Background -->
 	<GameObject id="2">
 		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
 								ResourceTexturePath="assets/textures/PNG_files/grass.png"
@@ -2576,5 +2578,128 @@
 		<Rotation x="0" y="0" />
 		<Scale size="200" />
 		<ZBuffer value="1" />
+	</GameObject>
+	<!-- Trees -->
+	<GameObject id="258">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/tree.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="750" y="800" />
+		<Rotation x="0" y="0" />
+		<Scale size="100" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="259">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/tree.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="700" y="700" />
+		<Rotation x="0" y="0" />
+		<Scale size="100" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="260">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/tree.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="830" y="680" />
+		<Rotation x="0" y="0" />
+		<Scale size="100" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="261">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/tree.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="930" y="580" />
+		<Rotation x="0" y="0" />
+		<Scale size="100" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="262">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/tree.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="1070" y="770" />
+		<Rotation x="0" y="0" />
+		<Scale size="100" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<!-- Crates -->
+	<GameObject id="262">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="600" y="200" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="263">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="500" y="200" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="264">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="700" y="200" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	
+	<GameObject id="265">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="500" y="500" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="266">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="600" y="500" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="267">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="700" y="500" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
+	</GameObject>
+	<GameObject id="268">
+		<Composition Type="2" ResourceMeshPath="assets/meshes/grass.mesh"
+								ResourceTexturePath="assets/textures/PNG_files/crate.png"
+								ResourceShaderPath="assets/shaders/rend_tex" />
+		<Properties Renderable="true" Collidable="true" />
+		<Position x="300" y="500" />
+		<Rotation x="0" y="0" />
+		<Scale size="50" />
+		<ZBuffer value="2" />
 	</GameObject>
 </Level>
