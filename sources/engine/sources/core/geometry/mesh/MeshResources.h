@@ -4,7 +4,7 @@
 #include "utils/MapCollection.h"
 #include "WireFrame.h"
 
-class MeshRes : private MapCollection<WireFrame*>
+class MeshRes : private MapPtrCollection<WireFrame>
 {
 public:
 

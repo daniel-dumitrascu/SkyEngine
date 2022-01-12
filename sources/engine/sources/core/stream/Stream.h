@@ -4,12 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
 
 class Stream
 {
 	public:
 
-		Stream() : m_isOpen(false), m_file_stream(NULL), m_file_size(0) {}
+		Stream() : m_isOpen(false), m_file_size(0) {}
 		virtual ~Stream(){}
 
 		virtual bool Open(const std::string& file_path, std::ios_base::openmode mode);
@@ -26,7 +27,7 @@ class Stream
 	protected:
 
 		bool m_isOpen;
-		std::fstream*  m_file_stream;
+		std::unique_ptr<std::fstream> m_file_stream;
 		int m_file_size;
 
 	private:

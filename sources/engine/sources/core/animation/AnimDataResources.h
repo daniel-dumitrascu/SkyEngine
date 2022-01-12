@@ -4,7 +4,7 @@
 #include "utils/MapCollection.h"
 #include "AnimData.h"
 
-class AnimDataRes : private MapCollection<AnimData*>
+class AnimDataRes : private MapPtrCollection<AnimData>
 {
 	public:
 

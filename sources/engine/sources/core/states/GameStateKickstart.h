@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_KICKSTART_H
 #define GAME_STATE_KICKSTART_H
 
+#include <memory>
 #include "GameBaseState.h"
 #include "time/Time.h"
 #include "splash/SplashScreen.h"
@@ -22,7 +23,7 @@ class GameStateKickstart : public GameBaseState
 	private:
 
 		bool is_done_loading;
-		SplashScreen* m_splash_screen;
+		std::unique_ptr<SplashScreen> m_splash_screen;
 		CoreTime::Timer m_splash_timer;
 };
 

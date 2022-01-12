@@ -13,8 +13,7 @@
 #include "settings/SettingsLoader.h"
 
 
-GameStateKickstart::GameStateKickstart() : is_done_loading(false), 
-                               m_splash_screen(NULL), 
+GameStateKickstart::GameStateKickstart() : is_done_loading(false),
 							   m_splash_timer(0500)
 {
 	stateID = GAME_STATE_KICKSTART;
@@ -34,7 +33,10 @@ void GameStateKickstart::ResumeState()
 
 	MeshRes::GetInstance()->Add((WireFrame*)MeshLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenMesh), splashScreenMesh);
 	TexRes::GetInstance()->Add((Texture*)TexLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenTexture), splashScreenTexture);
-	ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenShader), splashScreenShader);
+
+	//TODO - this should be done directly into AddShaderPair
+	std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenShader));
+	ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), splashScreenShader);
 
 	/***********************************************************************************************************************/
 	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(splashScreenShader);
@@ -87,7 +89,7 @@ void GameStateKickstart::UpdateState()
 			WireFrame* mesh = (WireFrame*)mesh_loader->Load(working_dir_path + "\\" + menuMeshPath);
 			mesh_res->Add(mesh, menuMeshPath);
 
-			m_splash_screen = new SplashScreen(mesh, texture, program_id);
+			m_splash_screen = std::make_unique<SplashScreen>(mesh, texture, program_id);
 			m_splash_screen->Init();
 
 			return;

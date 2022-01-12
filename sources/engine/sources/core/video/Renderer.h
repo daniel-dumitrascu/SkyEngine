@@ -7,8 +7,8 @@ class Renderer
 {
 	public:
 
-		Renderer();
-		virtual ~Renderer();
+		Renderer() = default;
+		virtual ~Renderer() = default;
 
 		virtual void InitRenderer(void* screen_handle,
 			                      const AspectRatio& aspect_ratio,

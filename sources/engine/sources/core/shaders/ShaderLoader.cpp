@@ -18,7 +18,7 @@ ShaderLoader::ShaderLoader() : log("ShaderLoader")
 
 void* ShaderLoader::Load(const std::string& file_path)
 {
-	void* m_buffer = NULL;
+	void* m_buffer = nullptr;
 
 #if(GRAPHICS_OPENGL_ES_2_0 || GRAPHICS_OPENGL_LATEST)
 	m_buffer = OpenGL2File::GetInstance()->LoadGL2ShaderPair(file_path);

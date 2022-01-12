@@ -10,10 +10,6 @@ LevelLoader* LevelLoader::GetInstance()
 	return &instance;
 }
 
-LevelLoader::LevelLoader() : log("LevelLoader")
-{
-}
-
 void* LevelLoader::Load(const std::string& file_path)
 {
 	void* m_buffer = nullptr;

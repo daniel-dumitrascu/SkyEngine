@@ -214,7 +214,8 @@ int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 	int program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
 	if (!program)
 	{
-		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath), pack.m_shaderPath);
+		std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath));
+		ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), pack.m_shaderPath);
 		program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
 	}
 

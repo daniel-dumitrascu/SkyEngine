@@ -9,7 +9,7 @@ FileMesh* FileMesh::GetInstance()
 
 WireFrame* FileMesh::ParseFile(const std::string& file_path)
 {
-	WireFrame* mesh = NULL;
+	WireFrame* mesh = nullptr;
 
 	/* Open the file */
 	if (Open(file_path, std::ios::in | std::ios::binary))
@@ -28,7 +28,7 @@ WireFrame* FileMesh::ParseFile(const std::string& file_path)
 		int result = stream_doc.Parse(model_buffer.c_str());
 
 		if (result != tinyxml2::XML_SUCCESS)
-			return NULL;
+			return nullptr;
 
 		tinyxml2::XMLElement* ModelMapping_elem = stream_doc.FirstChildElement("ModelMapping");
 
@@ -43,25 +43,25 @@ WireFrame* FileMesh::ParseFile(const std::string& file_path)
 			{
 				int normals_nr = 0;
 				if (MeshCoords_elem->QueryIntAttribute("number", &normals_nr) != tinyxml2::XML_SUCCESS)
-					return NULL;
+					return nullptr;
 
 				normals.reserve(normals_nr);
 				mesh->SetNormalsNr(normals_nr);
 
-				for (tinyxml2::XMLElement* e = MeshCoords_elem->FirstChildElement("MeshCoord"); e != NULL; e = e->NextSiblingElement("MeshCoord"))
+				for (tinyxml2::XMLElement* e = MeshCoords_elem->FirstChildElement("MeshCoord"); e != nullptr; e = e->NextSiblingElement("MeshCoord"))
 				{
 					/* Get the normal values */
 					result = e->QueryFloatAttribute("X", &elem_attribs.elem[0]);
 					result += e->QueryFloatAttribute("Y", &elem_attribs.elem[1]);
 
 					if (result != tinyxml2::XML_SUCCESS)
-						return NULL;
+						return nullptr;
 
 					normals.push_back(elem_attribs);
 				}
 			}
 			else
-				return NULL;
+				return nullptr;
 
 			tinyxml2::XMLElement* Textures_elem = ModelMapping_elem->FirstChildElement("Textures");
 
@@ -69,25 +69,25 @@ WireFrame* FileMesh::ParseFile(const std::string& file_path)
 			{
 				int texcoord_nr =0;
 				if (Textures_elem->QueryIntAttribute("number", &texcoord_nr) != tinyxml2::XML_SUCCESS)
-					return NULL;
+					return nullptr;
 
 				textures.reserve(texcoord_nr);
 				mesh->SetTexcoordNr(texcoord_nr);
 
-				for (tinyxml2::XMLElement* e = Textures_elem->FirstChildElement("Texcoord"); e != NULL; e = e->NextSiblingElement("Texcoord"))
+				for (tinyxml2::XMLElement* e = Textures_elem->FirstChildElement("Texcoord"); e != nullptr; e = e->NextSiblingElement("Texcoord"))
 				{
 					/* Get the normal values */
 					result = e->QueryFloatAttribute("U", &elem_attribs.elem[0]);
 					result += e->QueryFloatAttribute("V", &elem_attribs.elem[1]);
 
 					if (result != tinyxml2::XML_SUCCESS)
-						return NULL;
+						return nullptr;
 
 					textures.push_back(elem_attribs);
 				}
 			}
 			else
-				return NULL;
+				return nullptr;
 
 			tinyxml2::XMLElement* Polygons_elem = ModelMapping_elem->FirstChildElement("Polygons");
 
@@ -95,14 +95,14 @@ WireFrame* FileMesh::ParseFile(const std::string& file_path)
 			{
 				int poly_nr = 0;
 				if (Polygons_elem->QueryIntAttribute("number", &poly_nr) != tinyxml2::XML_SUCCESS)
-					return NULL;
+					return nullptr;
 
 				mesh->SetPolyNr(poly_nr);
 
 				vec_3x normal_idx, texture_idx;
 				Polygon polygon;
 
-				for (tinyxml2::XMLElement* e = Polygons_elem->FirstChildElement("Polygon"); e != NULL; e = e->NextSiblingElement("Polygon"))
+				for (tinyxml2::XMLElement* e = Polygons_elem->FirstChildElement("Polygon"); e != nullptr; e = e->NextSiblingElement("Polygon"))
 				{
 					/* Get the polygon indices */
 					result += e->QueryFloatAttribute("TexA", &texture_idx.elem[0]);
@@ -115,14 +115,14 @@ WireFrame* FileMesh::ParseFile(const std::string& file_path)
 					result += e->QueryFloatAttribute("NormC", &normal_idx.elem[2]);
 
 					if (result != tinyxml2::XML_SUCCESS)
-						return NULL;
+						return nullptr;
 
 					ConstrFace(polygon, normals, normal_idx, textures, texture_idx);
 					mesh->AddPolygon(polygon);
 				}
 			}
 			else
-				return NULL;
+				return nullptr;
 		}
 	}
 

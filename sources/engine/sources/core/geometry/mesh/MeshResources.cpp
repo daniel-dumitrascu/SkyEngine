@@ -29,25 +29,25 @@ MeshRes& MeshRes::operator=(const MeshRes& copy)
 
 void MeshRes::Add(WireFrame* mesh, const std::string& key)
 {
-	MapCollection::Add(mesh, key);
+	MapPtrCollection::Add(mesh, key);
 }
 
 void MeshRes::Remove(const std::string& key)
 {
-	MapCollection::Remove(key);
+	MapPtrCollection::Remove(key);
 }
 
 unsigned int MeshRes::Count()
 {
-	return MapCollection::Count();
+	return MapPtrCollection::Count();
 }
 
 bool MeshRes::Find(const std::string& key)
 {
-	return MapCollection::Find(key);
+	return MapPtrCollection::Find(key);
 }
 
 WireFrame* MeshRes::Retrive(const std::string& key)
 {
-	return MapCollection::Retrive(key);
+	return MapPtrCollection::Retrive(key);
 }

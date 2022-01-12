@@ -15,7 +15,7 @@ AnimDataLoader::AnimDataLoader() : log("AnimDataLoader")
 
 void* AnimDataLoader::Load(const std::string& file_path)
 {
-	void* m_buffer = NULL;
+	void* m_buffer = nullptr;
 
 	std::string extension = utils::str::GetFileExtension(file_path);
 

@@ -48,19 +48,6 @@ void Level::CleanLevel()
 			RemoveObject(index);
 	}
 
-	// Deallocate the game rectangles
-#if(DEBUG_SECTION)
-	for (int i = 0; i < m_gridRect.size(); ++i)
-		for (int j = 0; j < m_gridRect[i].size(); ++j)
-			delete m_gridRect[i][j].first;
-#endif
-
-	// Deallocate the grid structure
-	for (int i = 0; i < m_gameWorldGrid.size(); ++i)
-		for (int j = 0; j < m_gameWorldGrid[i].size(); ++j)
-			delete m_gameWorldGrid[i][j];
-
-
 	// Reset score and other settings
 	//TODO to implement
 }
@@ -177,7 +164,7 @@ void Level::ConstructGameGrid()
 		// Iterate in the new allocated row and create new sectors
 		for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 		{
-			m_gameWorldGrid[i][j] = new Sector(i, j);
+			m_gameWorldGrid[i][j] = std::make_unique<Sector>(i, j);
 
 			// After we have constructed the game grid we must create GameRect objects 
 			// for each time so that we can use them in the debug mode of the app
@@ -185,7 +172,7 @@ void Level::ConstructGameGrid()
 			vec_2x recLeftTop(GRID_SECTOR_WIDTH * j, (GRID_SECTOR_HEIGHT * i) + GRID_SECTOR_HEIGHT);
 			vec_2x recRightBottom((GRID_SECTOR_WIDTH * j) + GRID_SECTOR_WIDTH, GRID_SECTOR_HEIGHT * i);
 
-			m_gridRect[i][j] = std::make_pair(GameObjectFactory::GetInstance()->CreateGameRectangle(recLeftTop, recRightBottom, color), false);
+			m_gridRect[i][j] = std::make_pair(std::unique_ptr<GameObject>(GameObjectFactory::GetInstance()->CreateGameRectangle(recLeftTop, recRightBottom, color)), false);
 #endif
 		}
 	}
@@ -298,7 +285,7 @@ void Level::Update()
 				for (unsigned int i = 0; i < WORLD_GRID_HEIGHT_COUNT; ++i)
 					for (unsigned int j = 0; j < WORLD_GRID_WIDTH_COUNT; ++j)
 					{
-						((GameRectangle*)(m_gridRect[i][j].first))->SetColor(green);
+						((GameRectangle*)(m_gridRect[i][j].first.get()))->SetColor(green);
 					}
 			}
 #endif
@@ -377,13 +364,13 @@ void Level::Update()
 					for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
 						for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
 						{
-							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first.get()))->SetColor(color);
 						}
 
 					for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
 						for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
 						{
-							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first.get()))->SetColor(color);
 						}
 
 						//std::cout << "Collision between <" << currSceneObj->GetID() << "> and <" << ite->second->GetID() << ">" << std::endl;
@@ -417,13 +404,13 @@ void Level::Update()
 					for (int yAxisIndex = objectAGridMapping[0]; yAxisIndex >= objectAGridMapping[2]; yAxisIndex--)
 						for (int xAxisIndex = objectAGridMapping[1]; xAxisIndex <= objectAGridMapping[3]; xAxisIndex++)
 						{
-							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first.get()))->SetColor(color);
 						}
 
 					for (int yAxisIndex = objectBGridMapping[0]; yAxisIndex >= objectBGridMapping[2]; yAxisIndex--)
 						for (int xAxisIndex = objectBGridMapping[1]; xAxisIndex <= objectBGridMapping[3]; xAxisIndex++)
 						{
-							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first))->SetColor(color);
+							((GameRectangle*)(m_gridRect[yAxisIndex][xAxisIndex].first.get()))->SetColor(color);
 						}
 				}
 			}
@@ -538,7 +525,7 @@ void Level::InputActionNotify(const InputEventBatch& inputBatch)
 
 Sector* Level::GetSectorAtIndex(unsigned int x, unsigned int y)
 {
-	return (x < m_gameWorldGrid.size() && y < m_gameWorldGrid[x].size()) ? m_gameWorldGrid[x][y] : nullptr;
+	return (x < m_gameWorldGrid.size() && y < m_gameWorldGrid[x].size()) ? m_gameWorldGrid[x][y].get() : nullptr;
 }
 
 void Level::ComputeObjectToGridMapping(const Rectangle& objectRect, int& outTopIndex, int& outLeftIndex, int& outBottomIndex, int& outRightIndex)
@@ -577,10 +564,7 @@ bool Level::IsAreaOutOfBounce(const float outTopIndex, const float outLeftIndex,
 void Level::RemoveObject(int index)
 {
 	GameObject* todelGameObject = sceneObjectsCollection.Retrive(index);
-
 	sceneRenderingObjects.erase(todelGameObject->GetZBuffer());
-
-	delete todelGameObject;
 	sceneObjectsCollection.Free(index);
 }
 
@@ -596,7 +580,7 @@ GameObject* Level::GetGridRectObject(int x, int y)
 	if (x >= m_gridRect[y].size())
 		return nullptr;
 
-	return m_gridRect[y][x].first;
+	return m_gridRect[y][x].first.get();
 }
 
 bool Level::IsGridRectVisible(int x, int y)

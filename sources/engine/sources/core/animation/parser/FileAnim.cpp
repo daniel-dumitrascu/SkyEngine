@@ -11,8 +11,6 @@ FileAnim* FileAnim::GetInstance()
 
 AnimData* FileAnim::ParseFile(const std::string& file_path)
 {
-	AnimData* data = NULL;
-
 	/* Open the file */
 	Open(file_path, std::ios::in | std::ios::binary);
 
@@ -28,9 +26,11 @@ AnimData* FileAnim::ParseFile(const std::string& file_path)
 	int result = stream_doc.Parse(model_buffer.c_str());
 
 	if (result != tinyxml2::XML_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	tinyxml2::XMLElement* Animation_elem = stream_doc.FirstChildElement("Animation");
+
+	AnimData* data = nullptr;
 
 	if (Animation_elem)
 	{

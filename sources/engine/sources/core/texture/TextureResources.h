@@ -5,7 +5,7 @@
 #include "Texture.h"
 
 
-class TexRes : public MapCollection<Texture*>
+class TexRes : public MapPtrCollection<Texture>
 {
 	public:
 
@@ -13,7 +13,7 @@ class TexRes : public MapCollection<Texture*>
 
 		void Add(Texture* texture, const std::string& key);
 		void Remove(const std::string& key);
-		unsigned int Count() { return MapCollection::Count(); };
+		unsigned int Count() { return MapPtrCollection::Count(); };
 		bool Find(const std::string& key);
 		Texture* Retrive(const std::string& key);
 

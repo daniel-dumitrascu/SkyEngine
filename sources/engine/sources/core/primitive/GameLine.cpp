@@ -56,7 +56,8 @@ void GameLine::Init()
 	m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	if (!m_shader)
 	{
-		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath), primitivePath);
+		std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath));
+		ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), primitivePath);
 		m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	}
 

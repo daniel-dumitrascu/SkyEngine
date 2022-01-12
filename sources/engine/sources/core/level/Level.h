@@ -53,18 +53,18 @@ private:
 
 	// Level has ownership over the objects so the objects
 	// will be deleted by the the Level
-	FastAccessCollection<GameObject*> sceneObjectsCollection;
+	FastAccessCollection<GameObject> sceneObjectsCollection;
 
 	std::multimap<float, int> sceneRenderingObjects;
 
-	std::vector<std::vector<Sector*>> m_gameWorldGrid;
+	std::vector<std::vector<std::unique_ptr<Sector>>> m_gameWorldGrid;
 	Camera* activeLevelCamera;
 	std::unordered_map<std::string, std::unique_ptr<Camera>> availableCameras;
 
 #if(DEBUG_SECTION)	
 	// This creates a grid of GameRectangles.
 	// The boolean tells us if a certain object needs to be updated and rendered
-	std::vector<std::vector<std::pair<GameObject*, bool>>> m_gridRect;
+	std::vector<std::vector<std::pair<std::unique_ptr<GameObject>, bool>>> m_gridRect;
 
 	// Contains the grid lines
 	std::vector<std::unique_ptr<GameObject>> sceneGridLines;

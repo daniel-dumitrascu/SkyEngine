@@ -10,9 +10,8 @@ FileTGA* FileTGA::GetInstance()
 
 Texture* FileTGA::LoadTGA(const std::string& file_path)
 {
-	TGA_header  header;
-	Texture*    tex = new Texture;
-
+	TGA_header header;
+	Texture* tex = new Texture;
 
 	/* Open the file */
 	Open(file_path, std::ios::in | std::ios::binary);
@@ -27,14 +26,14 @@ Texture* FileTGA::LoadTGA(const std::string& file_path)
 	if (header.ColorDepth == 24)
 	{
 		int buffer_size = tex->w * tex->h;
-		RGBPoint *Buffer24 = new RGBPoint[buffer_size];
+		std::unique_ptr<RGBPoint[]> Buffer24(new RGBPoint[buffer_size]);
 
-		if (Buffer24)
+		if (Buffer24 != nullptr)
 		{
 			int i = 0;
 
 			Read(&(Buffer24[0].rgbtBlue), sizeof(RGBPoint)* buffer_size);
-			unsigned char* buffer = new unsigned char[3 * buffer_size];
+			std::unique_ptr<unsigned char[]> buffer(new unsigned char[3 * buffer_size]);
 
 			if (!(header.Descriptor & INVERTED_BIT))
 			{
@@ -65,9 +64,6 @@ Texture* FileTGA::LoadTGA(const std::string& file_path)
 					}
 			}
 
-			/* Cleanup */
-			delete [] Buffer24;
-
 			// TODO notices that this load function does several things
 			// including file upload and loading in OpenGL
 			// Normally we should break these operations into as small as possible, namely
@@ -85,19 +81,17 @@ Texture* FileTGA::LoadTGA(const std::string& file_path)
 
 			// Load mipmap level 0
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->w, tex->h, 0,
-				         GL_RGB, GL_UNSIGNED_BYTE, (const void*)buffer);
+				         GL_RGB, GL_UNSIGNED_BYTE, (const void*)buffer.get());
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 #endif
 
-			delete [] buffer;
 			Close();  	/* Close the stream */
 			return tex;
 		}
 	}
 
-	delete [] tex;
 	Close();  	/* Close the stream */
-	return NULL;	
+	return nullptr;	
 }

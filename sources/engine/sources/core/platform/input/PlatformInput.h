@@ -11,13 +11,13 @@ class PlatformInput
 		static PlatformInput* GetInstance();
 
 	public:
-		static std::vector<Device*> m_available_devices;
+		static std::vector<std::unique_ptr<Device>> m_available_devices;
 		static InputEventBatch inputBatch;
 
 	private:
 		PlatformInput();
-		PlatformInput(const PlatformInput& copy) {};
-		~PlatformInput();
+		PlatformInput(const PlatformInput& copy) = delete;
+		~PlatformInput() = default;
 
 		PlatformInput& operator = (const PlatformInput& copy) {};
 };

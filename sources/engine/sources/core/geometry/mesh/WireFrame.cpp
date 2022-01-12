@@ -5,7 +5,6 @@ WireFrame::WireFrame() : m_normalsNr(0),
 						 m_texcoordNr(0),
 						 m_polyNr(0), 
 						 m_geometryCount(0), 
-						 m_indices(NULL), 
 						 m_vboVert(0), 
 						 m_vboIndx(0),
 						 m_isGeometryInGpu(false)
@@ -15,7 +14,6 @@ WireFrame::WireFrame() : m_normalsNr(0),
 
 WireFrame::~WireFrame()
 {
-	delete[] m_indices;
 	m_polygons.clear();
 }
 
@@ -25,9 +23,8 @@ WireFrame& WireFrame::operator = (WireFrame& copy)
 	this->m_texcoordNr	  = copy.m_texcoordNr;
 	this->m_polyNr		  = copy.m_polyNr;
 	this->m_geometryCount = copy.m_geometryCount;
-
-	delete[] this->m_indices;
-	this->m_indices = new unsigned short[m_geometryCount];
+	
+	this->m_indices.reset(new unsigned short[m_geometryCount]);
 	for (int i = 0; i < m_geometryCount; i++)
 		this->m_indices[i] = copy.m_indices[i];
 
@@ -46,10 +43,7 @@ void WireFrame::SetPolyNr(unsigned int polyNr)
 	m_polyNr = polyNr;
 	m_geometryCount = TRIANGLE_FACE * m_polyNr;
 
-	if (m_indices)
-		delete[] m_indices;
-
-	m_indices = (unsigned short*) new unsigned short[m_geometryCount];
+	m_indices.reset(new unsigned short[m_geometryCount]);
 
 	for (int i = 0; i < m_geometryCount; ++i)
 		m_indices[i] = i;
@@ -57,7 +51,7 @@ void WireFrame::SetPolyNr(unsigned int polyNr)
 
 const Polygon* WireFrame::GetPolygonAtIndex(int index) const
 {
-	const Polygon* poly = NULL;
+	const Polygon* poly = nullptr;
 
 	if (index >= 0 && index < GetPolyNr())
 		poly = &m_polygons[index];

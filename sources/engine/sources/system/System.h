@@ -2,6 +2,7 @@
 #define SYSTEM_H
 
 #include <iostream>
+#include <memory>
 #include "../core/video/Driver.h"
 #include "../application/Application.h"
 #include "logging/Logging.h"
@@ -27,14 +28,13 @@ class System
 
 		System& operator=(const System& copy) {};
 
-		bool CleanUp();
 		void ConstrSystemGlobals();
 		void CreateSettingsFileIfNonExisting(const std::string& working_dir_path);
 		void CreateDefaultSettingsFile(const std::string& _path, const std::string& _fileName);
 
-		std::string    m_title;
-		Driver*        m_driver;
-		Logging		   log;
+		std::string					m_title;
+		std::unique_ptr<Driver>     m_driver;
+		Logging						log;
 
 	protected:
 

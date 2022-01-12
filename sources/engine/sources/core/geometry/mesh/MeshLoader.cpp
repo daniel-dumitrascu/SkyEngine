@@ -15,7 +15,7 @@ MeshLoader::MeshLoader() : log("MeshLoader")
 
 void* MeshLoader::Load(const std::string& file_path)
 {
-	void* m_buffer = NULL;
+	void* m_buffer = nullptr;
 
 	std::string extension = utils::str::GetFileExtension(file_path);
 
@@ -30,7 +30,7 @@ void* MeshLoader::Load(const std::string& file_path)
 		exit(1);
 	}
 
-	if (m_buffer == NULL)
+	if (m_buffer == nullptr)
 	{
 		log.message("Mesh file could not be loaded!", Logging::MSG_ERROR);
 		exit(1);

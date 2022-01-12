@@ -15,7 +15,7 @@ OpenGL2File::OpenGL2File() : log("OpenGL2File")
 
 ShaderPair* OpenGL2File::LoadGL2ShaderPair(const std::string& file_path)
 {
-	ShaderPair* result = NULL;
+	ShaderPair* result = nullptr;
 
 	/* Create 2 paths for the vertex and fragment shaders */
 	const std::string vertexShaderPath(file_path + ".vshader");
@@ -44,14 +44,12 @@ unsigned int OpenGL2File::LoadShader(const std::string& file_path, const int typ
 	if (IsOpen())
 	{
 		/* Read the whole file into memory */
-		char* buffer = new char[m_file_size + 1]();
-		Read(buffer, m_file_size);
+		std::unique_ptr<char> buffer(new char[m_file_size + 1]());
+		Read(buffer.get(), m_file_size);
 		Close();
 
 		/* Compile shader */
-		shader_id = CompileShader(type, buffer);
-
-		delete[] buffer;
+		shader_id = CompileShader(type, buffer.get());
 	}
 
 	return shader_id;

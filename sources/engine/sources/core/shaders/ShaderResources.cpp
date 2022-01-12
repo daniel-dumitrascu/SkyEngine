@@ -2,7 +2,7 @@
 #include "ShaderLoader.h"
 #include "../core/global/GlobalPaths.h"
 #include "../video/GraphicHeaders.h"
-
+#include <memory>
 
 ShaderRes* ShaderRes::GetInstance()
 {
@@ -16,12 +16,12 @@ ShaderRes::ShaderRes() : log("ShaderRes")
 
 ShaderRes::~ShaderRes()
 {
-	std::map<const std::string, unsigned int>::iterator  ite = m_collection.begin();
+	std::map<const std::string, std::unique_ptr<const unsigned int>>::iterator  ite = m_collection.begin();
 
 	for (; ite != m_collection.end();)
 	{
 #if(GRAPHICS_OPENGL_ES_2_0 || GRAPHICS_OPENGL_LATEST)
-		glDeleteProgram(ite->second);
+		glDeleteProgram(*(ite->second.get()));
 #endif
 		const std::string& to_del = ite->first;
 		++ite;
@@ -37,7 +37,7 @@ bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, const std::string& key)
 		
 		if (program_id != -1)
 		{
-			MapCollection::Add(program_id, key);
+			MapPtrCollection::Add(new unsigned int(program_id), key);
 			return true;
 		}
 	}
@@ -59,22 +59,23 @@ void ShaderRes::RemoveShaderPair(const std::string& key)
 #endif
 	}
 
-	MapCollection::Remove(key);
+	MapPtrCollection::Remove(key);
 }
 
 unsigned int ShaderRes::CountShaderPair()
 {
-	return MapCollection::Count();
+	return MapPtrCollection::Count();
 }
 
 bool ShaderRes::ExistShaderPair(const std::string& key)
 {
-	return MapCollection::Find(key);
+	return MapPtrCollection::Find(key);
 }
 
 unsigned int ShaderRes::RetriveProgramID(const std::string& key)
 {
-	return MapCollection::Retrive(key);
+	unsigned int* valuePtr = MapPtrCollection::Retrive(key);
+	return valuePtr ? *valuePtr : 0;
 }
 
 unsigned int ShaderRes::CompileShaderPair(unsigned int v_shader, unsigned int f_shader)
@@ -119,7 +120,6 @@ unsigned int ShaderRes::CompileShaderPair(unsigned int v_shader, unsigned int f_
 
 bool ShaderRes::LinkShaderPairProgram(unsigned int program_id)
 {
-
 #if(GRAPHICS_OPENGL_ES_2_0 || GRAPHICS_OPENGL_LATEST)
 	GLint  linked;
 
@@ -137,13 +137,12 @@ bool ShaderRes::LinkShaderPairProgram(unsigned int program_id)
 
 		if (infoLen > 1)
 		{
-			char* infoLog = new char[infoLen];
+			std::unique_ptr<char> infoLog = std::make_unique<char>(infoLen);
 
-			glGetProgramInfoLog(program_id, infoLen, NULL, infoLog);
+			glGetProgramInfoLog(program_id, infoLen, nullptr, infoLog.get());
 			std::string msg = "linking program: ";
-			msg += infoLog;
+			msg += *infoLog;
 			log.message(msg, Logging::MSG_INFO);
-			delete infoLog;
 		}
 
 		/* Clean up */

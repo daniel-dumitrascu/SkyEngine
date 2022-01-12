@@ -5,7 +5,6 @@
 #include <iostream>
 
 
-
 Renderer* OpenGLLatestRenderer::GetHandle()
 {
 	if (!m_handle)
@@ -16,8 +15,11 @@ Renderer* OpenGLLatestRenderer::GetHandle()
 
 OpenGLLatestRenderer::~OpenGLLatestRenderer()
 {
-	delete m_handle;
-	m_handle = NULL;
+	if (m_handle)
+	{
+		delete m_handle;
+		m_handle = nullptr;
+	}
 }
 
 void OpenGLLatestRenderer::InitRenderer(void* screen_handle,

@@ -54,20 +54,13 @@ GameObject::GameObject( WireFrame* wireframe,
 	// then we can create the rectangle as well
 	if (m_wireframe)
 	{
-		m_rectangle = Geometry::ConstrRectFromWireframe(*m_wireframe);
+		m_rectangle = std::unique_ptr<Rectangle>(Geometry::ConstrRectFromWireframe(*m_wireframe));
 
 		// Once we have a rect we can now calculate the size of that rect (height and lenght)
 		vec_2x rectDimensions = Geometry::CalculateRectDimensions(*m_rectangle);
 		m_rectHeight = rectDimensions.elem[0];
 		m_rectLenght = rectDimensions.elem[1];
 	}		
-}
-
-GameObject::~GameObject()
-{
-	// We have to internally deallocate the Rectangle
-	if(m_rectangle)
-		delete m_rectangle;
 }
 
 std::unique_ptr<GameObject> GameObject::Clone()

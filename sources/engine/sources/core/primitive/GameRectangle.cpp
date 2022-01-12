@@ -12,7 +12,7 @@
 GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color) :
 	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, INPUT_HANDLE_PROFILE_NONE)
 {
-	m_rectangle = new Rectangle(recLeftTop, recRightBottom);
+	m_rectangle = std::make_unique<Rectangle>(recLeftTop, recRightBottom);
 	m_wireframe = Geometry::ConstrWireframeFromRect(*m_rectangle);
 
 	// Once we have a rect we can now calculate the size of that rect (height and lenght)
@@ -27,7 +27,6 @@ GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const v
 GameRectangle::~GameRectangle()
 {
 	Painter::RemoveGeometryFromGPU(m_wireframe);
-	delete m_wireframe;
 }
 
 std::unique_ptr<GameObject> GameRectangle::Clone()
@@ -50,7 +49,8 @@ void GameRectangle::Init()
 	m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	if (!m_shader)
 	{
-		ShaderRes::GetInstance()->AddShaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath), primitivePath);
+		std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath));
+		ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), primitivePath);
 		m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
 	}
 

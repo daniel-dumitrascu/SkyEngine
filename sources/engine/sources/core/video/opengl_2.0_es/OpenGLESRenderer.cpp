@@ -5,7 +5,6 @@
 #include "utils/DebugOutput.h"
 
 
-
 Renderer* OpenGLRenderer::GetHandle()
 {
 	if (!m_handle)

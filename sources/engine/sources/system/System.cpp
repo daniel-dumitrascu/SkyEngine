@@ -30,7 +30,7 @@ void System::SetApplication(Application* const app, const std::string title)
 	m_title = utils::str::Strfmt("%s - built on %s %s, version 0.001", title.c_str(), __TIME__, __DATE__);
 }
 
-System::System() : m_title(""), m_driver(NULL), log("System")
+System::System() : m_title(""), log("System")
 {
 	ConstrSystemGlobals();
 	CreateSettingsFileIfNonExisting(working_dir_path);
@@ -39,7 +39,7 @@ System::System() : m_title(""), m_driver(NULL), log("System")
 
 void System::Init() 
 { 
-	m_driver = new Driver;
+	m_driver = std::make_unique<Driver>();
 	if (m_driver == nullptr)
 	{
 		log.message("System driver could not be initiated.", Logging::MSG_ERROR);
@@ -85,15 +85,6 @@ void System::Run()
 void System::Close()
 { 
 	m_app->Close(); 
-	CleanUp();
-}
-
-bool System::CleanUp()
-{
-	delete m_driver;
-	m_driver = NULL;
-
-	return true;
 }
 
 void System::ConstrSystemGlobals()

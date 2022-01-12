@@ -9,9 +9,9 @@ FileSettings* FileSettings::GetInstance()
 	return &instance;
 }
 
-SettingsPackage* FileSettings::ParseFile(const std::string& file_path)
+std::unique_ptr<SettingsPackage> FileSettings::ParseFile(const std::string& file_path)
 {
-	SettingsPackage* settings = new SettingsPackage();
+	std::unique_ptr<SettingsPackage> settings = std::make_unique<SettingsPackage>();
 
 	// Open the file
 	Open(file_path, std::ios::in | std::ios::binary);
@@ -39,5 +39,5 @@ SettingsPackage* FileSettings::ParseFile(const std::string& file_path)
 	settings->data.insert(std::pair<std::string, std::string>("defaultResources.menu.shader",
 		settingsJson["defaultResources"]["menu"]["shader"]));
 	
-	return settings;
+	return std::move(settings);
 }

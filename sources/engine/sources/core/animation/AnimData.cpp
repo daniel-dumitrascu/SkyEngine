@@ -12,15 +12,9 @@ AnimData::AnimData(const AnimData& copy) : m_frame_timmer(copy.m_frame_timmer)
 
 }
 
-AnimData::~AnimData()
-{
-	for (int i = 0; i < m_frames.size(); i++)
-		delete m_frames[i];
-}
-
 void AnimData::PushStateLimit(int start_frame, int end_frame)
 {
-	m_state_limits.push_back(new AnimStateLimit(start_frame, end_frame));
+	m_state_limits.push_back(std::make_unique<AnimStateLimit>(start_frame, end_frame));
 }
 
 bool AnimData::GetStateLimit(int index, int* start, int* end) 
@@ -32,6 +26,6 @@ bool AnimData::GetStateLimit(int index, int* start, int* end)
 
 		return true;
 	}
-	else
-		return false;
+
+	return false;
 }

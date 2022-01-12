@@ -11,7 +11,6 @@ FileLevel* FileLevel::GetInstance()
 
 LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 {
-	LevelPackage* level;
 	int intValue = 0;
 
 	/* Open the file */
@@ -31,7 +30,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 	result = stream_doc.Parse(model_buffer.c_str());
 
 	if (result != tinyxml2::XML_SUCCESS)
-		return NULL;
+		return nullptr;
 
 	tinyxml2::XMLElement* Level_elem = stream_doc.FirstChildElement("Level");
 	if (Level_elem == nullptr)
@@ -39,11 +38,11 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 		return nullptr;
 	}
 
-	level = new LevelPackage;
+	LevelPackage* level = new LevelPackage;
 
 	tinyxml2::XMLElement* object_elem = Level_elem->FirstChildElement("GameObject");
 
-	while (object_elem != NULL)
+	while (object_elem != nullptr)
 	{
 		GameObjectPackage game_object_pack;
 
@@ -54,7 +53,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 
 			// Check the result before using the id
 			if (result != tinyxml2::XML_SUCCESS)
-				return NULL;
+				return nullptr;
 
 			game_object_pack.m_id = std::string(id);
 
@@ -126,13 +125,13 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 				result += Property_elem->QueryIntAttribute("value", &(game_object_pack.m_zBuffer));
 
 			if (result != tinyxml2::XML_SUCCESS)
-				return NULL;
+				return nullptr;
 
 			// Add entity data to the level data 
 			level->m_level_data.push_back(game_object_pack);
 		}
 		else
-			return NULL;
+			return nullptr;
 
 		object_elem = object_elem->NextSiblingElement("GameObject");
 	}
@@ -153,7 +152,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 
 		// Check the result before using the id
 		if (result != tinyxml2::XML_SUCCESS)
-			return NULL;
+			return nullptr;
 
 		camera_pack.camera_id = std::string(id);
 
@@ -172,7 +171,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 		}
 
 		if (result != tinyxml2::XML_SUCCESS)
-			return NULL;
+			return nullptr;
 
 		level->m_level_cameras.push_back(camera_pack);
 		camera_elem = camera_elem->NextSiblingElement("Camera");
@@ -189,7 +188,7 @@ LevelPackage* FileLevel::ParseFile(const std::string& file_path)
 		level->m_active_camera_attached_object = std::string(value);		
 
 		if (result != tinyxml2::XML_SUCCESS)
-			return NULL;
+			return nullptr;
 	}
 
 	return level;

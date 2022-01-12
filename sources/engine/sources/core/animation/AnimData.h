@@ -6,7 +6,7 @@
 #include "animation/AnimStateLimit.h"
 #include <iostream>
 #include <vector>
-
+#include <memory>
 
 
 class AnimData
@@ -16,10 +16,10 @@ class AnimData
 
 		AnimData(); 
 		AnimData(const AnimData& copy);
-		~AnimData();
+		~AnimData() = default;
 
-		void PushFrame(WireFrame* frame) { m_frames.push_back(frame); }
-		WireFrame* GetFrame(int index) { return m_frames[index]; }
+		void PushFrame(WireFrame* frame) { m_frames.push_back(std::unique_ptr<WireFrame>(frame)); }
+		WireFrame* GetFrame(int index) { return m_frames[index].get(); }
 
 		void PushStateLimit(int start_frame, int end_frame);
 		bool GetStateLimit(int index, int* start, int* end);
@@ -29,8 +29,8 @@ class AnimData
 
 	private: 
 
-		std::vector<WireFrame*> m_frames;			  /* Total frames */
-		std::vector<AnimStateLimit*> m_state_limits;  /* Limits for all states */
+		std::vector<std::unique_ptr<WireFrame>> m_frames;	/* Total frames */
+		std::vector<std::unique_ptr<AnimStateLimit>> m_state_limits;	/* Limits for all states */
 
 		int m_frame_timmer;
 };

@@ -3,9 +3,8 @@
 
 #include "Device.h"
 #include "PlatformInput.h"
+#include "input/Controllable.h"
 #include "../../utils/FastAccessCollection.h"
-
-class Controllable;
 
 class InputManager
 {
@@ -27,7 +26,7 @@ class InputManager
 
 	private:
 
-		FastAccessCollection<Controllable*>	subscribers;
+		FastAccessCollection<Controllable>	subscribers;
 };
 
 #endif

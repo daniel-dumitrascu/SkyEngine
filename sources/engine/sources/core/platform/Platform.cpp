@@ -3,12 +3,12 @@
 #include "Platform.h"
 
 
-Platform* Platform::m_platform = NULL;
+Platform* Platform::m_platform = nullptr;
 AspectRatio Platform::m_aspect_ratio;
 DisplayResolution Platform::m_resolution;
 
 
-Platform::Platform() : m_window(NULL)
+Platform::Platform() : m_window(nullptr)
 {
 	
 }

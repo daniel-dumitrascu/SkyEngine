@@ -6,7 +6,7 @@
 #include "logging/Logging.h"
 
 
-class ShaderRes : private MapCollection<unsigned int>
+class ShaderRes : private MapPtrCollection<unsigned int>
 {
 	public:
 

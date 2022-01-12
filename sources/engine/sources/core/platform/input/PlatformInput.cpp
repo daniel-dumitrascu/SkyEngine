@@ -1,7 +1,8 @@
 #include "PlatformInput.h"
 #include "DeviceDefinitions.h"
+#include <memory>
 
-std::vector<Device*> PlatformInput::m_available_devices;
+std::vector<std::unique_ptr<Device>> PlatformInput::m_available_devices;
 InputEventBatch PlatformInput::inputBatch;
 
 PlatformInput* PlatformInput::GetInstance()
@@ -19,17 +20,8 @@ PlatformInput::PlatformInput()
 #if (WINDOWS_PLATFORM || LINUX_PLATFORM)		
 	//TODO the actual detection will be platform dependent and will be done some day
 	m_available_devices.insert(m_available_devices.begin() + DEVICE_KEYBOARD, 
-								new Device(BUTTON_KEYBOARD_COUNT));
+								std::make_unique<Device>(BUTTON_KEYBOARD_COUNT));
 	m_available_devices.insert(m_available_devices.begin() + DEVICE_MOUSE, 
-								new Device(BUTTON_MOUSE_COUNT));
-#endif
-}
-
-PlatformInput::~PlatformInput()
-{
-#if (WINDOWS_PLATFORM || LINUX_PLATFORM)		
-	//TODO the actual detection will be platform dependent and will be done some day
-	delete m_available_devices[DEVICE_KEYBOARD];
-	delete m_available_devices[DEVICE_MOUSE];
+								std::make_unique<Device>(BUTTON_MOUSE_COUNT));
 #endif
 }

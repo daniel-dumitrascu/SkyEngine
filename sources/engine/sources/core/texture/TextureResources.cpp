@@ -14,21 +14,21 @@ TexRes& TexRes::operator=(const TexRes& copy)
 
 void TexRes::Add(Texture* texture, const std::string& key)
 {
-	MapCollection::Add(texture, key);
+	MapPtrCollection::Add(texture, key);
 }
 
 void TexRes::Remove(const std::string& key)
 {
-	MapCollection::Remove(key);
+	MapPtrCollection::Remove(key);
 }
 
 bool TexRes::Find(const std::string& key)
 {
-	return MapCollection::Find(key);
+	return MapPtrCollection::Find(key);
 }
 
 Texture* TexRes::Retrive(const std::string& key)
 {
-	return MapCollection::Retrive(key);
+	return MapPtrCollection::Retrive(key);
 }
 		

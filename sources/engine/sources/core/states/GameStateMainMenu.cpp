@@ -15,7 +15,7 @@
 
 //TODO This implementation will be changes once I introduce a framework for in-game menu
 
-GameStateMainMenu::GameStateMainMenu() : m_main_menu(NULL)
+GameStateMainMenu::GameStateMainMenu()
 {
 	stateID = GAME_STATE_MAINMENU;
 }
@@ -66,19 +66,19 @@ void GameStateMainMenu::UpdateState()
 		TexRes* tex_res = TexRes::GetInstance();
 		WireFrame* mesh;
 		Texture* texture;
-
+		
 		/* Get resources for the splashscreen */
 		mesh = mesh_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.menu.mesh"));
 		texture = tex_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture"));
 
-		m_main_menu = new MainMenu(mesh, texture, program_id);
+		m_main_menu = std::make_unique<MainMenu>(mesh, texture, program_id);
 		m_main_menu->Init();
 		InputManager* input_manager = InputManager::GetInstance();
-		int subId = input_manager->AddSubscriber((Controllable*)m_main_menu);
+		int subId = input_manager->AddSubscriber((Controllable*)m_main_menu.get());
 		if(subId == -1)
 			std::cout << "[ERROR] Problem when addind the menu as input subscriber" << std::endl;
 		else
-			((Controllable*)m_main_menu)->SetSubscriberId(subId);
+			((Controllable*)m_main_menu.get())->SetSubscriberId(subId);
 			
 		return;
 	}
@@ -93,6 +93,6 @@ void GameStateMainMenu::RenderState()
 void GameStateMainMenu::UnsubscribeFromInput()
 {
 	InputManager* input_manager = InputManager::GetInstance();
-	input_manager->RemoveSubscriber(((Controllable*)m_main_menu)->GetSubscriberId());
-	((Controllable*)m_main_menu)->SetSubscriberId(-1);
+	input_manager->RemoveSubscriber(((Controllable*)m_main_menu.get())->GetSubscriberId());
+	((Controllable*)m_main_menu.get())->SetSubscriberId(-1);
 }

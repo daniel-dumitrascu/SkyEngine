@@ -26,8 +26,8 @@ MainMenu::MainMenu(const MainMenu& copy) : Controllable(INPUT_HANDLE_PROFILE_MEN
 
 MainMenu::~MainMenu()
 {
-	m_mesh = NULL;
-	m_texture = NULL;
+	m_mesh = nullptr;
+	m_texture = nullptr;
 	m_shader_pair_id = 0;
 }
 

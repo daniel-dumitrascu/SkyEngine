@@ -4,14 +4,10 @@ bool Stream::Open(const std::string& file_path, std::ios_base::openmode mode)
 {
 	/* Do we have an already opened stream ? */
 	if (m_isOpen)
-	{
-		// close it
 		Close();
-		delete m_file_stream;
-	}
 
 	/* Open the new stream */
-	m_file_stream = new std::fstream(file_path, mode);
+	m_file_stream = std::make_unique<std::fstream>(file_path, mode);
 
 	if (m_file_stream)
 	{
@@ -38,7 +34,7 @@ bool Stream::Open(const std::string& file_path, std::ios_base::openmode mode)
 		}
 		else
 		{
-			delete m_file_stream;
+			m_file_stream.release();
 		}
 	}
 
@@ -50,7 +46,7 @@ void Stream::Close()
 	if (m_isOpen)
 	{
 		m_file_stream->close();
-		delete m_file_stream;
+		m_file_stream.release();
 		m_isOpen = false;
 	}
 }

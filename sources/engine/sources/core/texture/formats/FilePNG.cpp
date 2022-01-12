@@ -28,7 +28,7 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 	else
 	{
 		m_isOpen = false;
-		return NULL;
+		return nullptr;
 	}
 
 	/* read the header */
@@ -39,8 +39,8 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 	{
 		log.message(file_path + " is not a png file.", Logging::MSG_ERROR);
 		fclose(m_file);
-		m_file = NULL;
-		return NULL;
+		m_file = nullptr;
+		return nullptr;
 	}
 
 	png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -49,8 +49,8 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 	{
 		log.message("png_create_read_struct returned 0", Logging::MSG_ERROR);
 		fclose(m_file);
-		m_file = NULL;
-		return NULL;
+		m_file = nullptr;
+		return nullptr;
 	}
 
 	/* create png info struct */
@@ -61,8 +61,8 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 		log.message("png_create_info_struct returned 0", Logging::MSG_ERROR);
 		png_destroy_read_struct(&png_ptr, (png_infopp)NULL, (png_infopp)NULL);
 		fclose(m_file);
-		m_file = NULL;
-		return NULL;
+		m_file = nullptr;
+		return nullptr;
 	}
 
 	/* create png info struct */
@@ -72,8 +72,8 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 		log.message("png_create_info_struct returned 0", Logging::MSG_ERROR);
 		png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
 		fclose(m_file);
-		m_file = NULL;
-		return NULL;
+		m_file = nullptr;
+		return nullptr;
 	}
 
 	/* the code in this if statement gets called if libpng encounters an error */
@@ -82,8 +82,8 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 		log.message("From libpng internals.", Logging::MSG_ERROR);
 		png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
 		fclose(m_file);
-		m_file = NULL;
-		return NULL;
+		m_file = nullptr;
+		return nullptr;
 	}
 
 	/* init png reading */
@@ -140,21 +140,21 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 #endif
 	
 	/* Allocate the image_data as a big block */
-	unsigned char* buffer = new unsigned char[(rowbytes * texture_buffer->h) + 15];
+	std::unique_ptr<unsigned char[]> buffer(new unsigned char[(rowbytes * texture_buffer->h) + 15]);
 	png_bytep* row_pointers = new png_bytep[texture_buffer->h];
 
-	if (buffer == NULL || row_pointers == NULL)
+	if (buffer == nullptr || row_pointers == nullptr)
 	{
 		log.message("Could not allocate memory for PNG image data", Logging::MSG_ERROR);
 		png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
 		fclose(m_file);
-		return NULL;
+		return nullptr;
 	}
 
 	/* set the individual row_pointers to point at the correct offsets of image_data */
 	/* For the inverted image modify code as follows: row_pointers[texture_buffer->h - 1 - i] */
 	for (int i = 0; i < texture_buffer->h; i++)
-		row_pointers[texture_buffer->h - 1 - i] = buffer + i * rowbytes;
+		row_pointers[texture_buffer->h - 1 - i] = buffer.get() + i * rowbytes;
 
 	/* read the png into image_data through row_pointers */
 	png_read_image(png_ptr, row_pointers);
@@ -169,13 +169,11 @@ void* FilePNG::LoadPNG(const std::string& file_path)
 
 	// Load mipmap level 0
 	glTexImage2D(GL_TEXTURE_2D, 0, format, texture_buffer->w, texture_buffer->h, 0,
-		         format, GL_UNSIGNED_BYTE, (const void*)buffer);
+		         format, GL_UNSIGNED_BYTE, (const void*)buffer.get());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 #endif
-
-	delete[] buffer;
 
 	/* clean up */
 	png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);

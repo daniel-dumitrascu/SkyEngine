@@ -3,6 +3,7 @@
 
 #include "GameBaseState.h"
 #include "menu/MainMenu.h"
+#include <memory>
 
 class GameStateMainMenu : public GameBaseState
 {
@@ -24,7 +25,7 @@ class GameStateMainMenu : public GameBaseState
 
 	private:
 
-		MainMenu* m_main_menu;
+		std::unique_ptr<MainMenu> m_main_menu;
 };
 
 

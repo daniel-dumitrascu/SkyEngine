@@ -13,7 +13,7 @@ class LevelLoader : public Loader
 
 	private:
 
-		LevelLoader();
+		LevelLoader() : log("LevelLoader") {}
 		LevelLoader(const LevelLoader& copy) = delete;
 		~LevelLoader() {};
 

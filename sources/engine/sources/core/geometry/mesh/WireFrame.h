@@ -3,6 +3,7 @@
 
 #include "../Polygon.h"
 #include <vector>
+#include <memory>
 
 class WireFrame
 {
@@ -20,7 +21,7 @@ class WireFrame
 		void SetPolyNr(unsigned int polyNr);
 		unsigned int GetPolyNr() const { return m_polyNr; }
 		unsigned int GetGeometryCount() const { return m_geometryCount; }
-		unsigned short* GetIndices() const  { return m_indices; }
+		unsigned short* GetIndices() const  { return m_indices.get(); }
 		void SetVBOVert(unsigned int vboVert) { m_vboVert = vboVert; }
 		unsigned int GetVBOVert() const { return m_vboVert; }
 		void SetVBOIndx(unsigned int vboIndx) { m_vboIndx = vboIndx; }
@@ -33,13 +34,13 @@ class WireFrame
 
 	private:
 
-		unsigned int m_normalsNr;      // Number of normals
-		unsigned int m_texcoordNr;	   // Number of texture coordinates
-		unsigned int m_polyNr;		   // Number of polygons //TODO this needs to be removed from here because he can take this info from m_polygons
-		unsigned int m_geometryCount;  // Total size of vertices in each face	
-		unsigned short*  m_indices;    // Model indices
-		unsigned int m_vboVert;		   // VBO for mesh vertices
-		unsigned int m_vboIndx;		   // VBO for mesh indices
+		unsigned int m_normalsNr;		// Number of normals
+		unsigned int m_texcoordNr;		// Number of texture coordinates
+		unsigned int m_polyNr;			// Number of polygons //TODO this needs to be removed from here because he can take this info from m_polygons
+		unsigned int m_geometryCount;	// Total size of vertices in each face	
+		std::unique_ptr<unsigned short[]>  m_indices; // Model indices
+		unsigned int m_vboVert;			// VBO for mesh vertices
+		unsigned int m_vboIndx;			// VBO for mesh indices
 		bool m_isGeometryInGpu;
 
 		std::vector<Polygon>  m_polygons;

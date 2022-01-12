@@ -4,8 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-
-
+#include <memory>
 
 /*
 Properties:
@@ -26,73 +25,56 @@ list ---->  0, 1, 2, 3, 4 ... 1023
 - if we no longer have vacancies, the function returns - 1
 */
 
-
-
 template <class T>
 class FastAccessCollection
 {
 	public:
 
-		FastAccessCollection() {};
-		~FastAccessCollection();
+		FastAccessCollection() = default;
+		~FastAccessCollection() = default;
 
-		int Occupy(const T item);
-		T Free(const int index);
+		int Occupy(const T* item);
+	    void Free(const int index);
 		void FreeAll();
 		unsigned int Count() const;
-		T Retrive(const int index) const;
+		T* Retrive(const int index) const;
 		bool IsSlotFree(const int index) const;
 		
 	protected:
 
-		struct Item
+		struct Wrapper
 		{
-			Item(T item) : m_item(item), 
-						   m_slotFree(false)
+			Wrapper(const T* item) : item(item), slotFree(false)
 			{ }
 
-			T m_item;
-			bool m_slotFree;
+			std::unique_ptr<const T> item;
+			bool slotFree;
 		};
 
-		std::vector<Item*> m_collection;
+		std::vector<Wrapper> m_collection;
 		std::stack<int> m_availableSlots;
 
 	private:
 
-		FastAccessCollection(const FastAccessCollection& copy) {};
+		FastAccessCollection(const FastAccessCollection& copy) = delete;
 		int GetFreeSlotIfAvailable();
 };
 
 template <class T>
-FastAccessCollection<T>::~FastAccessCollection()
+void FastAccessCollection<T>::Free(const int index)
 {
-	FreeAll();	
-}
-
-template <class T>
-T FastAccessCollection<T>::Free(const int index)
-{
-	/* Is this a valid index ? */
+	// Is this a valid index ? 
 	if (index >= 0 && index < m_collection.size())
 	{
-		if (!(m_collection[index]->m_slotFree))
+		if (!(m_collection[index].slotFree))
 		{
-			m_collection[index]->m_slotFree = true;
-
-			// Important 1 - do not remove the Item from the collection
+			// Important - do not remove the Wrapper from the collection
 			// because that will be reused when making the isSlotFree true
-			// Important 2 - do not deallocate the actual data because you don't know
-			// if that's a pointer and also you don't have ownership over that
+			m_collection[index].slotFree = true;
+			m_collection[index].item.release();
 			m_availableSlots.push(index);
-
-			return m_collection[index]->m_item;
 		}
 	}
-
-	//TODO this return "nullptr" is wrong because not every T is a pointer.
-	//If it happens that T is not a pointer then we will have an error when compiling
-	return nullptr;
 }
 
 template <class T>
@@ -100,28 +82,26 @@ void FastAccessCollection<T>::FreeAll()
 {
 	// This iterates in all the occupied slots making them free
 	for(int i=0; i < m_collection.size() && !IsSlotFree(i); i++)
-	{
 		Free(i);
-	}
 }
 
 template <class T>
-int FastAccessCollection<T>::Occupy(const T item)
+int FastAccessCollection<T>::Occupy(const T* item)
 {
 	// Do we have a free slot ?
 	int nextFreeIndex = GetFreeSlotIfAvailable();
 
 	if (nextFreeIndex != -1)
 	{
-		/* We found a free slot and we are going to use it*/
-		m_collection[nextFreeIndex]->m_slotFree = false;
-		m_collection[nextFreeIndex]->m_item = item;
+		// We found a free slot and we are going to use it
+		m_collection[nextFreeIndex].slotFree = false;
+		m_collection[nextFreeIndex].item.reset(item);
 	}
 	else
 	{
-		/* We don't have a free slot so we need to do a new */
-		/* insert into the collection */
-		m_collection.push_back(new Item(item));
+		// We don't have a free slot so we need to do a new 
+		// insert into the collection 
+		m_collection.push_back(Wrapper(item));
 		nextFreeIndex = m_collection.size() - 1;
 	}
 
@@ -129,24 +109,22 @@ int FastAccessCollection<T>::Occupy(const T item)
 }
 
 template <class T>
-T FastAccessCollection<T>::Retrive(const int index) const
+T* FastAccessCollection<T>::Retrive(const int index) const
 {
-	/* Is this a valid index ? */
+	// Is this a valid index ?
 	if (index >= 0 && index < m_collection.size())
 	{
-		if (!(m_collection[index]->m_slotFree))
-			return m_collection[index]->m_item;
+		if (!(m_collection[index].slotFree))
+			return const_cast<T*>(m_collection[index].item.get());
 	}
 
-	//TODO this return "nullptr" is wrong because not every T is a pointer.
-	//If it happens that T is not a pointer then we will have an error when compiling
 	return nullptr;
 }
 
 template <class T>
 bool FastAccessCollection<T>::IsSlotFree(const int index) const
 {
-	return (index >= 0 && index < m_collection.size()) && m_collection[index]->m_slotFree;
+	return (index >= 0 && index < m_collection.size()) && m_collection[index].slotFree;
 }
 
 template <class T>
