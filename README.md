@@ -39,7 +39,7 @@ $(ProjectDir)binaries\$(Platform)\$(Configuration)\.conan
 ```
 conan install conanfile.txt
 ```
-* Open visual Code and build the project
+* Open Visual Code and build the project
 * Before running the game we need to make the shared library visible to the system
 ```
 LD_LIBRARY_PATH=<path to engine so>
