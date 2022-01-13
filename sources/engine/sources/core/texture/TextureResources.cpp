@@ -1,4 +1,5 @@
 #include "TextureResources.h"
+#include "texture/TextureLoader.h"
 
 TexRes* TexRes::GetInstance()
 {
@@ -12,9 +13,12 @@ TexRes& TexRes::operator=(const TexRes& copy)
 	return *this;
 }
 
-void TexRes::Add(Texture* texture, const std::string& key)
+void TexRes::Add(const std::string& key, const std::string pathToResource)
 {
-	MapPtrCollection::Add(texture, key);
+	Texture* texture = (Texture*)TexLoader::GetInstance()->Load(pathToResource);
+
+	if (texture)
+		MapPtrCollection::Add(texture, key);
 }
 
 void TexRes::Remove(const std::string& key)

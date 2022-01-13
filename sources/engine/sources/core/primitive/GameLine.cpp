@@ -53,12 +53,11 @@ void GameLine::Init()
 	// If not, we need to load it
 	std::string primitivePath = "assets\\shaders\\primitive";
 	std::string fullpath = working_dir_path + "\\" + primitivePath;
-	m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
+	m_shader = ShaderRes::GetInstance()->Retrive(primitivePath);
 	if (!m_shader)
 	{
-		std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath));
-		ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), primitivePath);
-		m_shader = ShaderRes::GetInstance()->RetriveProgramID(primitivePath);
+		ShaderRes::GetInstance()->Add(primitivePath, fullpath);
+		m_shader = ShaderRes::GetInstance()->Retrive(primitivePath);
 	}
 
 	Painter::SendGeometryToGPU(m_wireframe);

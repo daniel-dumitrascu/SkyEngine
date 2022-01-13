@@ -1,4 +1,5 @@
 #include "MeshResources.h"
+#include "geometry/mesh/MeshLoader.h"
 
 MeshRes* MeshRes::GetInstance()
 {
@@ -27,9 +28,12 @@ MeshRes& MeshRes::operator=(const MeshRes& copy)
 	return *this;
 }
 
-void MeshRes::Add(WireFrame* mesh, const std::string& key)
+void MeshRes::Add(const std::string& key, const std::string pathToResource)
 {
-	MapPtrCollection::Add(mesh, key);
+	WireFrame* wireframe = (WireFrame*)MeshLoader::GetInstance()->Load(pathToResource);
+
+	if(wireframe)
+		MapPtrCollection::Add(wireframe, key);
 }
 
 void MeshRes::Remove(const std::string& key)

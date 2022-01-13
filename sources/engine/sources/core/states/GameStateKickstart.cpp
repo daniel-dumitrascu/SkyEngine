@@ -31,15 +31,12 @@ void GameStateKickstart::ResumeState()
 	std::string splashScreenTexture = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.texture");
 	std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
 
-	MeshRes::GetInstance()->Add((WireFrame*)MeshLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenMesh), splashScreenMesh);
-	TexRes::GetInstance()->Add((Texture*)TexLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenTexture), splashScreenTexture);
-
-	//TODO - this should be done directly into AddShaderPair
-	std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(working_dir_path + "\\" + splashScreenShader));
-	ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), splashScreenShader);
+	MeshRes::GetInstance()->Add(splashScreenMesh, working_dir_path + "\\" + splashScreenMesh);
+	TexRes::GetInstance()->Add(splashScreenTexture, working_dir_path + "\\" + splashScreenTexture);
+	ShaderRes::GetInstance()->Add(splashScreenShader, working_dir_path + "\\" + splashScreenShader);
 
 	/***********************************************************************************************************************/
-	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(splashScreenShader);
+	unsigned int program_id = ShaderRes::GetInstance()->Retrive(splashScreenShader);
 
 	// move them in DrawScheme
 	// for every shader pair :)
@@ -70,26 +67,22 @@ void GameStateKickstart::UpdateState()
 		    m_splash_screen->Update();
 		else
 		{
-			MeshLoader* mesh_loader = MeshLoader::GetInstance();
 			MeshRes* mesh_res = MeshRes::GetInstance();
-			TexLoader* tex_loader = TexLoader::GetInstance();
 			TexRes* tex_res = TexRes::GetInstance();
 			ShaderRes* shader_res = ShaderRes::GetInstance();
 
 			/* Load the splash screen and menu resources */	
-			std::string menuTexture = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture");
-			Texture* texture = (Texture*)tex_loader->Load(working_dir_path + "\\" + menuTexture);
-			tex_res->Add(texture, menuTexture);
+			std::string menuTexturePath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture");			
+			tex_res->Add(menuTexturePath, working_dir_path + "\\" + menuTexturePath);
 					
 			std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
-			unsigned int program_id = shader_res->RetriveProgramID(SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader"));
+			unsigned int program_id = shader_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader"));
 
 			/* Get resources for the splashscreen */
 			std::string menuMeshPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.mesh");
-			WireFrame* mesh = (WireFrame*)mesh_loader->Load(working_dir_path + "\\" + menuMeshPath);
-			mesh_res->Add(mesh, menuMeshPath);
+			mesh_res->Add(menuMeshPath, working_dir_path + "\\" + menuMeshPath);
 
-			m_splash_screen = std::make_unique<SplashScreen>(mesh, texture, program_id);
+			m_splash_screen = std::make_unique<SplashScreen>(mesh_res->Retrive(menuMeshPath), tex_res->Retrive(menuTexturePath), program_id);
 			m_splash_screen->Init();
 
 			return;

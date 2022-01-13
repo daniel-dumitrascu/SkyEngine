@@ -1,4 +1,5 @@
 #include "AnimDataResources.h"
+#include "AnimDataLoader.h"
 
 AnimDataRes* AnimDataRes::GetInstance()
 {
@@ -12,9 +13,12 @@ AnimDataRes& AnimDataRes::operator=(const AnimDataRes& copy)
 	return *this;
 }
 
-void AnimDataRes::Add(AnimData* anim, const std::string& key)
+void AnimDataRes::Add(const std::string& key, const std::string pathToResource)
 {
-	MapPtrCollection::Add(anim, key);
+	AnimData* animData = (AnimData*)AnimDataLoader::GetInstance()->Load(pathToResource);
+
+	if (animData)
+		MapPtrCollection::Add(animData, key);
 }
 
 void AnimDataRes::Remove(const std::string& key)

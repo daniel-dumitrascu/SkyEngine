@@ -167,12 +167,12 @@ WireFrame* GameObjectFactory::GetMesh(GameObjectPackage& pack)
 	/* If not, we need to load it */
 	std::string fullpath = working_dir_path + "\\" + pack.m_meshPath;
 	WireFrame* mesh = MeshRes::GetInstance()->Retrive(pack.m_meshPath);
-	if (mesh == NULL)
+	if (mesh == nullptr)
 	{
-		mesh = (WireFrame*)MeshLoader::GetInstance()->Load(fullpath);
-		MeshRes::GetInstance()->Add(mesh, pack.m_meshPath);
+		MeshRes::GetInstance()->Add(pack.m_meshPath, fullpath);
+		mesh = MeshRes::GetInstance()->Retrive(pack.m_meshPath);
 	}
-
+		
 	return mesh;
 }
 
@@ -182,10 +182,10 @@ Texture* GameObjectFactory::GetTexture(GameObjectPackage& pack)
 	/* If not, we need to load it */
 	std::string fullpath = working_dir_path + "\\" + pack.m_texturePath;
 	Texture* tex = TexRes::GetInstance()->Retrive(pack.m_texturePath);
-	if (tex == NULL)
+	if (tex == nullptr)
 	{
-		tex = (Texture*)TexLoader::GetInstance()->Load(fullpath);
-		TexRes::GetInstance()->Add(tex, pack.m_texturePath);
+		TexRes::GetInstance()->Add(pack.m_texturePath, fullpath);
+		tex = TexRes::GetInstance()->Retrive(pack.m_texturePath);
 	}
 
 	return tex;
@@ -197,10 +197,10 @@ AnimData* GameObjectFactory::GetAnimation(GameObjectPackage& pack)
 	/* If not, we need to load it */
 	std::string fullpath = working_dir_path + "\\" + pack.m_animationPath;
 	AnimData* anim = AnimDataRes::GetInstance()->Retrive(pack.m_animationPath);
-	if (anim == NULL)
+	if (anim == nullptr)
 	{
-		anim = (AnimData*)AnimDataLoader::GetInstance()->Load(fullpath);
-		AnimDataRes::GetInstance()->Add(anim, pack.m_animationPath);
+		AnimDataRes::GetInstance()->Add(pack.m_animationPath, fullpath);
+		anim = AnimDataRes::GetInstance()->Retrive(pack.m_animationPath);
 	}
 
 	return anim;
@@ -211,12 +211,11 @@ int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */
 	std::string fullpath = working_dir_path + "\\" + pack.m_shaderPath;
-	int program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
+	int program = ShaderRes::GetInstance()->Retrive(pack.m_shaderPath);
 	if (!program)
 	{
-		std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(fullpath));
-		ShaderRes::GetInstance()->AddShaderPair(shaderPair.get(), pack.m_shaderPath);
-		program = ShaderRes::GetInstance()->RetriveProgramID(pack.m_shaderPath);
+		ShaderRes::GetInstance()->Add(pack.m_shaderPath, fullpath);
+		program = ShaderRes::GetInstance()->Retrive(pack.m_shaderPath);
 	}
 
 	return program;

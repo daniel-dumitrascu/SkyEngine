@@ -11,7 +11,7 @@ class TexRes : public MapPtrCollection<Texture>
 
 		static TexRes* GetInstance();
 
-		void Add(Texture* texture, const std::string& key);
+		void Add(const std::string& key, const std::string pathToResource);
 		void Remove(const std::string& key);
 		unsigned int Count() { return MapPtrCollection::Count(); };
 		bool Find(const std::string& key);

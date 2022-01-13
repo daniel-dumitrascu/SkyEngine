@@ -29,9 +29,11 @@ ShaderRes::~ShaderRes()
 	}
 }
 
-bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, const std::string& key)
+bool ShaderRes::Add(const std::string& key, const std::string pathToResource)
 {
-	if (shaderPair)
+	std::unique_ptr<ShaderPair> shaderPair((ShaderPair*)ShaderLoader::GetInstance()->Load(pathToResource));
+
+	if (shaderPair != nullptr)
 	{
 		unsigned int program_id = CompileShaderPair(shaderPair->m_vertexShader.m_shaderID, shaderPair->m_fragmentShader.m_shaderID);
 		
@@ -45,10 +47,10 @@ bool ShaderRes::AddShaderPair(ShaderPair* shaderPair, const std::string& key)
 	return false;
 }
 
-void ShaderRes::RemoveShaderPair(const std::string& key)
+void ShaderRes::Remove(const std::string& key)
 {
 	//TODO if this function is called many times, an optimization would be to use an iterator as in ShaderRes :: ~ ShaderRes ()
-	unsigned int program_id = RetriveProgramID(key);
+	unsigned int program_id = Retrive(key);
 
 	//TODO also read the link saved https://www.opengl.org/discussion_boards/showthread.php/181432-Correct-way-to-delete-shader-programs
 
@@ -72,7 +74,7 @@ bool ShaderRes::ExistShaderPair(const std::string& key)
 	return MapPtrCollection::Find(key);
 }
 
-unsigned int ShaderRes::RetriveProgramID(const std::string& key)
+unsigned int ShaderRes::Retrive(const std::string& key)
 {
 	unsigned int* valuePtr = MapPtrCollection::Retrive(key);
 	return valuePtr ? *valuePtr : 0;

@@ -10,7 +10,7 @@ class AnimDataRes : private MapPtrCollection<AnimData>
 
 		static AnimDataRes* GetInstance();
 
-		void Add(AnimData* mesh, const std::string& key);
+		void Add(const std::string& key, const std::string pathToResource);
 		void Remove(const std::string& key);
 		unsigned int Count();
 		bool Find(const std::string& key);

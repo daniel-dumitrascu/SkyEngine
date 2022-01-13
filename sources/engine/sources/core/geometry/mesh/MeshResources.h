@@ -10,7 +10,7 @@ public:
 
 	static MeshRes* GetInstance();
 
-	void Add(WireFrame* mesh, const std::string& key);
+	void Add(const std::string& key, const std::string pathToResource);
 	void Remove(const std::string& key);
 	unsigned int Count();
 	bool Find(const std::string& key);

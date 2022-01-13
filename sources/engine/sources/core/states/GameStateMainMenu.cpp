@@ -28,7 +28,7 @@ GameStateMainMenu::~GameStateMainMenu()
 void GameStateMainMenu::ResumeState()
 {
 	const std::string& shaderPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.shader");
-	unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(shaderPath);
+	unsigned int program_id = ShaderRes::GetInstance()->Retrive(shaderPath);
 
 	// TODO 
 	// Move these calls in DrawScheme
@@ -60,7 +60,7 @@ void GameStateMainMenu::UpdateState()
 	else
 	{
 		const std::string& shaderPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.shader");
-		unsigned int program_id = ShaderRes::GetInstance()->RetriveProgramID(shaderPath);
+		unsigned int program_id = ShaderRes::GetInstance()->Retrive(shaderPath);
 
 		MeshRes* mesh_res = MeshRes::GetInstance();
 		TexRes* tex_res = TexRes::GetInstance();
