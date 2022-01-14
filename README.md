@@ -31,13 +31,22 @@ $(ProjectDir)binaries\$(Platform)\$(Configuration)\.conan
 * To run the application you will also need to copy the whole "resources" folder into either "Debug" or "Release"
 	
 ### Linux
+(Tested on Manjaro)
 
 * Install gcc
 * Install visual code
 * Add the Microsoft C/C++ extension for Visual Code (if preferred  you can also add Material Icon Theme but this is not mandatory)
+* Install conan by running the line (needs python)
+```
+pip install conan
+```
 * Go into the project root directory and execute the conan pachage manager 
 ```
 conan install conanfile.txt
+```
+* Aditional tools to install
+```
+pamac install nlohmann-json
 ```
 * Open Visual Code and build the project
 * Before running the game we need to make the shared library visible to the system
