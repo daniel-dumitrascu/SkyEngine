@@ -32,7 +32,7 @@ void utils::path::GetWorkingDir(std::string& path)
 bool utils::path::IsFileCreated(const std::string& _path, const std::string& _fileName)
 {
 #if(WINDOWS_PLATFORM)
-	std::string filenamePath = _path + "\\" + _fileName;
+	std::string filenamePath = _path + "/" + _fileName;
 	return GetFileAttributes(filenamePath.c_str()) != INVALID_FILE_ATTRIBUTES && GetLastError() != ERROR_FILE_NOT_FOUND;
 #elif(LINUX_PLATFORM)
 	//TODO to implement
@@ -41,7 +41,7 @@ bool utils::path::IsFileCreated(const std::string& _path, const std::string& _fi
 
 std::ofstream utils::path::CreateFileAtLocation(const std::string& _path, const std::string& _fileName)
 {
-	return std::ofstream(_path + "\\" + _fileName);
+	return std::ofstream(_path + "/" + _fileName);
 }
 
 const char* utils::str::Strfmt(const char* fmt, ...)

@@ -51,8 +51,8 @@ void GameLine::Init()
 
 	// Do we have this resource loaded?
 	// If not, we need to load it
-	std::string primitivePath = "assets\\shaders\\primitive";
-	std::string fullpath = working_dir_path + "\\" + primitivePath;
+	std::string primitivePath = "assets/shaders/primitive";
+	std::string fullpath = working_dir_path + "/" + primitivePath;
 	m_shader = ShaderRes::GetInstance()->Retrive(primitivePath);
 	if (!m_shader)
 	{

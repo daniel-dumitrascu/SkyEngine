@@ -165,7 +165,7 @@ WireFrame* GameObjectFactory::GetMesh(GameObjectPackage& pack)
 {
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */
-	std::string fullpath = working_dir_path + "\\" + pack.m_meshPath;
+	std::string fullpath = working_dir_path + "/" + pack.m_meshPath;
 	WireFrame* mesh = MeshRes::GetInstance()->Retrive(pack.m_meshPath);
 	if (mesh == nullptr)
 	{
@@ -180,7 +180,7 @@ Texture* GameObjectFactory::GetTexture(GameObjectPackage& pack)
 {
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */
-	std::string fullpath = working_dir_path + "\\" + pack.m_texturePath;
+	std::string fullpath = working_dir_path + "/" + pack.m_texturePath;
 	Texture* tex = TexRes::GetInstance()->Retrive(pack.m_texturePath);
 	if (tex == nullptr)
 	{
@@ -195,7 +195,7 @@ AnimData* GameObjectFactory::GetAnimation(GameObjectPackage& pack)
 {
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */
-	std::string fullpath = working_dir_path + "\\" + pack.m_animationPath;
+	std::string fullpath = working_dir_path + "/" + pack.m_animationPath;
 	AnimData* anim = AnimDataRes::GetInstance()->Retrive(pack.m_animationPath);
 	if (anim == nullptr)
 	{
@@ -210,7 +210,7 @@ int GameObjectFactory::GetProgram(GameObjectPackage& pack)
 {
 	/* Do we have this resource loaded? */
 	/* If not, we need to load it */
-	std::string fullpath = working_dir_path + "\\" + pack.m_shaderPath;
+	std::string fullpath = working_dir_path + "/" + pack.m_shaderPath;
 	int program = ShaderRes::GetInstance()->Retrive(pack.m_shaderPath);
 	if (!program)
 	{

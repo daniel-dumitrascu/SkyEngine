@@ -103,13 +103,13 @@ void System::CreateDefaultSettingsFile(const std::string& _path, const std::stri
 	std::ofstream settingFile = utils::path::CreateFileAtLocation(_path, _fileName);
 
 	json settingsJson;
-	settingsJson["defaultResources"]["splashScreen"]["texture"] = "assets\\textures\\default\\splashscreen\\splashscreen.png";
-	settingsJson["defaultResources"]["splashScreen"]["mesh"] = "assets\\meshes\\default\\splashscreen\\splashscreen.mesh";
-	settingsJson["defaultResources"]["splashScreen"]["shader"] = "assets\\shaders\\default\\basic";
+	settingsJson["defaultResources"]["splashScreen"]["texture"] = "assets/textures/default/splashscreen/splashscreen.png";
+	settingsJson["defaultResources"]["splashScreen"]["mesh"] = "assets/meshes/default/splashscreen/splashscreen.mesh";
+	settingsJson["defaultResources"]["splashScreen"]["shader"] = "assets/shaders/default/basic";
 
-	settingsJson["defaultResources"]["menu"]["mesh"] = "assets\\meshes\\default\\menu\\main_menu.mesh";
-	settingsJson["defaultResources"]["menu"]["texture"] = "assets\\textures\\default\\menu\\main_menu.png";	
-	settingsJson["defaultResources"]["menu"]["shader"] = "assets\\shaders\\default\\basic";
+	settingsJson["defaultResources"]["menu"]["mesh"] = "assets/meshes/default/menu/main_menu.mesh";
+	settingsJson["defaultResources"]["menu"]["texture"] = "assets/textures/default/menu/main_menu.png";	
+	settingsJson["defaultResources"]["menu"]["shader"] = "assets/shaders/default/basic";
 
 	std::string strJson = settingsJson.dump(4);
 

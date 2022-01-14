@@ -4,6 +4,7 @@
 #include <vector>
 #include "Device.h"
 #include "InputEventBatch.h"
+#include <memory>
 
 class PlatformInput
 {

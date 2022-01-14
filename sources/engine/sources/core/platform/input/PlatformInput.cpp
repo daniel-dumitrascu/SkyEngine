@@ -1,6 +1,5 @@
 #include "PlatformInput.h"
 #include "DeviceDefinitions.h"
-#include <memory>
 
 std::vector<std::unique_ptr<Device>> PlatformInput::m_available_devices;
 InputEventBatch PlatformInput::inputBatch;

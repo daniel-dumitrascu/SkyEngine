@@ -31,9 +31,9 @@ void GameStateKickstart::ResumeState()
 	std::string splashScreenTexture = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.texture");
 	std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
 
-	MeshRes::GetInstance()->Add(splashScreenMesh, working_dir_path + "\\" + splashScreenMesh);
-	TexRes::GetInstance()->Add(splashScreenTexture, working_dir_path + "\\" + splashScreenTexture);
-	ShaderRes::GetInstance()->Add(splashScreenShader, working_dir_path + "\\" + splashScreenShader);
+	MeshRes::GetInstance()->Add(splashScreenMesh, working_dir_path + "/" + splashScreenMesh);
+	TexRes::GetInstance()->Add(splashScreenTexture, working_dir_path + "/" + splashScreenTexture);
+	ShaderRes::GetInstance()->Add(splashScreenShader, working_dir_path + "/" + splashScreenShader);
 
 	/***********************************************************************************************************************/
 	unsigned int program_id = ShaderRes::GetInstance()->Retrive(splashScreenShader);
@@ -73,14 +73,14 @@ void GameStateKickstart::UpdateState()
 
 			/* Load the splash screen and menu resources */	
 			std::string menuTexturePath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.texture");			
-			tex_res->Add(menuTexturePath, working_dir_path + "\\" + menuTexturePath);
+			tex_res->Add(menuTexturePath, working_dir_path + "/" + menuTexturePath);
 					
 			std::string splashScreenShader = SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader");
 			unsigned int program_id = shader_res->Retrive(SettingsLoader::GetInstance()->GetValue("defaultResources.splashScreen.shader"));
 
 			/* Get resources for the splashscreen */
 			std::string menuMeshPath = SettingsLoader::GetInstance()->GetValue("defaultResources.menu.mesh");
-			mesh_res->Add(menuMeshPath, working_dir_path + "\\" + menuMeshPath);
+			mesh_res->Add(menuMeshPath, working_dir_path + "/" + menuMeshPath);
 
 			m_splash_screen = std::make_unique<SplashScreen>(mesh_res->Retrive(menuMeshPath), tex_res->Retrive(menuTexturePath), program_id);
 			m_splash_screen->Init();

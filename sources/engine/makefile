@@ -15,15 +15,19 @@ INCLUDE  := -I./sources/core \
 			-I$(CONAN_INCLUDE_DIRS_GLFW) \
 			-I$(CONAN_INCLUDE_DIRS_GLEW) \
 			-I$(CONAN_INCLUDE_DIRS_LIBPNG) \
-			-I$(CONAN_INCLUDE_DIRS_TINYXML2)
+			-I$(CONAN_INCLUDE_DIRS_TINYXML2) \
+			-I$(CONAN_INCLUDE_DIRS_ZLIB) \
+			-I$(CONAN_INCLUDE_DIRS_NLOHMANN_JSON)
 LIBS_DIR := -L$(CONAN_LIB_DIRS_GLFW) \
 			-L$(CONAN_LIB_DIRS_GLEW) \
 			-L$(CONAN_LIB_DIRS_LIBPNG) \
-			-L$(CONAN_LIB_DIRS_TINYXML2)
+			-L$(CONAN_LIB_DIRS_TINYXML2) \
+			-L$(CONAN_LIB_DIRS_ZLIB)
 LIBS  	 := -l$(CONAN_LIBS_GLFW) \
 			-l$(CONAN_LIBS_GLEW) \
 			-l$(CONAN_LIBS_LIBPNG) \
 			-l$(CONAN_LIBS_TINYXML2) \
+			-l$(CONAN_LIBS_ZLIB) \
 			-lpthread \
 			-lGL
  
@@ -44,7 +48,7 @@ $(OBJ_DIR)/%.o: %.cpp
 
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CXX)  $(CXXFLAGS) $(LIBS_DIR) -Wl,-whole-archive $(LIBS) -Wl,-no-whole-archive $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $^ 
+	$(CXX)  $(CXXFLAGS) $(LIBS_DIR) -Wl,--whole-archive $(LIBS) -Wl,--no-whole-archive $(LDFLAGS) -o $(APP_DIR)/$(TARGET) $^ 
 
 .PHONY: all build clean debug release
 

@@ -2,6 +2,7 @@
 #include "loader/Loader.h"
 #include "logging/Logging.h"
 #include "SettingsPackage.h"
+#include <memory>
 
 class SettingsLoader : public Loader
 {

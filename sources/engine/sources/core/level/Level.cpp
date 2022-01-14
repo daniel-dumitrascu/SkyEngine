@@ -9,6 +9,10 @@
 #include "actions/Actions.h"
 #include "entities/GameObjectFactory.h"
 
+#if(LINUX_PLATFORM)
+#include <cmath>
+#endif
+
 #if(DEBUG_SECTION)
 #include "primitive/GameRectangle.h"
 #endif
@@ -418,6 +422,7 @@ void Level::Update()
 #endif
 	}
 
+#if(DEBUG_SECTION)
 	if (isMovementInCurrUpdate)
 	{
 		// Update the debug grid when movement has been detected in the current update frame
@@ -429,7 +434,6 @@ void Level::Update()
 	}
 
 	// Update the grid lines
-#if(DEBUG_SECTION)
 	for (auto& ite : sceneGridLines)
 	{
 		ite->Update();

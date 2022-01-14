@@ -31,7 +31,7 @@ $(APP_DIR)/$(TARGET): $(OBJECTS)
 build:	
 	@mkdir -p $(APP_DIR)
 	@mkdir -p $(OBJ_DIR)
-	cp -R ./../../resources $(APP_DIR)
+	cp -R ./../../assets $(APP_DIR)
 
 debug: CXXFLAGS += -DDEBUG -g
 debug: all

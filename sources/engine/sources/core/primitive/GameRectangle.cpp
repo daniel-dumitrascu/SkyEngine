@@ -9,7 +9,7 @@
 #include "level/Level.h"
 
 
-GameRectangle::GameRectangle(vec_2x& recLeftTop, vec_2x& recRightBottom, const vec_4x& color) :
+GameRectangle::GameRectangle(const vec_2x& recLeftTop, const vec_2x& recRightBottom, const vec_4x& color) :
 	GameObject(nullptr, nullptr, -1, 0.0f, 0.0f, 1, INPUT_HANDLE_PROFILE_NONE)
 {
 	m_rectangle = std::make_unique<Rectangle>(recLeftTop, recRightBottom);
@@ -44,8 +44,8 @@ void GameRectangle::Init()
 
 	// Do we have this resource loaded?
 	// If not, we need to load it
-	std::string primitivePath = "assets\\shaders\\primitive";
-	std::string fullpath = working_dir_path + "\\" + primitivePath;
+	std::string primitivePath = "assets/shaders/primitive";
+	std::string fullpath = working_dir_path + "/" + primitivePath;
 	m_shader = ShaderRes::GetInstance()->Retrive(primitivePath);
 	if (!m_shader)
 	{

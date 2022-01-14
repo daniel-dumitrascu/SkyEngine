@@ -52,7 +52,7 @@ const mat_4x& Camera::GetViewMatrix()
 
 const mat_4x& Camera::BuildViewMatrixUsingAttachedObject()
 {
-	vec_2x& pos = attachedObject->GetPosition();
+	vec_2x pos = attachedObject->GetPosition();
 	CenterCamera(pos.elem[0], pos.elem[1]);
 
 	//TODO - we use a hardcoded value for the scaling and not the one from the object because otherwise the objects will disappear
